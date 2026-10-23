@@ -54,12 +54,22 @@ const AS_SUPPLIED: Record<string, string> = {
  */
 const docsDir = path.join(publicDir, "documents");
 const docFiles = fs.existsSync(docsDir) ? (fs.readdirSync(docsDir) as string[]).filter((f) => /\.pdf$/i.test(f)) : [];
-function sheetOf(slug: string, d: ProductRangeItemDetails) {
+function sheetOf(slug: string, d: ProductRangeItemDetails = {}) {
+  if (d.sheetUrl) return d.sheetUrl;
+  const docs = fs.existsSync(docsDir) ? (fs.readdirSync(docsDir) as string[]).filter((f) => /\.pdf$/i.test(f)) : [];
+  const pds = docs.find(
+    (x) =>
+      (x.toLowerCase().includes("pds") || x.toLowerCase().includes("data-sheet") || x.toLowerCase().includes("sheet")) &&
+      (x.toLowerCase().startsWith(`${slug}-`) || x.toLowerCase() === `${slug}.pdf`),
+  );
+  if (pds) return `/documents/${pds}`;
   if (d.reportUrl) return d.reportUrl;
-  const f = docFiles.find((x) => x.toLowerCase().startsWith(`${slug}-`) || x.toLowerCase() === `${slug}.pdf`);
-  return f ? `/documents/${f}` : undefined;
+  const f = docs.find((x) => x.toLowerCase().startsWith(`${slug}-`) || x.toLowerCase() === `${slug}.pdf`);
+  if (f) return `/documents/${f}`;
+  return `/documents/${slug}-pds.pdf`;
 }
-function videoOf(slug: string) {
+function videoOf(slug: string, d?: ProductRangeItemDetails) {
+  if (d?.videoUrl) return d.videoUrl;
   const ext = ["mp4", "webm"].find((e) => fs.existsSync(path.join(publicDir, "videos", "products", `${slug}.${e}`)));
   return ext ? `/videos/products/${slug}.${ext}` : undefined;
 }
@@ -103,25 +113,29 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
     ...(d.shelfLife ? [{ k: "Shelf life", v: d.shelfLife }] : []),
   ];
   if (!d.storage) packing.push({ k: "Storage", v: line.id === "aerosols" ? "Store below 50 °C, away from heat and direct sunlight. Pressurised container." : "Store indoors in the closed original container, away from heat and direct sunlight." });
-  return {
-    key: r ? `${p.id}-${r.name}` : p.id,
-    slug,
-    name,
-    type: r ? p.name : line.short,
-    group: p.name,
-    text: r?.text ?? p.about,
-    grades,
-    line: line.id,
-    lineTitle: line.title,
-    lineShort: line.short,
-    brand: line.brand.name,
-    brandLogo: line.brand.logo,
-    brandLogoFull: line.brand.logoFull ?? line.brand.logo,
-    image: d.image,
-    imageAlt: d.imageAlt ?? name,
-    views: viewsOf(slug, d.image),
-    sheet: sheetOf(slug, d),
-    video: videoOf(slug),
+    const views = viewsOf(slug, d.image);
+    const cardImg = d.image ?? views.find((v) => v.label === "Front" && v.src)?.src;
+    return {
+      key: r ? `${p.id}-${r.name}` : p.id,
+      slug,
+      name,
+      type: r ? p.name : line.short,
+      group: p.name,
+      text: r?.text ?? p.cardText ?? p.about,
+      grades,
+      line: line.id,
+      lineTitle: line.title,
+      lineShort: line.short,
+      brand: line.brand.name,
+      brandLogo: line.brand.logo,
+      brandLogoFull: line.brand.logoFull ?? line.brand.logo,
+      image: cardImg,
+      imageAlt: d.imageAlt ?? name,
+      views,
+      sheet: sheetOf(slug, d),
+    report: d.reportUrl,
+    reportLabel: d.reportLabel,
+    video: videoOf(slug, d),
     about: d.description ?? (r ? `${r.text}. ${p.about}` : p.about),
     highlights,
     applications: d.purpose ?? p.uses ?? [],

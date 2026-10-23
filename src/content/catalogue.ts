@@ -42,8 +42,11 @@ export type ProductRangeItemDetails = {
     ratio: string;
   }[];
   metaLine?: string;
+  sheetUrl?: string;
+  sheetLabel?: string;
   reportUrl?: string;
   reportLabel?: string;
+  videoUrl?: string;
   reportKicker?: string;
   reportButtonText?: string;
 };
@@ -63,6 +66,8 @@ export type Product = {
   range?: ProductRangeItem[];
   /** What this type of product does, in general terms. */
   about: string;
+  /** Precise 3-line card description for shop cards. */
+  cardText?: string;
   /** Typical uses, in general terms. */
   uses?: string[];
   /** Krini Crude's own published claims for the product. */
@@ -122,6 +127,8 @@ export const lines: Line[] = [
         id: "cutting-oil",
         name: "Cutting Oil",
         variants: ["Neat cutting oil", "Broaching", "Gear hobbing", "Stamping", "Drawing oil"],
+        cardText:
+          "Neat cutting oils used undiluted to reduce friction, prevent tool wear, and deliver a smooth machining surface finish.",
         about:
           "Neat (straight) cutting oils are used undiluted. They lubricate the contact between tool and workpiece, which reduces friction and tool wear and helps give a good surface finish.",
         uses: ["Machining where lubrication at the cutting edge matters most", "Broaching and gear hobbing", "Stamping and drawing of sheet metal"],
@@ -138,6 +145,11 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "PDS 2024",
+              image: "/images/1-cool-aquacut-150-pail.webp",
+              imageAlt: "1-COOL Aquacut 150 water soluble coolant oil 20L pail",
+              sheetUrl: "/documents/1-cool-aquacut-150-pds-2024.pdf",
+              sheetLabel: "1-COOL Aquacut 150 Product Data Sheet (PDS 2024)",
+              videoUrl: "/videos/products/1-cool-aquacut-150.mp4",
               description:
                 "1-COOL AQUACUT 150 is a premium mineral coolant cutting fluid developed for use in light to heavy duty machining of ferrous and non-ferrous metal alloys, as well as general purpose grinding. Formulated with special lubricity and E.P. additives and rust inhibitors, it delivers extended sump life and improved tool longevity.",
               metaLine:
@@ -195,6 +207,11 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "PDS 2026",
+              image: "/images/1-cool-al-5000-pail.webp",
+              imageAlt: "1-COOL AL 5000 semi synthetic coolant oil 20L pail",
+              sheetUrl: "/documents/1-cool-al-5000-pds.pdf",
+              sheetLabel: "1-COOL AL 5000 Product Data Sheet (PDS 2026)",
+              videoUrl: "/videos/products/1-cool-al-5000.mp4",
               description:
                 "1-COOL AL 5000 is a semi-synthetic, environment friendly cutting fluid developed for use in light to heavy duty machining of ferrous and non-ferrous metal alloys. It is also suitable for general purpose grinding. Formulated with special lubricity and E.P. additives and rust inhibitors, it delivers extended sump life, reduced downtime, and improved tool longevity.",
               metaLine:
@@ -240,14 +257,61 @@ export const lines: Line[] = [
                 "Ensure machine sumps are thoroughly cleaned and sterilized before charging with fresh coolant mixture.",
                 "Check emulsion concentration regularly using a refractometer (multiplication factor: 1.4) and replenish with premixed emulsion rather than pure water.",
               ],
-              packing: "Standard packing: 26 L pails & 210 L industrial steel drums",
+              packing: "Standard packing: 20 L pails & 210 L industrial steel drums",
               storage:
                 "Store indoors in original tightly closed containers between 5 °C and 40 °C. Protect from freezing and direct exposure to intense heat or rain.",
               shelfLife: "12 months from date of manufacture when stored in unopened containers",
               note: "Typical values based on laboratory batch testing (PDS Rev. 2026). Technical values are typical and not a sales specification.",
             },
           },
-          { name: "1-COOL AL 7000", text: "Premium Semi Synthetic Coolant Oil" },
+          {
+            name: "1-COOL AL 7000",
+            text: "Premium semi synthetic coolant oil engineered for heavy duty machining and grinding.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/1-cool-al-7000.webp",
+              imageAlt: "1-COOL CASPRO 7000 semi synthetic coolant oil 26L pail",
+              sheetUrl: "/documents/1-cool-al-7000-pds.pdf",
+              sheetLabel: "1-COOL AL 7000 Product Data Sheet (PDS 2026)",
+              description:
+                "1-COOL CASPRO 7000 is a high performance semi synthetic metal working coolant oil designed for a wide range of machining and grinding operations. It provides excellent cooling, lubrication and corrosion protection, ensuring longer tool life and superior surface finish.",
+              dilution: "3% – 10%",
+              dilutionNote: "Grinding (3–5%), General Machining (4–6%), Heavy Duty (6–10%)",
+              purposeTitle: "Application & Operations",
+              purpose: [
+                "CNC machining",
+                "Milling, Turning, Drilling",
+                "Grinding operations",
+                "General metal working processes",
+                "Ferrous and non-ferrous metals",
+              ],
+              benefits: [
+                "Excellent cooling and lubrication",
+                "Longer tool life and reduced machine wear",
+                "Better precision surface finish",
+                "Good corrosion protection",
+                "Stable emulsion with high sump life",
+                "Suitable for a wide range of metals",
+              ],
+              properties: [
+                { property: "Appearance", value: "Light Yellow", spec: "Visual" },
+                { property: "Emulsion Type", value: "White Milky", spec: "Diluted in water" },
+                { property: "pH (5-6% emulsion)", value: "8.5 – 9.5", spec: "Standard pH" },
+                { property: "Specific Gravity @ 30°C", value: "0.95 – 1.05", spec: "Standard density" },
+                { property: "Refractometer Factor", value: "1.0", spec: "Direct reading" },
+              ],
+              application: [
+                "Always add oil into water while stirring continuously to ensure a stable milky emulsion.",
+                "Maintain concentration between 4% to 8% depending on operation severity.",
+                "Keep sump clean and aerated for maximum coolant performance.",
+              ],
+              packing: "Standard packing: 26 L pails & 210 L industrial steel drums",
+              storage:
+                "Store in a cool, dry place. Keep the container tightly closed. Avoid direct sunlight. Refer MSDS for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored in unopened containers",
+            },
+          },
         ],
         about:
           "Soluble cutting oils are mixed with water to make a coolant. The coolant carries heat away from the cutting zone, lubricates, flushes away chips and helps protect parts and machines from rust.",
@@ -258,6 +322,50 @@ export const lines: Line[] = [
         id: "rust-preventive-oil",
         name: "Rust Preventive Oil",
         variants: ["Dewatering RP oil", "Oil based RP oil"],
+        range: [
+          {
+            name: "1-COOL Rust Proteck R5",
+            text: "Dewatering rust preventive oil for machined metal components with fast water displacement.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/rust-preventive-oil.webp",
+              imageAlt: "1-COOL Rust Proteck R5 rust preventive oil 20L pail",
+              sheetUrl: "/documents/rust-preventive-oil-pds.pdf",
+              sheetLabel: "1-COOL Rust Proteck R5 Product Data Sheet (PDS 2026)",
+              description:
+                "1-COOL RUST PROTECK R5 is a rust preventive oil with dewatering properties, designed to protect metal components from rust and corrosion. It quickly displaces moisture and forms a protective film on the metal surface.",
+              purpose: [
+                "Rust prevention for machined metal components",
+                "Dewatering after cleaning operations",
+                "Storage and transit protection",
+                "Suitable for ferrous metals",
+                "General industrial use",
+              ],
+              benefits: [
+                "Excellent rust protection",
+                "Quick water displacement",
+                "Good film coverage",
+                "Easy application by dip, spray or brush",
+                "Suitable for storage and shipment",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear Light Yellow", spec: "Visual" },
+                { property: "Density @ 30°C", value: "0.85 – 0.90 g/cm³", spec: "ASTM D1298" },
+                { property: "Kinematic Viscosity @ 40°C (cSt)", value: "10 – 20 cSt", spec: "ASTM D445" },
+                { property: "Flash Point (°C)", value: "> 150 °C", spec: "ASTM D92" },
+              ],
+              application: [
+                "Apply neat as supplied by dipping, spraying or brushing onto clean metal parts.",
+                "Ensure parts are adequately drained after immersion to form a uniform protective barrier.",
+              ],
+              packing: "Standard packing: 20 L pails & 210 L steel drums",
+              storage:
+                "Store in a cool, dry place. Keep the container tightly closed. Avoid direct sunlight and keep away from heat and ignition sources.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Rust preventive oils leave a protective film on metal parts between operations, in storage and in transit. Dewatering types first displace water from freshly washed or machined parts.",
         uses: ["Protecting machined components between operations", "Storage and shipment of steel parts", "Parts that come out of washing or water-based coolant"],
@@ -267,6 +375,52 @@ export const lines: Line[] = [
         id: "hydraulic-oil",
         name: "Hydraulic Oil",
         variants: ["32", "46", "68"],
+        range: [
+          {
+            name: "1-COOL Hydraulic 68",
+            text: "High performance anti-wear hydraulic oil formulated with premium base oils and advanced additives.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/hydraulic-oil.webp",
+              imageAlt: "1-COOL Hydraulic 68 high performance hydraulic oil 20L pail",
+              sheetUrl: "/documents/hydraulic-oil-pds.pdf",
+              sheetLabel: "1-COOL Hydraulic Oil Product Data Sheet (PDS 2026)",
+              videoUrl: "/videos/products/1-cool-hydraulic-68.mp4",
+              description:
+                "1-COOL HYDRAULIC 68 is a high performance anti-wear hydraulic oil, formulated with premium base oils and advanced additives to provide excellent oxidation stability, wear protection and long service life in hydraulic systems.",
+              purposeTitle: "Application & Equipment",
+              purpose: [
+                "Hydraulic systems",
+                "Industrial hydraulic equipment",
+                "Machine tools",
+                "Presses and injection moulding machines",
+                "Circulation systems",
+                "General industrial use",
+              ],
+              benefits: [
+                "Excellent anti-wear protection",
+                "Good oxidation stability",
+                "Resists rust and corrosion",
+                "Maintains system cleanliness",
+                "Longer oil life and reduced downtime",
+                "Smooth operation",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear Light Yellow", spec: "Visual" },
+                { property: "Density @ 30°C (g/cm³)", value: "0.86 – 0.90", spec: "ASTM D1298" },
+                { property: "Kinematic Viscosity @ 40°C (cSt)", value: "68", spec: "ASTM D445" },
+                { property: "Viscosity Index", value: "≥ 95", spec: "ASTM D2270" },
+                { property: "Flash Point (°C)", value: "≥ 200", spec: "ASTM D92" },
+                { property: "Pour Point (°C)", value: "≤ -15", spec: "ASTM D97" },
+              ],
+              packing: "Standard packing: 20 L pails & 210 L steel drums",
+              storage:
+                "Store in a cool, dry place. Keep container tightly closed. Avoid direct sunlight. Keep away from heat and ignition sources. Refer MSDS for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Hydraulic oils transmit power in hydraulic systems while lubricating pumps, valves and cylinders. The grade is the oil's viscosity: choose the one your equipment maker recommends for your operating temperatures.",
         uses: ["Hydraulic presses and injection moulding machines", "Machine tool hydraulics", "Mobile and industrial hydraulic equipment"],
@@ -276,6 +430,8 @@ export const lines: Line[] = [
         id: "gear-oil",
         name: "Gear Oil",
         variants: ["90", "140", "220", "320"],
+        cardText:
+          "Lubricates gearboxes and drives, maintaining an oil film under heavy loads to reduce friction, heat and tooth wear.",
         about:
           "Gear oils lubricate gearboxes and gear drives, keeping a film of oil between meshing teeth under load to reduce wear, heat and noise.",
         uses: ["Industrial gearboxes and gear drives", "Automotive and equipment gear assemblies, as specified by the manufacturer"],
@@ -285,6 +441,8 @@ export const lines: Line[] = [
         id: "engine-oil",
         name: "Engine Oil",
         variants: ["15W40", "20W40", "5W30"],
+        cardText:
+          "Engine oils lubricate, clean and cool internal combustion engines, protecting vital parts from wear and thermal stress.",
         about:
           "Engine oils lubricate, clean and cool internal combustion engines. Use the grade your vehicle or engine manufacturer specifies.",
         uses: ["Petrol and diesel engines, in the grade the engine maker specifies"],
@@ -293,6 +451,8 @@ export const lines: Line[] = [
       {
         id: "greases",
         name: "Greases",
+        cardText:
+          "High-performance lubricants thickened to stay in place where oils run off, protecting bearings, joints and slides.",
         about:
           "Greases are lubricants thickened to stay in place where an oil would run off, for bearings, joints and slides that are not in a circulating oil system.",
         tbc: [placeholder("Grease types and grades")],
@@ -345,7 +505,7 @@ export const lines: Line[] = [
           /* listed first on krinicrude.com/construction (October 2026), without a page of its own yet */
           {
             name: "Repel Shuttering Oil",
-            text: "Premium Shuttering Oil Suitable for Aluminium & All Formworks",
+            text: "Premium shuttering oil suitable for aluminium and all formwork, ensuring clean stripping and smooth concrete surface finishes.",
           },
           {
             name: "Silease 360 Shuttering Oil",
@@ -353,6 +513,8 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "Rev. 09/2026",
+              image: "/images/silease-360-shuttering-oil.webp",
+              imageAlt: "Silease 360 Precast Shuttering Oil 200L drum",
               description:
                 "SILEASE 360 is a ready-to-use mould release oil developed for precast concrete production. It forms a uniform release film on the formwork, supports clean demoulding and helps reduce surface pinholes and honeycombing when applied correctly.",
               purpose: [
@@ -389,6 +551,8 @@ export const lines: Line[] = [
               storage:
                 "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
               shelfLife: "6 months from date of manufacture when stored as recommended",
+              sheetUrl: "/documents/silease-360-shuttering-oil-pds-2026.pdf",
+              sheetLabel: "Silease 360 Precast Shuttering Oil PDS (Rev. 09/2026)",
               note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
             },
           },
@@ -433,17 +597,23 @@ export const lines: Line[] = [
               storage:
                 "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
               shelfLife: "12 months from date of manufacture when stored as recommended",
+              sheetUrl: "/documents/magic-shuttering-oil-product-data-sheet-2026.pdf",
+              sheetLabel: "Magic Shuttering Oil Product Data Sheet (Rev. 09/2026)",
               reportUrl: "/documents/magic-shuttering-oil-test-report-oct-2026.pdf",
-              reportLabel: "View original report (Sri Sai Test Report Oct 2026)",
+              reportLabel: "Original Laboratory Test Certificate (Sri Sai Test Report Oct 2026)",
               note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
             },
           },
           {
             name: "Nikri 30 Shuttering Oil",
-            text: "Cost Effective MS, Plywood & Road Projects Shuttering Oil",
+            text: "Cost-effective shuttering oil formulated for MS, plywood and infrastructure road projects with reliable concrete release.",
             /* krinicrude.com/product/nikri30, read October 2026: its key features and coverage, word for word */
             details: {
               status: "verified",
+              image: "/images/nikri-30-shuttering-oil.webp",
+              imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
+              sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
+              sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
               description: "Road Project Shuttering Oil. Cost Effective MS, Plywood & Road Projects Shuttering Oil.",
               purposeTitle: "Suitable formwork & projects",
               purpose: ["MS (mild steel) formwork", "Plywood formwork", "Road projects"],
@@ -457,6 +627,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "NIKRI AL / 2026",
+              image: "/images/nikri-al-shuttering-oil.webp",
+              imageAlt: "Nikri AL Emulsion-based Shuttering Oil 200L drum for Mivan aluminium formwork",
+              sheetUrl: "/documents/nikri-al-shuttering-oil-pds.pdf",
+              sheetLabel: "Nikri AL Shuttering Oil Product Data Sheet",
               description:
                 "NIKRI AL is an emulsion-based shuttering oil that forms a uniform release film between concrete and formwork, supporting cleaner stripping and a smoother concrete finish.",
               purpose: [
@@ -507,6 +681,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "PDS - Calcium Based",
+              image: "/images/krini-shuttering-grease-tub.webp",
+              imageAlt: "Krini Shuttering Grease 1kg tub and bulk formwork release grease",
+              sheetUrl: "/documents/krini-shuttering-grease-pds.pdf",
+              sheetLabel: "Krini Shuttering Grease Product Data Sheet",
               description:
                 "KRINI SHUTTERING GREASE is a calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -552,6 +730,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "PDS - Calcium Based",
+              image: "/images/repel-shuttering-grease-tub.webp",
+              imageAlt: "Repel Shuttering Grease premium calcium-based formwork release grease tub",
+              sheetUrl: "/documents/repel-shuttering-grease-pds.pdf",
+              sheetLabel: "Repel Shuttering Grease Product Data Sheet",
               description:
                 "REPEL SHUTTERING GREASE is a high-performance calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -598,6 +780,8 @@ export const lines: Line[] = [
       {
         id: "mold-release-oil",
         name: "Mold Release Oil",
+        cardText:
+          "Applied to moulds so cast concrete units release cleanly with a smooth surface finish, allowing moulds to be reused.",
         about:
           "Mold (mould) release oil is applied to moulds so that cast concrete units come away cleanly, with a good surface finish, and the moulds can be reused.",
         uses: ["Precast concrete moulds", "Moulded concrete products"],
@@ -662,6 +846,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "Vibrant Series",
+              image: "/images/black-glossy-matt.webp",
+              imageAlt: "Vibrant Glossy Black acrylic aerosol spray paint can 550ml",
+              sheetUrl: "/documents/black-glossy-matt-pds.pdf",
+              sheetLabel: "Vibrant Black Spray Paint Product Data Sheet",
               description:
                 "VIBRANT BLACK SPRAY PAINT is a premium acrylic-based aerosol spray paint formulated for indoor and outdoor applications. Engineered with fast-drying resins and deep pigment technology, it delivers a smooth, uniform, and durable coating available in deep glossy and sleek matt black finishes.",
               metaLine:
@@ -710,6 +898,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "Vibrant Series",
+              image: "/images/any-ral-shades.webp",
+              imageAlt: "Vibrant Custom Shade Acrylic Aerosol Spray Paint in Any RAL Colour",
+              sheetUrl: "/documents/any-ral-shades-pds.pdf",
+              sheetLabel: "Vibrant Custom Shade Spray Paint Product Data Sheet",
               description:
                 "VIBRANT CUSTOM SHADE AEROSOL SPRAY PAINT is a professional-grade custom color-matched spray paint prepared to any requested RAL shade code. Specially formulated with quick-drying industrial resins, it provides precise color matching to powder coatings, painted equipment, and architectural standards with exceptional finish uniformity and weather durability.",
               metaLine:
@@ -759,6 +951,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "300 GMS",
+              image: "/images/galva-zinc-spray.webp",
+              imageAlt: "Vibrant Bright Galva Coating 300g zinc aerosol spray can",
+              sheetUrl: "/documents/galva-zinc-spray-pds.pdf",
+              sheetLabel: "Vibrant Bright Galva Coating Product Data Sheet",
               description:
                 "VIBRANT BRIGHT GALVA COATING is a high-performance zinc-rich cold galvanizing aerosol spray formulated with boosted zinc protection. It provides cathodic rust and corrosion defense for all ferrous metal surfaces, fabricated structural steelwork, weld seams, and cut edges, delivering a clean, bright metallic zinc finish.",
               metaLine:
@@ -816,6 +1012,10 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "400 ML",
+              image: "/images/lock-bond-adhesive-spray-400ml.webp",
+              imageAlt: "Lock-Bond Multi Purpose Adhesive Aerosol Spray 400ml can",
+              sheetUrl: "/documents/lock-bond-adhesive-spray-400ml-pds.pdf",
+              sheetLabel: "Lock-Bond Adhesive Spray Product Data Sheet",
               description:
                 "LOCK-BOND ADHESIVE SPRAY is a premium multi-purpose industrial aerosol adhesive formulated for fast tack, high bonding strength, and long-lasting durability across a wide spectrum of materials. It is non-toxic, ozone-friendly, CFC and lead-free, ensuring safe handling in manufacturing, workshop assembly, and industrial maintenance.",
               metaLine:
@@ -871,10 +1071,14 @@ export const lines: Line[] = [
         range: [
           {
             name: "Relese Anti-Spatter Spray",
-            text: "Anti-spatter spray, lasts longer, silicone-free.",
+            text: "Silicone-free anti-spatter spray engineered to prevent spatter adhesion on metal surfaces and welding torch nozzles.",
             details: {
               status: "verified",
               pdsRevision: "550 ML",
+              image: "/images/relese-anti-spatter-spray.webp",
+              imageAlt: "Relese Anti Spatter Spray 550ml silicone-free aerosol can",
+              sheetUrl: "/documents/relese-anti-spatter-spray-pds.pdf",
+              sheetLabel: "Relese Anti Spatter Spray Product Data Sheet",
               description:
                 "RELESE ANTI-SPATTER SPRAY is a premium industrial aerosol welding anti-spatter agent. Specially formulated without silicone, it forms a thin, protective barrier on workpieces, welding nozzles, contact tips, and jigs to prevent welding spatter from adhering. It eliminates laborious post-weld chiselling and grinding, and allows direct subsequent painting, powder coating, or galvanizing without fish-eye defects.",
               metaLine:

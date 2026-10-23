@@ -5198,6 +5198,15 @@ main section.cta3 {
 }
 .kcard-media {
   position: relative;
+  background: #ffffff;
+  overflow: hidden;
+}
+.kcard-media .kphoto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #ffffff;
 }
 .kcard-media .media-slot {
   border-radius: 0;
@@ -5231,15 +5240,20 @@ main section.cta3 {
 .kcard-name {
   font: 700 1.08rem/1.25 var(--font-display);
   color: var(--slate);
+  min-height: calc(1.25em * 2);
 }
 .kcard-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
   font-size: 0.88rem;
   line-height: 1.5;
+  min-height: calc(1.5em * 3);
   color: #5b6474;
+  text-align: left;
+  text-align-last: left;
 }
 .kcard-grade {
   display: flex;
@@ -7440,7 +7454,7 @@ main section.cta3 {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-:where(main, .pv) :where(.label, [class*="kicker"], [class*="-k"], [class*="-type"], .bl-count, .pshop-count, .crumbs, .crumbs *, .pv-assure li, .pv-tags li, .pv-price b, .about-lead, .story-quote, .story-quote *, p:has(.placeholder), .sh p, .sh li),
+:where(main, .pv) :where(.label, [class*="kicker"], [class*="-k"], [class*="-type"], .bl-count, .pshop-count, .kcard-text, .crumbs, .crumbs *, .pv-assure li, .pv-tags li, .pv-price b, .about-lead, .story-quote, .story-quote *, p:has(.placeholder), .sh p, .sh li),
 :where(.pshop-empty, .bl-empty, #details .visit-place) :where(p, li) {
   text-align: inherit;
   text-align-last: inherit;
@@ -7586,10 +7600,14 @@ main section.cta3 {
     overflow: hidden;
     font-size: 0.92rem;
     line-height: 1.22;
+    min-height: calc(1.22em * 2);
   }
   .kcard-text {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     font-size: 0.74rem;
     line-height: 1.4;
+    min-height: calc(1.4em * 3);
   }
   .kcard-grade {
     flex-direction: column;

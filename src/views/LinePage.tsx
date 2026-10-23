@@ -301,6 +301,29 @@ function ProductSheet({ p, n, type, line }: { p: Product; n: string; type: strin
   );
 }
 
+function CanisterIcon() {
+  return (
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lp-canister-icon"
+      aria-hidden="true"
+    >
+      <rect x="5" y="5" width="14" height="16" rx="2" />
+      <path d="M8 2h8v3H8z" />
+      <path d="M12 9v5" />
+      <path d="M10 11.5h4" />
+    </svg>
+  );
+}
+
+
 /**
  * The last card in the grid, on navy: products made to the customer's own
  * formulation or under their brand. Beside an odd number of products it fills

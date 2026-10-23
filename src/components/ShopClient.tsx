@@ -30,6 +30,8 @@ export type ShopItem = {
   imageAlt?: string;
   /** Its data sheet (a PDF) and its AI-generated video, where we have them. */
   sheet?: string;
+  report?: string;
+  reportLabel?: string;
   video?: string;
   /** The pack from the front, back, left and right (a view without a photo yet has no src). */
   views: { label: string; src?: string }[];
@@ -549,28 +551,22 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </div>
               {/* every product: its data sheet, and its AI-generated video */}
               <div className="pv-docs">
-                {pv.sheet ? (
-                  <a href={pv.sheet} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
+                <a href={pv.sheet || `/documents/${pv.slug}-pds.pdf`} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
+                  <DocIcon />
+                  <span>
+                    <b>Product data sheet</b>
+                    <small>View the PDF</small>
+                  </span>
+                </a>
+                {pv.report ? (
+                  <a href={pv.report} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
                     <DocIcon />
                     <span>
-                      <b>Product data sheet</b>
-                      <small>View the PDF</small>
+                      <b>Test report</b>
+                      <small>View certificate</small>
                     </span>
                   </a>
-                ) : (
-                  <a
-                    href={`${whatsapp.split("?")[0]}?text=${encodeURIComponent(`Hi Krini Crude, please send the product data sheet for ${pv.name}.`)}`}
-                    className="pv-doc"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <DocIcon />
-                    <span>
-                      <b>Product data sheet</b>
-                      <small>Get it on WhatsApp</small>
-                    </span>
-                  </a>
-                )}
+                ) : null}
                 <button type="button" className="pv-doc pv-doc-vid" onClick={() => setVidOpen(true)} disabled={!pv.video} aria-disabled={!pv.video}>
                   <PlayIcon />
                   <span>
@@ -674,14 +670,15 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   ) : (
                     <div className="pv-ask pv-ask-box">
                       <DocIcon />
-                      <p>The technical data sheet for this product is shared on request: ask us on WhatsApp and we send it the same day.</p>
+                      <p>View the complete technical specifications and official data sheet for {pv.name}.</p>
                       <a
-                        href={`${whatsapp.split("?")[0]}?text=${encodeURIComponent(`Hi Krini Crude, please send the technical data sheet for ${pv.name}.`)}`}
+                        href={pv.sheet || `/documents/${pv.slug}-pds.pdf`}
                         className="pv-ask-btn"
                         target="_blank"
                         rel="noopener noreferrer"
+                        data-no-fast
                       >
-                        <WaIcon /> Request the data sheet
+                        <DocIcon /> View official data sheet (PDF)
                       </a>
                     </div>
                   )}
