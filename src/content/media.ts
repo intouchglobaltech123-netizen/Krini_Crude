@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "flow15";
+const seqVersion = "flow17";
 
 /**
  * Home's hero (ScrollHero.tsx): realistic, machinery only, no people, made with Google Flow
@@ -61,12 +61,12 @@ const seqVersion = "flow15";
  * aluminium formwork panels craned in and pinned, clamped and braced into a mould round the rebar;
  * a spray lance mists shuttering oil on the inner faces; concrete pumped in, levelled and cured
  * (time-lapse); the panels release and are stacked intact beside a clean concrete block; in a
- * precast segment shed, modelled on the owner's own factory videos, concrete is poured into a
- * blue ribbed steel mould with an arched, oiled black bed, and the cured curved segment is hoisted
- * straight up as one rigid piece, off clean to join the stacks on timber; on site a tower crane lowers a precast panel into the
+ * precast segment shed, modelled on the owner's own factory videos, a bucket fills the closed blue
+ * ribbed steel mould along its arched, oiled black bed; the sides open, the lifting beam is hooked on and the
+ * cured piece, an exact cast of the arch, rises straight off the clean oiled bed; on site a tower crane lowers a precast panel into the
  * top floor of a 13-storey apartment block, which is then finished (paint, shutters, glazing,
  * garden), ending on it in daylight.
- * Cut to 23.6 s, then sped up to 15 s. Laptops play it part by part, one part per scroll (stops); phones play it on a loop.
+ * Cut to 23 s, then sped up to 15 s. Laptops play it part by part, one part per scroll (stops); phones play it on a loop.
  */
 export const heroSeq = {
   /** The film's frames: 22 s sampled 5 times a second. */
@@ -94,9 +94,9 @@ export const heroSeq = {
    * shuttering, then the four stages (site.film.stages: foundation and concrete columns, aluminium
    * formwork, precast, steel and welding), and the finished building with the promise and the buttons.
    */
-  beats: [0, 0.19, 1.33, 4.38, 11.17],
+  beats: [0, 0.19, 1.35, 4.5, 11.25],
   /** Laptops: the seconds where each part of the film ends; one scroll plays the next part (0 is the opening frame under the name). */
-  stops: [0, 1.33, 4.38, 11.17, 15],
+  stops: [0, 1.35, 4.5, 11.25, 15],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */
