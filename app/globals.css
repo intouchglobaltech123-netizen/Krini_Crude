@@ -6383,8 +6383,10 @@ html.motion [data-shutter] {
   }
   .sh-motto {
     margin-top: 0.5rem;
+    max-width: 34ch;
     font-size: var(--fs-p);
     color: rgb(var(--c-amber));
+    text-wrap: balance;
   }
   .sh-big {
     margin-top: 0.8rem;

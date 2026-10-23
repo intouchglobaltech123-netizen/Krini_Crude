@@ -117,10 +117,54 @@ export const site = {
      * is and where, in the words people search with (the name and the tagline alone don't).
      */
     kicker: "Lubricant manufacturer in Chennai",
-    tagline: "Premium Quality Industrial Solutions",
-    /** The live site's second hero line, under the tagline. */
-    motto: "Innovation & Excellence in Manufacturing",
-    promise: "Engineered for Performance",
+    /** The hero's headline, beside the name (from the hero brief). */
+    tagline: "Built on Precision. Engineered to Last.",
+    /** The supporting line under the headline. */
+    motto: "Specialists in beam shuttering, concrete casting, and metal deck slab solutions.",
+    promise: "Built on Precision. Engineered to Last.",
+    /** The hero's two buttons (opening screen on phones, and the last screen). */
+    ctas: {
+      primary: { label: "Explore Our Solutions", href: "/products" },
+      secondary: { label: "Contact Us", href: "/contact" },
+    },
+    /**
+     * The hero film (Google Flow, realistic, machinery only, no people): aluminium formwork panels
+     * craned in and locked into a rigid mould around the rebar; an automated lance mists shuttering
+     * oil on the inner faces; concrete is pumped in, levelled and cured (time-lapse); the panels
+     * release cleanly, intact and reusable, leaving a smooth concrete block; in a precast shed a blue
+     * steel segment mould is oiled, cast and cured and the curved segment lifts out clean to join the
+     * stacks; then a 13-storey apartment block is finished (heroSeq.stops says where each part ends).
+     * Product claims are krinicrude.com's own.
+     */
+    stages: [
+      {
+        name: "Aluminium formwork",
+        rail: "Formwork",
+        product: "",
+        line: "Panels pinned and braced into a precise mould.",
+        link: { label: "Construction chemicals", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Shuttering oil",
+        rail: "Shuttering oil",
+        product: "Shuttering oil",
+        line: "A thin coat before the pour. Clean release, smooth concrete.",
+        link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Precast concrete",
+        rail: "Precast",
+        product: "Mould release oil",
+        line: "Oiled moulds, clean lift-out, fixed on site.",
+        link: { label: "Mould release agents", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Building complete",
+        rail: "Complete",
+        product: "",
+        line: "Clean, precise concrete, with Krini Crude.",
+      },
+    ],
   },
   /**
    * The showroom, right after the hero: the three product lines side by side,

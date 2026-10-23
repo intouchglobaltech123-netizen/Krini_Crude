@@ -53,58 +53,55 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "header2";
+const seqVersion = "flow14";
 
 /**
- * Home's hero (ScrollHero.tsx): one Google Flow film, a single take, played by
- * scrolling (src/motion/scrollhero.ts). A rusty gear shaft; golden oil pours
- * over it; a thick coat of grease; a spray can mists it; the camera pulls back
- * to the gear. scripts/hero/frames.sh cuts it into frames packed into sheets
- * (perSheet frames, top to bottom, in one image each) and prints `frames`.
+ * Home's hero (ScrollHero.tsx): realistic, machinery only, no people, made with Google Flow
+ * (Nano Banana stills as start and end frames, Omni 1.1 Flash clips) and joined with fades:
+ * aluminium formwork panels craned in and pinned, clamped and braced into a mould round the rebar;
+ * a spray lance mists shuttering oil on the inner faces; concrete pumped in, levelled and cured
+ * (time-lapse); the panels release and are stacked intact beside a clean concrete block; in a
+ * precast segment shed, modelled on the owner's own factory videos, concrete is poured into a
+ * blue ribbed steel mould with an arched, oiled black bed, and the cured curved segment is hoisted
+ * straight up as one rigid piece, off clean to join the stacks on timber; on site a tower crane lowers a precast panel into the
+ * top floor of a 13-storey apartment block, which is then finished (paint, shutters, glazing,
+ * garden), ending on it in daylight.
+ * Cut to 23.6 s. Laptops play it part by part, one part per scroll (stops); phones play it on a loop.
  */
 export const heroSeq = {
-  /** Every frame of the film: 8 s at 24 frames a second. */
-  frames: 192,
-  fps: 24,
+  /** The film's frames: 22 s sampled 5 times a second. */
+  frames: 109,
+  fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
   /** One frame's size in the sheets. */
-  width: 1280,
-  height: 720,
-  /** The last frame: the hero without the motion, wide and (cut 4:5 around the gear, Flow's mark stamped in its corner) for phones. */
+  width: 960,
+  height: 540,
+  /** The last frame (the finished building): the hero without the motion, wide and cut 4:5 for phones. */
   end: `${base}/images/hero-seq/end.webp?v=${seqVersion}`,
   endTall: `${base}/images/hero-seq/end-tall.webp?v=${seqVersion}`,
-  /** Phones held upright play the film itself, as a video (muted, looping), with its first frame as the poster. */
-  video: `${base}/videos/kirni-header.mp4?v=${seqVersion}`,
+  /** Phones held upright play the film itself, as a video (muted, looping, videoRate times real time), with its first frame as the poster. */
+  video: `${base}/videos/krini-hero.mp4?v=${seqVersion}`,
+  videoRate: 1,
   first: `${base}/images/hero-seq/first.webp?v=${seqVersion}`,
-  /**
-   * Where the film's subject sits across the frame (0 left, 1 right) as it
-   * plays, as [second, x]: the oil and the shaft, then the spray can on the
-   * right, then the gear. A narrow screen's crop follows it.
-   */
+  /** The subject stays in the middle of the frame, as [second, x]. */
   focus: [
-    [0, 0.36],
-    [1.2, 0.44],
-    [2.2, 0.38],
-    [3.8, 0.42],
-    [4.4, 0.8],
-    [5.7, 0.78],
-    [6.4, 0.46],
-    [8, 0.5],
+    [0, 0.5],
+    [23.7, 0.5],
   ] as [number, number][],
   /**
-   * Where each of the four steps of the words starts, in seconds of the film: the name; the three
-   * lines of products (the oil pours, the thick coat); aerosols (the can sprays: a scroll stops
-   * 60% of the way in, about 5.5 s, the can and its mist in full view); the end (the pull-back).
+   * Where each step of the words starts, in seconds of the film: the name over the column
+   * shuttering, then the four stages (site.film.stages: foundation and concrete columns, aluminium
+   * formwork, precast, steel and welding), and the finished building with the promise and the buttons.
    */
-  beats: [0, 0.5, 4.4, 6.2],
+  beats: [0, 0.3, 2.1, 6.9, 17.6],
+  /** Laptops: the seconds where each part of the film ends; one scroll plays the next part (0 is the opening frame under the name). */
+  stops: [0, 2.1, 6.9, 17.6, 23.63],
+  /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
+  land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */
-  lead: 0.08,
-  hold: 0.92,
-  /**
-   * A watermark in the footage's bottom-right corner, if it has one (size and margins as fractions of
-   * the frame). The current film (kirni_header) has none, so its size is 0: the crop never shifts to
-   * keep it whole and no copy of it is shown.
-   */
+  lead: 0.04,
+  hold: 0.96,
+  /** Flow's mark is part of every frame here (bottom right), so no copy of it is placed on top. */
   mark: { src: `${base}/images/veo-mark.png`, width: 0, height: 0, right: 0, bottom: 0 },
 } as const;
