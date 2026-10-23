@@ -128,41 +128,33 @@ export const site = {
       secondary: { label: "Contact Us", href: "/contact" },
     },
     /**
-     * The hero film (Google Flow, realistic, machinery only, no people): aluminium formwork panels
-     * craned in and locked into a rigid mould around the rebar; an automated lance mists shuttering
-     * oil on the inner faces; concrete is pumped in, levelled and cured (time-lapse); the panels
-     * release cleanly, intact and reusable, leaving a smooth concrete block; in a precast shed a blue
-     * steel segment mould is oiled, cast and cured and the curved segment lifts out clean to join the
-     * stacks; then a 13-storey apartment block is finished (heroSeq.stops says where each part ends).
+     * The hero film (Google Flow, realistic, machinery only, no people), one part per scroll: it opens
+     * on the finished apartment block, then aluminium formwork (panels craned in, braced, oiled, cast
+     * and released clean), then precast (concrete poured into an arched steel mould and the cured
+     * piece, an exact cast of the mould, lifted off clean), then the building assembled (a precast
+     * panel craned in) and finished (heroSeq.stops says where each part ends).
      * Product claims are krinicrude.com's own.
      */
     stages: [
       {
         name: "Aluminium formwork",
         rail: "Formwork",
-        product: "",
-        line: "Panels pinned and braced into a precise mould.",
-        link: { label: "Construction chemicals", href: "/products/construction-chemicals" },
-      },
-      {
-        name: "Shuttering oil",
-        rail: "Shuttering oil",
         product: "Shuttering oil",
-        line: "A thin coat before the pour. Clean release, smooth concrete.",
+        line: "Panels pinned and braced, a thin coat of shuttering oil, clean release.",
         link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
       },
       {
         name: "Precast concrete",
         rail: "Precast",
         product: "Mould release oil",
-        line: "Oiled moulds, clean lift-out, fixed on site.",
+        line: "Oiled moulds, a perfect cast, clean lift-out.",
         link: { label: "Mould release agents", href: "/products/construction-chemicals" },
       },
       {
-        name: "Building complete",
+        name: "Assembled & complete",
         rail: "Complete",
         product: "",
-        line: "Clean, precise concrete, with Krini Crude.",
+        line: "Precast panels fixed in place: clean, precise concrete, with Krini Crude.",
       },
     ],
   },

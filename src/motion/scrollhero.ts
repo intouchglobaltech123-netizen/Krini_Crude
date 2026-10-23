@@ -268,7 +268,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("aria-hidden", "true");
-    v.src = heroSeq.video;
+    v.src = band ? heroSeq.videoSmall : heroSeq.video;
     const rate = () => {
       v.defaultPlaybackRate = heroSeq.videoRate;
       v.playbackRate = heroSeq.videoRate;
@@ -277,6 +277,12 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     d.on(v, "loadedmetadata", rate);
     stage.insertBefore(v, canvas);
     d.on(v, "timeupdate", placeVideo);
+    d.on(v, "ended", () => {
+      if (band) return;
+      target = -1;
+      partLock = Math.max(partLock, performance.now() + 450);
+      placeVideo();
+    });
     d.on(v, "loadedmetadata", placeVideo);
     video = v;
     return v;
@@ -290,11 +296,20 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
    * Wider screens: the film in parts, one per scroll. heroSeq.stops are the seconds where each part
    * ends (the first, 0, is the opening frame under the name); a scroll down plays the film from
    * where it is to the next stop and pauses there, a scroll up goes back a stop. The words of the
-   * step come in as its part starts.
+   * step come in as its part starts. While a part is playing, scrolling is held (the film is never
+   * skipped through), and the page only moves on to the next section once the last part has played
+   * to the very end.
    */
   const stops = heroSeq.stops;
   let part = 0;
   let target = -1;
+  /** No new step before this moment (performance.now()): a flick's glide is not a second scroll. */
+  let partLock = 0;
+  /** A part is playing towards its stop. */
+  const busy = () => Boolean(video && target >= 0 && !video.paused && !video.ended);
+  /** The film has played to its last frame (or was opened there). */
+  const atEnd = () =>
+    arrived || Boolean(video && part === stops.length - 1 && target < 0 && video.duration && video.currentTime >= Math.min(stops[stops.length - 1], video.duration) - 0.15);
   const goPart = (k: number, play = true) => {
     const v = ensureVideo();
     part = Math.max(0, Math.min(stops.length - 1, k));
@@ -321,8 +336,9 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       // stop at the end of the part being played
       if (!video.paused && target >= 0 && now >= target - 0.04) {
         video.pause();
-        video.currentTime = target;
+        video.currentTime = Math.min(target, (video.duration || target + 1) - 0.04);
         target = -1;
+        partLock = Math.max(partLock, performance.now() + 450);
       }
       hero.classList.toggle("at-end", false);
       if (bar && video.duration) bar.style.transform = `scaleX(${(now / video.duration).toFixed(4)})`;
@@ -483,20 +499,35 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     if (next !== starts.length - 1) arrived = false;
     scroller.scrollTo(top + total * stepAt(next), { offset: 0 });
   };
-  // wider screens: a scroll inside the hero plays the next part of the film (or goes back one); past
-  // the last part the page scrolls on as usual
-  let partLock = 0;
+  // wider screens: a scroll inside the hero plays the next part of the film (or goes back one). While
+  // a part plays, scrolling is held; the page scrolls on to the next section only after the last part
+  // has played to the end
+  const holdScroll = (e: Event) => {
+    if (e.cancelable) e.preventDefault();
+    e.stopImmediatePropagation();
+  };
   const partStep = (down: boolean, e: Event) => {
     if (band) return;
     const r = root.getBoundingClientRect();
     if (Math.abs(r.top) > 4) return; // only while the hero fills the screen
-    const next = down ? part + 1 : part - 1;
-    if (next < 0 || next > stops.length - 1) return;
-    e.preventDefault();
-    e.stopImmediatePropagation();
     const now = performance.now();
-    if (now < partLock) return;
-    partLock = now + 900;
+    // a part is still playing, or has only just stopped: hold the page where it is
+    if (busy() || now < partLock) {
+      holdScroll(e);
+      return;
+    }
+    const next = down ? part + 1 : part - 1;
+    if (next < 0) return; // above the hero: the page scrolls up as usual
+    if (next > stops.length - 1) {
+      // below the last part: move on only once the film has played to its end
+      if (!atEnd()) {
+        holdScroll(e);
+        if (!busy()) goPart(stops.length - 1, true);
+      }
+      return;
+    }
+    holdScroll(e);
+    partLock = now + 700;
     arrived = false;
     goPart(next, down);
   };
