@@ -1,6 +1,6 @@
 import { seo } from "../content/pages";
 import { faqPage, webPage } from "../content/schema";
-import { enquireHref, routes, site } from "../content/site";
+import { routes, site } from "../content/site";
 import { lines } from "../content/catalogue";
 import { Shell } from "../components/Shell";
 import { ScrollHero } from "../components/ScrollHero";
@@ -13,9 +13,8 @@ import { Arrow, Icon, type IconName } from "../components/ui";
  *     its brand's logo and its products by name, linking to the products (styles: app/home.css);
  *  3. industries we serve: the live site's four, each linking to its products;
  *  4. questions buyers ask, as an accordion (with the page's FAQPage structured data), only those
- *     whose answers are not already on the page;
- *  5. a simple enquiry panel: the heading, one line and Enquire now (the phone, email and
- *     WhatsApp are in the footer; the addresses on About and Contact).
+ *     whose answers are not already on the page.
+ * The phone, email and WhatsApp are in the footer, Enquire now in the menu bar.
  * Who we are lives on the About page, so it is not repeated here.
  */
 
@@ -142,26 +141,6 @@ export function HomePage() {
         </div>
       </section>
 
-      <section id="enquire" className="hm-make hm-cta-sec" aria-labelledby="cta-title">
-        <div className="frame">
-          <div className="hm-cta">
-            <div className="hm-cta-top">
-              <div>
-                <p className="hm-k hm-k-light">Enquiries</p>
-                <h2 id="cta-title" className="hm-cta-h">
-                  {site.contact.headline}
-                </h2>
-                <p className="hm-cta-p">Tell us the products, quantities and application, or the product you want made under your brand.</p>
-              </div>
-              <div className="hm-cta-btns">
-                <a href={enquireHref("Enquiry")} className="hm-btn hm-btn-gold" data-enquire="Enquiry">
-                  Enquire now <Arrow />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </Shell>
   );
 }

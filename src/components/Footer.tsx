@@ -52,7 +52,7 @@ export function Footer({ current }: { current?: PageId }) {
           <div className="ft3-brand" data-ft style={vars({ "--i": 0 })}>
             <a href={routes.home} className="ft3-logo" aria-label="Krini Crude, home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo-krini-h.webp" alt="" width={739} height={220} />
+              <img src="/images/logo-krini-h.webp?v=kc2" alt="" width={739} height={220} />
             </a>
             <p className="ft3-about">
               Lubricants, greases, construction chemicals and aerosols, made at our ISO certified factory in Chennai.
