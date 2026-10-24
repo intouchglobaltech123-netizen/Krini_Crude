@@ -4,7 +4,7 @@ import { enquireHref, routes, site } from "../content/site";
 import { lines } from "../content/catalogue";
 import { Shell } from "../components/Shell";
 import { ScrollHero } from "../components/ScrollHero";
-import { Arrow, Glyph, Icon, type IconName } from "../components/ui";
+import { Arrow, Icon, type IconName } from "../components/ui";
 
 /**
  * Home, kept to what a first-time visitor and a search engine need:
@@ -12,10 +12,10 @@ import { Arrow, Glyph, Icon, type IconName } from "../components/ui";
  *  2. what we make: the three lines (construction chemicals, lubricants, aerosols), each with
  *     its brand's logo and its products by name, linking to the products (styles: app/home.css);
  *  3. industries we serve: the live site's four, each linking to its products;
- *  4. questions buyers ask, as an accordion (with the page's FAQPage structured data); the
- *     questions whose answers are already on the page (where we are, which industries) are left out;
- *  5. a simple enquiry panel: one line, three buttons (enquire, call, WhatsApp) and the two
- *     addresses (phone and email are also in the footer).
+ *  4. questions buyers ask, as an accordion (with the page's FAQPage structured data), only those
+ *     whose answers are not already on the page;
+ *  5. a simple enquiry panel: the heading, one line and Enquire now (the phone, email and
+ *     WhatsApp are in the footer; the addresses on About and Contact).
  * Who we are lives on the About page, so it is not repeated here.
  */
 
@@ -27,8 +27,9 @@ const LINE_SLUG: Record<string, string> = { lubricants: "lubricants", constructi
 
 export function HomePage() {
   const faq = site.pages.home.faq;
-  // the answers already on this page (the addresses in the enquiry band, the industries above) are not asked again
-  const questions = faq.items.filter((f) => !/office and factory|which industries/i.test(f.q));
+  // only questions whose answers are not already on the page: the products (cards above), the
+  // industries (section above) and the addresses (About and Contact) are not asked again
+  const questions = faq.items.filter((f) => !/office and factory|which industries|lubricants and oils|shuttering oil|aerosol sprays/i.test(f.q));
   const shown = LINE_ORDER.map((id) => lines.find((l) => l.id === id)).filter((l): l is (typeof lines)[number] => Boolean(l));
   return (
     <Shell current="home" schema={[webPage(seo.home), faqPage(seo.home.path, questions)]}>
@@ -156,29 +157,7 @@ export function HomePage() {
                 <a href={enquireHref("Enquiry")} className="hm-btn hm-btn-gold" data-enquire="Enquiry">
                   Enquire now <Arrow />
                 </a>
-                <a href={site.contact.phoneHref} className="hm-btn hm-btn-line">
-                  Call {site.contact.phone}
-                </a>
-                <a href={site.contact.whatsapp} className="hm-btn hm-btn-line" target="_blank" rel="noopener noreferrer">
-                  WhatsApp
-                </a>
               </div>
-            </div>
-            <div className="hm-cta-places">
-              {[
-                { label: "Office", lines: site.contact.office, map: site.contact.officeMap },
-                { label: "Factory", lines: site.contact.factory, map: site.contact.factoryMap },
-              ].map((pl) => (
-                <a key={pl.label} href={pl.map} target="_blank" rel="noopener noreferrer" className="hm-cta-place">
-                  <span className="hm-cta-pin" aria-hidden="true">
-                    <Glyph name="contact" size={16} />
-                  </span>
-                  <span>
-                    <b>{pl.label}</b>
-                    <span>{pl.lines.join(" ")}</span>
-                  </span>
-                </a>
-              ))}
             </div>
           </div>
         </div>

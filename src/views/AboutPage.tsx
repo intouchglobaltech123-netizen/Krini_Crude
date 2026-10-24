@@ -1,5 +1,4 @@
 import { enquireHref, routes, site } from "../content/site";
-import { lines } from "../content/catalogue";
 import { seo, trail } from "../content/pages";
 import { breadcrumbs, webPage } from "../content/schema";
 import { Shell } from "../components/Shell";
@@ -16,9 +15,8 @@ import { isPlaceholder } from "../content/placeholder";
  *     the four commitments. The name, photo and message come from site.pages.about.leadership;
  *     until they are filled in, a plain portrait frame and the published fact about the
  *     Director's role are shown.
- *  4. What we make: the three lines (construction, lubricants, aerosols), each with its brand
- *     and its products, as text cards.
- *  5. Where we are: the office and the factory (phone and email are in the footer).
+ *  4. Where we are: the office and the factory (phone and email are in the footer).
+ * The three product lines are shown on the home page, so they are not repeated here.
  */
 
 const FIGURES = [
@@ -35,14 +33,11 @@ const WAYS = [
 ];
 
 const MISSION = [
-  { title: "Research & development", body: "Invest substantially in research and development." },
+  { title: "Investment", body: "Invest substantially in research and development." },
   { title: "Modern technology", body: "Keep acquiring modern technologies." },
   { title: "Reach", body: "Keep expanding geographically." },
   { title: "Support", body: "Comprehensive after-sales support for every client." },
 ];
-
-/** The order the three lines are shown in: construction first. */
-const LINE_ORDER = ["construction", "lubricants", "aerosols"] as const;
 
 const MARKETS = ["Industrial", "Automotive", "Marine", "Construction", "Infrastructure", "Specialist sectors"];
 
@@ -99,7 +94,7 @@ export function AboutPage() {
             <article className="ab3-tile ab3-who">
               <p className="ab3-k">Who we are</p>
               <h2 className="ab3-h2">A distinguished reputation, built on extensive manufacturing experience.</h2>
-              <p className="ab3-text">We make standard, speciality and niche-market products, to our own formulations and to yours.</p>
+              <p className="ab3-text">We make standard, speciality and niche-market products.</p>
               <ul className="ab3-chips" aria-label="Markets we serve">
                 {MARKETS.map((m) => (
                   <li key={m}>{m}</li>
@@ -177,57 +172,8 @@ export function AboutPage() {
           </div>
         </section>
 
-        {/* 4. What we make */}
-        <section className="ab3-sec ab3-soft" aria-labelledby="make-title">
-          <div className="frame">
-            <div className="ab3-head">
-              <div>
-                <p className="ab3-k">What we make</p>
-                <h2 id="make-title" className="ab3-h2">
-                  Three product lines, three brands.
-                </h2>
-              </div>
-              <a href={routes.products} className="ab3-link">
-                View all products <Arrow />
-              </a>
-            </div>
-            <ul className="ab3-lines">
-              {LINE_ORDER.map((id) => lines.find((l) => l.id === id))
-                .filter((l): l is (typeof lines)[number] => Boolean(l))
-                .map((l, i) => (
-                  <li key={l.id}>
-                    <a href={routes.line(l.slug)} className="ab3-line">
-                      <span className="ab3-line-top">
-                        <span className="ab3-line-n" aria-hidden="true">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        {l.brand.logoFull ?? l.brand.logo ? (
-                      <span className="ab3-line-logo" title={`Brand: ${l.brand.name}`}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={l.brand.logoFull ?? l.brand.logo} alt={l.brand.name} loading="lazy" decoding="async" />
-                      </span>
-                    ) : (
-                      <span className="ab3-line-brand">{l.brand.name}</span>
-                    )}
-                      </span>
-                      <b>{l.title}</b>
-                      <span className="ab3-line-items">
-                        {l.strap.split("•").map((x) => (
-                          <span key={x}>{x.trim()}</span>
-                        ))}
-                      </span>
-                      <em>
-                        View products <Arrow />
-                      </em>
-                    </a>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* 5. Where we are */}
-        <section className="ab3-sec" aria-labelledby="visit-title">
+        {/* 4. Where we are */}
+        <section className="ab3-sec ab3-soft" aria-labelledby="visit-title">
           <div className="frame">
             <div className="ab3-head">
               <div>

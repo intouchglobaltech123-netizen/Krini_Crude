@@ -106,9 +106,9 @@ export function ScrollHero() {
             <p className="sh-count label">
               <span className="text-amber">Stage {total}</span>
               <span aria-hidden="true"> / {total}</span>
-              <span> · {stages[stages.length - 1].name}</span>
             </p>
-            <p className="sh-big display-tight">{film.promise}</p>
+            {/* the promise is the opening headline (film.tagline), so it is not said again here */}
+            <h2 className="sh-big display-tight">{stages[stages.length - 1].name}</h2>
             <p className="sh-body">{stages[stages.length - 1].line}</p>
             <div className="sh-ctas">
               <a href={film.ctas.primary.href} className="btn btn-primary" data-magnetic>
