@@ -1,0 +1,1257 @@
+/* ===========================================================================
+   Products page refresh (src/components/ShopClient.tsx), loaded after theme.css.
+   Every rule starts with section.pshop so it outranks the older shop rules
+   without touching any other page.
+     1. the filter bar: the lines as pills and the search, in one tidy bar
+     2. compact product cards, several to a row (a store-style catalogue)
+     3. the brand plate on the product page
+     4. the product page: full width, photos kept in view, sections in columns
+     5. ratings & reviews
+   =========================================================================== */
+
+/* ---- 1. filter bar ------------------------------------------------------ */
+section.pshop .pshop-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.92);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  backdrop-filter: saturate(1.4) blur(10px);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 10px 28px -18px rgb(15 23 42 / 0.35);
+}
+section.pshop .pshop-cats {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  min-width: 0;
+}
+section.pshop .pshop-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px 0 16px;
+  border: 1px solid rgb(15 23 42 / 0.1);
+  border-radius: 999px;
+  background: #fff;
+  color: rgb(15 23 42);
+  font-size: 14px !important;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+section.pshop .pshop-cat:hover {
+  border-color: rgb(212 175 55 / 0.7);
+  background: rgb(212 175 55 / 0.08);
+}
+section.pshop .pshop-cat .pshop-cat-t {
+  font-weight: 600;
+}
+section.pshop .pshop-cat > span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.06);
+  color: rgb(71 85 105);
+  font-size: 11.5px !important;
+  font-weight: 700;
+  line-height: 1;
+}
+section.pshop .pshop-cat .pshop-cat-chev {
+  margin-left: -2px;
+  opacity: 0.6;
+}
+section.pshop .pshop-cat[aria-pressed="true"] {
+  border-color: rgb(15 23 42);
+  background: rgb(15 23 42);
+  color: #fff;
+  box-shadow: 0 6px 16px -10px rgb(15 23 42 / 0.8);
+}
+section.pshop .pshop-cat[aria-pressed="true"] > span {
+  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  color: rgb(15 23 42);
+}
+section.pshop .pshop-cat[aria-pressed="true"] .pshop-cat-chev {
+  opacity: 0.9;
+}
+section.pshop .pshop-search {
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  min-width: 0;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.045);
+  color: rgb(100 116 139);
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+section.pshop .pshop-search:focus-within {
+  border-color: rgb(212 175 55 / 0.8);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(212 175 55 / 0.16);
+}
+section.pshop .pshop-search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: rgb(15 23 42);
+  font-size: 14px !important;
+}
+section.pshop .pshop-search input::placeholder {
+  color: rgb(100 116 139);
+}
+section.pshop .pshop-count {
+  margin: 14px 2px 10px;
+  font-size: 13px !important;
+  color: rgb(100 116 139);
+}
+@media (max-width: 899px) {
+  /* the lines wrap above the search, which takes the full width */
+  section.pshop .pshop-cats {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+  }
+  section.pshop .pshop-search {
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 639px) {
+  /* phones: the four lines as a 2 × 2 grid of equal pills (their menus stay unclipped) */
+  section.pshop .pshop-cats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  section.pshop .pshop-catw,
+  section.pshop .pshop-catw > .pshop-cat {
+    width: 100%;
+    min-width: 0;
+  }
+  section.pshop .pshop-cat {
+    justify-content: space-between;
+    height: 38px;
+    padding: 0 10px 0 12px;
+    font-size: 13px !important;
+  }
+  section.pshop .pshop-cat .pshop-cat-t {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+  section.pshop .pshop-cat > span {
+    flex: none;
+  }
+}
+
+/* ---- 2. compact product cards -------------------------------------------- */
+/* five to a row on laptops and larger, four, three, then two on phones */
+section.pshop .pshop-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 1099px) {
+  section.pshop .pshop-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+@media (max-width: 899px) {
+  section.pshop .pshop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+section.pshop .pshop-grid .kcard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: auto;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+section.pshop .pshop-grid .kcard:hover {
+  transform: translateY(-2px);
+  border-color: rgb(15 23 42 / 0.12);
+  box-shadow: 0 14px 30px -18px rgb(15 23 42 / 0.45);
+}
+section.pshop .pshop-grid .kcard-media {
+  position: relative;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding: 14px;
+  background: #fff;
+  border-bottom: 1px solid rgb(15 23 42 / 0.05);
+}
+section.pshop .pshop-grid .kcard-media .kphoto {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.35s ease;
+}
+section.pshop .pshop-grid .kcard:hover .kcard-media .kphoto {
+  transform: scale(1.04);
+}
+section.pshop .pshop-grid .kcard-media > .kplate {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  aspect-ratio: auto;
+  padding: 24px 8px 8px;
+  border-radius: 0;
+}
+section.pshop .pshop-grid .kcard-media .kplate-drum-svg {
+  width: 44px;
+  height: 56px;
+}
+section.pshop .pshop-grid .kcard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  padding: 10px 12px 4px;
+}
+section.pshop .pshop-grid .kcard-meta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+section.pshop .pshop-grid .kcard-type {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgb(161 128 32);
+  font-size: 10.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.pshop .pshop-grid .kcard-pds-tag {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 9.5px !important;
+  letter-spacing: 0.04em;
+}
+section.pshop .pshop-grid .kcard-name {
+  margin: 0;
+  min-height: 2.6em;
+  font-size: 14.5px !important;
+  line-height: 1.3 !important;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+section.pshop .pshop-grid .kcard-link {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font: inherit;
+  text-align: left;
+  color: rgb(15 23 42);
+}
+section.pshop .pshop-grid .kcard-link:hover {
+  color: rgb(161 128 32);
+}
+section.pshop .pshop-grid .kcard-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: auto;
+}
+section.pshop .pshop-grid .kcard-spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 3px 7px;
+  border: 0;
+  border-radius: 6px;
+  background: rgb(15 23 42 / 0.045);
+  color: rgb(71 85 105);
+  font-size: 11px !important;
+  line-height: 1.3;
+}
+section.pshop .pshop-grid .kcard-spec-item svg {
+  flex: none;
+  width: 11px;
+  height: 11px;
+}
+section.pshop .pshop-grid .kcard-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px 10px;
+}
+section.pshop .pshop-grid .kcard-add {
+  height: 36px;
+  border-radius: 8px;
+  font-size: 13.5px !important;
+  font-weight: 700;
+  box-shadow: 0 4px 10px -6px rgb(212 175 55 / 0.7);
+}
+section.pshop .pshop-grid .kcard-add svg {
+  width: 16px;
+  height: 16px;
+}
+section.pshop .pshop-grid .kcard-step {
+  height: 36px;
+  border-radius: 8px;
+}
+section.pshop .pshop-grid .kcard-step span {
+  font-size: 12.5px !important;
+}
+section.pshop .pshop-grid .kcard-detail-link {
+  padding: 4px 0 0;
+  font-size: 12.5px !important;
+  font-weight: 600;
+  color: rgb(71 85 105);
+}
+section.pshop .pshop-grid .kcard-detail-link:hover {
+  color: rgb(15 23 42);
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-grid .kcard-media {
+    padding: 10px;
+  }
+  section.pshop .pshop-grid .kcard-body {
+    padding: 8px 10px 2px;
+  }
+  section.pshop .pshop-grid .kcard-name {
+    font-size: 13.5px !important;
+  }
+  section.pshop .pshop-grid .kcard-foot {
+    padding: 6px 10px 10px;
+  }
+  section.pshop .pshop-grid .kcard-add {
+    height: 34px;
+    font-size: 12.5px !important;
+  }
+  section.pshop .pshop-grid .kcard-spec-item:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+/* ---- 3. the brand plate (Lubecon, 1-COOL; none for Vibrant) -------------- */
+section.pshop .pshop-grid .kcard-media > .kbrand-lubecon.has-logo {
+  height: 36px;
+  padding: 4px 8px;
+  border-radius: 9px;
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-grid .kcard-media > .kbrand-lubecon.has-logo {
+    height: 28px;
+    padding: 3px 6px;
+  }
+}
+section.pshop .pv-by {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---- 4. the product page: simple and neat --------------------------------
+   One clean white panel on top (photos with their thumbnails down the side,
+   the details beside them), then one white panel for everything else, each
+   section a row: its title on the left, its content on the right. */
+section.pshop .pv {
+  --pv-line: rgb(15 23 42 / 0.08);
+  --pv-mute: rgb(100 116 139);
+  --pv-ink: rgb(15 23 42);
+}
+section.pshop .pv .pv-wrap {
+  width: 100%;
+  max-width: 1480px;
+  margin-inline: auto;
+  padding: 20px clamp(14px, 3vw, 40px) 72px;
+}
+section.pshop .pv .pv-top {
+  display: grid;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(16px, 2.2vw, 32px);
+  border: 1px solid var(--pv-line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: none;
+}
+@media (min-width: 1024px) {
+  section.pshop .pv .pv-top {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+  }
+  section.pshop .pv .pv-media {
+    position: sticky;
+  }
+}
+
+/* the bar along the top: back, the product's name, the cart; lined up with the panels below */
+section.pshop .pv .pv-bar {
+  display: block;
+  flex: none;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border-bottom: 1px solid var(--pv-line);
+  background: rgb(255 255 255 / 0.92);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  backdrop-filter: saturate(1.4) blur(14px);
+}
+section.pshop .pv .pv-bar-in {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 1480px;
+  height: 64px;
+  margin-inline: auto;
+  padding: 0 clamp(14px, 3vw, 40px);
+}
+section.pshop .pv .pv-back,
+section.pshop .pv .pv-cartbtn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--pv-line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pv-ink);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+section.pshop .pv .pv-back:hover,
+section.pshop .pv .pv-cartbtn:hover {
+  border-color: rgb(15 23 42 / 0.2);
+  background: rgb(15 23 42 / 0.04);
+}
+section.pshop .pv .pv-back svg,
+section.pshop .pv .pv-cartbtn svg {
+  width: 18px;
+  height: 18px;
+}
+section.pshop .pv .pv-cartbtn b {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  font-size: 10.5px !important;
+  line-height: 1;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-bar-t {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px !important;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pv-ink);
+}
+@media (min-width: 1024px) {
+  section.pshop .pv .pv-media {
+    top: 88px;
+  }
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pv-bar-in {
+    height: 56px;
+    gap: 10px;
+    padding: 0 14px;
+  }
+  section.pshop .pv .pv-bar-t {
+    font-size: 15px !important;
+  }
+}
+
+/* photos: thumbnails down the left, the photo on a soft grey plate */
+section.pshop .pv .pg {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+section.pshop .pv .pg-thumbs {
+  order: -1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+section.pshop .pv .pg-thumb {
+  gap: 4px;
+}
+section.pshop .pv .pg-thumb-img {
+  width: 72px;
+  height: 72px;
+  padding: 6px;
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  background: #f7f7f8;
+  transition: border-color 0.2s ease;
+}
+section.pshop .pv .pg-thumb-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+section.pshop .pv .pg-thumb[aria-pressed="true"] .pg-thumb-img {
+  border: 2px solid #d4af37;
+}
+section.pshop .pv .pg-thumb-t {
+  font-size: 11.5px !important;
+  font-weight: 600;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pg-stage {
+  border: 1px solid var(--pv-line);
+  border-radius: 14px;
+  background: #f7f7f8;
+}
+section.pshop .pv .pg-slide {
+  background: transparent;
+}
+section.pshop .pv .pg-slide > img {
+  object-fit: contain;
+}
+section.pshop .pv .pg-brand,
+section.pshop .pv .pg-count {
+  display: none;
+}
+section.pshop .pv .pg-arrow {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--pv-line);
+  background: #fff;
+  box-shadow: 0 4px 12px -6px rgb(15 23 42 / 0.3);
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  section.pshop .pv .pg-thumbs {
+    order: 0;
+    flex-direction: row;
+    justify-content: center;
+  }
+  section.pshop .pv .pg-thumb-img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* the details beside the photos */
+section.pshop .pv .pv-info {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  padding: 0;
+}
+section.pshop .pv .pv-crumbs {
+  margin: 0;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(161 128 32);
+}
+section.pshop .pv .pv-name {
+  margin: 0;
+  font-size: clamp(26px, 2.3vw, 34px) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.01em;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: -6px 0 0;
+  font-size: 13.5px !important;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pv-by .kbrand.has-logo {
+  height: 28px;
+  padding: 3px 8px;
+  border: 1px solid var(--pv-line);
+  box-shadow: none;
+}
+section.pshop .pv .pv-text {
+  margin: 0;
+  font-size: 15px !important;
+  line-height: 1.6;
+  color: rgb(71 85 105);
+}
+section.pshop .pv .pv-price {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 14px 0;
+  border: 0;
+  border-block: 1px solid var(--pv-line);
+  border-radius: 0;
+  background: none;
+}
+section.pshop .pv .pv-price b {
+  font-size: 20px !important;
+  font-weight: 800;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-price span {
+  font-size: 13px !important;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pv-k {
+  margin: 0 0 8px;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pv-block {
+  margin: 0;
+}
+section.pshop .pv .pv-qtyrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+section.pshop .pv .pv-qtyrow .pv-k {
+  margin: 0;
+}
+section.pshop .pv .pv-qty {
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  background: #fff;
+}
+section.pshop .pv .pv-cta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+section.pshop .pv .pv-cta .pv-add,
+section.pshop .pv .pv-cta .pv-wa {
+  height: 48px;
+  border-radius: 10px;
+  font-size: 15px !important;
+  font-weight: 700;
+}
+section.pshop .pv .pv-docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+section.pshop .pv .pv-doc {
+  flex: 1 1 180px;
+  min-height: 0;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: 10px;
+  background: #fff;
+}
+section.pshop .pv .pv-doc > svg {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  background: none;
+}
+section.pshop .pv .pv-doc b {
+  font-size: 13.5px !important;
+}
+section.pshop .pv .pv-doc small {
+  font-size: 12px !important;
+}
+section.pshop .pv .pv-assure {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+section.pshop .pv .pv-assure li {
+  position: relative;
+  display: block;
+  min-height: 0;
+  padding: 0 0 0 20px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 13px !important;
+  font-weight: 500;
+  text-align: left;
+  color: rgb(71 85 105);
+}
+section.pshop .pv .pv-assure li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.32em;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid #16a34a;
+  border-bottom: 2px solid #16a34a;
+  transform: rotate(-45deg);
+}
+
+/* everything else: one panel, a row per section */
+section.pshop .pv .pv-details {
+  display: block;
+  margin-top: 16px;
+  padding: 0 clamp(16px, 2.2vw, 32px);
+  border: 1px solid var(--pv-line);
+  border-radius: 16px;
+  background: #fff;
+}
+section.pshop .pv .pv-details > .pv-sec {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+  padding: 26px 0;
+  border: 0;
+  border-top: 1px solid var(--pv-line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+section.pshop .pv .pv-details > .pv-sec:first-child {
+  border-top: 0;
+}
+@media (min-width: 900px) {
+  section.pshop .pv .pv-details > .pv-sec {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 10px 40px;
+  }
+  section.pshop .pv .pv-details > .pv-sec > :not(h3) {
+    grid-column: 2;
+  }
+}
+section.pshop .pv .pv-details > .pv-sec > h3 {
+  display: block;
+  margin: 0;
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+  font-weight: 700;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-details > .pv-sec > h3 .pv-ic {
+  display: none;
+}
+section.pshop .pv .pv-details .pv-sec p {
+  margin: 0;
+  font-size: 14.5px !important;
+  line-height: 1.65;
+  color: rgb(71 85 105);
+}
+/* spec tables: a bordered table, soft stripes, labels in a fixed column */
+section.pshop .pv .pv-details .pv-specs {
+  display: grid;
+  align-content: start;
+  align-self: start;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--pv-line);
+  border-radius: 12px;
+  background: #fff;
+}
+section.pshop .pv .pv-details .pv-specs > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 38%) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--pv-line);
+  background: #fff;
+  transition: background-color 0.15s ease;
+}
+section.pshop .pv .pv-details .pv-specs > div:nth-child(even) {
+  background: #fbfaf6;
+}
+section.pshop .pv .pv-details .pv-specs > div:hover {
+  background: rgb(212 175 55 / 0.07);
+}
+section.pshop .pv .pv-details .pv-specs > div:last-child {
+  border-bottom: 0;
+}
+/* wide tables (packing, dilution): a narrower label column */
+section.pshop .pv .pv-details .pv-sec > .pv-specs > div {
+  grid-template-columns: minmax(120px, 200px) minmax(0, 1fr);
+}
+section.pshop .pv .pv-details .pv-specs dt {
+  margin: 0;
+  font-size: 13.5px !important;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pv-details .pv-specs dd {
+  margin: 0;
+  font-size: 14px !important;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-details .pv-specs dd small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px !important;
+  font-weight: 500;
+  color: rgb(148 163 184);
+}
+section.pshop .pv .pv-details .pv-spec-grid {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 1100px) {
+  section.pshop .pv .pv-details .pv-spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+section.pshop .pv .pv-details .pv-spec-k {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(161 128 32);
+}
+section.pshop .pv .pv-details .pv-spec-k::before {
+  content: "";
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  background: #d4af37;
+}
+section.pshop .pv .pv-details .pv-small {
+  margin-top: 12px;
+  font-size: 12.5px !important;
+  color: rgb(148 163 184);
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pv-details .pv-specs > div,
+  section.pshop .pv .pv-details .pv-sec > .pv-specs > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+    padding: 11px 14px;
+  }
+}
+section.pshop .pv .pv-details .pv-tags li,
+section.pshop .pv .pv-details .pv-feats li {
+  border-radius: 8px;
+}
+section.pshop .pv .pv-details > .pv-note {
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--pv-line);
+  background: none;
+  font-size: 13px !important;
+  color: var(--pv-mute);
+}
+section.pshop .pv .pv-details .pv-ask-box {
+  justify-items: start;
+  text-align: left;
+  border-radius: 12px;
+}
+section.pshop .pv .pv-details .pv-ask-box p {
+  text-align: left !important;
+  text-align-last: left;
+}
+/* the two tables keep their own heights */
+section.pshop .pv .pv-details .pv-spec-grid > div {
+  display: block;
+}
+section.pshop .pv .pv-similar {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+@media (min-width: 1100px) {
+  section.pshop .pv .pv-similar {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pv-similar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+/* similar products: small store cards, the whole pack in view */
+section.pshop .pv .pv-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding: 0 0 12px;
+  border: 1px solid var(--pv-line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+section.pshop .pv .pv-mini:hover {
+  transform: translateY(-2px);
+  border-color: rgb(15 23 42 / 0.14);
+  box-shadow: 0 14px 28px -18px rgb(15 23 42 / 0.45);
+}
+section.pshop .pv .pv-mini-media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  margin: 0 0 6px;
+  padding: 12px;
+  border-bottom: 1px solid var(--pv-line);
+  background: #f7f7f8;
+}
+section.pshop .pv .pv-mini-media .kphoto {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+section.pshop .pv .pv-mini:hover .pv-mini-media .kphoto {
+  transform: scale(1.05);
+}
+section.pshop .pv .pv-mini-media .kplate {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  background: transparent;
+}
+section.pshop .pv .pv-mini-type {
+  padding: 0 12px;
+  font-size: 10.5px !important;
+  color: rgb(161 128 32);
+}
+section.pshop .pv .pv-mini-name {
+  min-height: 2.5em;
+  padding: 0 12px;
+  font-size: 14px !important;
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--pv-ink);
+}
+section.pshop .pv .pv-mini-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: auto;
+  padding: 6px 12px 0;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  color: rgb(161 128 32);
+}
+section.pshop .pv .pv-mini-go::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+section.pshop .pv .pv-mini:hover .pv-mini-go::after {
+  transform: translateX(3px);
+}
+
+/* ---- 5. ratings & reviews ---------------------------------------------- */
+section.pshop .rv-grid {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  section.pshop .rv-grid {
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+    gap: 32px;
+  }
+}
+section.pshop .rv-sum {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 14px;
+  background: rgb(15 23 42 / 0.02);
+  align-self: start;
+}
+section.pshop .rv-avg {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+section.pshop .rv-avg b {
+  font-size: 2.25rem !important;
+  line-height: 1;
+  font-weight: 800;
+  color: rgb(15 23 42);
+}
+section.pshop .rv-n {
+  margin: 0;
+  font-size: 13px !important;
+  color: rgb(100 116 139);
+}
+section.pshop .rv-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+section.pshop .rv-stars svg {
+  fill: rgb(15 23 42 / 0.12);
+}
+section.pshop .rv-stars svg.is-on {
+  fill: #e0b23a;
+}
+section.pshop .rv-bars {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+section.pshop .rv-bars li {
+  display: grid;
+  grid-template-columns: 26px 1fr 22px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px !important;
+  color: rgb(71 85 105);
+}
+section.pshop .rv-bars i {
+  height: 6px;
+  border-radius: 999px;
+  background: rgb(15 23 42 / 0.08);
+  overflow: hidden;
+}
+section.pshop .rv-bars em {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #c9a43a, #e3c25a);
+}
+section.pshop .rv-none {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+section.pshop .rv-none p {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+section.pshop .rv-none b {
+  font-size: 16px !important;
+  color: rgb(15 23 42);
+}
+section.pshop .rv-none span {
+  font-size: 13.5px !important;
+  color: rgb(100 116 139);
+}
+section.pshop .rv-write {
+  height: 40px;
+  border: 1px solid rgb(15 23 42);
+  border-radius: 10px;
+  background: #fff;
+  color: rgb(15 23 42);
+  font-size: 14px !important;
+  font-weight: 700;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+section.pshop .rv-write:hover,
+section.pshop .rv-write[aria-expanded="true"] {
+  background: rgb(15 23 42);
+  color: #fff;
+}
+section.pshop .rv-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+section.pshop .rv-empty {
+  margin: 0;
+  padding: 18px;
+  border: 1px dashed rgb(15 23 42 / 0.15);
+  border-radius: 14px;
+  font-size: 14px !important;
+  color: rgb(100 116 139);
+}
+section.pshop .rv-form {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgb(212 175 55 / 0.45);
+  border-radius: 14px;
+  background: rgb(212 175 55 / 0.05);
+}
+section.pshop .rv-k {
+  margin: 0;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(71 85 105);
+}
+section.pshop .rv-pick {
+  display: flex;
+  gap: 4px;
+}
+section.pshop .rv-pick button {
+  padding: 2px;
+  border: 0;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+}
+section.pshop .rv-pick svg {
+  fill: rgb(15 23 42 / 0.14);
+  transition: fill 0.15s ease, transform 0.15s ease;
+}
+section.pshop .rv-pick button.is-on svg {
+  fill: #e0b23a;
+}
+section.pshop .rv-pick button:hover svg {
+  transform: scale(1.12);
+}
+section.pshop .rv-field {
+  display: grid;
+  gap: 6px;
+}
+section.pshop .rv-field span {
+  font-size: 13px !important;
+  font-weight: 600;
+  color: rgb(15 23 42);
+}
+section.pshop .rv-field input,
+section.pshop .rv-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgb(15 23 42 / 0.14);
+  border-radius: 10px;
+  background: #fff;
+  color: rgb(15 23 42);
+  font: inherit;
+  font-size: 14px !important;
+  resize: vertical;
+}
+section.pshop .rv-field input:focus,
+section.pshop .rv-field textarea:focus {
+  outline: 0;
+  border-color: rgb(212 175 55);
+  box-shadow: 0 0 0 4px rgb(212 175 55 / 0.16);
+}
+section.pshop .rv-send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+section.pshop .rv-send-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: #25d366;
+  color: #fff;
+  font-size: 14px !important;
+  font-weight: 700;
+  text-decoration: none;
+}
+section.pshop .rv-send-btn[aria-disabled="true"] {
+  background: rgb(15 23 42 / 0.12);
+  color: rgb(100 116 139);
+  pointer-events: none;
+}
+section.pshop .rv-send small {
+  font-size: 12.5px !important;
+  color: rgb(100 116 139);
+}
+section.pshop .rv-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+section.pshop .rv-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(15 23 42 / 0.07);
+}
+section.pshop .rv-item:first-child {
+  padding-top: 0;
+}
+section.pshop .rv-item-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-bottom: 6px;
+  font-size: 13.5px !important;
+}
+section.pshop .rv-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: #388e3c;
+  color: #fff;
+  font-size: 12px !important;
+  font-weight: 700;
+}
+section.pshop .rv-place,
+section.pshop .rv-date {
+  font-size: 12.5px !important;
+  color: rgb(100 116 139);
+}
+section.pshop .rv-item p {
+  margin: 0;
+  font-size: 14px !important;
+  color: rgb(51 65 85);
+}

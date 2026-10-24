@@ -33,7 +33,7 @@ export type ShopItem = {
   report?: string;
   reportLabel?: string;
   video?: string;
-  /** The pack from the front, back, left and right (a view without a photo yet has no src). */
+  /** The pack from the front and the back (a view without a photo yet has no src). */
   views: { label: string; src?: string }[];
   /** The product page's sections: every product has all of them. */
   about: string;
@@ -52,7 +52,10 @@ export type ShopItem = {
   howToTitle?: string;
   packing: ShopRow[];
   note?: string;
+  /** Real customer reviews (catalogue.ts), newest first; empty until some come in. */
+  reviews: ShopReview[];
 };
+export type ShopReview = { name: string; rating: number; text: string; place?: string; date?: string };
 export type ShopLine = { id: string; title: string; brand?: string };
 type CartLine = { id: string; key: string; name: string; type: string; line: string; grade: string; qty: number };
 
@@ -208,7 +211,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
 
   const count = cart.reduce((n, l) => n + l.qty, 0);
   const lineId = (it: ShopItem, grade: string) => `${it.key}::${grade}`;
-  const inCart = (it: ShopItem) => cart.find((l) => l.id === lineId(it, grades[it.key] ?? ""));
+  const inCart = (it: ShopItem) => cart.find((l) => l.id === lineId(it, grades[it.key] ?? "")) || cart.find((l) => l.key === it.key);
 
   const add = (it: ShopItem) => {
     const grade = grades[it.key] ?? "";
@@ -265,10 +268,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             <h1 id="page-title" className="pshop-title">
               Our products
             </h1>
-            <p className="pshop-sub">
-              Construction chemicals, lubricants and aerosols, made in Chennai. Add what you need to the cart and send us the list: we reply with price, stock and
-              delivery.
-            </p>
           </div>
           <ol className="pshop-steps" aria-label="How ordering works">
             <li>
@@ -283,8 +282,80 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
           </ol>
         </div>
 
-        {/* search, the lines and the cart: stays in view while the cards scroll */}
+        {/* Sticky bar: categories on the left, search bar & cart in remaining space on the right */}
         <div className="pshop-bar">
+          <div className="pshop-cats" role="group" aria-label="Product lines">
+            {[{ id: "all", title: "All products" }, ...lines].map((l) => {
+              const inLine = l.id === "all" ? items : items.filter((i) => i.line === l.id);
+              // the kinds of product in this line, in catalogue order (Shuttering Oil, Shuttering Grease…)
+              const groups = l.id === "all" ? [] : Array.from(new Set(inLine.map((i) => i.group)));
+              const isOpen = menu === l.id && groups.length > 1;
+              return (
+                <div key={l.id} className={`pshop-catw${isOpen ? " is-open" : ""}`}>
+                  <button
+                    type="button"
+                    className="pshop-cat"
+                    aria-pressed={cat === l.id}
+                    aria-haspopup={groups.length > 1 ? "menu" : undefined}
+                    aria-expanded={groups.length > 1 ? isOpen : undefined}
+                    onClick={() => {
+                      if (l.id === "all") {
+                        setCat("all");
+                        setSub("");
+                        setMenu(null);
+                        return;
+                      }
+                      if (cat !== l.id) {
+                        setCat(l.id);
+                        setSub("");
+                      }
+                      setMenu((m) => (m === l.id ? null : l.id));
+                    }}
+                  >
+                    <b className="pshop-cat-t">{l.title}</b>
+                    <span>{inLine.length}</span>
+                    {groups.length > 1 ? (
+                      <svg className="pshop-cat-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    ) : null}
+                  </button>
+                  {isOpen ? (
+                    <div className="pshop-menu" role="menu" aria-label={l.title}>
+                      <button
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={cat === l.id && !sub}
+                        onClick={() => {
+                          setSub("");
+                          setMenu(null);
+                        }}
+                      >
+                        All {l.title.toLowerCase()}
+                        <span>{inLine.length}</span>
+                      </button>
+                      {groups.map((g) => (
+                        <button
+                          key={g}
+                          type="button"
+                          role="menuitemradio"
+                          aria-checked={cat === l.id && sub === g}
+                          onClick={() => {
+                            setSub(g);
+                            setMenu(null);
+                          }}
+                        >
+                          {g}
+                          <span>{inLine.filter((i) => i.group === g).length}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+
           <label className="pshop-search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
               <circle cx="11" cy="11" r="7" />
@@ -298,82 +369,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </button>
             ) : null}
           </label>
-          <button type="button" className={`pshop-cartbtn${bump ? " is-bump" : ""}`} key={bump} onClick={() => setOpen(true)} aria-label={`Open cart, ${count} items`}>
-            <CartIcon />
-            <span>Cart</span>
-            <b>{count}</b>
-          </button>
-        </div>
-        <div className="pshop-cats" role="group" aria-label="Product lines">
-          {[{ id: "all", title: "All products" }, ...lines].map((l) => {
-            const inLine = l.id === "all" ? items : items.filter((i) => i.line === l.id);
-            // the kinds of product in this line, in catalogue order (Shuttering Oil, Shuttering Grease…)
-            const groups = l.id === "all" ? [] : Array.from(new Set(inLine.map((i) => i.group)));
-            const isOpen = menu === l.id && groups.length > 1;
-            return (
-              <div key={l.id} className={`pshop-catw${isOpen ? " is-open" : ""}`}>
-                <button
-                  type="button"
-                  className="pshop-cat"
-                  aria-pressed={cat === l.id}
-                  aria-haspopup={groups.length > 1 ? "menu" : undefined}
-                  aria-expanded={groups.length > 1 ? isOpen : undefined}
-                  onClick={() => {
-                    if (l.id === "all") {
-                      setCat("all");
-                      setSub("");
-                      setMenu(null);
-                      return;
-                    }
-                    if (cat !== l.id) {
-                      setCat(l.id);
-                      setSub("");
-                    }
-                    setMenu((m) => (m === l.id ? null : l.id));
-                  }}
-                >
-                  <b className="pshop-cat-t">{l.title}</b>
-                  <span>{inLine.length}</span>
-                  {groups.length > 1 ? (
-                    <svg className="pshop-cat-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
-                  ) : null}
-                </button>
-                {isOpen ? (
-                  <div className="pshop-menu" role="menu" aria-label={l.title}>
-                    <button
-                      type="button"
-                      role="menuitemradio"
-                      aria-checked={cat === l.id && !sub}
-                      onClick={() => {
-                        setSub("");
-                        setMenu(null);
-                      }}
-                    >
-                      All {l.title.toLowerCase()}
-                      <span>{inLine.length}</span>
-                    </button>
-                    {groups.map((g) => (
-                      <button
-                        key={g}
-                        type="button"
-                        role="menuitemradio"
-                        aria-checked={cat === l.id && sub === g}
-                        onClick={() => {
-                          setSub(g);
-                          setMenu(null);
-                        }}
-                      >
-                        {g}
-                        <span>{inLine.filter((i) => i.group === g).length}</span>
-                      </button>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
         </div>
         <p className="pshop-count" aria-live="polite">
           {shown.length} {shown.length === 1 ? "product" : "products"}
@@ -406,26 +401,39 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                     <Brand name={it.brand} logo={it.brandLogo} />
                   </div>
                   <div className="kcard-body">
-                    <p className="kcard-type">{it.type}</p>
+                    <div className="kcard-meta-top">
+                      <span className="kcard-type">{it.type}</span>
+                      {it.sheet ? <span className="kcard-pds-tag" title="Technical data sheet available">PDS</span> : null}
+                    </div>
                     <h3 className="kcard-name">
                       <button type="button" className="kcard-link" onClick={() => openProduct(it.key)}>
                         {it.name}
                       </button>
                     </h3>
-                    <p className="kcard-text">{it.text}</p>
-                    {it.grades.length ? (
-                      <label className="kcard-grade">
-                        <span>Grade</span>
-                        <select value={grades[it.key] ?? ""} onChange={(e) => setGrades((g) => ({ ...g, [it.key]: e.target.value }))}>
-                          <option value="">Not sure / any</option>
-                          {it.grades.map((g) => (
-                            <option key={g} value={g}>
-                              {g}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                    ) : null}
+                    <div className="kcard-specs">
+                      {it.grades.length ? (
+                        <span className="kcard-spec-item" title="Multiple grades available (choose inside product page)">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="m12 6v6l4 2" />
+                          </svg>
+                          {it.grades.length} Grades available
+                        </span>
+                      ) : (
+                        <span className="kcard-spec-item" title="Certified Manufacturer">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                          </svg>
+                          ISO 9001
+                        </span>
+                      )}
+                      <span className="kcard-spec-item" title="Packaging">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        </svg>
+                        {it.packing?.[0]?.v?.replace(/^Standard packing:\s*/i, "").replace(/^Pack sizes on request/i, "Pack on request") || "Industrial pack"}
+                      </span>
+                    </div>
                   </div>
                   <div className="kcard-foot">
                     {line ? (
@@ -434,7 +442,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                           −
                         </button>
                         <span>
-                          <b>{line.qty}</b> in cart
+                          <b>{line.qty}</b> in cart{line.grade ? ` (${line.grade})` : ""}
                         </span>
                         <button type="button" onClick={() => setQty(line.id, line.qty + 1)} aria-label="One more">
                           +
@@ -445,6 +453,9 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                         <CartIcon /> Add to cart
                       </button>
                     )}
+                    <button type="button" className="kcard-detail-link" onClick={() => openProduct(it.key)}>
+                      View details <span aria-hidden="true">→</span>
+                    </button>
                   </div>
                 </li>
               );
@@ -463,28 +474,37 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
         )}
       </div>
 
-      {/* the cart button that follows the visitor once there is something in it */}
-      {count ? (
-        <button type="button" className="pshop-float" key={`f${bump}`} onClick={() => setOpen(true)} aria-label={`Open cart, ${count} items`}>
+      {/* Floating circular cart button in bottom-right corner */}
+      <button
+        type="button"
+        className={`pshop-float${bump ? " is-bump" : ""}`}
+        key={`fab-${bump}`}
+        onClick={() => setOpen(true)}
+        aria-label={`Open cart, ${count} items`}
+        title={`Open cart (${count})`}
+      >
+        <span className="pshop-float-icon">
           <CartIcon />
-          View cart <b>{count}</b>
-        </button>
-      ) : null}
+        </span>
+        <b className="pshop-float-badge">{count}</b>
+      </button>
 
       {/* a product's own page, over the shop: like a store's product page */}
       {pv ? (
         <div className="pv" role="dialog" aria-modal="true" aria-labelledby="pv-title" ref={pvRef} data-lenis-prevent>
           <div className="pv-bar">
-            <button type="button" className="pv-back" onClick={closeProduct} ref={pvBackRef} aria-label="Back to products">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M15 5l-7 7 7 7" />
-              </svg>
-            </button>
-            <p className="pv-bar-t">{pv.name}</p>
-            <button type="button" className="pv-cartbtn" onClick={() => setOpen(true)} aria-label={`Open cart, ${count} items`}>
-              <CartIcon />
-              {count ? <b>{count}</b> : null}
-            </button>
+            <div className="pv-bar-in">
+              <button type="button" className="pv-back" onClick={closeProduct} ref={pvBackRef} aria-label="Back to products">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M15 5l-7 7 7 7" />
+                </svg>
+              </button>
+              <p className="pv-bar-t">{pv.name}</p>
+              <button type="button" className="pv-cartbtn" onClick={() => setOpen(true)} aria-label={`Open cart, ${count} items`}>
+                <CartIcon />
+                {count ? <b>{count}</b> : null}
+              </button>
+            </div>
           </div>
 
           <div className="pv-wrap">
@@ -549,15 +569,17 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   <WaIcon /> Order on WhatsApp
                 </a>
               </div>
-              {/* every product: its data sheet, and its AI-generated video */}
-              <div className="pv-docs">
-                <a href={pv.sheet || `/documents/${pv.slug}-pds.pdf`} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
-                  <DocIcon />
-                  <span>
-                    <b>Product data sheet</b>
-                    <small>View the PDF</small>
-                  </span>
-                </a>
+              {/* the data sheet (construction chemicals only) and the AI-generated video */}
+              <div className={`pv-docs${pv.sheet ? "" : " is-solo"}`}>
+                {pv.sheet ? (
+                  <a href={pv.sheet} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
+                    <DocIcon />
+                    <span>
+                      <b>Product data sheet</b>
+                      <small>View the PDF</small>
+                    </span>
+                  </a>
+                ) : null}
                 {pv.report ? (
                   <a href={pv.report} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
                     <DocIcon />
@@ -667,18 +689,24 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                         </div>
                       ))}
                     </dl>
-                  ) : (
+                  ) : pv.sheet ? (
                     <div className="pv-ask pv-ask-box">
                       <DocIcon />
                       <p>View the complete technical specifications and official data sheet for {pv.name}.</p>
+                      <a href={pv.sheet} className="pv-ask-btn" target="_blank" rel="noopener noreferrer" data-no-fast>
+                        <DocIcon /> View official data sheet (PDF)
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="pv-ask pv-ask-box">
+                      <p>Technical values for {pv.name} are shared on request: ask us and our team replies the same day.</p>
                       <a
-                        href={pv.sheet || `/documents/${pv.slug}-pds.pdf`}
+                        href={`${whatsapp.split("?")[0]}?text=${encodeURIComponent(`Hi Krini Crude, please share the technical details of ${pv.name}.`)}`}
                         className="pv-ask-btn"
                         target="_blank"
                         rel="noopener noreferrer"
-                        data-no-fast
                       >
-                        <DocIcon /> View official data sheet (PDF)
+                        Ask for technical details
                       </a>
                     </div>
                   )}
@@ -718,7 +746,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               )}
               {pv.dilutionNote && !pv.dilutionRatios?.length ? <p className="pv-small">{pv.dilutionNote}</p> : null}
             </section>
-            <section className="pv-sec">
+            <section className="pv-sec pv-sec-pack">
               <h3>
                 <SecIcon kind="box" />
                 Packing &amp; storage
@@ -749,6 +777,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </section>
             ) : null}
             {pv.note ? <p className="pv-note">{pv.note}</p> : null}
+
+            <Reviews key={pv.key} name={pv.name} reviews={pv.reviews} whatsapp={whatsapp} />
 
             <section className="pv-sec pv-more">
               <h3>
@@ -947,17 +977,21 @@ function PhotoSlot() {
   );
 }
 
-/** A product's photo; with none yet, a plate with its brand and name in its place. */
-function Photo({ src, alt, brand, brandLogo, name }: { src?: string; alt: string; brand?: string; brandLogo?: string; name?: string }) {
+/** A product's photo; with none yet, a clean industrial pack silhouette. */
+function Photo({ src, alt }: { src?: string; alt: string; brand?: string; brandLogo?: string; name?: string }) {
   if (!src) {
-    if (!brand) return <PhotoSlot />;
     return (
       <div className="kplate" aria-hidden="true">
-        {brandLogo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={brandLogo} alt="" className="kplate-logo" loading="lazy" decoding="async" />
-        ) : null}
-        {name ? <span className={`kplate-name${brandLogo ? "" : " is-solo"}`}>{name}</span> : null}
+        <div className="kplate-drum">
+          <svg viewBox="0 0 64 80" className="kplate-drum-svg" fill="none" stroke="currentColor">
+            <ellipse cx="32" cy="14" rx="26" ry="9" strokeWidth="2.2" />
+            <path d="M6 14v52c0 5 11.6 9 26 9s26-4 26-9V14" strokeWidth="2.2" />
+            <path d="M6 31c0 5 11.6 9 26 9s26-4 26-9" strokeWidth="1.8" strokeDasharray="3 3" opacity="0.6" />
+            <path d="M6 48c0 5 11.6 9 26 9s26-4 26-9" strokeWidth="1.8" strokeDasharray="3 3" opacity="0.6" />
+            <ellipse cx="22" cy="14" rx="5" ry="2" strokeWidth="1.5" />
+          </svg>
+          <span className="kplate-tag">Industrial Pack</span>
+        </div>
       </div>
     );
   }
@@ -965,25 +999,8 @@ function Photo({ src, alt, brand, brandLogo, name }: { src?: string; alt: string
   return <img className="kphoto" src={src} alt={alt} width={800} height={600} loading="lazy" decoding="async" />;
 }
 
-const brandKey = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "");
-
-/** The brand a product is sold under: its logo on a small white plate, or its name as a wordmark. */
-function Brand({ name, logo }: { name: string; logo?: string }) {
-  if (!logo) return null;
-  return (
-    <span className={`kbrand kbrand-${brandKey(name)}${logo ? " has-logo" : ""}`} title={`Brand: ${name}`}>
-      {logo ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={logo} alt={name} loading="lazy" decoding="async" />
-      ) : (
-        name
-      )}
-    </span>
-  );
-}
-
 /**
- * A product page's photos: the pack from the front, back, left and right, one at a time. Scroll or
+ * A product page's photos: the pack from the front and the back, one at a time. Scroll or
  * swipe across, use the arrows, or tap a view below; a view whose photo has not come yet says so.
  */
 function Gallery({ views, name, brand, brandLogo, plateLogo, alt }: { views: ShopItem["views"]; name: string; brand: string; brandLogo?: string; plateLogo?: string; alt: string }) {
@@ -1060,6 +1077,152 @@ function Gallery({ views, name, brand, brandLogo, plateLogo, alt }: { views: Sho
         ))}
       </div>
     </div>
+  );
+}
+
+const brandKey = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+/**
+ * The brand a product is sold under, on a small white plate: Lubecon on construction chemicals,
+ * 1-COOL on lubricants; a brand without a logo (Vibrant aerosols) shows nothing.
+ */
+function Brand({ name, logo }: { name: string; logo?: string }) {
+  if (!logo) return null;
+  return (
+    <span className={`kbrand kbrand-${brandKey(name)} has-logo`} title={`Brand: ${name}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={logo} alt={name} loading="lazy" decoding="async" />
+    </span>
+  );
+}
+
+/** Five stars, filled to a rating (halves round to the nearest star). */
+function Stars({ value, size = 16 }: { value: number; size?: number }) {
+  const full = Math.round(value);
+  return (
+    <span className="rv-stars" aria-label={`${value.toFixed(1)} out of 5`} role="img">
+      {[1, 2, 3, 4, 5].map((n) => (
+        <svg key={n} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" className={n <= full ? "is-on" : ""}>
+          <path d="m12 3.2 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17l-5.38 2.85 1.03-6L3.3 9.6l6-.9L12 3.2Z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+/**
+ * Ratings & reviews: the average and how the stars spread, then each review. Only real reviews are
+ * shown (catalogue.ts, details.reviews): until there are some, the section says so. Writing one
+ * sends it to Krini Crude on WhatsApp, and it is added to the page once checked (there is no
+ * account or database behind the site).
+ */
+function Reviews({ name, reviews, whatsapp }: { name: string; reviews: ShopReview[]; whatsapp: string }) {
+  const [writing, setWriting] = useState(false);
+  const [stars, setStars] = useState(0);
+  const [who, setWho] = useState("");
+  const [text, setText] = useState("");
+  const n = reviews.length;
+  const avg = n ? reviews.reduce((t, r) => t + r.rating, 0) / n : 0;
+  const spread = [5, 4, 3, 2, 1].map((k) => ({ k, c: reviews.filter((r) => Math.round(r.rating) === k).length }));
+  const sendHref = `${whatsapp.split("?")[0]}?text=${encodeURIComponent(
+    [`Review of ${name}`, `Rating: ${stars} / 5`, `Name / company: ${who.trim()}`, `Review: ${text.trim()}`].join("\n"),
+  )}`;
+  const ok = stars > 0 && text.trim().length > 3;
+  return (
+    <section className="pv-sec pv-sec-wide rv" aria-labelledby="rv-title">
+      <h3 id="rv-title">
+        <SecIcon kind="star" />
+        Ratings &amp; reviews
+      </h3>
+      <div className="rv-grid">
+        <div className="rv-sum">
+          {n ? (
+            <>
+              <p className="rv-avg">
+                <b>{avg.toFixed(1)}</b>
+                <Stars value={avg} size={20} />
+              </p>
+              <p className="rv-n">
+                Based on {n} {n === 1 ? "review" : "reviews"}
+              </p>
+              <ul className="rv-bars">
+                {spread.map(({ k, c }) => (
+                  <li key={k}>
+                    <span>{k}★</span>
+                    <i>
+                      <em style={{ width: `${n ? (c / n) * 100 : 0}%` }} />
+                    </i>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <div className="rv-none">
+              <Stars value={0} size={22} />
+              <p>
+                <b>No reviews yet</b>
+                <span>Used {name}? Be the first to review it.</span>
+              </p>
+            </div>
+          )}
+          <button type="button" className="rv-write" onClick={() => setWriting((w) => !w)} aria-expanded={writing}>
+            {writing ? "Close" : "Write a review"}
+          </button>
+        </div>
+
+        <div className="rv-main">
+          {writing ? (
+            <div className="rv-form">
+              <p className="rv-k">Your rating</p>
+              <div className="rv-pick" role="radiogroup" aria-label="Your rating">
+                {[1, 2, 3, 4, 5].map((k) => (
+                  <button key={k} type="button" role="radio" aria-checked={stars === k} aria-label={`${k} star${k > 1 ? "s" : ""}`} className={k <= stars ? "is-on" : ""} onClick={() => setStars(k)}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m12 3.2 2.7 5.5 6 .9-4.35 4.25 1.03 6L12 17l-5.38 2.85 1.03-6L3.3 9.6l6-.9L12 3.2Z" />
+                    </svg>
+                  </button>
+                ))}
+              </div>
+              <label className="rv-field">
+                <span>Name or company</span>
+                <input value={who} onChange={(e) => setWho(e.target.value)} placeholder="e.g. Ravi, precast yard, Chennai" autoComplete="off" />
+              </label>
+              <label className="rv-field">
+                <span>Your review</span>
+                <textarea value={text} onChange={(e) => setText(e.target.value)} rows={4} placeholder="How did it work for you? Finish, coverage, release, value…" />
+              </label>
+              <div className="rv-send">
+                <a href={ok ? sendHref : undefined} aria-disabled={!ok} className="rv-send-btn" target="_blank" rel="noopener noreferrer">
+                  Send review on WhatsApp
+                </a>
+                <small>We check every review before it appears here.</small>
+              </div>
+            </div>
+          ) : null}
+
+          {n ? (
+            <ul className="rv-list">
+              {reviews.map((r, k) => (
+                <li key={`${r.name}-${k}`} className="rv-item">
+                  <div className="rv-item-top">
+                    <span className="rv-badge">
+                      {r.rating.toFixed(0)} ★
+                    </span>
+                    <b>{r.name}</b>
+                    {r.place ? <span className="rv-place">{r.place}</span> : null}
+                    {r.date ? <span className="rv-date">{r.date}</span> : null}
+                  </div>
+                  <p>{r.text}</p>
+                </li>
+              ))}
+            </ul>
+          ) : !writing ? (
+            <p className="rv-empty">Reviews from our customers will appear here. Bought this product? Tap <b>Write a review</b> and tell others how it worked for you.</p>
+          ) : null}
+        </div>
+      </div>
+    </section>
   );
 }
 

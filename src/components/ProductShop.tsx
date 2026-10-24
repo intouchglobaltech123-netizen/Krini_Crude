@@ -16,12 +16,12 @@ const slugOf = (name: string) =>
     .replace(/^-|-$/g, "");
 
 /**
- * The four views of a product's pack (front, back, left, right): photos dropped into
- * public/images/products/ as <slug>-front.webp, <slug>-back.webp, <slug>-left.webp and
- * <slug>-right.webp (or .png / .jpg) are picked up at build time. The front falls back to the
- * catalogue's photo; a view with no photo yet shows an empty frame saying which view goes there.
+ * The two views of a product's pack (front and back): photos dropped into
+ * public/images/products/ as <slug>-front.webp and <slug>-back.webp (or .png / .jpg) are picked
+ * up at build time. The front falls back to the catalogue's photo; a back with no photo yet shows
+ * an empty frame saying so.
  */
-const VIEWS = ["Front", "Back", "Left", "Right"] as const;
+const VIEWS = ["Front", "Back"] as const;
 const EXTS = ["webp", "png", "jpg", "jpeg"];
 const publicDir = path.join(process.cwd(), "public");
 function viewsOf(slug: string, image?: string) {
@@ -132,8 +132,9 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
       image: cardImg,
       imageAlt: d.imageAlt ?? name,
       views,
-      sheet: sheetOf(slug, d),
-    report: d.reportUrl,
+      // data sheets (and test reports) are offered for construction chemicals only
+      sheet: line.id === "construction" ? sheetOf(slug, d) : undefined,
+    report: line.id === "construction" ? d.reportUrl : undefined,
     reportLabel: d.reportLabel,
     video: videoOf(slug, d),
     about: d.description ?? (r ? `${r.text}. ${p.about}` : p.about),
@@ -151,6 +152,7 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
     howToTitle: d.applicationTitle,
     packing,
     note: d.note,
+    reviews: d.reviews ?? [],
   };
 }
 

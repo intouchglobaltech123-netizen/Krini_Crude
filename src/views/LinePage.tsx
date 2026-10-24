@@ -238,7 +238,7 @@ function ProductSheet({ p, n, type, line }: { p: Product; n: string; type: strin
                       <div className="scard-body">
                         <h4 className="scard-name">{r.name}</h4>
                         <p className="scard-text">{r.text}</p>
-                        {r.details?.pdsRevision ? <p className="scard-pds">{r.details.pdsRevision}</p> : null}
+                        {line.id === "construction" && r.details?.pdsRevision ? <p className="scard-pds">{r.details.pdsRevision}</p> : null}
                       </div>
                       <div className="scard-actions">
                         <a
@@ -251,7 +251,14 @@ function ProductSheet({ p, n, type, line }: { p: Product; n: string; type: strin
                           <WhatsAppIcon />
                           Order now
                         </a>
-                        {r.details ? <ProductDetailsTrigger product={r} type={type} compact /> : null}
+                        {r.details ? (
+                          <ProductDetailsTrigger
+                            // data sheets and test reports: construction chemicals only
+                            product={line.id === "construction" ? r : { ...r, details: { ...r.details, sheetUrl: undefined, reportUrl: undefined, pdsRevision: undefined } }}
+                            type={type}
+                            compact
+                          />
+                        ) : null}
                       </div>
                     </article>
                   </li>

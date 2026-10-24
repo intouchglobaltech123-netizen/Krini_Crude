@@ -5027,108 +5027,34 @@ main section.cta3 {
   color: var(--slate);
 }
 
-/* the bar: search and the cart, staying in view */
+/* the bar: categories on the left, search and cart in remaining space on the right */
 .pshop-bar {
   position: sticky;
   top: calc(var(--nav-bar, 76px) + 12px);
-  z-index: 20;
+  z-index: 25;
   display: flex;
-  gap: 10px;
-  margin-top: 26px;
-  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 7px 8px 7px 10px;
   border: 1px solid var(--line);
   border-radius: 18px;
-  background: rgb(255 255 255 / 0.94);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 14px 32px -20px rgb(15 23 42 / 0.4);
-}
-.pshop-search {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 50px;
-  padding: 0 14px;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
-  background: var(--mist);
-  color: #64748b;
-  transition: border-color 0.2s, background 0.2s;
-}
-.pshop-search:focus-within {
-  border-color: var(--gold);
-  background: #fff;
-}
-.pshop-search input {
-  flex: 1;
-  min-width: 0;
-  border: 0;
-  outline: none;
-  background: none;
-  font: 500 1rem/1.2 var(--font-display);
-  color: var(--slate);
-}
-.pshop-search input::-webkit-search-cancel-button {
-  display: none;
-}
-.pshop-clear {
-  width: 28px;
-  height: 28px;
-  border: 0;
-  border-radius: 50%;
-  background: #e2e8f0;
-  color: var(--slate);
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-}
-.pshop-cartbtn,
-.pshop-float {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 0;
-  background: var(--slate);
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-}
-.pshop-cartbtn {
-  min-height: 50px;
-  padding: 0 16px;
-  border-radius: 12px;
-}
-.pshop-cartbtn b,
-.pshop-float b {
-  display: grid;
-  place-items: center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 7px;
-  border-radius: 999px;
-  background: var(--gold-grad);
-  color: var(--slate);
-  font-size: 0.8rem;
-}
-.pshop-cartbtn.is-bump b,
-.pshop-float b {
-  animation: kc-bump 0.45s ease;
-}
-@keyframes kc-bump {
-  40% {
-    transform: scale(1.35);
-  }
+  background: rgb(255 255 255 / 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 32px -20px rgb(15 23 42 / 0.35);
 }
 
-/* the lines as chips */
+/* Category pills container */
 .pshop-cats {
   display: flex;
-  gap: 8px;
-  margin-top: 16px;
-  padding-bottom: 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+  overflow: visible;
 }
 .pshop-cats::-webkit-scrollbar {
   display: none;
@@ -5138,22 +5064,26 @@ main section.cta3 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  min-height: 44px;
+  padding: 0 14px;
   border: 1.5px solid var(--line);
   border-radius: 999px;
   background: #fff;
   color: var(--slate);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  white-space: nowrap;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .pshop-cat span {
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   background: var(--mist);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: #64748b;
+  line-height: 1;
 }
 .pshop-cat:hover {
   border-color: var(--gold);
@@ -5162,10 +5092,79 @@ main section.cta3 {
   border-color: var(--slate);
   background: var(--slate);
   color: #fff;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.4);
 }
 .pshop-cat[aria-pressed="true"] span {
-  background: rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.18);
   color: var(--gold-hi);
+}
+
+/* Search bar: fills all remaining space next to categories */
+.pshop-search {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  background: var(--mist);
+  color: #64748b;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.pshop-search:focus-within {
+  border-color: var(--gold);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+.pshop-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  font: 500 0.92rem/1.2 var(--font-display);
+  color: var(--slate);
+}
+.pshop-search input::-webkit-search-cancel-button {
+  display: none;
+}
+.pshop-clear {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: var(--slate);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+@media (max-width: 1120px) {
+  .pshop-bar {
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+  }
+  .pshop-cats {
+    order: 1;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .pshop-cats::-webkit-scrollbar {
+    display: none;
+  }
+  .pshop-search {
+    order: 2;
+    width: 100%;
+    min-width: 0;
+  }
 }
 .pshop-count {
   margin-top: 14px;
@@ -5186,27 +5185,55 @@ main section.cta3 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: 18px;
-  background: #fff;
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  background: #ffffff;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.05);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
+  cursor: pointer;
 }
 .kcard:hover {
-  transform: translateY(-3px);
-  border-color: rgb(212 175 55 / 0.5);
-  box-shadow: 0 22px 40px -26px rgb(15 23 42 / 0.45);
+  transform: translateY(-4px);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 20px 36px -16px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(212, 175, 55, 0.35);
 }
 .kcard-media {
   position: relative;
-  background: #ffffff;
+  background: linear-gradient(180deg, #fafafa 0%, #f3f4f6 100%);
   overflow: hidden;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 .kcard-media .kphoto {
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
-  background: #ffffff;
+  object-fit: contain;
+  padding: 12px;
+  background: transparent;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.kcard:hover .kcard-media .kphoto {
+  transform: scale(1.05);
+}
+.kcard-view-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.75);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.kcard:hover .kcard-view-hint {
+  opacity: 1;
+  transform: translateY(0);
 }
 .kcard-media .media-slot {
   border-radius: 0;
@@ -5227,57 +5254,93 @@ main section.cta3 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px 16px 4px;
+  gap: 8px;
+  padding: 14px 16px 6px;
 }
-.kcard-type {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gold-deep);
-}
-.kcard-name {
-  font: 700 1.08rem/1.25 var(--font-display);
-  color: var(--slate);
-  min-height: calc(1.25em * 2);
-}
-.kcard-text {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
-  font-size: 0.88rem;
-  line-height: 1.5;
-  min-height: calc(1.5em * 3);
-  color: #5b6474;
-  text-align: left;
-  text-align-last: left;
-}
-.kcard-grade {
+.kcard-meta-top {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--slate);
+  justify-content: space-between;
+  gap: 8px;
 }
-.kcard-grade select {
-  flex: 1;
-  min-width: 0;
-  height: 38px;
-  padding: 0 10px;
-  border: 1.5px solid var(--line);
-  border-radius: 10px;
-  background: #fff;
+.kcard-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #faf5e6;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8c6b12;
+  line-height: 1.2;
+}
+.kcard-pds-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #475569;
+}
+.kcard-name {
+  margin: 0;
+  font: 700 1.05rem/1.3 var(--font-display);
+  color: var(--slate);
+  min-height: calc(1.3em * 2);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.kcard-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  padding: 0;
+  background: transparent;
   font: inherit;
-  font-weight: 500;
-  color: var(--slate);
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s;
 }
+.kcard:hover .kcard-link {
+  color: #b8921e;
+}
+.kcard-specs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.kcard-spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #475569;
+  line-height: 1.2;
+}
+
 .kcard-foot {
-  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 16px 14px;
 }
 .kcard-add {
   display: inline-flex;
@@ -5285,47 +5348,83 @@ main section.cta3 {
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 46px;
+  min-height: 44px;
   border: 0;
-  border-radius: 12px;
-  background: var(--gold-grad);
-  color: var(--slate);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #dfbd4e 0%, #d4af37 60%, #c49d26 100%);
+  color: #0f172a;
+  font-size: 0.9rem;
   font-weight: 800;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgb(255 250 230 / 0.6), 0 10px 20px -14px rgb(184 146 30 / 0.9);
-  transition: filter 0.2s;
+  box-shadow: 0 4px 12px -2px rgba(212, 175, 55, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
 }
 .kcard-add:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.04);
+  box-shadow: 0 6px 16px -2px rgba(212, 175, 55, 0.6);
+}
+.kcard-add:active {
+  transform: scale(0.99);
+}
+.kcard-detail-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.kcard:hover .kcard-detail-link {
+  color: #0f172a;
+}
+.kcard-detail-link span {
+  transition: transform 0.2s;
+}
+.kcard:hover .kcard-detail-link span {
+  transform: translateX(3px);
 }
 .kcard-step {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  min-height: 46px;
+  min-height: 44px;
   padding: 0 6px;
-  border-radius: 12px;
-  background: var(--slate);
+  border-radius: 10px;
+  background: #0f172a;
   color: #fff;
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.35);
 }
 .kcard-step button {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border: 0;
-  border-radius: 10px;
-  background: rgb(255 255 255 / 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.14);
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   cursor: pointer;
+  transition: background 0.15s;
+}
+.kcard-step button:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 .kcard-step span {
   font-size: 0.85rem;
+  font-weight: 600;
 }
 .kcard-step b {
   font-size: 1rem;
-  color: var(--gold-hi);
+  color: #f1d378;
 }
 .kcard-step-sm {
   min-height: 38px;
@@ -5341,6 +5440,30 @@ main section.cta3 {
 }
 .kcard-step-sm b {
   color: var(--slate);
+}
+.kplate-drum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+}
+.kplate-drum-svg {
+  width: 48px;
+  height: 60px;
+  color: #94a3b8;
+  opacity: 0.8;
+}
+.kplate-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.05);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.02em;
 }
 .pshop-empty {
   margin-top: 18px;
@@ -5364,15 +5487,81 @@ main section.cta3 {
   font-weight: 700;
 }
 
-/* the cart button that follows the visitor */
+/* Floating circular cart button in the bottom-right corner */
 .pshop-float {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 60;
-  padding: 14px 18px;
+  right: 28px;
+  bottom: 28px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -6px rgba(15, 23, 42, 0.5), 0 0 16px rgba(212, 175, 55, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, border-color 0.25s, background 0.25s;
+}
+.pshop-float:hover {
+  transform: translateY(-3px) scale(1.06);
+  border-color: var(--gold);
+  background: linear-gradient(145deg, #273549 0%, #0f172a 100%);
+  box-shadow: 0 20px 38px -8px rgba(15, 23, 42, 0.6), 0 0 22px rgba(212, 175, 55, 0.45);
+}
+.pshop-float:active {
+  transform: scale(0.95);
+}
+.pshop-float-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pshop-float-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+}
+.pshop-float-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
   border-radius: 999px;
-  box-shadow: 0 16px 34px -14px rgb(15 23 42 / 0.6);
+  background: var(--gold-grad);
+  border: 2px solid #0f172a;
+  color: #0f172a;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+.pshop-float.is-bump {
+  animation: kc-fab-bump 0.45s ease;
+}
+.pshop-float.is-bump .pshop-float-badge {
+  animation: kc-badge-pop 0.45s ease;
+}
+@keyframes kc-fab-bump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.2); }
+  65% { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+@keyframes kc-badge-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.4); }
+  100% { transform: scale(1); }
 }
 
 /* the cart */
@@ -5600,8 +5789,21 @@ main section.cta3 {
     font-size: 0.72rem;
   }
   .pshop-float {
-    right: 14px;
-    bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    right: 16px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    width: 52px;
+    height: 52px;
+  }
+  .pshop-float-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .pshop-float-badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.72rem;
+    top: -3px;
+    right: -3px;
   }
 }
 /* the cart's heading at its own size (section headings elsewhere are larger) */
@@ -7503,53 +7705,50 @@ main section.cta3 {
 
   .pshop-bar {
     top: calc(var(--nav-h, 72px) + 6px);
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 6px;
-    margin-top: 16px;
-    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 8px;
     border-radius: 16px;
   }
-  .pshop-search {
-    min-width: 0;
-    min-height: 44px;
-    padding: 0 12px;
-    border-radius: 11px;
-  }
-  .pshop-search input {
-    font-size: 0.86rem;
-  }
-  .pshop-cartbtn {
-    min-height: 44px;
-    padding: 0 12px;
+  .pshop-cats {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
     gap: 6px;
-    border-radius: 11px;
+    margin: 0;
+    padding-bottom: 2px;
   }
-  .pshop-cartbtn > span {
+  .pshop-cats::-webkit-scrollbar {
     display: none;
   }
-
-  .pshop-cats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px;
-    margin-top: 12px;
-    padding: 0;
-  }
   .pshop-cat {
-    justify-content: space-between;
+    flex: 0 0 auto;
     min-width: 0;
-    min-height: 40px;
-    padding: 0 10px 0 12px;
-    border-radius: 12px;
-    font-size: 0.74rem;
-    line-height: 1.2;
-    text-align: left;
-    white-space: normal;
+    min-height: 38px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    white-space: nowrap;
   }
   .pshop-cat span {
     flex: none;
-    font-size: 0.66rem;
+    font-size: 0.68rem;
+    padding: 1px 6px;
+  }
+  .pshop-search {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 10px;
+    border-radius: 10px;
+  }
+  .pshop-search input {
+    font-size: 0.84rem;
   }
   .pshop-count {
     margin-top: 12px;
@@ -7602,38 +7801,35 @@ main section.cta3 {
     line-height: 1.22;
     min-height: calc(1.22em * 2);
   }
-  .kcard-text {
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    font-size: 0.74rem;
-    line-height: 1.4;
-    min-height: calc(1.4em * 3);
-  }
-  .kcard-grade {
-    flex-direction: column;
-    align-items: stretch;
+  .kcard-specs {
     gap: 4px;
-    margin-top: 4px;
-    font-size: 0.62rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #64748b;
+    margin-top: auto;
+    padding-top: 2px;
   }
-  .kcard-grade select {
-    flex: none;
-    width: 100%;
-    height: 34px;
-    padding: 0 8px;
-    border-width: 1px;
-    border-radius: 9px;
-    background: #f8f7f2;
-    font-size: 0.78rem;
-    text-transform: none;
-    letter-spacing: 0;
+  .kcard-spec-item {
+    padding: 3px 6px;
+    font-size: 0.65rem;
+    gap: 4px;
+  }
+  .kcard-grade-box {
+    margin-top: auto;
+  }
+  .kcard-grade-label {
+    font-size: 0.62rem;
+  }
+  .kcard-select {
+    height: 32px;
+    padding: 0 20px 0 6px;
+    font-size: 0.74rem;
   }
   .kcard-foot {
     margin-top: auto;
-    padding: 10px;
+    gap: 4px;
+    padding: 8px 10px 10px;
+  }
+  .kcard-detail-link {
+    font-size: 0.7rem;
+    padding: 2px;
   }
   .kcard-add {
     gap: 6px;
@@ -10536,7 +10732,6 @@ main section.cta3 {
    lists the kinds of product in that line (Shuttering Oil, Shuttering
    Grease…) to narrow the cards to one kind */
 .pshop-cats {
-  flex-wrap: wrap;
   overflow: visible;
 }
 .pshop-catw {

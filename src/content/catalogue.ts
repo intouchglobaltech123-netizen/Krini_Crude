@@ -49,6 +49,19 @@ export type ProductRangeItemDetails = {
   videoUrl?: string;
   reportKicker?: string;
   reportButtonText?: string;
+  /** Real customer reviews, shown on the product page (add them here as they come in; never invented). */
+  reviews?: ProductReview[];
+};
+
+/** A customer's review of a product: their name (or company), stars out of 5, what they said and when. */
+export type ProductReview = {
+  name: string;
+  rating: number;
+  text: string;
+  /** e.g. "Precast yard, Chennai" */
+  place?: string;
+  /** e.g. "October 2026" */
+  date?: string;
 };
 
 export type ProductRangeItem = {
@@ -561,6 +574,8 @@ export const lines: Line[] = [
             text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
             details: {
               status: "verified",
+              image: "/images/magic-shuttering-oil.webp",
+              imageAlt: "Magic Shuttering Oil 200L drum",
               pdsRevision: "Rev. 09/2026",
               description:
                 "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",

@@ -1,0 +1,696 @@
+/* ===========================================================================
+   About page (src/views/AboutPage.tsx). Everything is scoped under .ab3.
+   Compact: four blocks, modest spacing, tiles in a grid. Navy and gold.
+   =========================================================================== */
+
+.ab3 {
+  --ab-navy: #0f172a;
+  --ab-navy-2: #172340;
+  --ab-gold: #d4af37;
+  --ab-gold-hi: #e3c25a;
+  --ab-gold-deep: #a8841c;
+  --ab-ink: #0f172a;
+  --ab-text: #475569;
+  --ab-mute: #64748b;
+  --ab-line: rgb(15 23 42 / 0.08);
+  --ab-soft: #f7f5ef;
+  --ab-r: 20px;
+  color: var(--ab-ink);
+}
+
+/* the site makes every section a full screen on laptops: not here */
+main > div.ab3 > section {
+  min-height: 0 !important;
+  display: block !important;
+}
+
+/* running text justified, like the rest of the site; headings and labels left */
+.ab3 :is(p, li) {
+  text-align: justify;
+  text-align-last: left;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.ab3 :is(h1, h2, h3, dt, dd, address, .ab3-ways p, .ab3-k, .ab3-chips li, .ab3-place-k, .ab3-line, .ab3-lead-name, .ab3-lead-role) {
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}
+
+/* ---- shared ------------------------------------------------------------ */
+.ab3-sec {
+  padding-block: clamp(36px, 4.5vw, 64px);
+}
+.ab3-soft {
+  background: var(--ab-soft);
+}
+.ab3-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-size: 0.75rem !important;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ab-gold-deep);
+}
+.ab3-k::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ab-gold);
+}
+.ab3-k-light {
+  color: var(--ab-gold-hi);
+}
+.ab3-h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.4vw, 2rem) !important;
+  line-height: 1.15 !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ab-ink);
+}
+.ab3-h2-light {
+  color: #fff;
+}
+.ab3-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.ab3-head .ab3-h2 {
+  max-width: 28ch;
+}
+.ab3-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  color: var(--ab-gold-deep);
+  text-decoration: none;
+}
+.ab3-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.ab3-btn:hover {
+  transform: translateY(-1px);
+}
+.ab3-btn-gold {
+  background: linear-gradient(180deg, var(--ab-gold-hi), #c9a43a);
+  color: var(--ab-navy);
+}
+.ab3-btn-line {
+  border: 1px solid rgb(15 23 42 / 0.18);
+  background: #fff;
+  color: var(--ab-ink);
+}
+.ab3-btn-line:hover {
+  border-color: rgb(15 23 42 / 0.4);
+}
+.ab3-btn-dark {
+  background: var(--ab-navy);
+  color: #fff;
+}
+
+/* ---- 1. header ---------------------------------------------------------- */
+.ab3-top {
+  padding-top: calc(var(--nav-h, 80px) + env(safe-area-inset-top, 0px) + 12px);
+  padding-bottom: clamp(28px, 3.5vw, 48px);
+}
+.ab3-hero {
+  display: grid;
+  gap: 28px;
+  margin-top: 14px;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .ab3-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+  }
+}
+.ab3-title {
+  margin: 0;
+  font-size: clamp(2rem, 3.8vw, 3.2rem) !important;
+  line-height: 1.06 !important;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ab-ink);
+}
+.ab3-title span {
+  background: linear-gradient(90deg, #b8901f, var(--ab-gold-hi));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.ab3-sub {
+  max-width: 44ch;
+  margin: 16px 0 0;
+  font-size: 1.05rem !important;
+  line-height: 1.6;
+  color: var(--ab-text);
+}
+.ab3-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.ab3-hero-media {
+  position: relative;
+  margin: 0;
+}
+.ab3-hero-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--ab-r);
+  box-shadow: 0 24px 48px -30px rgb(15 23 42 / 0.55);
+}
+.ab3-figures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 28px 0 0;
+}
+@media (min-width: 900px) {
+  .ab3-figures {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+.ab3-figures > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: var(--ab-navy);
+  background: linear-gradient(160deg, var(--ab-navy-2), var(--ab-navy));
+}
+.ab3-figures dd {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem) !important;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--ab-gold-hi);
+}
+.ab3-figures dt {
+  font-size: 0.85rem !important;
+  color: rgb(255 255 255 / 0.7);
+}
+
+/* ---- 2. tiles ------------------------------------------------------------ */
+.ab3-bento {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 1024px) {
+  .ab3-bento {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+.ab3-tile {
+  padding: clamp(22px, 2.6vw, 32px);
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+}
+.ab3-text {
+  margin: 12px 0 18px;
+  font-size: 1rem !important;
+  line-height: 1.6;
+  color: var(--ab-text);
+}
+.ab3-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ab3-chips li {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--ab-soft);
+  font-size: 0.88rem !important;
+  font-weight: 600;
+  color: var(--ab-ink);
+}
+
+/* ways to work with us: three short columns in one tile */
+.ab3-ways ol {
+  display: grid;
+  gap: 18px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .ab3-ways ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+  .ab3-ways li {
+    padding: 0 20px;
+  }
+  .ab3-ways li:first-child {
+    padding-left: 0;
+  }
+  .ab3-ways li + li {
+    border-left: 1px solid var(--ab-line);
+  }
+}
+.ab3-ways li > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  line-height: 1;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--ab-gold);
+}
+.ab3-ways h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem !important;
+  line-height: 1.3 !important;
+  font-weight: 800;
+  color: var(--ab-ink);
+}
+.ab3-ways p {
+  margin: 0;
+  font-size: 0.92rem !important;
+  line-height: 1.55;
+  color: var(--ab-text);
+}
+
+/* ---- 3. leadership, vision & mission: white -------------------------------
+   The portrait on a gold block set behind it, the words beside it under a large
+   gold quotation mark; then the vision on a cream panel and the four commitments
+   in a row. */
+.ab3-lead {
+  padding-block: clamp(40px, 5vw, 72px);
+  background: #fff;
+  border-top: 1px solid var(--ab-line);
+}
+.ab3-lead-top {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .ab3-lead-top {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 56px;
+  }
+}
+@media (min-width: 1200px) {
+  .ab3-lead-top {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 72px;
+  }
+}
+.ab3-portrait {
+  position: relative;
+  width: calc(100% - 16px);
+  max-width: 284px;
+  margin: 0 16px 16px 0;
+  aspect-ratio: 4 / 5;
+}
+/* the gold block behind the portrait */
+.ab3-portrait::before {
+  content: "";
+  position: absolute;
+  inset: 16px -16px -16px 16px;
+  border-radius: var(--ab-r);
+  background: linear-gradient(150deg, #e9cd6c, #c9a43a);
+}
+.ab3-portrait img,
+.ab3-portrait svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--ab-r);
+  object-fit: cover;
+}
+.ab3-portrait.is-empty svg {
+  padding: 18% 11% 0;
+  background: linear-gradient(180deg, #f1f4f8, #e2e8f0);
+  fill: #cbd5e1;
+}
+.ab3-lead-copy {
+  position: relative;
+}
+.ab3-qmark {
+  display: block;
+  height: 0.55em;
+  margin: 4px 0 6px -4px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 5.5rem;
+  line-height: 0.9;
+  color: var(--ab-gold);
+}
+.ab3-lead-name {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ab-ink);
+}
+.ab3-lead-role {
+  margin: 6px 0 0;
+  font-size: 0.95rem !important;
+  font-weight: 600;
+  color: var(--ab-gold-deep);
+}
+.ab3-lead-text {
+  max-width: 60ch;
+  margin: 0;
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem) !important;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--ab-ink);
+}
+
+.ab3-vm {
+  display: grid;
+  gap: 16px;
+  margin-top: clamp(32px, 4vw, 52px);
+}
+@media (min-width: 1024px) {
+  .ab3-vm {
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: 20px;
+  }
+}
+.ab3-vision {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(22px, 2.6vw, 34px);
+  border-radius: var(--ab-r);
+  border-left: 4px solid var(--ab-gold);
+  background: #fbf6e6;
+}
+.ab3-vision-line {
+  margin: 6px 0 0;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem) !important;
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: left !important;
+  color: var(--ab-ink);
+}
+.ab3-mission {
+  padding: clamp(22px, 2.6vw, 30px);
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+}
+.ab3-mission ol {
+  display: grid;
+  gap: 16px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .ab3-mission ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
+  }
+}
+@media (min-width: 1280px) {
+  .ab3-mission ol {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+  .ab3-mission li {
+    padding: 0 18px;
+  }
+  .ab3-mission li:first-child {
+    padding-left: 0;
+  }
+  .ab3-mission li + li {
+    border-left: 1px solid var(--ab-line);
+  }
+}
+.ab3-mission li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+.ab3-mission li > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--ab-navy);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--ab-gold-hi);
+}
+.ab3-mission b {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ab-ink);
+}
+.ab3-mission p {
+  margin: 3px 0 0;
+  font-size: 0.9rem !important;
+  line-height: 1.5;
+  text-align: left !important;
+  color: var(--ab-text);
+}
+
+/* ---- 4. what we make ---------------------------------------------------- */
+.ab3-lines {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 768px) {
+  .ab3-lines {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.ab3-line {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: clamp(22px, 2.4vw, 30px);
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+/* a gold line along the top that grows on hover */
+.ab3-line::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, #c9a43a, var(--ab-gold-hi));
+  transition: width 0.35s ease;
+}
+.ab3-line:hover {
+  transform: translateY(-3px);
+  border-color: rgb(212 175 55 / 0.45);
+  box-shadow: 0 20px 40px -28px rgb(15 23 42 / 0.45);
+}
+.ab3-line:hover::before {
+  width: 100%;
+}
+.ab3-line-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ab3-line-n {
+  font-size: 2.2rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.3px var(--ab-gold);
+}
+/* the brand's logo on a small white plate (Lubecon, 1-COOL); a brand without one shows its name */
+.ab3-line-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 10px;
+  background: #fff;
+}
+.ab3-line-logo img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 140px;
+  object-fit: contain;
+}
+.ab3-line-brand {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--ab-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ab-gold-hi);
+}
+.ab3-line > b {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ab-ink);
+}
+.ab3-line-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ab3-line-items span {
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: var(--ab-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ab-text);
+}
+.ab3-line em {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+  font-style: normal;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--ab-gold-deep);
+}
+
+/* ---- 5. where we are ---------------------------------------------------- */
+.ab3-visit {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 900px) {
+  .ab3-visit {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.ab3-place {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px;
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+}
+.ab3-place-ic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgb(212 175 55 / 0.14);
+  color: var(--ab-gold-deep);
+}
+.ab3-place > div {
+  flex: 1;
+  min-width: 0;
+}
+.ab3-place-k {
+  margin: 0 0 4px;
+  font-size: 1rem !important;
+  font-weight: 800;
+  color: var(--ab-ink);
+}
+.ab3-place address {
+  font-style: normal;
+  font-size: 0.92rem !important;
+  line-height: 1.55;
+  color: var(--ab-text);
+}
+.ab3-place > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  align-self: center;
+  padding: 8px 14px;
+  border: 1px solid var(--ab-line);
+  border-radius: 999px;
+  font-size: 0.88rem !important;
+  font-weight: 700;
+  color: var(--ab-ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.ab3-place > a:hover {
+  border-color: rgb(212 175 55 / 0.7);
+  background: rgb(212 175 55 / 0.08);
+}
+
+/* ---- phones -------------------------------------------------------------- */
+@media (max-width: 639px) {
+  .ab3-actions .ab3-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+  .ab3-place {
+    flex-wrap: wrap;
+  }
+  .ab3-place > a {
+    margin-left: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ab3-line,
+  .ab3-line::before,
+  .ab3-btn {
+    transition: none;
+  }
+  .ab3-line:hover,
+  .ab3-btn:hover {
+    transform: none;
+  }
+}
