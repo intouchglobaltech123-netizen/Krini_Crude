@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "mivan2";
+const seqVersion = "mivan3";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
@@ -63,11 +63,11 @@ const seqVersion = "mivan2";
  * box round the rebar, their oiled inner faces glossy as the concrete is poured in; the box stripped
  * clean; a precast mould poured and its unit lifted out clean; the building rising floor by floor; and
  * the completed building with its trees. Only gloved hands and backs are seen, never faces.
- * 26.4 s, 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
+ * Cut to 14.2 s (the client: no longer than 15 s), parts sped up a little: 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
  */
 export const heroSeq = {
   /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
-  frames: 132,
+  frames: 72,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
@@ -90,26 +90,26 @@ export const heroSeq = {
    */
   focus: [
     [0, 0.5],
-    [1.6, 0.5],
-    [2.0, 0.42],
-    [7.1, 0.42],
-    [7.6, 0.5],
-    [26.38, 0.5],
+    [0.9, 0.5],
+    [1.3, 0.42],
+    [4.0, 0.42],
+    [4.4, 0.5],
+    [14.2, 0.5],
   ] as [number, number][],
   /**
    * Where each step of the words starts, in seconds of the film: the name over the building, then
    * Magic oil on the Mivan panels, the pour and the clean strip, the precast mould, and the
    * defect-free finish (site.film.stages), the last with the buttons over the completed building.
    */
-  beats: [0, 1.6, 7.4, 15.9, 20.6],
+  beats: [0, 1.0, 4.2, 8.15, 10.85],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
-   * inside a fade: 0 the finished building (under the name), 7.0 the panel oiled glossy, 15.25 the
-   * concrete box stripped clean, 20.1 the precast unit lifted out of its mould, 26.33 the completed
+   * inside a fade: 0 the finished building (under the name), 3.9 the panel oiled glossy, 7.8 the
+   * concrete box stripped clean, 10.5 the precast unit lifted out of its mould, 14.17 the completed
    * building with its trees.
    */
-  stops: [0, 7.0, 15.25, 20.1, 26.33],
+  stops: [0, 3.9, 7.8, 10.5, 14.17],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */
