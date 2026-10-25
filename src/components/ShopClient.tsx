@@ -265,8 +265,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
       )}`
     : "";
 
-  // the Construction Chemicals chip shows the Lubecon logo beside the heading
-  const headLine = cat === "construction" ? lines.find((l) => l.id === cat) : undefined;
+  // the Lubecon logo beside the heading: on All products and on Construction Chemicals
+  const headLine = cat === "all" || cat === "construction" ? lines.find((l) => l.id === "construction") : undefined;
 
   return (
     <section id="all-products" className="pshop" aria-labelledby="page-title">
