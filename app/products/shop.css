@@ -467,6 +467,12 @@ section.pshop .pshop-head-logo {
     height: 46px;
   }
 }
+/* laptops: the logo in the middle of the space between the heading and the ordering steps */
+@media (min-width: 1024px) {
+  section.pshop .pshop-head-logo {
+    margin-inline: auto;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   section.pshop .pshop-head-logo {
     animation: none;
