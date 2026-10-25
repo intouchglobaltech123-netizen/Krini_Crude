@@ -526,13 +526,13 @@ export const lines: Line[] = [
           {
             name: "Repel Shuttering Oil",
             tagline: "Premium shuttering oil (pinhole reduction)",
-            beaker: "/images/products/oil-beaker.webp",
+            beaker: "/images/products/oil-sample.webp",
             text: "Premium shuttering oil suitable for aluminium and all formwork, ensuring clean stripping and smooth concrete surface finishes.",
           },
           {
             name: "Silease 360 Shuttering Oil",
             tagline: "Precast shuttering oil",
-            beaker: "/images/products/silease-360-beaker.webp",
+            beaker: "/images/products/silease-360-sample.webp",
             text: "Precast shuttering oil and mould release agent for precast concrete production.",
             details: {
               status: "verified",
@@ -583,7 +583,7 @@ export const lines: Line[] = [
           {
             name: "Magic Shuttering Oil",
             tagline: "Oil based, for Mivan and other formworks",
-            beaker: "/images/products/oil-beaker.webp",
+            beaker: "/images/products/oil-sample.webp",
             text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
             details: {
               status: "verified",
@@ -635,7 +635,7 @@ export const lines: Line[] = [
           {
             name: "Nikri 30 Shuttering Oil",
             tagline: "Road project shuttering oil",
-            beaker: "/images/products/nikri-beaker.webp",
+            beaker: "/images/products/nikri-sample.webp",
             text: "Cost-effective shuttering oil formulated for MS, plywood and infrastructure road projects with reliable concrete release.",
             /* krinicrude.com/product/nikri30, read October 2026: its key features and coverage, word for word */
             details: {
@@ -654,7 +654,7 @@ export const lines: Line[] = [
           {
             name: "Nikri AL Shuttering Oil",
             tagline: "Cost-effective emulsion oil for Mivan and other formworks",
-            beaker: "/images/products/nikri-beaker.webp",
+            beaker: "/images/products/nikri-sample.webp",
             text: "Emulsion-based concrete formwork release agent for Mivan aluminium, MS, plywood and FRP formwork.",
             details: {
               status: "verified",
@@ -718,6 +718,7 @@ export const lines: Line[] = [
               imageAlt: "Krini Shuttering Grease 1kg tub and bulk formwork release grease",
               sheetUrl: "/documents/krini-shuttering-grease-pds.pdf",
               sheetLabel: "Krini Shuttering Grease Product Data Sheet",
+              videoUrl: "/videos/products/krini-shuttering-grease.mp4",
               description:
                 "KRINI SHUTTERING GREASE is a calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -768,6 +769,7 @@ export const lines: Line[] = [
               imageAlt: "Repel Shuttering Grease premium calcium-based formwork release grease tub",
               sheetUrl: "/documents/repel-shuttering-grease-pds.pdf",
               sheetLabel: "Repel Shuttering Grease Product Data Sheet",
+              videoUrl: "/videos/products/repel-shuttering-grease.mp4",
               description:
                 "REPEL SHUTTERING GREASE is a high-performance calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -865,6 +867,7 @@ export const lines: Line[] = [
               imageAlt: "Vibrant Glossy Black acrylic aerosol spray paint can 550ml",
               sheetUrl: "/documents/black-glossy-matt-pds.pdf",
               sheetLabel: "Vibrant Black Spray Paint Product Data Sheet",
+              videoUrl: "/videos/products/black-glossy-matt.mp4",
               description:
                 "VIBRANT BLACK SPRAY PAINT is a premium acrylic-based aerosol spray paint formulated for indoor and outdoor applications. Engineered with fast-drying resins and deep pigment technology, it delivers a smooth, uniform, and durable coating available in deep glossy and sleek matt black finishes.",
               metaLine:
@@ -917,6 +920,7 @@ export const lines: Line[] = [
               imageAlt: "Vibrant Custom Shade Acrylic Aerosol Spray Paint in Any RAL Colour",
               sheetUrl: "/documents/any-ral-shades-pds.pdf",
               sheetLabel: "Vibrant Custom Shade Spray Paint Product Data Sheet",
+              videoUrl: "/videos/products/any-ral-shades.mp4",
               description:
                 "VIBRANT CUSTOM SHADE AEROSOL SPRAY PAINT is a professional-grade custom color-matched spray paint prepared to any requested RAL shade code. Specially formulated with quick-drying industrial resins, it provides precise color matching to powder coatings, painted equipment, and architectural standards with exceptional finish uniformity and weather durability.",
               metaLine:
@@ -970,6 +974,7 @@ export const lines: Line[] = [
               imageAlt: "Vibrant Bright Galva Coating 300g zinc aerosol spray can",
               sheetUrl: "/documents/galva-zinc-spray-pds.pdf",
               sheetLabel: "Vibrant Bright Galva Coating Product Data Sheet",
+              videoUrl: "/videos/products/galva-zinc-spray.mp4",
               description:
                 "VIBRANT BRIGHT GALVA COATING is a high-performance zinc-rich cold galvanizing aerosol spray formulated with boosted zinc protection. It provides cathodic rust and corrosion defense for all ferrous metal surfaces, fabricated structural steelwork, weld seams, and cut edges, delivering a clean, bright metallic zinc finish.",
               metaLine:
@@ -1031,6 +1036,7 @@ export const lines: Line[] = [
               imageAlt: "Lock-Bond Multi Purpose Adhesive Aerosol Spray 400ml can",
               sheetUrl: "/documents/lock-bond-adhesive-spray-400ml-pds.pdf",
               sheetLabel: "Lock-Bond Adhesive Spray Product Data Sheet",
+              videoUrl: "/videos/products/lock-bond-adhesive-spray-400ml.mp4",
               description:
                 "LOCK-BOND ADHESIVE SPRAY is a premium multi-purpose industrial aerosol adhesive formulated for fast tack, high bonding strength, and long-lasting durability across a wide spectrum of materials. It is non-toxic, ozone-friendly, CFC and lead-free, ensuring safe handling in manufacturing, workshop assembly, and industrial maintenance.",
               metaLine:
@@ -1094,6 +1100,7 @@ export const lines: Line[] = [
               imageAlt: "Relese Anti Spatter Spray 550ml silicone-free aerosol can",
               sheetUrl: "/documents/relese-anti-spatter-spray-pds.pdf",
               sheetLabel: "Relese Anti Spatter Spray Product Data Sheet",
+              videoUrl: "/videos/products/relese-anti-spatter-spray.mp4",
               description:
                 "RELESE ANTI-SPATTER SPRAY is a premium industrial aerosol welding anti-spatter agent. Specially formulated without silicone, it forms a thin, protective barrier on workpieces, welding nozzles, contact tips, and jigs to prevent welding spatter from adhering. It eliminates laborious post-weld chiselling and grinding, and allows direct subsequent painting, powder coating, or galvanizing without fish-eye defects.",
               metaLine:

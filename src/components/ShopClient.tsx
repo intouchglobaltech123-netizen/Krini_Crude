@@ -450,7 +450,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                         </svg>
-                        {it.packing?.[0]?.v?.replace(/^Standard packing:\s*/i, "").replace(/^Pack sizes on request/i, "Pack on request") || "Industrial pack"}
+                        {it.packing?.[0]?.v?.replace(/^Standard packing:\s*/i, "").replace(/^Pack sizes on request/i, "Pack on request").replace(/\s*\(.*\)\s*$/, "") || "Industrial pack"}
                       </span>
                     </div>
                   </div>
@@ -472,9 +472,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                         <CartIcon /> Add to cart
                       </button>
                     )}
-                    <button type="button" className="kcard-detail-link" onClick={() => openProduct(it.key)}>
-                      View details <span aria-hidden="true">→</span>
-                    </button>
                   </div>
                 </li>
               );
