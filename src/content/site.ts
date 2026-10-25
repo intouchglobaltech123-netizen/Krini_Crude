@@ -135,25 +135,26 @@ export const site = {
      * (heroSeq.stops says where each part ends). Product claims are krinicrude.com's own.
      */
     stages: [
+      /* each stage's words say exactly what its part of the film shows */
       {
-        name: "Magic oil on Mivan",
-        rail: "Mivan",
+        name: "Oil on the Mivan panels",
+        rail: "Oiling",
         product: "Magic Shuttering Oil",
-        line: "Rolled on to the face of each aluminium panel that meets the concrete: one thin, even, glossy film.",
+        line: "Magic oil is rolled on to the face of the aluminium panel that meets the concrete: one thin, even, glossy film.",
         link: { label: "Magic Shuttering Oil", href: "/products/construction-chemicals" },
       },
       {
-        name: "Clean strip",
-        rail: "Formwork",
-        product: "",
-        line: "Concrete goes in against the oiled faces, and the panels strip clean: nothing sticks, no stains.",
+        name: "Pour and clean strip",
+        rail: "Pour",
+        product: "Magic Shuttering Oil",
+        line: "Concrete is poured against the oiled faces, and the panels strip clean: nothing sticks, no stains.",
         link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
       },
       {
         name: "Precast moulds",
         rail: "Precast",
         product: "Silease 360 precast shuttering oil",
-        line: "An even film on the steel mould for a clean lift-out.",
+        line: "The oiled steel mould is poured, and the precast unit lifts out clean.",
         link: { label: "Precast shuttering oil", href: "/products/construction-chemicals" },
       },
       {
@@ -161,7 +162,7 @@ export const site = {
         name: "Defect\u2011free finish",
         rail: "Finish",
         product: "",
-        line: "Smooth, even concrete: no blowholes, no stains, no honeycombing.",
+        line: "Floor by floor to the finished building: smooth, even concrete with no blowholes, no stains, no honeycombing.",
       },
     ],
   },
