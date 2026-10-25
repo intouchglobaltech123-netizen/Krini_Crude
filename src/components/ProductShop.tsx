@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { site } from "../content/site";
-import { lines, type Line, type Product, type ProductRangeItemDetails } from "../content/catalogue";
+import { lines, type Line, type Product, type ProductRangeItem, type ProductRangeItemDetails } from "../content/catalogue";
 import type { ReactNode } from "react";
 import { ShopClient, type ShopItem, type ShopRow } from "./ShopClient";
 
@@ -44,7 +44,6 @@ const AS_SUPPLIED: Record<string, string> = {
   "engine-oil": "Used as supplied: no dilution. Use the grade your engine maker specifies.",
   greases: "Applied as supplied: no dilution.",
   "shuttering-grease": "Applied as supplied: no dilution.",
-  "mold-release-grease": "Applied as supplied: no dilution.",
 };
 /**
  * A product's data sheet: the report the catalogue names, or a PDF in public/documents/ whose name
@@ -74,9 +73,43 @@ function videoOf(slug: string, d?: ProductRangeItemDetails) {
   return ext ? `/videos/products/${slug}.${ext}` : undefined;
 }
 
+/**
+ * Whether a picture in public/ is upright (taller than wide), read from its file header (WebP or
+ * PNG); undefined when it cannot be told. Beside a beaker, a wide pack shot (a drum on white) is
+ * cropped to the drum, while an upright picture is shown whole.
+ */
+function isUpright(src?: string) {
+  if (!src || !src.startsWith("/")) return undefined;
+  try {
+    const b = fs.readFileSync(path.join(publicDir, src.split("?")[0]!));
+    let w = 0;
+    let h = 0;
+    if (b.toString("ascii", 0, 4) === "RIFF" && b.toString("ascii", 8, 12) === "WEBP") {
+      const kind = b.toString("ascii", 12, 16);
+      if (kind === "VP8 ") {
+        w = b.readUInt16LE(26) & 0x3fff;
+        h = b.readUInt16LE(28) & 0x3fff;
+      } else if (kind === "VP8L") {
+        const n = b.readUInt32LE(21);
+        w = (n & 0x3fff) + 1;
+        h = ((n >> 14) & 0x3fff) + 1;
+      } else if (kind === "VP8X") {
+        w = b.readUIntLE(24, 3) + 1;
+        h = b.readUIntLE(27, 3) + 1;
+      }
+    } else if (b.readUInt32BE(0) === 0x89504e47) {
+      w = b.readUInt32BE(16);
+      h = b.readUInt32BE(20);
+    }
+    return w && h ? h > w : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 const ON_REQUEST = "Shared with the technical data sheet: ask us on WhatsApp and we send it the same day.";
 
-function itemOf(line: Line, p: Product, r?: { name: string; text: string; details?: ProductRangeItemDetails }): ShopItem {
+function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
   const d = r?.details ?? {};
   const name = r?.name ?? p.name;
   const slug = slugOf(name);
@@ -87,6 +120,8 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
     { k: "Product type", v: p.name },
     ...(grades.length ? [{ k: line.id === "lubricants" && /oil/i.test(p.name) && /^\d/.test(grades[0]!) ? "Grades (viscosity)" : "Grades / variants", v: grades.join(" · ") }] : []),
     ...(d.coverage ? [{ k: "Coverage", v: d.coverage }] : []),
+    // every construction chemical is ready to use (the client, October 2026): no dilution section
+    ...(line.id === "construction" ? [{ k: "Dilution", v: "Not needed: ready to use, apply as supplied" }] : []),
     { k: "Made at", v: "ISO certified factory, Chennai" },
   ];
   const highlights = d.benefits?.length
@@ -100,7 +135,9 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
           "Bulk supply, and private label under your own brand",
         ];
   const dilutionText =
-    d.dilution && !d.dilutionRatios?.length
+    line.id === "construction"
+      ? undefined
+      : d.dilution && !d.dilutionRatios?.length
       ? d.dilution
       : !d.dilutionRatios?.length
         ? line.id === "aerosols"
@@ -113,12 +150,16 @@ function itemOf(line: Line, p: Product, r?: { name: string; text: string; detail
     ...(d.shelfLife ? [{ k: "Shelf life", v: d.shelfLife }] : []),
   ];
   if (!d.storage) packing.push({ k: "Storage", v: line.id === "aerosols" ? "Store below 50 °C, away from heat and direct sunlight. Pressurised container." : "Store indoors in the closed original container, away from heat and direct sunlight." });
-    const views = viewsOf(slug, d.image);
+    // the product in a beaker: beside the pack on the card, and a third view on its page
+    const views = [...viewsOf(slug, d.image), ...(r?.beaker ? [{ label: "Sample", src: r.beaker }] : [])];
     const cardImg = d.image ?? views.find((v) => v.label === "Front" && v.src)?.src;
     return {
       key: r ? `${p.id}-${r.name}` : p.id,
       slug,
       name,
+      tagline: r?.tagline,
+      beaker: r?.beaker,
+      imageUpright: r?.beaker ? isUpright(cardImg) : undefined,
       type: r ? p.name : line.short,
       group: p.name,
       text: r?.text ?? p.cardText ?? p.about,
@@ -190,7 +231,7 @@ export function ProductShop({ top }: { top?: ReactNode }) {
     <ShopClient
       top={top}
       items={shopLines.flatMap(itemsOf)}
-      lines={shopLines.map((l) => ({ id: l.id, title: l.title, brand: l.brand.name }))}
+      lines={shopLines.map((l) => ({ id: l.id, title: l.title, brand: l.brand.name, logo: l.brand.logo }))}
       whatsapp={site.contact.whatsapp}
       email={site.contact.email}
     />

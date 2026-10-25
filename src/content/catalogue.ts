@@ -67,6 +67,13 @@ export type ProductReview = {
 export type ProductRangeItem = {
   name: string;
   text: string;
+  /** One short line under the name, on its card and its page (the client's words, October 2026). */
+  tagline?: string;
+  /**
+   * A photo of the product itself in a lab beaker, shown beside the pack on its card and as a view
+   * on its page (AI-generated with Google Flow, cropped to 480x640 in public/images/products/).
+   */
+  beaker?: string;
   details?: ProductRangeItemDetails;
 };
 
@@ -501,15 +508,15 @@ export const lines: Line[] = [
     description:
       "High-performance construction chemicals and solutions for infrastructure, building, and civil engineering projects. Built for durability and strength.",
     series: "Construction Chemicals",
-    strap: "Shuttering Oil • Shuttering Grease • Mold Release Solutions",
+    strap: "Shuttering Oil • Shuttering Grease • Ready to Use",
     image: "/images/construction.webp",
     imageAlt: "Release oil sprayed onto steel formwork beside rebar at dusk",
     seo: {
-      title: "Shuttering Oil, Mold Release Oil & Greases Manufacturer | Krini Crude",
+      title: "Shuttering Oil & Shuttering Grease Manufacturer | Krini Crude",
       description:
-        "Shuttering oil and grease, mold release oil and grease for formwork and precast concrete, made in Chennai for building and infrastructure projects.",
+        "Ready-to-use shuttering oils and greases for Mivan, steel, plywood and precast formwork, made in Chennai for building and infrastructure projects.",
     },
-    heading: "Shuttering and mold release oils and greases for concrete.",
+    heading: "Ready-to-use shuttering oils and greases for concrete.",
     products: [
       {
         id: "shuttering-oil",
@@ -518,10 +525,14 @@ export const lines: Line[] = [
           /* listed first on krinicrude.com/construction (October 2026), without a page of its own yet */
           {
             name: "Repel Shuttering Oil",
+            tagline: "Premium shuttering oil (pinhole reduction)",
+            beaker: "/images/products/oil-beaker.webp",
             text: "Premium shuttering oil suitable for aluminium and all formwork, ensuring clean stripping and smooth concrete surface finishes.",
           },
           {
             name: "Silease 360 Shuttering Oil",
+            tagline: "Precast shuttering oil",
+            beaker: "/images/products/silease-360-beaker.webp",
             text: "Precast shuttering oil and mould release agent for precast concrete production.",
             details: {
               status: "verified",
@@ -571,6 +582,8 @@ export const lines: Line[] = [
           },
           {
             name: "Magic Shuttering Oil",
+            tagline: "Oil based, for Mivan and other formworks",
+            beaker: "/images/products/oil-beaker.webp",
             text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
             details: {
               status: "verified",
@@ -621,6 +634,8 @@ export const lines: Line[] = [
           },
           {
             name: "Nikri 30 Shuttering Oil",
+            tagline: "Road project shuttering oil",
+            beaker: "/images/products/nikri-beaker.webp",
             text: "Cost-effective shuttering oil formulated for MS, plywood and infrastructure road projects with reliable concrete release.",
             /* krinicrude.com/product/nikri30, read October 2026: its key features and coverage, word for word */
             details: {
@@ -638,6 +653,8 @@ export const lines: Line[] = [
           },
           {
             name: "Nikri AL Shuttering Oil",
+            tagline: "Cost-effective emulsion oil for Mivan and other formworks",
+            beaker: "/images/products/nikri-beaker.webp",
             text: "Emulsion-based concrete formwork release agent for Mivan aluminium, MS, plywood and FRP formwork.",
             details: {
               status: "verified",
@@ -692,6 +709,7 @@ export const lines: Line[] = [
         range: [
           {
             name: "Krini Shuttering Grease",
+            tagline: "Calcium based premium shuttering grease",
             text: "Heavy-duty calcium-based shuttering grease for wall ties, sleeves and structural formwork.",
             details: {
               status: "verified",
@@ -741,6 +759,7 @@ export const lines: Line[] = [
           },
           {
             name: "Repel Shuttering Grease",
+            tagline: "Cost-effective shuttering grease",
             text: "Premium calcium-based shuttering grease for wall ties, sleeves and complex formwork.",
             details: {
               status: "verified",
@@ -792,25 +811,6 @@ export const lines: Line[] = [
         about:
           "A release agent for formwork in grease form. Ask our team whether an oil or a grease suits your formwork, surface and site conditions.",
       },
-      {
-        id: "mold-release-oil",
-        name: "Mold Release Oil",
-        cardText:
-          "Applied to moulds so cast concrete units release cleanly with a smooth surface finish, allowing moulds to be reused.",
-        about:
-          "Mold (mould) release oil is applied to moulds so that cast concrete units come away cleanly, with a good surface finish, and the moulds can be reused.",
-        uses: ["Precast concrete moulds", "Moulded concrete products"],
-        claims: ["Formulated not just as physical release but also chemically engineered for superior performance and concrete finish."],
-        tbc: [TDS],
-      },
-      {
-        id: "mold-release-grease",
-        name: "Mold Release Grease",
-        about: "Mould release in grease form, for moulds and conditions where a grease is preferred to an oil.",
-        uses: ["Precast concrete moulds"],
-        claims: ["Formulated not just as physical release but also chemically engineered for superior performance and concrete finish."],
-        tbc: [TDS],
-      },
     ],
     industries: ["construction"],
     faq: [
@@ -819,8 +819,8 @@ export const lines: Line[] = [
         a: "Shuttering oil is applied to formwork before concrete is poured. It stops the concrete sticking, so the formwork strips cleanly, the concrete keeps a clean face and the formwork can be reused.",
       },
       {
-        q: "What is the difference between shuttering oil and mold release oil?",
-        a: "Both are release agents. Shuttering oil is used on site formwork; mold release oil is used on moulds, typically for precast concrete. We make both, in oil and grease form.",
+        q: "Do your shuttering oils need to be diluted?",
+        a: "No. All our construction chemicals are ready to use: apply them as supplied, with no dilution. For precast moulds, use Silease 360, our precast shuttering oil.",
       },
       {
         q: "Should I use a release oil or a release grease?",

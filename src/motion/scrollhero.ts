@@ -28,10 +28,16 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   const stage = root?.querySelector<HTMLElement>("[data-sh-stage]");
   const canvas = root?.querySelector<HTMLCanvasElement>("[data-sh-canvas]");
   if (!root || !stage || !canvas) return;
-  if (prefersReducedMotion()) {
+  /** A phone held upright (the same test as `band` below, before the stage is measured). */
+  const phoneNow = () => stage.clientWidth < 640 && stage.clientHeight > stage.clientWidth;
+  // reduced motion: bigger screens show the still; a phone still shows the film, but it waits for a
+  // tap on its play button instead of starting by itself
+  const reduced = prefersReducedMotion();
+  if (reduced && !phoneNow()) {
     root.classList.add("is-still");
     return;
   }
+  const waitForTap = reduced;
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   const hero: HTMLElement = root;
@@ -261,7 +267,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.defaultMuted = true;
     v.loop = true;
     v.playsInline = true;
-    v.autoplay = band;
+    v.autoplay = band && !waitForTap;
     v.preload = "auto";
     v.poster = heroSeq.first;
     v.disablePictureInPicture = true;
@@ -284,6 +290,12 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       placeVideo();
     });
     d.on(v, "loadedmetadata", placeVideo);
+    d.on(v, "playing", () => {
+      started = true;
+      refused = false;
+      syncBtn();
+    });
+    d.on(v, "pause", syncBtn);
     video = v;
     return v;
   };
@@ -363,7 +375,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   };
   function startPlay() {
     const v = ensureVideo();
-    if (arrived) {
+    if (arrived && !band) {
       holdEnd(v);
       return;
     }
@@ -379,15 +391,68 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       hero.dataset.stage = String(part);
       return;
     }
-    if (inView && !document.hidden) {
+    // a phone: the film plays on a loop while the hero is on screen, unless the visitor paused it
+    // (or, with reduced motion, until they first tap play)
+    if (v.ended || (!v.loop && v.duration && v.currentTime >= v.duration - 0.1)) v.currentTime = 0;
+    v.loop = true;
+    v.poster = heroSeq.first;
+    if (inView && !document.hidden && !userPaused && !(waitForTap && !started)) {
       v.play().catch(() => {
-        // autoplay refused (a battery saver, say): the first frame stays as the picture
+        // autoplay refused (a battery saver or data saver, say): the first frame stays, with the
+        // play button over it, and the first tap anywhere on the page starts the film
+        refused = true;
+        syncBtn();
       });
       if (!playing) playing = requestAnimationFrame(tick);
     } else {
       v.pause();
     }
+    syncBtn();
   }
+
+  // ---- the phone film's play / pause button: the film can always be paused, and when the phone
+  // will not start it by itself (a battery or data saver, or reduced motion) one tap starts it
+  let started = false;
+  let refused = false;
+  let userPaused = false;
+  const playBtn = document.createElement("button");
+  playBtn.type = "button";
+  playBtn.className = "sh-play is-paused";
+  playBtn.innerHTML =
+    '<svg class="sh-play-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>' +
+    '<svg class="sh-pause-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>' +
+    "<span>Play film</span>";
+  stage.appendChild(playBtn);
+  d.add(() => playBtn.remove());
+  function syncBtn() {
+    const paused = !video || video.paused;
+    playBtn.classList.toggle("is-paused", paused);
+    // before the film has ever played (autoplay refused, or reduced motion): a big gold button
+    playBtn.classList.toggle("is-big", paused && !started && (refused || waitForTap));
+    playBtn.setAttribute("aria-label", paused ? "Play the film" : "Pause the film");
+  }
+  d.on(playBtn, "click", (e) => {
+    e.stopPropagation();
+    const v = ensureVideo();
+    if (v.paused) {
+      userPaused = false;
+      v.loop = true;
+      void v.play().catch(() => {});
+      if (!playing) playing = requestAnimationFrame(tick);
+    } else {
+      userPaused = true;
+      v.pause();
+    }
+    syncBtn();
+  });
+  // autoplay refused: the first tap anywhere on the page starts the film (a tap allows playing)
+  const kick = () => {
+    if (!band || !refused || userPaused || waitForTap || !video || !video.paused || !inView) return;
+    void video.play().catch(() => {});
+    if (!playing) playing = requestAnimationFrame(tick);
+  };
+  d.on(document, "touchend", kick, { passive: true });
+  d.on(document, "click", kick);
   const seen = new IntersectionObserver((entries) => {
     inView = entries.some((e) => e.isIntersecting);
     startPlay();
@@ -400,7 +465,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   });
   startPlay();
 
-  /** Coming back to Home on a phone: the video stays on its last frame, still (no loop). */
+  /** Coming back to Home on a bigger screen: the film stays on its last frame, still. */
   function holdEnd(v: HTMLVideoElement) {
     v.autoplay = false;
     v.loop = false;
@@ -425,8 +490,15 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   // frame, not its start. Bigger screens: the last screen of the hero (its promise and buttons)
   // with the film's last frame; an upright phone: the video held still on its last frame.
   const toEnd = () => {
+    if (band) {
+      // a phone: the film plays from its start on a loop, as on a first visit
+      arrived = false;
+      scroller.scrollTo(0, { immediate: true, offset: 0 });
+      startPlay();
+      return;
+    }
     arrived = true;
-    if (band || filmMode) {
+    if (filmMode) {
       holdEnd(ensureVideo());
       scroller.scrollTo(0, { immediate: true, offset: 0 });
       return;

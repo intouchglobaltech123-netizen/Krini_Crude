@@ -2,7 +2,7 @@ import { site } from "../content/site";
 import { heroSeq } from "../content/media";
 import { Arrow, Name } from "./ui";
 
-/** The steps as named on the rail beside the hero (the name, then the five stages of the build); where each starts in the scroll is heroSeq.beats. */
+/** The steps as named on the rail beside the hero (the name, then the stages of the film); where each starts is heroSeq.beats. */
 const STEPS = ["Krini Crude", ...site.film.stages.map((s) => s.rail)];
 /** Phones, under the buttons: three of the live site's figures (site.stats). */
 const [productsStat, , clientsStat] = site.stats;
@@ -13,17 +13,16 @@ const OPEN_STATS = [
 ];
 
 /**
- * Home's hero: a building going up from bare land, played by scrolling (a Google Flow film,
- * src/content/media.ts heroSeq; src/motion/scrollhero.ts draws it on a canvas). No people:
- * everything moves by itself. The scroll picks the film's frame and the step whose words are
- * shown: the name over the empty plot, then one screen per stage of the build (site.film.stages),
- * each opening close on where a Krini Crude product is at work (lubricants in the excavator,
- * shuttering oil, aluminium formwork release, precast mould release, anti-spatter and colour
- * sprays) with the product named, and last the finished building under the promise and the
- * buttons. The rail on the right names every stage and jumps to it. On an upright phone the film
- * plays as a video at the top of one screen, the stage on screen named over it (.sh-chip). With
- * reduced motion or without JavaScript the hero is one screen: the finished building, the name,
- * the promise and the buttons. Docs: docs/HERO.md.
+ * Home's hero: Krini Crude's oils at work, a Google Flow film (src/content/media.ts heroSeq;
+ * src/motion/scrollhero.ts plays it). Mostly oil going on to the boards: shuttering oil sprayed on
+ * to plywood and brushed on to steel plates, precast shuttering oil on a precast mould, then a board
+ * stripped clean and the smooth, defect-free concrete it leaves. On wider screens each scroll plays
+ * the next part: the name over the dry boards, then one screen per stage (site.film.stages) with
+ * the product named, and last the finished wall under the buttons. The rail on the right names
+ * every stage and jumps to it. On an upright phone the film plays as a video at the top of one
+ * screen, the stage on screen named over it (.sh-chip). With reduced motion or without JavaScript
+ * the hero is one screen: the finished wall, the name, the headline and the buttons.
+ * Docs: docs/HERO.md.
  */
 export function ScrollHero() {
   const { film } = site;
@@ -109,7 +108,7 @@ export function ScrollHero() {
             </p>
             {/* the promise is the opening headline (film.tagline), so it is not said again here */}
             <h2 className="sh-big display-tight">{stages[stages.length - 1].name}</h2>
-            <p className="sh-body">{stages[stages.length - 1].line}</p>
+            {stages[stages.length - 1].line ? <p className="sh-body">{stages[stages.length - 1].line}</p> : null}
             <div className="sh-ctas">
               <a href={film.ctas.primary.href} className="btn btn-primary" data-magnetic>
                 {film.ctas.primary.label} <Arrow />
@@ -126,7 +125,7 @@ export function ScrollHero() {
           <span className="sh-mouse">
             <span className="sh-wheel" />
           </span>
-          <span className="sh-scroll-text">Scroll to see it built</span>
+          <span className="sh-scroll-text">Scroll to see it in action</span>
           <svg className="sh-chev" width="14" height="9" viewBox="0 0 14 9" fill="none">
             <path d="M1 1.5 7 7.5l6-6" stroke="currentColor" strokeWidth="1.6" />
           </svg>

@@ -53,29 +53,29 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "flow19";
+const seqVersion = "oil1";
 
 /**
- * Home's hero (ScrollHero.tsx): realistic, machinery only, no people, made with Google Flow
- * (Nano Banana stills as start and end frames, Omni 1.1 Flash clips) and joined with fades.
- * It opens on the finished 13-storey apartment block (under the name and the buttons), then shows
- * how it was built, one part per scroll: aluminium formwork panels craned in, pinned, braced and
- * oiled, cast and released; in a precast shed modelled on the owner's own factory videos, concrete
- * poured into a blue ribbed steel mould with an arched, oiled black bed and the cured piece, an
- * exact cast of the arch, lifted straight off; then a precast panel craned into the building and
- * the block finished (paint, shutters, glazing, garden), ending on the same finished building.
- * 16.7 s, 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
+ * Home's hero (ScrollHero.tsx): realistic close-ups made with Google Flow (Nano Banana stills as
+ * start and end frames, Omni 1.1 Flash clips) and joined with fades. Most of it is oil going on
+ * to the boards, then the finish it gives (the client's brief): shuttering oil sprayed on to
+ * film-faced plywood boards, brushed on to steel shuttering plates, and precast shuttering oil
+ * (Silease 360) sprayed on to a precast steel casting bed, each dull, dry surface turning evenly glossy; a plywood board
+ * pulled off a cast wall, coming away clean; and the camera drawing back from the smooth,
+ * defect-free concrete to the whole wall and column, the clean boards stacked in front.
+ * Only gloved hands are seen, never faces.
+ * 17.4 s, 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
  */
 export const heroSeq = {
-  /** The film's frames: 22 s sampled 5 times a second. */
-  frames: 109,
+  /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
+  frames: 88,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
   /** One frame's size in the sheets. */
   width: 960,
   height: 540,
-  /** The last frame (the finished building): the hero without the motion, wide and cut 4:5 for phones. */
+  /** The last frame (the finished wall and column): the hero without the motion, wide and cut 4:5 for phones. */
   end: `${base}/images/hero-seq/end.webp?v=${seqVersion}`,
   endTall: `${base}/images/hero-seq/end-tall.webp?v=${seqVersion}`,
   /** Phones held upright play the film itself, as a video (muted, looping, videoRate times real time), with its first frame as the poster. */
@@ -84,24 +84,39 @@ export const heroSeq = {
   videoSmall: `${base}/videos/krini-hero-720.mp4?v=${seqVersion}`,
   videoRate: 1,
   first: `${base}/images/hero-seq/first.webp?v=${seqVersion}`,
-  /** The subject stays in the middle of the frame, as [second, x]. */
+  /**
+   * Where the subject is across the frame, as [second, x], so a phone's narrow crop follows it: the
+   * spray lance, the brush as it travels left to right, the spray gun, the board as it comes off,
+   * then the wall, its column and the stacked boards right of centre.
+   */
   focus: [
-    [0, 0.5],
-    [16.7, 0.5],
+    [0, 0.48],
+    [3.3, 0.48],
+    [3.7, 0.36],
+    [6.5, 0.8],
+    [6.9, 0.56],
+    [9.2, 0.56],
+    [9.6, 0.68],
+    [10.8, 0.68],
+    [11.8, 0.55],
+    [12.7, 0.5],
+    [16.0, 0.6],
+    [17.37, 0.62],
   ] as [number, number][],
   /**
-   * Where each step of the words starts, in seconds of the film: the name over the finished
-   * building, then aluminium formwork, precast concrete, and the building assembled and complete
-   * (site.film.stages), with the promise and the buttons.
+   * Where each step of the words starts, in seconds of the film: the name over the dry boards,
+   * then oil on the boards, oil on the precast mould, the clean release and the defect-free finish
+   * (site.film.stages), the last with the buttons.
    */
-  beats: [0, 1.95, 6.16, 10.86],
+  beats: [0, 0.4, 6.75, 9.4, 12.75],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
-   * inside a fade: 0 the finished building (under the name), 6.0 the formwork released, 10.7 the
-   * precast piece lifted off its mould, 16.7 the finished building again.
+   * inside a fade: 0 the dry plywood boards and the spray lance (under the name), 6.5 the steel plate
+   * brushed glossy, 9.15 the precast bed sprayed glossy, 12.6 the smooth concrete where the board
+   * was, 17.37 the finished wall and column.
    */
-  stops: [0, 6.0, 10.7, 16.7],
+  stops: [0, 6.5, 9.15, 12.6, 17.37],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */

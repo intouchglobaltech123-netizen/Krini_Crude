@@ -11,6 +11,12 @@ export type ShopItem = {
   /** The product's name as a file name: its photos are /images/products/<slug>-front.webp and so on. */
   slug: string;
   name: string;
+  /** One short line under the name (catalogue.ts range tagline). */
+  tagline?: string;
+  /** The product itself in a lab beaker, shown beside the pack on the card. */
+  beaker?: string;
+  /** The card picture is taller than wide (so beside the beaker it is shown whole, not cropped). */
+  imageUpright?: boolean;
   /** The product type it belongs to (Soluble Cutting Oil, Shuttering Oil…). */
   type: string;
   /** The kind of product it is, for the drop-down under its line (Shuttering Oil, Hydraulic Oil…). */
@@ -56,7 +62,7 @@ export type ShopItem = {
   reviews: ShopReview[];
 };
 export type ShopReview = { name: string; rating: number; text: string; place?: string; date?: string };
-export type ShopLine = { id: string; title: string; brand?: string };
+export type ShopLine = { id: string; title: string; brand?: string; logo?: string };
 type CartLine = { id: string; key: string; name: string; type: string; line: string; grade: string; qty: number };
 
 const STORE = "kc:cart";
@@ -259,15 +265,23 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
       )}`
     : "";
 
+  // the Construction Chemicals chip shows the Lubecon logo beside the heading
+  const headLine = cat === "construction" ? lines.find((l) => l.id === cat) : undefined;
+
   return (
     <section id="all-products" className="pshop" aria-labelledby="page-title">
       <div className="frame">
         {top}
         <div className="pshop-head">
-          <div>
+          <div className="pshop-head-main">
             <h1 id="page-title" className="pshop-title">
               Our products
             </h1>
+            {/* a line sold under its own brand (Lubecon on construction chemicals): its logo, beside the heading */}
+            {headLine?.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img className="pshop-head-logo" src={headLine.logo} alt={headLine.brand ?? ""} title={`${headLine.title}: sold under our ${headLine.brand} brand`} decoding="async" />
+            ) : null}
           </div>
           <ol className="pshop-steps" aria-label="How ordering works">
             <li>
@@ -396,8 +410,12 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                     if (!(e.target as HTMLElement).closest("select, button, label, a")) openProduct(it.key);
                   }}
                 >
-                  <div className="kcard-media">
+                  <div className={`kcard-media${it.beaker ? " has-beaker" : ""}${it.imageUpright ? " is-upright" : ""}`}>
                     <Photo src={it.image} alt="" brand={it.brand} brandLogo={it.brandLogoFull} name={it.name} />
+                    {it.beaker ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img className="kbeaker" src={it.beaker} alt="" width={480} height={640} loading="lazy" decoding="async" />
+                    ) : null}
                     <Brand name={it.brand} logo={it.brandLogo} />
                   </div>
                   <div className="kcard-body">
@@ -410,6 +428,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                         {it.name}
                       </button>
                     </h3>
+                    {it.tagline ? <p className="kcard-tag">{it.tagline}</p> : null}
                     <div className="kcard-specs">
                       {it.grades.length ? (
                         <span className="kcard-spec-item" title="Multiple grades available (choose inside product page)">
@@ -521,6 +540,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               <h2 id="pv-title" className="pv-name">
                 {pv.name}
               </h2>
+              {pv.tagline ? <p className="pv-tagline">{pv.tagline}</p> : null}
               <p className="pv-by">
                 <span>Brand</span>
                 {pv.brandLogo ? <Brand name={pv.brand} logo={pv.brandLogo} /> : <b>{pv.brand}</b>}
@@ -714,6 +734,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </div>
               {pv.coverageNote ? <p className="pv-small">{pv.coverageNote}</p> : null}
             </section>
+            {/* construction chemicals are ready to use, so they have no dilution section (ProductShop.tsx) */}
+            {pv.dilutionText || pv.dilutionRatios?.length ? (
             <section className="pv-sec">
               <h3>
                 <SecIcon kind="drop" />
@@ -746,6 +768,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               )}
               {pv.dilutionNote && !pv.dilutionRatios?.length ? <p className="pv-small">{pv.dilutionNote}</p> : null}
             </section>
+            ) : null}
             <section className="pv-sec pv-sec-pack">
               <h3>
                 <SecIcon kind="box" />

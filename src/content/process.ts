@@ -174,7 +174,7 @@ export const processPage = {
       },
       {
         line: "construction",
-        title: "Shuttering and mold release oils",
+        title: "Shuttering oils and greases",
         body: "Oil carrying release agents that leave a thin film on the formwork, so the concrete comes away cleanly.",
       },
       {

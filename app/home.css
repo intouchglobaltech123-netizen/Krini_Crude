@@ -419,3 +419,74 @@ main > section.hm-make {
     transform: none;
   }
 }
+
+/* ---- the phone film's play / pause button (src/motion/scrollhero.ts) --------
+   A small round button at the right of the film, level with the stage's name;
+   before the film has ever played (the phone refused to start it, or reduced
+   motion is on) a gold "Play film" button in the middle of the film instead. */
+.sh-play {
+  display: none;
+}
+@media (max-width: 639px) {
+  .sh.is-band .sh-play {
+    position: absolute;
+    right: 14px;
+    top: calc(var(--sh-film-h) - 154px);
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgb(212 175 55 / 0.45);
+    border-radius: 999px;
+    background: rgb(10 11 14 / 0.62);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+  .sh.is-band .sh-play:active {
+    opacity: 0.8;
+  }
+  .sh-play svg {
+    width: 16px;
+    height: 16px;
+  }
+  .sh-play .sh-play-i,
+  .sh-play.is-paused .sh-pause-i,
+  .sh-play span {
+    display: none;
+  }
+  .sh-play.is-paused .sh-play-i {
+    display: block;
+  }
+  /* centred without transforms (the site turns transforms off on buttons) */
+  .sh.is-band .sh-play.is-big {
+    left: 0;
+    right: 0;
+    top: calc(var(--sh-film-h) * 0.4 - 26px);
+    width: fit-content;
+    margin-inline: auto;
+    height: 52px;
+    padding: 0 24px 0 18px;
+    border: 0;
+    background: linear-gradient(180deg, #e3c25a, #c9a43a);
+    color: #0f172a;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 16px 34px -14px rgb(0 0 0 / 0.8);
+  }
+  .sh-play.is-big svg {
+    width: 20px;
+    height: 20px;
+  }
+  .sh-play.is-big span {
+    display: inline;
+  }
+}
