@@ -53,29 +53,28 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "oil1";
+const seqVersion = "mivan2";
 
 /**
- * Home's hero (ScrollHero.tsx): realistic close-ups made with Google Flow (Nano Banana stills as
- * start and end frames, Omni 1.1 Flash clips) and joined with fades. Most of it is oil going on
- * to the boards, then the finish it gives (the client's brief): shuttering oil sprayed on to
- * film-faced plywood boards, brushed on to steel shuttering plates, and precast shuttering oil
- * (Silease 360) sprayed on to a precast steel casting bed, each dull, dry surface turning evenly glossy; a plywood board
- * pulled off a cast wall, coming away clean; and the camera drawing back from the smooth,
- * defect-free concrete to the whole wall and column, the clean boards stacked in front.
- * Only gloved hands are seen, never faces.
- * 17.4 s, 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
+ * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
+ * oiling of the Mivan panels added in its place (Flow clips made after the client's own site video).
+ * In order: the finished building; in the foundation pit, Magic Shuttering Oil rolled on to the
+ * smooth face of a Mivan aluminium panel (the face that meets the concrete); the panels standing as a
+ * box round the rebar, their oiled inner faces glossy as the concrete is poured in; the box stripped
+ * clean; a precast mould poured and its unit lifted out clean; the building rising floor by floor; and
+ * the completed building with its trees. Only gloved hands and backs are seen, never faces.
+ * 26.4 s, 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
  */
 export const heroSeq = {
   /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
-  frames: 88,
+  frames: 132,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
   /** One frame's size in the sheets. */
   width: 960,
   height: 540,
-  /** The last frame (the finished wall and column): the hero without the motion, wide and cut 4:5 for phones. */
+  /** The last frame (the finished building): the hero without the motion, wide and cut 4:5 for phones. */
   end: `${base}/images/hero-seq/end.webp?v=${seqVersion}`,
   endTall: `${base}/images/hero-seq/end-tall.webp?v=${seqVersion}`,
   /** Phones held upright play the film itself, as a video (muted, looping, videoRate times real time), with its first frame as the poster. */
@@ -86,37 +85,31 @@ export const heroSeq = {
   first: `${base}/images/hero-seq/first.webp?v=${seqVersion}`,
   /**
    * Where the subject is across the frame, as [second, x], so a phone's narrow crop follows it: the
-   * spray lance, the brush as it travels left to right, the spray gun, the board as it comes off,
-   * then the wall, its column and the stacked boards right of centre.
+   * building's centre, the worker and the panel he is oiling, then the formwork box, the precast mould
+   * and the building, all near the centre.
    */
   focus: [
-    [0, 0.48],
-    [3.3, 0.48],
-    [3.7, 0.36],
-    [6.5, 0.8],
-    [6.9, 0.56],
-    [9.2, 0.56],
-    [9.6, 0.68],
-    [10.8, 0.68],
-    [11.8, 0.55],
-    [12.7, 0.5],
-    [16.0, 0.6],
-    [17.37, 0.62],
+    [0, 0.5],
+    [1.6, 0.5],
+    [2.0, 0.42],
+    [7.1, 0.42],
+    [7.6, 0.5],
+    [26.38, 0.5],
   ] as [number, number][],
   /**
-   * Where each step of the words starts, in seconds of the film: the name over the dry boards,
-   * then oil on the boards, oil on the precast mould, the clean release and the defect-free finish
-   * (site.film.stages), the last with the buttons.
+   * Where each step of the words starts, in seconds of the film: the name over the building, then
+   * Magic oil on the Mivan panels, the pour and the clean strip, the precast mould, and the
+   * defect-free finish (site.film.stages), the last with the buttons over the completed building.
    */
-  beats: [0, 0.4, 6.75, 9.4, 12.75],
+  beats: [0, 1.6, 7.4, 15.9, 20.6],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
-   * inside a fade: 0 the dry plywood boards and the spray lance (under the name), 6.5 the steel plate
-   * brushed glossy, 9.15 the precast bed sprayed glossy, 12.6 the smooth concrete where the board
-   * was, 17.37 the finished wall and column.
+   * inside a fade: 0 the finished building (under the name), 7.0 the panel oiled glossy, 15.25 the
+   * concrete box stripped clean, 20.1 the precast unit lifted out of its mould, 26.33 the completed
+   * building with its trees.
    */
-  stops: [0, 6.5, 9.15, 12.6, 17.37],
+  stops: [0, 7.0, 15.25, 20.1, 26.33],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */

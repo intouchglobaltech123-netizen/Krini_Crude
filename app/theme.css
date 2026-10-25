@@ -10013,15 +10013,22 @@ main section.cta3 {
   aspect-ratio: 1 / 1;
   max-height: 60svh;
   margin: 0;
+  padding: clamp(24px, 5.5vw, 40px) clamp(30px, 6.5vw, 48px);
+  box-sizing: border-box;
   scroll-snap-align: center;
   background: #fff;
 }
 .pg-slide > img {
   width: 100%;
   height: 100%;
+  max-width: 86%;
+  max-height: 86%;
   object-fit: contain;
+  margin: auto;
 }
 .pg-slide > .kplate {
+  max-width: 86%;
+  max-height: 86%;
   height: 100%;
   aspect-ratio: auto;
 }
@@ -10034,6 +10041,9 @@ main section.cta3 {
   gap: 6px;
   width: 100%;
   height: 100%;
+  max-width: 86%;
+  max-height: 86%;
+  border-radius: 12px;
   place-content: center;
   background:
     repeating-linear-gradient(135deg, rgb(15 23 42 / 0.025) 0 12px, transparent 12px 24px),

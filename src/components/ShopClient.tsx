@@ -62,7 +62,7 @@ export type ShopItem = {
   reviews: ShopReview[];
 };
 export type ShopReview = { name: string; rating: number; text: string; place?: string; date?: string };
-export type ShopLine = { id: string; title: string; brand?: string; logo?: string };
+export type ShopLine = { id: string; title: string; brand?: string; logo?: string; logoFull?: string };
 type CartLine = { id: string; key: string; name: string; type: string; line: string; grade: string; qty: number };
 
 const STORE = "kc:cart";
@@ -265,8 +265,9 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
       )}`
     : "";
 
-  // the Lubecon logo beside the heading: on All products and on Construction Chemicals
-  const headLine = cat === "all" || cat === "construction" ? lines.find((l) => l.id === "construction") : undefined;
+  // the brands beside the heading: Lubecon on Construction Chemicals, 1-COOL on Lubricants, both on
+  // All products (Aerosols are sold as Vibrant, which has no logo yet)
+  const headBrands = lines.filter((l) => (cat === "all" ? l.id === "construction" || l.id === "lubricants" : l.id === cat) && (l.logoFull || l.logo));
 
   return (
     <section id="all-products" className="pshop" aria-labelledby="page-title">
@@ -277,10 +278,20 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             <h1 id="page-title" className="pshop-title">
               Our products
             </h1>
-            {/* a line sold under its own brand (Lubecon on construction chemicals): its logo, beside the heading */}
-            {headLine?.logo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="pshop-head-logo" src={headLine.logo} alt={headLine.brand ?? ""} title={`${headLine.title}: sold under our ${headLine.brand} brand`} decoding="async" />
+            {headBrands.length ? (
+              <div className="pshop-head-logos" key={cat}>
+                {headBrands.map((l) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={l.id}
+                    className={`pshop-head-logo pshop-head-logo-${l.id}`}
+                    src={l.logoFull ?? l.logo}
+                    alt={l.brand ?? ""}
+                    title={`${l.title}: sold under our ${l.brand} brand`}
+                    decoding="async"
+                  />
+                ))}
+              </div>
             ) : null}
           </div>
           <ol className="pshop-steps" aria-label="How ordering works">

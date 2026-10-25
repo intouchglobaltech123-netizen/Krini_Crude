@@ -14,14 +14,15 @@ const OPEN_STATS = [
 
 /**
  * Home's hero: Krini Crude's oils at work, a Google Flow film (src/content/media.ts heroSeq;
- * src/motion/scrollhero.ts plays it). Mostly oil going on to the boards: shuttering oil sprayed on
- * to plywood and brushed on to steel plates, precast shuttering oil on a precast mould, then a board
- * stripped clean and the smooth, defect-free concrete it leaves. On wider screens each scroll plays
- * the next part: the name over the dry boards, then one screen per stage (site.film.stages) with
- * the product named, and last the finished wall under the buttons. The rail on the right names
+ * src/motion/scrollhero.ts plays it). The client's building-first film: the finished building, Magic
+ * Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel, the oiled formwork box
+ * poured and stripped clean, a precast mould, and the building rising to its completed, defect-free
+ * finish. On wider screens each scroll plays the next part: the name
+ * over the building, then one screen per stage (site.film.stages) with the product named, and last
+ * the finished building under the buttons. The rail on the right names
  * every stage and jumps to it. On an upright phone the film plays as a video at the top of one
  * screen, the stage on screen named over it (.sh-chip). With reduced motion or without JavaScript
- * the hero is one screen: the finished wall, the name, the headline and the buttons.
+ * the hero is one screen: the finished building, the name, the headline and the buttons.
  * Docs: docs/HERO.md.
  */
 export function ScrollHero() {

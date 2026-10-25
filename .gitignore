@@ -19,3 +19,4 @@ flow-src
 *.code-workspace
 Krini_Crude/
 Krini_Crude/
+.env*

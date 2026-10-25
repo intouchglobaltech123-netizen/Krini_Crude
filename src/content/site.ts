@@ -128,33 +128,33 @@ export const site = {
       secondary: { label: "Contact Us", href: "/contact" },
     },
     /**
-     * The hero film (Google Flow, realistic close-ups, only gloved hands), one part per scroll: mostly
-     * oil going on to the boards, then the finish it gives (the client's brief). It opens on dry
-     * plywood boards, then shuttering oil sprayed on to them and brushed on to steel plates, precast
-     * shuttering oil (Silease 360) sprayed on to a precast casting bed, a board stripped clean off a cast wall, and the
-     * smooth, defect-free concrete (heroSeq.stops says where each part ends).
-     * Product claims are krinicrude.com's own.
+     * The hero film (the client's building-first film, Google Flow), one part per scroll: the finished
+     * building, then Magic Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel in
+     * the pit, the oiled box poured and stripped clean, a precast mould, and the building rising to its
+     * defect-free finish
+     * (heroSeq.stops says where each part ends). Product claims are krinicrude.com's own.
      */
     stages: [
       {
-        name: "Oil on the boards",
-        rail: "Boards",
-        product: "Shuttering oil",
-        line: "Sprayed on plywood, brushed on steel plates: one thin, even coat on every board.",
+        name: "Magic oil on Mivan",
+        rail: "Mivan",
+        product: "Magic Shuttering Oil",
+        line: "Rolled on to the face of each aluminium panel that meets the concrete: one thin, even, glossy film.",
+        link: { label: "Magic Shuttering Oil", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Clean strip",
+        rail: "Formwork",
+        product: "",
+        line: "Concrete goes in against the oiled faces, and the panels strip clean: nothing sticks, no stains.",
         link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
       },
       {
-        name: "Oil on the moulds",
-        rail: "Moulds",
+        name: "Precast moulds",
+        rail: "Precast",
         product: "Silease 360 precast shuttering oil",
         line: "An even film on the steel mould for a clean lift-out.",
         link: { label: "Precast shuttering oil", href: "/products/construction-chemicals" },
-      },
-      {
-        name: "Clean release",
-        rail: "Release",
-        product: "",
-        line: "The board comes away clean, nothing sticks, ready for the next pour.",
       },
       {
         /* a non-breaking hyphen, so the big heading never breaks after "Defect-" */

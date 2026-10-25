@@ -231,7 +231,7 @@ export function ProductShop({ top }: { top?: ReactNode }) {
     <ShopClient
       top={top}
       items={shopLines.flatMap(itemsOf)}
-      lines={shopLines.map((l) => ({ id: l.id, title: l.title, brand: l.brand.name, logo: l.brand.logo }))}
+      lines={shopLines.map((l) => ({ id: l.id, title: l.title, brand: l.brand.name, logo: l.brand.logo, logoFull: l.brand.logoFull }))}
       whatsapp={site.contact.whatsapp}
       email={site.contact.email}
     />

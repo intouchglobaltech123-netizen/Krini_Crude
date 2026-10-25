@@ -522,7 +522,62 @@ export const lines: Line[] = [
         id: "shuttering-oil",
         name: "Shuttering Oil",
         range: [
-          /* listed first on krinicrude.com/construction (October 2026), without a page of its own yet */
+          /* Magic first: our top product (the client, October 2026) */
+          {
+            name: "Magic Shuttering Oil",
+            tagline: "Oil based, for Mivan and other formworks",
+            beaker: "/images/products/oil-sample.webp",
+            text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
+            details: {
+              status: "verified",
+              image: "/images/magic-shuttering-oil.webp",
+              imageAlt: "Magic Shuttering Oil 200L drum",
+              /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=1",
+              pdsRevision: "Rev. 09/2026",
+              description:
+                "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
+              purpose: [
+                "Mivan aluminium formwork",
+                "Mild steel (MS) formwork",
+                "Plywood formwork",
+                "Building and infrastructure site formwork",
+              ],
+              coverage: "30–40 m²/L",
+              coverageNote:
+                "Average coverage. Actual coverage may vary with formwork porosity, surface condition and application method.",
+              benefits: [
+                "Excellent release performance on Mivan aluminium formwork",
+                "Clean demoulding with reduced adhesion to the formwork",
+                "Promotes a smooth and uniform concrete surface finish",
+                "Helps reduce concrete build-up and simplifies cleaning",
+                "Ready to use with economical spreading coverage",
+              ],
+              properties: [
+                { property: "Appearance", value: "Brown transparent liquid", spec: "Visual inspection" },
+                { property: "Kinematic viscosity at 40 °C", value: "Typical: 32 cSt", spec: "Specification: >12 cSt" },
+                { property: "Density at 15 °C", value: "Typical: 0.88 g/mL", spec: "Specification: >0.80 g/mL" },
+                { property: "Flash point, Pensky-Martens", value: "Typical: 180 °C", spec: "Specification: >100 °C" },
+                { property: "Coverage", value: "30–40 m²/L", spec: "Typical site rate" },
+              ],
+              application: [
+                "Clean the formwork and remove concrete residue, rust, dust, water and excess oil.",
+                "Apply a very thin, uniform film by fine spray, lint-free cloth, roller or suitable applicator.",
+                "Avoid puddles and over-application; wipe off excess oil before placing reinforcement or concrete.",
+                "Conduct a small site trial to establish the optimum application rate for site conditions.",
+              ],
+              packing: "Standard packing: 200 L barrel",
+              storage:
+                "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
+              shelfLife: "12 months from date of manufacture when stored as recommended",
+              sheetUrl: "/documents/magic-shuttering-oil-product-data-sheet-2026.pdf",
+              sheetLabel: "Magic Shuttering Oil Product Data Sheet (Rev. 09/2026)",
+              reportUrl: "/documents/magic-shuttering-oil-test-report-oct-2026.pdf",
+              reportLabel: "Original Laboratory Test Certificate (Sri Sai Test Report Oct 2026)",
+              note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
+            },
+          },
+          /* on krinicrude.com/construction (October 2026), without a page of its own yet */
           {
             name: "Repel Shuttering Oil",
             tagline: "Premium shuttering oil (pinhole reduction)",
@@ -577,58 +632,6 @@ export const lines: Line[] = [
               shelfLife: "6 months from date of manufacture when stored as recommended",
               sheetUrl: "/documents/silease-360-shuttering-oil-pds-2026.pdf",
               sheetLabel: "Silease 360 Precast Shuttering Oil PDS (Rev. 09/2026)",
-              note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
-            },
-          },
-          {
-            name: "Magic Shuttering Oil",
-            tagline: "Oil based, for Mivan and other formworks",
-            beaker: "/images/products/oil-sample.webp",
-            text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
-            details: {
-              status: "verified",
-              image: "/images/magic-shuttering-oil.webp",
-              imageAlt: "Magic Shuttering Oil 200L drum",
-              pdsRevision: "Rev. 09/2026",
-              description:
-                "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
-              purpose: [
-                "Mivan aluminium formwork",
-                "Mild steel (MS) formwork",
-                "Plywood formwork",
-                "Building and infrastructure site formwork",
-              ],
-              coverage: "30–40 m²/L",
-              coverageNote:
-                "Average coverage. Actual coverage may vary with formwork porosity, surface condition and application method.",
-              benefits: [
-                "Excellent release performance on Mivan aluminium formwork",
-                "Clean demoulding with reduced adhesion to the formwork",
-                "Promotes a smooth and uniform concrete surface finish",
-                "Helps reduce concrete build-up and simplifies cleaning",
-                "Ready to use with economical spreading coverage",
-              ],
-              properties: [
-                { property: "Appearance", value: "Brown transparent liquid", spec: "Visual inspection" },
-                { property: "Kinematic viscosity at 40 °C", value: "Typical: 32 cSt", spec: "Specification: >12 cSt" },
-                { property: "Density at 15 °C", value: "Typical: 0.88 g/mL", spec: "Specification: >0.80 g/mL" },
-                { property: "Flash point, Pensky-Martens", value: "Typical: 180 °C", spec: "Specification: >100 °C" },
-                { property: "Coverage", value: "30–40 m²/L", spec: "Typical site rate" },
-              ],
-              application: [
-                "Clean the formwork and remove concrete residue, rust, dust, water and excess oil.",
-                "Apply a very thin, uniform film by fine spray, lint-free cloth, roller or suitable applicator.",
-                "Avoid puddles and over-application; wipe off excess oil before placing reinforcement or concrete.",
-                "Conduct a small site trial to establish the optimum application rate for site conditions.",
-              ],
-              packing: "Standard packing: 200 L barrel",
-              storage:
-                "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
-              shelfLife: "12 months from date of manufacture when stored as recommended",
-              sheetUrl: "/documents/magic-shuttering-oil-product-data-sheet-2026.pdf",
-              sheetLabel: "Magic Shuttering Oil Product Data Sheet (Rev. 09/2026)",
-              reportUrl: "/documents/magic-shuttering-oil-test-report-oct-2026.pdf",
-              reportLabel: "Original Laboratory Test Certificate (Sri Sai Test Report Oct 2026)",
               note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
             },
           },
