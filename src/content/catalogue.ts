@@ -147,12 +147,49 @@ export const lines: Line[] = [
         id: "cutting-oil",
         name: "Cutting Oil",
         variants: ["Neat cutting oil", "Broaching", "Gear hobbing", "Stamping", "Drawing oil"],
-        cardText:
-          "Neat cutting oils used undiluted to reduce friction, prevent tool wear, and deliver a smooth machining surface finish.",
+        range: [
+          {
+            name: "1-COOL Cutting Oil",
+            text: "High-performance neat metalworking fluid formulated for machining, turning, milling, and tapping operations.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/cutting-oil.webp",
+              imageAlt: "1-COOL Cutting Oil high performance metal working fluid 20L pail",
+              description:
+                "1-COOL CUTTING OIL is a high performance metal working fluid formulated for machining operations. It provides effective lubrication and cooling to improve tool life and surface finish across ferrous and non-ferrous metals.",
+              purposeTitle: "Applications",
+              purpose: [
+                "Turning and milling operations",
+                "Drilling, tapping and reaming",
+                "Broaching and gear hobbing",
+                "Stamping and drawing of sheet metal",
+                "General machining operations on ferrous and non-ferrous metals",
+              ],
+              benefits: [
+                "Excellent lubricity and anti-wear protection",
+                "Reduces tool wear and extends cutting tool life",
+                "Improves workpiece precision and surface finish",
+                "Helps in smooth, efficient machining",
+                "Suitable for a wide range of metals",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear & Bright", spec: "Visual" },
+                { property: "Kinematic Viscosity @ 40°C (cSt)", value: "As per grade", spec: "ASTM D445" },
+                { property: "Viscosity Index", value: "≥ 90", spec: "ASTM D2270" },
+                { property: "Flash Point (°C)", value: "≥ 200", spec: "ASTM D92" },
+                { property: "Pour Point (°C)", value: "≤ -12", spec: "ASTM D97" },
+              ],
+              packing: "Standard packing: 20 L pails & 210 L steel drums",
+              storage:
+                "Store in a cool, dry place away from direct sunlight. Keep the container tightly closed when not in use. Refer to Safety Data Sheet (SDS) for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Neat (straight) cutting oils are used undiluted. They lubricate the contact between tool and workpiece, which reduces friction and tool wear and helps give a good surface finish.",
         uses: ["Machining where lubrication at the cutting edge matters most", "Broaching and gear hobbing", "Stamping and drawing of sheet metal"],
-        tbc: [TDS],
       },
       {
         id: "soluble-cutting-oil",
@@ -291,28 +328,27 @@ export const lines: Line[] = [
               status: "verified",
               pdsRevision: "PDS 2026",
               image: "/images/1-cool-al-7000.webp",
-              imageAlt: "1-COOL CASPRO 7000 semi synthetic coolant oil 26L pail",
+              imageAlt: "1-COOL AL 7000 aluminium machining fluid 20L pail",
               sheetUrl: "/documents/1-cool-al-7000-pds.pdf",
               sheetLabel: "1-COOL AL 7000 Product Data Sheet (PDS 2026)",
               description:
-                "1-COOL CASPRO 7000 is a high performance semi synthetic metal working coolant oil designed for a wide range of machining and grinding operations. It provides excellent cooling, lubrication and corrosion protection, ensuring longer tool life and superior surface finish.",
+                "1-COOL AL 7000 is a high performance metal working fluid designed for machining aluminium and its alloys. It provides excellent cooling, lubrication and surface finish during high speed machining operations.",
               dilution: "3% – 10%",
               dilutionNote: "Grinding (3–5%), General Machining (4–6%), Heavy Duty (6–10%)",
-              purposeTitle: "Application & Operations",
+              purposeTitle: "Applications",
               purpose: [
-                "CNC machining",
-                "Milling, Turning, Drilling",
-                "Grinding operations",
-                "General metal working processes",
-                "Ferrous and non-ferrous metals",
+                "Machining of aluminium and its alloys",
+                "CNC milling and high speed turning",
+                "Deep hole drilling and tapping",
+                "Precision reaming and grinding",
+                "General machining operations on aluminium components",
               ],
               benefits: [
-                "Excellent cooling and lubrication",
-                "Longer tool life and reduced machine wear",
-                "Better precision surface finish",
-                "Good corrosion protection",
-                "Stable emulsion with high sump life",
-                "Suitable for a wide range of metals",
+                "Excellent cooling and lubrication for aluminium",
+                "Improves tool life and prevents built-up edge (BUE)",
+                "Provides superior surface finish and component precision",
+                "Helps prevent workpiece staining and corrosion",
+                "Suitable for high speed CNC machining",
               ],
               properties: [
                 { property: "Appearance", value: "Light Yellow", spec: "Visual" },
@@ -326,7 +362,7 @@ export const lines: Line[] = [
                 "Maintain concentration between 4% to 8% depending on operation severity.",
                 "Keep sump clean and aerated for maximum coolant performance.",
               ],
-              packing: "Standard packing: 26 L pails & 210 L industrial steel drums",
+              packing: "Standard packing: 20 L pails & 210 L industrial steel drums",
               storage:
                 "Store in a cool, dry place. Keep the container tightly closed. Avoid direct sunlight. Refer MSDS for safe handling.",
               shelfLife: "12 months from date of manufacture when stored in unopened containers",
@@ -451,32 +487,148 @@ export const lines: Line[] = [
         id: "gear-oil",
         name: "Gear Oil",
         variants: ["90", "140", "220", "320"],
-        cardText:
-          "Lubricates gearboxes and drives, maintaining an oil film under heavy loads to reduce friction, heat and tooth wear.",
+        range: [
+          {
+            name: "1-COOL Gear Oil",
+            text: "High performance gear oil designed for enclosed gear systems under normal to heavy load conditions.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/gear-oil.webp",
+              imageAlt: "1-COOL Gear Oil high performance lubricating oil 20L pail",
+              description:
+                "1-COOL GEAR OIL is a high performance lubricating oil designed for industrial enclosed gear systems operating under normal to heavy load conditions. Formulated with premium base oils and advanced additives to provide wear protection, smooth operation and long service life.",
+              purposeTitle: "Applications",
+              purpose: [
+                "Industrial gear boxes",
+                "Helical, bevel and spur gears",
+                "Reduction gear units",
+                "Circulating oil systems",
+                "General industrial gear applications",
+              ],
+              benefits: [
+                "Effective lubrication for gear systems",
+                "Helps in smooth operation",
+                "Supports protection against wear",
+                "Good oxidation stability",
+                "Suitable for continuous operation",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear & Bright", spec: "Visual" },
+                { property: "Kinematic Viscosity @ 40°C (cSt)", value: "As per grade", spec: "ASTM D445" },
+                { property: "Viscosity Index", value: "≥ 90", spec: "ASTM D2270" },
+                { property: "Flash Point (°C)", value: "≥ 200", spec: "ASTM D92" },
+                { property: "Pour Point (°C)", value: "≤ -12", spec: "ASTM D97" },
+              ],
+              packing: "Standard packing: 20 L pails & 210 L steel drums",
+              storage:
+                "Store in a cool, dry place away from direct sunlight. Keep the container tightly closed when not in use. Refer to Safety Data Sheet (SDS) for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Gear oils lubricate gearboxes and gear drives, keeping a film of oil between meshing teeth under load to reduce wear, heat and noise.",
         uses: ["Industrial gearboxes and gear drives", "Automotive and equipment gear assemblies, as specified by the manufacturer"],
-        tbc: [TDS],
       },
       {
         id: "engine-oil",
         name: "Engine Oil",
         variants: ["15W40", "20W40", "5W30"],
-        cardText:
-          "Engine oils lubricate, clean and cool internal combustion engines, protecting vital parts from wear and thermal stress.",
+        range: [
+          {
+            name: "1-COOL Engine Oil",
+            text: "High-performance engine lubricant designed for diesel and gasoline engines under normal to heavy-duty conditions.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/engine-oil.webp",
+              imageAlt: "1-COOL Engine Oil high performance lubricant 20L pail",
+              description:
+                "1-COOL ENGINE OIL is a high performance lubricant designed for diesel and gasoline engines operating under normal to heavy duty conditions. Formulated with premium base oils and advanced detergent-dispersant additives for engine cleanliness, thermal stability and wear protection.",
+              purposeTitle: "Applications",
+              purpose: [
+                "Diesel engines",
+                "Petrol engines",
+                "Commercial vehicles and fleet transport",
+                "Construction equipment and earthmovers",
+                "Industrial engines and generator sets",
+              ],
+              benefits: [
+                "Helps in smooth, reliable engine operation",
+                "Provides effective wear and corrosion protection",
+                "Maintains engine cleanliness and prevents sludge buildup",
+                "Good thermal and oxidation stability",
+                "Suitable for continuous heavy duty operation",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear & Bright", spec: "Visual" },
+                { property: "Kinematic Viscosity @ 40°C (cSt)", value: "As per grade", spec: "ASTM D445" },
+                { property: "Viscosity Index", value: "≥ 90", spec: "ASTM D2270" },
+                { property: "Flash Point (°C)", value: "≥ 200", spec: "ASTM D92" },
+                { property: "Pour Point (°C)", value: "≤ -12", spec: "ASTM D97" },
+              ],
+              packing: "Standard packing: 20 L pails & 210 L steel drums",
+              storage:
+                "Store in a cool, dry place away from direct sunlight. Keep the container tightly closed when not in use. Refer to Safety Data Sheet (SDS) for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Engine oils lubricate, clean and cool internal combustion engines. Use the grade your vehicle or engine manufacturer specifies.",
         uses: ["Petrol and diesel engines, in the grade the engine maker specifies"],
-        tbc: [TDS],
       },
       {
         id: "greases",
         name: "Greases",
-        cardText:
-          "High-performance lubricants thickened to stay in place where oils run off, protecting bearings, joints and slides.",
+        variants: ["NLGI 2", "Multipurpose Lithium", "Industrial Grease"],
+        range: [
+          {
+            name: "1-COOL Grease",
+            text: "High-performance multipurpose industrial grease designed for general industrial and automotive lubrication.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/1-cool-grease.webp",
+              imageAlt: "1-COOL Grease multipurpose industrial grease 20L pail",
+              description:
+                "1-COOL GREASE is a high performance multipurpose industrial grease designed for general industrial and automotive lubrication. Formulated with high quality mineral base oil and lithium thickener, it provides excellent wear protection, water resistance, and long service life.",
+              purposeTitle: "Applications",
+              purpose: [
+                "Heavy-duty ball and roller bearings",
+                "Enclosed and open gears",
+                "Automotive chassis and suspension joints",
+                "Industrial plant machinery and equipment",
+                "Construction and earthmoving machinery",
+                "General purpose workshop lubrication",
+              ],
+              benefits: [
+                "Excellent lubrication and metal adhesion",
+                "Provides dependable wear and corrosion protection",
+                "Good water washout resistance",
+                "Long service life reducing relubrication intervals",
+                "Suitable for a wide range of industrial and automotive applications",
+              ],
+              properties: [
+                { property: "Appearance", value: "Smooth Grease", spec: "Visual" },
+                { property: "Colour", value: "Yellow / Amber", spec: "Visual" },
+                { property: "NLGI Grade", value: "2", spec: "ASTM D217" },
+                { property: "Dropping Point (°C)", value: "≥ 180", spec: "ASTM D566" },
+                { property: "Worked Penetration @ 25°C (0.1 mm)", value: "265 – 295", spec: "ASTM D217" },
+                { property: "Base Oil Type", value: "Mineral", spec: "Formulation" },
+                { property: "Thickener Type", value: "Lithium", spec: "Formulation" },
+              ],
+              packing: "Standard packing: 20 L pails & 180 kg steel drums",
+              storage:
+                "Store in a cool, dry place away from direct sunlight. Keep the container tightly closed when not in use. Refer to Safety Data Sheet (SDS) for safe handling.",
+              shelfLife: "12 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about:
           "Greases are lubricants thickened to stay in place where an oil would run off, for bearings, joints and slides that are not in a circulating oil system.",
-        tbc: [placeholder("Grease types and grades")],
+        uses: ["Bearings, chassis and joints", "Industrial plant machinery and construction equipment"],
       },
     ],
     industries: ["auto-assembly", "auto-component"],
@@ -1154,8 +1306,53 @@ export const lines: Line[] = [
       {
         id: "release-spray",
         name: "Release Spray",
+        variants: ["550 ml aerosol", "Clean & Easy Demoulding"],
+        range: [
+          {
+            name: "Release Spray 550ml",
+            text: "High-performance mould release aerosol agent designed to prevent concrete from sticking to formwork.",
+            details: {
+              status: "verified",
+              pdsRevision: "PDS 2026",
+              image: "/images/release-spray.webp",
+              imageAlt: "Release Spray 550ml mould release agent aerosol can",
+              description:
+                "RELEASE SPRAY is a high performance mould release agent designed to prevent concrete from sticking to formwork, moulds and other surfaces. It provides easy demoulding with a smooth surface finish while saving labor and preparation time.",
+              purposeTitle: "Applications",
+              purpose: [
+                "Concrete formwork and moulds",
+                "Shuttering plates (steel and aluminium)",
+                "Plywood and timber shuttering moulds",
+                "Precast concrete products and architectural panels",
+                "Construction and infrastructure works",
+              ],
+              benefits: [
+                "Prevents concrete adhesion and reduces surface blemishes",
+                "Ensures easy, clean demoulding without damaging mould edges",
+                "Delivers a fair-faced, uniform concrete surface finish",
+                "Saves time and labour with fast, even aerosol spray application",
+                "Suitable for various formwork materials including steel, wood, and plastic",
+              ],
+              properties: [
+                { property: "Appearance", value: "Clear Aerosol Spray", spec: "Visual" },
+                { property: "Net Volume", value: "550 ml", spec: "Standard Can" },
+                { property: "Propellant", value: "Eco-Friendly", spec: "Standard" },
+                { property: "Demoulding Action", value: "Easy Release / Non-Sticking", spec: "Performance" },
+              ],
+              application: [
+                "Shake the can well before use.",
+                "Spray evenly on clean and dry surface from a distance of 15–20 cm.",
+                "Allow a thin, uniform film to form. No wiping required.",
+              ],
+              packing: "Standard packing: 550 ml aerosol spray cans (Cartons of 12 / 24 cans)",
+              storage:
+                "Pressurised container. Store below 50 °C away from heat, sparks, open flame and direct sunlight. Use in well-ventilated area.",
+              shelfLife: "24 months from date of manufacture when stored as recommended.",
+            },
+          },
+        ],
         about: "A release agent in aerosol form, for quick, even application on moulds and surfaces.",
-        tbc: [placeholder("Applications and technical data")],
+        uses: ["Concrete formwork, shuttering plates and precast moulds", "Site and factory formwork preparation"],
       },
     ],
     industries: ["paint"],
