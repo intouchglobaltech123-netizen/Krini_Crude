@@ -11,7 +11,7 @@ import type { PageSeo } from "./pages";
 
 /** A section: paragraphs, then a list, then paragraphs after the list. */
 export type LegalBlock = { h: string; p?: string[]; list?: string[]; after?: string[] };
-export type LegalDoc = { id: "privacy" | "terms"; label: string; title: string; lead: string; updated: string; seo: PageSeo; body: LegalBlock[] };
+export type LegalDoc = { id: "privacy" | "terms"; label: string; title: string; lead: string; updated: string; seo: PageSeo; glance: string[]; body: LegalBlock[] };
 
 const c = site.contact;
 const office = c.office.join(" ").replace(/,\s*$/, "");
@@ -24,6 +24,12 @@ export const privacy: LegalDoc = {
   title: "Privacy Policy",
   lead: "What we collect when you use this website or get in touch, why, and the choices you have.",
   updated,
+  glance: [
+    "We collect only what you send us: your name, number and message.",
+    "We use it to answer you, quote and supply. We never sell it.",
+    "No advertising or tracking cookies on this site.",
+    "Ask us any time to see, correct or delete your details.",
+  ],
   seo: {
     title: "Privacy Policy | Krini Crude",
     description: "How Krini Crude collects, uses and protects the details you share through our website, enquiry form, WhatsApp, email and phone.",
@@ -96,6 +102,12 @@ export const terms: LegalDoc = {
   title: "Terms & Conditions",
   lead: "The terms for using this website and for quotations and orders placed with Krini Crude.",
   updated,
+  glance: [
+    "An enquiry is not an order: an order is confirmed by us in writing.",
+    "Prices are in rupees and exclude GST and freight unless stated.",
+    "Check product suitability with our team and the data sheet before use.",
+    "Indian law applies; the courts at Chennai have jurisdiction.",
+  ],
   seo: {
     title: "Terms & Conditions | Krini Crude",
     description: "Terms for using the Krini Crude website and for quotations, orders, delivery and product information from Krini Crude, Chennai.",

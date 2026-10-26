@@ -39,7 +39,15 @@ const MISSION = [
   { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
 ];
 
-const MARKETS = ["Industrial", "Automotive", "Marine", "Construction", "Infrastructure", "Specialist sectors"];
+/** The markets, each with a small line icon (24 x 24, drawn in the current colour). */
+const MARKETS: { name: string; icon: string }[] = [
+  { name: "Industrial", icon: "M3 20h18M4 20V10l5 3v-3l5 3V7h6v13M17 7V4h2v3M8 17h2M13 17h2" },
+  { name: "Automotive", icon: "M3 13l2-5.2A2 2 0 0 1 6.9 6.5h10.2a2 2 0 0 1 1.9 1.3L21 13v4h-2.2M5.2 17H3v-4h18M3 13h18M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01" },
+  { name: "Marine", icon: "M12 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM12 8v13M8 11.5h8M4 14c0 4 3.6 7 8 7s8-3 8-7M4 14l-1.5 1.5M4 14l1.8 1.2M20 14l1.5 1.5M20 14l-1.8 1.2" },
+  { name: "Construction", icon: "M3 18h18M5 18v-3a7 7 0 0 1 14 0v3M10 8.4V6a2 2 0 0 1 4 0v2.4M9 18v-4M15 18v-4" },
+  { name: "Infrastructure", icon: "M2 18h20M4 18v-6M20 18v-6M2 12c4 0 6.5-5 10-5s6 5 10 5M8 18v-7.5M16 18v-7.5M12 18V7" },
+  { name: "Specialist sectors", icon: "M9 3h6M10 3v6.2L4.8 18.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9.2V3M7.3 15h9.4" },
+];
 
 export function AboutPage() {
   const c = site.contact;
@@ -97,7 +105,12 @@ export function AboutPage() {
               <p className="ab3-text">We make standard, speciality and niche-market products.</p>
               <ul className="ab3-chips" aria-label="Markets we serve">
                 {MARKETS.map((m) => (
-                  <li key={m}>{m}</li>
+                  <li key={m.name}>
+                    <svg className="ab3-chip-ic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={m.icon} />
+                    </svg>
+                    {m.name}
+                  </li>
                 ))}
               </ul>
             </article>

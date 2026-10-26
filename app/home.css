@@ -767,3 +767,170 @@ main > section.hm-make {
     height: 15px;
   }
 }
+
+/* ---- Phone hero, polished (the client, October 2026): a soft fade and a fine gold line under the
+   film; the words a touch closer to it; the motto on two lines; "Explore Our Solutions" a full-width
+   gold button with its arrow and "Contact Us" a quiet outlined one under it (side by side on short
+   phones, where there is no room for two rows); the figures on a slightly warmer glass strip. */
+@media (max-width: 639px) {
+  section.sh.is-band .sh-scrim {
+    background:
+      linear-gradient(90deg, transparent 4%, rgb(212 175 55 / 0.75) 50%, transparent 96%)
+        0 calc(var(--sh-band-bottom) - 1px) / 100% 1px no-repeat,
+      linear-gradient(180deg, transparent calc(var(--sh-band-bottom) - 34px), rgb(11 10 8 / 0.55) var(--sh-band-bottom), transparent var(--sh-band-bottom));
+  }
+  section.sh.is-band .sh-open .sh-motto {
+    max-width: 330px;
+    margin-top: 8px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+  section.sh.is-band .sh-open-ctas {
+    grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 18px;
+  }
+  section.sh.is-band .sh-open-ctas .btn {
+    gap: 8px;
+    min-width: 0;
+    min-height: 46px;
+    padding: 0 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  section.sh.is-band .sh-open-ctas .btn-primary {
+    font-weight: 700;
+  }
+  section.sh.is-band .sh-open-ctas .btn-primary .arrow {
+    display: none;
+  }
+  section.sh.is-band .sh-open-ctas .btn-ghost {
+    border: 1px solid rgb(212 175 55 / 0.55);
+    background: rgb(255 255 255 / 0.04);
+    color: #fff;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  section.sh.is-band .sh-open-stats {
+    margin-top: 16px;
+    padding: 12px 4px;
+    border-color: rgb(212 175 55 / 0.22);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(212 175 55 / 0.04));
+  }
+}
+@media (max-width: 639px) and (min-height: 740px) {
+  section.sh.is-band .sh-open-ctas {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    max-width: 340px;
+    margin-inline: auto;
+  }
+  section.sh.is-band .sh-open-ctas .btn {
+    font-size: 0.9rem;
+  }
+  section.sh.is-band .sh-open-ctas .btn-primary {
+    min-height: 50px;
+  }
+  section.sh.is-band .sh-open-ctas .btn-primary .arrow {
+    display: inline-block;
+  }
+  section.sh.is-band .sh-open-ctas .btn-ghost {
+    min-height: 44px;
+  }
+}
+
+/* ---- Phone: "What we make" as three neat full-width rows (the client, October 2026), like a shop's
+   category list: the brand on a white plate at the left, the number, the line's name and what it
+   covers in the middle, a round gold arrow at the right; a gold bar down the left edge. */
+@media (max-width: 639px) {
+  .hm-make .hm-head-row {
+    margin-bottom: 18px;
+  }
+  .hm-lines {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .hm-make .hm-line {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) 34px;
+    grid-template-areas:
+      "logo n go"
+      "logo h go"
+      "logo items go";
+    column-gap: 14px;
+    row-gap: 3px;
+    align-items: center;
+    padding: 14px 14px 14px 16px;
+    border-radius: 16px;
+    text-align: left;
+    background: #fff;
+  }
+  .hm-make .hm-line::before {
+    inset: 14px auto 14px 0;
+    width: 3px;
+    height: auto;
+    margin: 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .hm-make .hm-line-top {
+    display: contents;
+  }
+  .hm-make .hm-line-n {
+    grid-area: n;
+    align-self: end;
+    font-size: 0.68rem;
+    text-align: left;
+  }
+  .hm-make .hm-line-logo,
+  .hm-make .hm-line-brand {
+    grid-area: logo;
+    width: 92px;
+    height: 62px;
+    padding: 8px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 16px -12px rgb(15 23 42 / 0.5);
+  }
+  .hm-make .hm-line-brand {
+    font-size: 1.02rem;
+  }
+  .hm-make .hm-line h3 {
+    grid-area: h;
+    display: block;
+    min-height: 0;
+    margin: 0;
+    font-size: 1.02rem !important;
+    line-height: 1.2 !important;
+    text-align: left;
+  }
+  .hm-make .hm-line-items {
+    grid-area: items;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    align-self: start;
+    font-size: 0.76rem;
+    line-height: 1.4;
+    color: var(--hm-text);
+  }
+  .hm-make .hm-line-items span {
+    display: inline;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    font-size: inherit;
+    color: inherit;
+  }
+  .hm-make .hm-line-items span + span::before {
+    content: " · ";
+    color: var(--hm-gold-deep);
+  }
+  .hm-make .hm-line em {
+    grid-area: go;
+    margin: 0;
+  }
+}

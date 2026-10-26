@@ -11041,3 +11041,16 @@ main section.cta3 {
 .sh.is-film .sh-still {
   display: none !important;
 }
+
+/* ---- No sideways drift on older phones (the client, October 2026): the footer's wave is twice the
+   screen's width and slides; keep it inside its strip, and where a browser does not know
+   "overflow: clip" (iPhones before iOS 16) hide anything that pokes past the right edge. */
+.ft3-wave {
+  overflow: hidden;
+}
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}

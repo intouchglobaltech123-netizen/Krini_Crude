@@ -1452,3 +1452,303 @@ section.pshop .rv-item p {
   font-size: 14px !important;
   color: rgb(51 65 85);
 }
+
+/* ===========================================================================
+   Phones, like a shopping app (the client, October 2026)
+   The list: the filter bar stays where it is (it no longer covers the products while you
+   scroll), and each product is one row: the photo on the left, the type, name, line and facts
+   on the right, Add to cart under them.
+   The product page: the type, name and brand first, then the photos, the price, grade and
+   quantity, the description, the documents; Add to cart and WhatsApp stay in the bar at the
+   foot (not repeated above); plain left-set text and two-column spec tables.
+   =========================================================================== */
+@media (max-width: 639px) {
+  /* -- the list: two to a row, like a shopping app; every card the same build: the pack on a
+     soft grey square, the type, the name (two lines), one short line, one fact, the pack size, and
+     Add to cart at the foot, lined up across the row -- */
+  section.pshop .pshop-bar {
+    position: relative;
+    top: auto;
+  }
+  section.pshop .pshop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  section.pshop .pshop-grid .kcard {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border-color: rgb(15 23 42 / 0.07);
+    box-shadow: 0 6px 16px -14px rgb(15 23 42 / 0.5);
+  }
+  section.pshop .pshop-grid .kcard:hover {
+    transform: none;
+  }
+  section.pshop .pshop-grid .kcard-media,
+  section.pshop .pshop-grid .kcard-media.has-beaker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    padding: 26px 10px 10px;
+    border-bottom: 0;
+    background: #f5f5f2;
+  }
+  section.pshop .pshop-grid .kcard-media .kphoto,
+  section.pshop .pshop-grid .kcard-media.has-beaker .kphoto,
+  section.pshop .pshop-grid .kcard-media.has-beaker.is-upright .kphoto {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+  /* the sample beaker is for the larger cards; on a phone the pack alone reads better */
+  section.pshop .pshop-grid .kcard-media .kbeaker {
+    display: none;
+  }
+  section.pshop .pshop-grid .kcard-media > .kplate {
+    background: #f5f5f2;
+  }
+  section.pshop .pshop-grid .kcard-body {
+    flex: 1;
+    gap: 4px;
+    padding: 10px 10px 2px;
+  }
+  section.pshop .pshop-grid .kcard-meta-top {
+    min-width: 0;
+  }
+  section.pshop .pshop-grid .kcard-type {
+    font-size: 9.5px !important;
+    letter-spacing: 0.06em;
+  }
+  /* the data sheet is on the product page; here it only crowded the type */
+  section.pshop .pshop-grid .kcard-pds-tag {
+    display: none;
+  }
+  section.pshop .pshop-grid .kcard-name {
+    font-size: 14px !important;
+    line-height: 1.28 !important;
+    font-weight: 700;
+  }
+  section.pshop .pshop-grid .kcard-link {
+    min-height: 2.56em;
+  }
+  section.pshop .pshop-grid .kcard-tag {
+    -webkit-line-clamp: 2;
+    margin: 0;
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+  }
+  section.pshop .pshop-grid .kcard-specs {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  section.pshop .pshop-grid .kcard-spec-item,
+  section.pshop .pshop-grid .kcard-spec-item:nth-child(n + 2) {
+    display: inline-flex;
+    padding: 0;
+    background: none;
+    font-size: 11px !important;
+    color: rgb(71 85 105);
+  }
+  section.pshop .pshop-grid .kcard-spec-item:first-child {
+    color: rgb(21 128 61);
+    font-weight: 600;
+  }
+  section.pshop .pshop-grid .kcard-spec-item:nth-child(2) {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  section.pshop .pshop-grid .kcard-spec-item:nth-child(2) svg {
+    display: none;
+  }
+  section.pshop .pshop-grid .kcard-foot {
+    padding: 8px 10px 10px;
+  }
+  section.pshop .pshop-grid .kcard-add,
+  section.pshop .pshop-grid .kcard-step {
+    height: 36px;
+    border-radius: 999px;
+    font-size: 13px !important;
+  }
+  section.pshop .pshop-grid .kcard-media > .kbrand-lubecon.has-logo,
+  section.pshop .pshop-grid .kcard-media > .kbrand.has-logo {
+    top: 6px;
+    left: 6px;
+  }
+
+  /* -- the product page -- */
+  section.pshop .pv .pv-wrap {
+    padding: 0 0 104px;
+  }
+  section.pshop .pv .pv-top {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 14px 18px;
+    border-width: 0 0 1px;
+    border-radius: 0;
+  }
+  section.pshop .pv .pv-info {
+    display: contents;
+  }
+  section.pshop .pv .pv-crumbs {
+    order: 1;
+    font-size: 11px !important;
+  }
+  section.pshop .pv .pv-name {
+    order: 2;
+    margin-top: -8px;
+    font-size: 23px !important;
+    line-height: 1.2 !important;
+  }
+  section.pshop .pv .pv-tagline {
+    order: 3;
+    margin-top: -10px;
+    font-size: 14px !important;
+  }
+  section.pshop .pv .pv-by {
+    order: 4;
+    margin-top: -6px;
+  }
+  section.pshop .pv .pv-media {
+    order: 5;
+  }
+  section.pshop .pv .pv-price {
+    order: 6;
+  }
+  section.pshop .pv .pv-block {
+    order: 7;
+  }
+  section.pshop .pv .pv-qtyrow {
+    order: 8;
+  }
+  section.pshop .pv .pv-text {
+    order: 9;
+  }
+  section.pshop .pv .pv-docs {
+    order: 10;
+  }
+  section.pshop .pv .pv-assure {
+    order: 11;
+  }
+  section.pshop .pv .pv-cta {
+    display: none;
+  }
+  section.pshop .pv .pv-details {
+    padding: 10px 10px 0;
+  }
+  section.pshop .pv :is(p, li, dd) {
+    text-align: left !important;
+    text-align-last: auto !important;
+    -webkit-hyphens: manual;
+    hyphens: manual;
+    word-spacing: normal !important;
+  }
+  section.pshop .pv .pv-details .pv-specs > div,
+  section.pshop .pv .pv-details .pv-sec > .pv-specs > div {
+    grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px 12px;
+  }
+  section.pshop .pv .pv-details .pv-specs dt {
+    font-size: 12.5px !important;
+  }
+  section.pshop .pv .pv-details .pv-specs dd {
+    font-size: 13px !important;
+  }
+}
+
+/* ---- Phones: the product page, shop-style finish (the client, October 2026): the photos on a
+   soft grey plate, the price in a cream panel with a gold edge, quantity beside it, the details
+   as white cards, and round pill buttons in the bar at the foot. */
+@media (max-width: 639px) {
+  section.pshop .pv .pg-stage {
+    border: 0;
+    border-radius: 14px;
+    background: #f5f5f2;
+  }
+  section.pshop .pv .pg-slide {
+    background: #f5f5f2;
+    padding: 18px 22px;
+  }
+  section.pshop .pv .pg-slide > img {
+    max-width: 92%;
+    max-height: 92%;
+    mix-blend-mode: multiply;
+  }
+  section.pshop .pv .pg-slide-vid {
+    padding: 0;
+    background: #0f172a;
+  }
+  section.pshop .pv .pg-slide-vid > video {
+    mix-blend-mode: normal;
+  }
+  section.pshop .pv .pg-thumb-img {
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+  }
+  section.pshop .pv .pv-price {
+    gap: 4px;
+    padding: 14px 14px 14px 16px;
+    border: 0;
+    border-left: 3px solid #d4af37;
+    border-radius: 0 12px 12px 0;
+    background: #fbf6e6;
+  }
+  section.pshop .pv .pv-price b {
+    font-size: 19px !important;
+    color: #0f172a;
+  }
+  section.pshop .pv .pv-qtyrow {
+    padding: 4px 0;
+  }
+  section.pshop .pv .pv-text {
+    font-size: 14.5px !important;
+    line-height: 1.6;
+  }
+  section.pshop .pv .pv-assure {
+    gap: 6px 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--pv-line);
+  }
+  section.pshop .pv .pv-details {
+    display: grid;
+    gap: 10px;
+    padding: 10px 10px 0;
+    background: #f3f2ee;
+  }
+  section.pshop .pv .pv-details > .pv-sec {
+    padding: 18px 16px;
+    border: 0;
+    border-radius: 14px;
+    background: #fff;
+  }
+  section.pshop .pv .pv-details > .pv-sec > h3 {
+    font-size: 17px !important;
+  }
+  section.pshop .pv .pv-details > .pv-note {
+    padding: 14px 6px;
+    border-top: 0;
+  }
+  section.pshop .pv .pv-wrap {
+    background: #f3f2ee;
+  }
+  section.pshop .pv .pv-top {
+    background: #fff;
+  }
+  section.pshop .pv .pv-buy .pv-add,
+  section.pshop .pv .pv-buy .pv-wa {
+    min-height: 48px;
+    border-radius: 999px;
+    font-size: 15px !important;
+  }
+}

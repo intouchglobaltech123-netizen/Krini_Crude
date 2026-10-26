@@ -921,3 +921,223 @@ main > div.ab3 > section {
     margin-top: 16px;
   }
 }
+
+/* ---- the markets with a small gold line icon each */
+.ab3-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ab3-chip-ic {
+  flex: none;
+  color: var(--ab-gold-deep);
+}
+
+/* ---- phones, polished (the client, October 2026)
+   Who we are: the six markets as a tidy two-column grid of icon tiles.
+   Leadership: one card, the portrait at the left of the name and role, the words under them in a
+   cream quote panel. Vision: a navy card. Mission: four numbered steps joined by a gold line.
+   Where we are: the place's name at the left and Directions at the right, the address under them
+   set flush on both sides. */
+@media (max-width: 639px) {
+  .ab3-chips {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .ab3-chips li {
+    gap: 10px;
+    min-height: 52px;
+    padding: 8px 10px;
+    border: 1px solid var(--ab-line);
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fff, var(--ab-soft));
+    font-size: 0.84rem !important;
+    line-height: 1.2;
+  }
+  .ab3-chip-ic {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+    border-radius: 10px;
+    background: rgb(212 175 55 / 0.14);
+  }
+
+  /* leadership card */
+  .ab3-lead-top {
+    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-areas:
+      "pic k"
+      "pic name"
+      "pic role"
+      "text text";
+    column-gap: 18px;
+    row-gap: 0;
+    align-items: center;
+    justify-items: start;
+    padding: 18px;
+    border: 1px solid var(--ab-line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff, #fdfaf1);
+    box-shadow: 0 18px 36px -28px rgb(15 23 42 / 0.45);
+  }
+  .ab3-lead-copy {
+    display: contents;
+  }
+  .ab3-portrait {
+    grid-area: pic;
+    width: 88px;
+    max-width: 88px;
+    margin: 0 8px 8px 0;
+  }
+  .ab3-portrait::before {
+    inset: 8px -8px -8px 8px;
+    border-radius: 14px;
+  }
+  .ab3-portrait img,
+  .ab3-portrait svg {
+    border-radius: 14px;
+  }
+  .ab3 .ab3-lead-top .ab3-lead-copy :is(.ab3-k, .ab3-lead-name, .ab3-lead-role, .ab3-lead-text) {
+    text-align: left;
+  }
+  .ab3-lead-top .ab3-lead-copy .ab3-k {
+    grid-area: k;
+    align-self: end;
+    justify-content: flex-start;
+    margin: 0 0 4px;
+  }
+  .ab3-lead-name {
+    grid-area: name;
+    font-size: 1.4rem !important;
+  }
+  .ab3-lead-role {
+    grid-area: role;
+    align-self: start;
+    margin-top: 4px;
+    font-size: 0.86rem !important;
+  }
+  .ab3-qmark {
+    display: none;
+  }
+  .ab3-lead-text {
+    grid-area: text;
+    position: relative;
+    width: 100%;
+    margin: 18px 0 0;
+    padding: 16px 16px 16px 18px;
+    border-left: 3px solid var(--ab-gold);
+    border-radius: 0 14px 14px 0;
+    background: #fbf6e6;
+    font-size: 0.95rem !important;
+    line-height: 1.6;
+  }
+  .ab3-lead-text::before {
+    content: "\201C";
+    display: block;
+    height: 0.5em;
+    margin-bottom: 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.6rem;
+    line-height: 0.9;
+    color: var(--ab-gold);
+  }
+
+  /* vision: navy */
+  .ab3-vision {
+    border-left: 0;
+    background:
+      radial-gradient(90% 120% at 100% 0%, rgb(212 175 55 / 0.2), transparent 60%),
+      linear-gradient(160deg, var(--ab-navy-2), var(--ab-navy));
+  }
+  .ab3-vision .ab3-k {
+    color: var(--ab-gold-hi);
+  }
+  .ab3-vision-line {
+    font-size: 1.28rem !important;
+    color: #fff;
+  }
+
+  /* mission: numbered steps joined by a line */
+  .ab3-mission ol {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 12px;
+  }
+  .ab3-mission li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 14px;
+    padding-bottom: 18px;
+  }
+  .ab3-mission li:last-child {
+    padding-bottom: 0;
+  }
+  .ab3-mission li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 36px;
+    bottom: 2px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgb(212 175 55 / 0.8), rgb(212 175 55 / 0.15));
+  }
+  .ab3-mission li > span {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 5px rgb(212 175 55 / 0.35);
+  }
+  .ab3-mission li > div {
+    padding-top: 6px;
+  }
+  .ab3-mission b {
+    font-size: 1rem;
+  }
+  .ab3-mission p {
+    margin-top: 3px;
+    font-size: 0.88rem !important;
+  }
+
+  /* where we are */
+  .ab3-place {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "ic k go"
+      "ad ad ad";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 12px;
+  }
+  .ab3-place > div {
+    display: contents;
+  }
+  .ab3-place-ic {
+    grid-area: ic;
+  }
+  .ab3-place-k {
+    grid-area: k;
+    margin: 0;
+  }
+  .ab3-place > a {
+    grid-area: go;
+    margin: 0;
+    border-color: rgb(212 175 55 / 0.5);
+    background: rgb(212 175 55 / 0.08);
+  }
+  .ab3 .ab3-place address {
+    grid-area: ad;
+    padding-top: 12px;
+    border-top: 1px solid var(--ab-line);
+    font-size: 0.9rem !important;
+    line-height: 1.6;
+    text-align: justify;
+    text-align-last: left;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
