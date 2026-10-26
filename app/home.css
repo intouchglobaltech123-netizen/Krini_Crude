@@ -1,0 +1,492 @@
+/* ===========================================================================
+   Home page (src/views/HomePage.tsx): the "What we make" section after the
+   hero. Scoped under .hm-make; navy and gold, like the About page.
+   =========================================================================== */
+
+/* the site makes every section a full screen on laptops: not these */
+main > section.hm-make {
+  min-height: 0 !important;
+  display: block !important;
+}
+
+.hm-make {
+  --hm-navy: #0f172a;
+  --hm-gold: #d4af37;
+  --hm-gold-hi: #e3c25a;
+  --hm-gold-deep: #a8841c;
+  --hm-text: #475569;
+  --hm-line: rgb(15 23 42 / 0.08);
+  --hm-soft: #f7f5ef;
+  padding-block: clamp(48px, 6vw, 88px);
+  background: #fff;
+  color: var(--hm-navy);
+}
+.hm-soft {
+  background: #f7f5ef;
+}
+.hm-make :is(h2, h3, .hm-k, .hm-line-items span, summary) {
+  text-align: left;
+  -webkit-hyphens: manual;
+  hyphens: manual;
+}
+
+.hm-head {
+  display: grid;
+  gap: 18px;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+@media (min-width: 1024px) {
+  .hm-head {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: end;
+    gap: 64px;
+  }
+}
+.hm-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hm-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  color: var(--hm-gold-deep);
+  text-decoration: none;
+}
+.hm-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 0.75rem !important;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hm-gold-deep);
+}
+.hm-k::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hm-gold);
+}
+.hm-h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.5rem) !important;
+  line-height: 1.12 !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--hm-navy);
+}
+.hm-lead {
+  margin: 0;
+  font-size: 1.02rem !important;
+  line-height: 1.65;
+  color: var(--hm-text);
+}
+
+.hm-lines {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 900px) {
+  .hm-lines {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+.hm-line {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  padding: clamp(22px, 2.4vw, 30px);
+  border: 1px solid var(--hm-line);
+  border-radius: 20px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hm-line::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, #c9a43a, var(--hm-gold-hi));
+  transition: width 0.35s ease;
+}
+.hm-line:hover {
+  transform: translateY(-3px);
+  border-color: rgb(212 175 55 / 0.45);
+  box-shadow: 0 20px 40px -28px rgb(15 23 42 / 0.45);
+}
+.hm-line:hover::before {
+  width: 100%;
+}
+.hm-line-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.hm-line-n {
+  font-size: 2.2rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.3px var(--hm-gold);
+}
+/* the brand's logo on a small white plate (Lubecon, 1-COOL); a brand without one shows its name */
+.hm-line-logo {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 10px;
+  background: #fff;
+}
+.hm-line-logo img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 140px;
+  object-fit: contain;
+}
+.hm-line-brand {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--hm-navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--hm-gold-hi);
+}
+.hm-line h3 {
+  margin: 0;
+  font-size: 1.3rem !important;
+  line-height: 1.2 !important;
+  font-weight: 800;
+  color: var(--hm-navy);
+}
+.hm-line p {
+  margin: 0;
+  font-size: 0.95rem !important;
+  line-height: 1.6;
+  color: var(--hm-text);
+}
+.hm-line-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hm-line-items span {
+  padding: 5px 11px;
+  border-radius: 8px;
+  background: var(--hm-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--hm-text);
+}
+.hm-line em {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+  font-style: normal;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--hm-gold-deep);
+}
+
+/* ---- industries we serve ------------------------------------------------- */
+.hm-inds {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .hm-inds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .hm-inds {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+.hm-ind {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(20px, 2.2vw, 28px);
+  border: 1px solid var(--hm-line);
+  border-radius: 20px;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hm-ind:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -28px rgb(15 23 42 / 0.45);
+}
+.hm-ind-ic {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--hm-navy);
+  color: var(--hm-gold-hi);
+}
+.hm-ind-ic svg {
+  width: 24px;
+  height: 24px;
+}
+.hm-ind h3 {
+  margin: 0;
+  font-size: 1.12rem !important;
+  line-height: 1.25 !important;
+  font-weight: 800;
+  color: var(--hm-navy);
+}
+.hm-ind p {
+  margin: 0;
+  font-size: 0.92rem !important;
+  line-height: 1.6;
+  color: var(--hm-text);
+}
+.hm-ind a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 4px;
+  font-size: 0.9rem !important;
+  font-weight: 700;
+  color: var(--hm-gold-deep);
+  text-decoration: none;
+}
+
+/* ---- questions: an accordion beside its heading ---------------------------- */
+.hm-faq {
+  display: grid;
+  gap: 24px;
+}
+@media (min-width: 1024px) {
+  .hm-faq {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 64px;
+    align-items: start;
+  }
+  .hm-faq-head {
+    position: sticky;
+    top: calc(var(--nav-h, 80px) + 24px);
+  }
+}
+.hm-faq-head .hm-lead {
+  margin-top: 14px;
+}
+.hm-faq-list {
+  display: grid;
+  gap: 10px;
+}
+.hm-q {
+  border: 1px solid var(--hm-line);
+  border-radius: 16px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.hm-q[open] {
+  border-color: rgb(212 175 55 / 0.5);
+  box-shadow: 0 14px 30px -24px rgb(15 23 42 / 0.4);
+}
+.hm-q summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+}
+.hm-q summary::-webkit-details-marker {
+  display: none;
+}
+.hm-q-n {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--hm-gold-deep);
+}
+.hm-q-t {
+  flex: 1;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--hm-navy);
+}
+.hm-q-ic {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--hm-soft);
+  transition: background-color 0.2s ease, transform 0.25s ease;
+}
+.hm-q-ic::before,
+.hm-q-ic::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  border-radius: 2px;
+  background: var(--hm-navy);
+}
+.hm-q-ic::after {
+  transform: rotate(90deg);
+  transition: transform 0.25s ease;
+}
+.hm-q[open] .hm-q-ic {
+  background: var(--hm-gold-hi);
+}
+.hm-q[open] .hm-q-ic::after {
+  transform: rotate(0deg);
+}
+.hm-q-a {
+  padding: 0 20px 20px 54px;
+}
+.hm-q-a p {
+  margin: 0;
+  font-size: 0.95rem !important;
+  line-height: 1.65;
+  color: var(--hm-text);
+}
+.hm-q-a a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.9rem !important;
+  font-weight: 700;
+  color: var(--hm-gold-deep);
+  text-decoration: none;
+}
+@media (max-width: 639px) {
+  .hm-q summary {
+    padding: 16px;
+    gap: 10px;
+  }
+  .hm-q-a {
+    padding: 0 16px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-ind,
+  .hm-q-ic,
+  .hm-q-ic::after {
+    transition: none;
+  }
+  .hm-ind:hover {
+    transform: none;
+  }
+  .hm-line,
+  .hm-line::before {
+    transition: none;
+  }
+  .hm-line:hover {
+    transform: none;
+  }
+}
+
+/* ---- the phone film's play / pause button (src/motion/scrollhero.ts) --------
+   A small round button at the right of the film, level with the stage's name;
+   before the film has ever played (the phone refused to start it, or reduced
+   motion is on) a gold "Play film" button in the middle of the film instead. */
+.sh-play {
+  display: none;
+}
+@media (max-width: 639px) {
+  .sh.is-band .sh-play {
+    position: absolute;
+    right: 14px;
+    top: calc(var(--sh-film-h) - 154px);
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgb(212 175 55 / 0.45);
+    border-radius: 999px;
+    background: rgb(10 11 14 / 0.62);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+  .sh.is-band .sh-play:active {
+    opacity: 0.8;
+  }
+  .sh-play svg {
+    width: 16px;
+    height: 16px;
+  }
+  .sh-play .sh-play-i,
+  .sh-play.is-paused .sh-pause-i,
+  .sh-play span {
+    display: none;
+  }
+  .sh-play.is-paused .sh-play-i {
+    display: block;
+  }
+  /* centred without transforms (the site turns transforms off on buttons) */
+  .sh.is-band .sh-play.is-big {
+    left: 0;
+    right: 0;
+    top: calc(var(--sh-film-h) * 0.4 - 26px);
+    width: fit-content;
+    margin-inline: auto;
+    height: 52px;
+    padding: 0 24px 0 18px;
+    border: 0;
+    background: linear-gradient(180deg, #e3c25a, #c9a43a);
+    color: #0f172a;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 16px 34px -14px rgb(0 0 0 / 0.8);
+  }
+  .sh-play.is-big svg {
+    width: 20px;
+    height: 20px;
+  }
+  .sh-play.is-big span {
+    display: inline;
+  }
+}

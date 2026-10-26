@@ -49,11 +49,31 @@ export type ProductRangeItemDetails = {
   videoUrl?: string;
   reportKicker?: string;
   reportButtonText?: string;
+  /** Real customer reviews, shown on the product page (add them here as they come in; never invented). */
+  reviews?: ProductReview[];
+};
+
+/** A customer's review of a product: their name (or company), stars out of 5, what they said and when. */
+export type ProductReview = {
+  name: string;
+  rating: number;
+  text: string;
+  /** e.g. "Precast yard, Chennai" */
+  place?: string;
+  /** e.g. "October 2026" */
+  date?: string;
 };
 
 export type ProductRangeItem = {
   name: string;
   text: string;
+  /** One short line under the name, on its card and its page (the client's words, October 2026). */
+  tagline?: string;
+  /**
+   * A photo of the product itself in a lab beaker, shown beside the pack on its card and as a view
+   * on its page (AI-generated with Google Flow, cropped to 480x640 in public/images/products/).
+   */
+  beaker?: string;
   details?: ProductRangeItemDetails;
 };
 
@@ -489,27 +509,86 @@ export const lines: Line[] = [
     description:
       "High-performance construction chemicals and solutions for infrastructure, building, and civil engineering projects. Built for durability and strength.",
     series: "Construction Chemicals",
-    strap: "Shuttering Oil • Shuttering Grease • Mold Release Solutions",
+    strap: "Shuttering Oil • Shuttering Grease • Ready to Use",
     image: "/images/construction.webp",
     imageAlt: "Release oil sprayed onto steel formwork beside rebar at dusk",
     seo: {
-      title: "Shuttering Oil, Mold Release Oil & Greases Manufacturer | Krini Crude",
+      title: "Shuttering Oil & Shuttering Grease Manufacturer | Krini Crude",
       description:
-        "Shuttering oil and grease, mold release oil and grease for formwork and precast concrete, made in Chennai for building and infrastructure projects.",
+        "Ready-to-use shuttering oils and greases for Mivan, steel, plywood and precast formwork, made in Chennai for building and infrastructure projects.",
     },
-    heading: "Shuttering and mold release oils and greases for concrete.",
+    heading: "Ready-to-use shuttering oils and greases for concrete.",
     products: [
       {
         id: "shuttering-oil",
         name: "Shuttering Oil",
         range: [
-          /* listed first on krinicrude.com/construction (October 2026), without a page of its own yet */
+          /* Magic first: our top product (the client, October 2026) */
+          {
+            name: "Magic Shuttering Oil",
+            tagline: "Oil based, for Mivan and other formworks",
+            beaker: "/images/products/oil-sample.webp",
+            text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
+            details: {
+              status: "verified",
+              image: "/images/magic-shuttering-oil.webp",
+              imageAlt: "Magic Shuttering Oil 200L drum",
+              /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=1",
+              pdsRevision: "Rev. 09/2026",
+              description:
+                "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
+              purpose: [
+                "Mivan aluminium formwork",
+                "Mild steel (MS) formwork",
+                "Plywood formwork",
+                "Building and infrastructure site formwork",
+              ],
+              coverage: "30–40 m²/L",
+              coverageNote:
+                "Average coverage. Actual coverage may vary with formwork porosity, surface condition and application method.",
+              benefits: [
+                "Excellent release performance on Mivan aluminium formwork",
+                "Clean demoulding with reduced adhesion to the formwork",
+                "Promotes a smooth and uniform concrete surface finish",
+                "Helps reduce concrete build-up and simplifies cleaning",
+                "Ready to use with economical spreading coverage",
+              ],
+              properties: [
+                { property: "Appearance", value: "Brown transparent liquid", spec: "Visual inspection" },
+                { property: "Kinematic viscosity at 40 °C", value: "Typical: 32 cSt", spec: "Specification: >12 cSt" },
+                { property: "Density at 15 °C", value: "Typical: 0.88 g/mL", spec: "Specification: >0.80 g/mL" },
+                { property: "Flash point, Pensky-Martens", value: "Typical: 180 °C", spec: "Specification: >100 °C" },
+                { property: "Coverage", value: "30–40 m²/L", spec: "Typical site rate" },
+              ],
+              application: [
+                "Clean the formwork and remove concrete residue, rust, dust, water and excess oil.",
+                "Apply a very thin, uniform film by fine spray, lint-free cloth, roller or suitable applicator.",
+                "Avoid puddles and over-application; wipe off excess oil before placing reinforcement or concrete.",
+                "Conduct a small site trial to establish the optimum application rate for site conditions.",
+              ],
+              packing: "Standard packing: 200 L barrel",
+              storage:
+                "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
+              shelfLife: "12 months from date of manufacture when stored as recommended",
+              sheetUrl: "/documents/magic-shuttering-oil-product-data-sheet-2026.pdf",
+              sheetLabel: "Magic Shuttering Oil Product Data Sheet (Rev. 09/2026)",
+              reportUrl: "/documents/magic-shuttering-oil-test-report-oct-2026.pdf",
+              reportLabel: "Original Laboratory Test Certificate (Sri Sai Test Report Oct 2026)",
+              note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
+            },
+          },
+          /* on krinicrude.com/construction (October 2026), without a page of its own yet */
           {
             name: "Repel Shuttering Oil",
+            tagline: "Premium shuttering oil (pinhole reduction)",
+            beaker: "/images/products/oil-sample.webp",
             text: "Premium shuttering oil suitable for aluminium and all formwork, ensuring clean stripping and smooth concrete surface finishes.",
           },
           {
             name: "Silease 360 Shuttering Oil",
+            tagline: "Precast shuttering oil",
+            beaker: "/images/products/silease-360-sample.webp",
             text: "Precast shuttering oil and mould release agent for precast concrete production.",
             details: {
               status: "verified",
@@ -558,55 +637,9 @@ export const lines: Line[] = [
             },
           },
           {
-            name: "Magic Shuttering Oil",
-            text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
-            details: {
-              status: "verified",
-              pdsRevision: "Rev. 09/2026",
-              description:
-                "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
-              purpose: [
-                "Mivan aluminium formwork",
-                "Mild steel (MS) formwork",
-                "Plywood formwork",
-                "Building and infrastructure site formwork",
-              ],
-              coverage: "30–40 m²/L",
-              coverageNote:
-                "Average coverage. Actual coverage may vary with formwork porosity, surface condition and application method.",
-              benefits: [
-                "Excellent release performance on Mivan aluminium formwork",
-                "Clean demoulding with reduced adhesion to the formwork",
-                "Promotes a smooth and uniform concrete surface finish",
-                "Helps reduce concrete build-up and simplifies cleaning",
-                "Ready to use with economical spreading coverage",
-              ],
-              properties: [
-                { property: "Appearance", value: "Brown transparent liquid", spec: "Visual inspection" },
-                { property: "Kinematic viscosity at 40 °C", value: "Typical: 32 cSt", spec: "Specification: >12 cSt" },
-                { property: "Density at 15 °C", value: "Typical: 0.88 g/mL", spec: "Specification: >0.80 g/mL" },
-                { property: "Flash point, Pensky-Martens", value: "Typical: 180 °C", spec: "Specification: >100 °C" },
-                { property: "Coverage", value: "30–40 m²/L", spec: "Typical site rate" },
-              ],
-              application: [
-                "Clean the formwork and remove concrete residue, rust, dust, water and excess oil.",
-                "Apply a very thin, uniform film by fine spray, lint-free cloth, roller or suitable applicator.",
-                "Avoid puddles and over-application; wipe off excess oil before placing reinforcement or concrete.",
-                "Conduct a small site trial to establish the optimum application rate for site conditions.",
-              ],
-              packing: "Standard packing: 200 L barrel",
-              storage:
-                "Store in the original closed container in a cool, dry, well-ventilated area away from heat and direct sunlight. Use appropriate gloves and eye protection. Avoid prolonged skin contact. Refer to the Safety Data Sheet before use.",
-              shelfLife: "12 months from date of manufacture when stored as recommended",
-              sheetUrl: "/documents/magic-shuttering-oil-product-data-sheet-2026.pdf",
-              sheetLabel: "Magic Shuttering Oil Product Data Sheet (Rev. 09/2026)",
-              reportUrl: "/documents/magic-shuttering-oil-test-report-oct-2026.pdf",
-              reportLabel: "Original Laboratory Test Certificate (Sri Sai Test Report Oct 2026)",
-              note: "Typical values are not guaranteed specifications. Suitability and coverage should be confirmed by a site trial under actual conditions. For industrial use only.",
-            },
-          },
-          {
             name: "Nikri 30 Shuttering Oil",
+            tagline: "Road project shuttering oil",
+            beaker: "/images/products/nikri-sample.webp",
             text: "Cost-effective shuttering oil formulated for MS, plywood and infrastructure road projects with reliable concrete release.",
             /* krinicrude.com/product/nikri30, read October 2026: its key features and coverage, word for word */
             details: {
@@ -624,6 +657,8 @@ export const lines: Line[] = [
           },
           {
             name: "Nikri AL Shuttering Oil",
+            tagline: "Cost-effective emulsion oil for Mivan and other formworks",
+            beaker: "/images/products/nikri-sample.webp",
             text: "Emulsion-based concrete formwork release agent for Mivan aluminium, MS, plywood and FRP formwork.",
             details: {
               status: "verified",
@@ -678,6 +713,7 @@ export const lines: Line[] = [
         range: [
           {
             name: "Krini Shuttering Grease",
+            tagline: "Calcium based premium shuttering grease",
             text: "Heavy-duty calcium-based shuttering grease for wall ties, sleeves and structural formwork.",
             details: {
               status: "verified",
@@ -728,6 +764,7 @@ export const lines: Line[] = [
           },
           {
             name: "Repel Shuttering Grease",
+            tagline: "Cost-effective shuttering grease",
             text: "Premium calcium-based shuttering grease for wall ties, sleeves and complex formwork.",
             details: {
               status: "verified",
@@ -780,25 +817,6 @@ export const lines: Line[] = [
         about:
           "A release agent for formwork in grease form. Ask our team whether an oil or a grease suits your formwork, surface and site conditions.",
       },
-      {
-        id: "mold-release-oil",
-        name: "Mold Release Oil",
-        cardText:
-          "Applied to moulds so cast concrete units release cleanly with a smooth surface finish, allowing moulds to be reused.",
-        about:
-          "Mold (mould) release oil is applied to moulds so that cast concrete units come away cleanly, with a good surface finish, and the moulds can be reused.",
-        uses: ["Precast concrete moulds", "Moulded concrete products"],
-        claims: ["Formulated not just as physical release but also chemically engineered for superior performance and concrete finish."],
-        tbc: [TDS],
-      },
-      {
-        id: "mold-release-grease",
-        name: "Mold Release Grease",
-        about: "Mould release in grease form, for moulds and conditions where a grease is preferred to an oil.",
-        uses: ["Precast concrete moulds"],
-        claims: ["Formulated not just as physical release but also chemically engineered for superior performance and concrete finish."],
-        tbc: [TDS],
-      },
     ],
     industries: ["construction"],
     faq: [
@@ -807,8 +825,8 @@ export const lines: Line[] = [
         a: "Shuttering oil is applied to formwork before concrete is poured. It stops the concrete sticking, so the formwork strips cleanly, the concrete keeps a clean face and the formwork can be reused.",
       },
       {
-        q: "What is the difference between shuttering oil and mold release oil?",
-        a: "Both are release agents. Shuttering oil is used on site formwork; mold release oil is used on moulds, typically for precast concrete. We make both, in oil and grease form.",
+        q: "Do your shuttering oils need to be diluted?",
+        a: "No. All our construction chemicals are ready to use: apply them as supplied, with no dilution. For precast moulds, use Silease 360, our precast shuttering oil.",
       },
       {
         q: "Should I use a release oil or a release grease?",

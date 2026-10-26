@@ -1,303 +1,213 @@
 import { enquireHref, routes, site } from "../content/site";
-import { lines } from "../content/catalogue";
 import { seo, trail } from "../content/pages";
-import { breadcrumbs, faqPage, webPage } from "../content/schema";
+import { breadcrumbs, webPage } from "../content/schema";
 import { Shell } from "../components/Shell";
-import { Breadcrumbs, Facts } from "../components/PageHeader";
-import { Figures } from "../components/Figures";
-import { Faq } from "../components/Faq";
-import { CtaBand } from "../components/CtaBand";
-import { SectionIntro } from "../components/Blocks";
-import { Arrow, Fact, Glyph, Icon, SectionHead, type IconName, MediaSlot } from "../components/ui";
+import { Breadcrumbs } from "../components/PageHeader";
+import { Arrow, Glyph } from "../components/ui";
 import { isPlaceholder } from "../content/placeholder";
 
 /**
- * About: the company in depth. The header: the live site's line, the name and
- * the sentence under it beside a picture held to the screen's height (a turning
- * seal on its corner, a fine gold frame behind it), the figures under them; the
- * story, vision and mission (from the live site's own words),
- * research & development from the Director's desk (name, message and photo to
- * be supplied), six things every client gets (a spec sheet), the figures, how
- * we work from enquiry to after-sales, where we are, and questions.
+ * About (styles: app/about/about.css, all under .ab3): compact, four blocks, every fact said once.
+ *
+ *  1. Header: the headline and one line beside a photo of the plant, the four figures under them.
+ *  2. Two tiles: who we are (with the markets) and the three ways to work with us.
+ *  3. Leadership, vision & mission: the Director's photo and words, then the vision and
+ *     the four commitments. The name, photo and message come from site.pages.about.leadership;
+ *     until they are filled in, a plain portrait frame and the published fact about the
+ *     Director's role are shown.
+ *  4. Where we are: the office and the factory (phone and email are in the footer).
+ * The three product lines are shown on the home page, so they are not repeated here.
  */
+
+const FIGURES = [
+  { value: "70+", label: "Products" },
+  { value: "1000+", label: "Happy clients" },
+  { value: "ISO", label: "Certified company" },
+  { value: "Pan-India", label: "All major states" },
+];
+
+const WAYS = [
+  { n: "01", title: "Our formulations", body: "Products made to formulations developed by our own team." },
+  { n: "02", title: "Your formulation", body: "Products made to the formulation you specify." },
+  { n: "03", title: "Your brand", body: "Private label and tailor-made products for your brand." },
+];
+
+const MISSION = [
+  { title: "Investment", body: "Invest substantially in research and development." },
+  { title: "Modern technology", body: "Keep acquiring modern technologies." },
+  { title: "Reach", body: "Keep expanding geographically." },
+  { title: "Support", body: "Comprehensive after-sales support for every client." },
+];
+
+const MARKETS = ["Industrial", "Automotive", "Marine", "Construction", "Infrastructure", "Specialist sectors"];
+
 export function AboutPage() {
-  const p = site.pages.about;
-  const a = site.about;
   const c = site.contact;
   const t = trail.about;
+  const lead = site.pages.about.leadership;
+  const hasDirector = !isPlaceholder(lead.name);
+  const hasPhoto = !isPlaceholder(lead.photo);
+  const hasMessage = !isPlaceholder(lead.message);
+
   return (
-    <Shell current="about" schema={[webPage(seo.about, "AboutPage"), breadcrumbs(t), faqPage(seo.about.path, p.faq)]}>
-      <div className="about-page">
-        {/* Header: the live site's line, the name (as in the logo) and the sentence under it, centred
-            against the picture; the figures under them */}
-        <header className="page-head about-head" aria-labelledby="page-title">
+    <Shell current="about" schema={[webPage(seo.about, "AboutPage"), breadcrumbs(t)]}>
+      <div className="ab3">
+        {/* 1. Header */}
+        <section className="ab3-top" aria-labelledby="page-title">
           <div className="frame">
             <Breadcrumbs trail={t} />
-            <div className="mt-10 grid gap-14 lg:mt-8 lg:grid-cols-12 lg:items-center lg:gap-8">
-              <div className="lg:col-span-7">
-                <p className="label text-amber" data-reveal>
-                  {p.lead}
-                </p>
-                <h1 id="page-title" className="about-title display-tight mt-6" data-split>
-                  {"About "}
-                  <br />
-                  <span className="text-amber">Krini</span> Crude
+            <div className="ab3-hero">
+              <div className="ab3-hero-copy">
+                <p className="ab3-k">About Krini Crude</p>
+                <h1 id="page-title" className="ab3-title">
+                  Pioneers in lubricants, construction chemicals <span>and aerosols.</span>
                 </h1>
-                <p className="about-lead mt-8 max-w-measure" data-reveal>
-                  {a.headline}
-                </p>
-                <div className="mt-10 flex flex-wrap gap-3" data-reveal>
-                  <a href={enquireHref("Enquiry")} className="btn btn-primary" data-enquire="Enquiry" data-magnetic>
+                <p className="ab3-sub">Premium industrial products, made at our own factory in Chennai.</p>
+                <div className="ab3-actions">
+                  <a href={enquireHref("Enquiry")} className="ab3-btn ab3-btn-gold" data-enquire="Enquiry">
                     Talk to our team <Arrow />
                   </a>
-                  <a href={routes.products} className="btn btn-ghost" data-magnetic>
+                  <a href={routes.products} className="ab3-btn ab3-btn-line">
                     View products <Arrow />
                   </a>
                 </div>
               </div>
-              <figure className="about-figure mx-auto w-full sm:max-w-[460px] lg:col-span-5 lg:max-w-none" data-drift="0.05">
-                <div className="about-pic">
-                  {/* 4:3 on phones, so the picture doesn't take the whole screen; 4:5 on tablets; 4:3 again from
-                      1024px, filling its column beside the words. Each still has the frame's own shape. */}
-                  <div className="media aspect-[4/3] rounded-sm sm:aspect-[4/5] lg:aspect-[4/3]" data-shutter>
-                    <MediaSlot label="Company / factory photo" w={1200} h={900} />
-                  </div>
-                </div>
+              <figure className="ab3-hero-media">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/manufacturing-169.webp" alt="Stainless-steel blending tanks on the manufacturing floor" width={1600} height={900} decoding="async" fetchPriority="high" />
               </figure>
             </div>
-            <Facts items={p.facts} />
-          </div>
-        </header>
-
-        {/* Our story: an editorial spread */}
-        <section id="story" className="section" aria-labelledby="story-title">
-          <div className="frame">
-            <SectionHead>{p.story.label}</SectionHead>
-            <div className="mt-12 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-8">
-              <div className="lg:col-span-5">
-                <div className="lg:sticky lg:top-28">
-                  <h2 id="story-title" className="display text-display-sm" data-split>
-                    {p.story.heading}
-                  </h2>
-                  <blockquote className="story-quote" data-reveal>
-                    <p>{p.story.quote}</p>
-                  </blockquote>
+            <dl className="ab3-figures">
+              {FIGURES.map((f) => (
+                <div key={f.label}>
+                  <dd>{f.value}</dd>
+                  <dt>{f.label}</dt>
                 </div>
-              </div>
-              <div className="lg:col-span-6 lg:col-start-7">
-                <div className="story-body" data-reveal>
-                  {a.story.map((para, i) => (
-                    <p key={para.slice(0, 24)} className={i === 0 ? "dropcap" : undefined}>
-                      {para}
-                    </p>
-                  ))}
-                </div>
-                <p className="label mt-12 text-mute" data-reveal>
-                  Our three lines
-                </p>
-                <ul className="mt-4 flex flex-wrap gap-2" data-chips>
-                  {lines.map((l) => (
-                    <li key={l.id}>
-                      <a href={routes.line(l.slug)} className="chip chip-link">
-                        {l.title} <Arrow className="ml-2" />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <p className="label mt-8 text-mute" data-reveal>
-                  Markets we supply
-                </p>
-                <ul className="mt-4 flex flex-wrap gap-2" data-chips>
-                  {a.markets.map((m) => (
-                    <li key={m} className="chip">
-                      {m}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+              ))}
+            </dl>
           </div>
         </section>
 
-        {/* Vision & mission: the vision fills like a gauge as it scrolls up; the mission in four commitments */}
-        <section id="vision" className="section vm theme-navy" aria-labelledby="vision-title">
-          <div className="frame">
-            <SectionHead>{p.vision.label}</SectionHead>
-            <p className="label mt-12 text-amber lg:mt-20" data-reveal>
-              {p.vision.visionLabel}
-            </p>
-            <h2 id="vision-title" className="vm-vision display" data-fill>
-              <span className="fill-line">{p.vision.vision}</span>
-              <span className="fill-top" aria-hidden="true">
-                {p.vision.vision}
-              </span>
-            </h2>
-            <div className="mt-20 grid gap-10 lg:mt-28 lg:grid-cols-12 lg:gap-8">
-              <div className="lg:col-span-3">
-                <p className="label text-amber" data-reveal>
-                  {p.vision.missionLabel}
-                </p>
-                <p className="mt-5 max-w-xs text-mute" data-reveal>
-                  What we are committed to, in our own words.
-                </p>
-              </div>
-              <ol className="vm-mission lg:col-span-9" data-rows>
-                {p.vision.mission.map((m, i) => (
-                  <li key={m.title} className="vm-item">
-                    <span className="vm-n display" aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="display-tight text-xl leading-tight">{m.title}</h3>
-                      <p className="mt-2 text-mute">{m.body}</p>
-                    </div>
+        {/* 2. Tiles: who we are, ways to work with us */}
+        <section className="ab3-sec" aria-label="Who we are">
+          <div className="frame ab3-bento">
+            <article className="ab3-tile ab3-who">
+              <p className="ab3-k">Who we are</p>
+              <h2 className="ab3-h2">A distinguished reputation, built on extensive manufacturing experience.</h2>
+              <p className="ab3-text">We make standard, speciality and niche-market products.</p>
+              <ul className="ab3-chips" aria-label="Markets we serve">
+                {MARKETS.map((m) => (
+                  <li key={m}>{m}</li>
+                ))}
+              </ul>
+            </article>
+
+            <article className="ab3-tile ab3-ways">
+              <p className="ab3-k">Ways to work with us</p>
+              <ol>
+                {WAYS.map((w) => (
+                  <li key={w.n}>
+                    <span aria-hidden="true">{w.n}</span>
+                    <h3>{w.title}</h3>
+                    <p>{w.body}</p>
                   </li>
                 ))}
               </ol>
-            </div>
+            </article>
           </div>
         </section>
 
-        {/* Research & development: from the Director's desk */}
-        <section id="research" className="section border-t border-bone/10" aria-labelledby="rd-title">
+        {/* 3. Leadership, vision & mission (white) */}
+        <section className="ab3-lead" aria-labelledby="lead-title">
           <div className="frame">
-            <SectionHead>{p.rd.label}</SectionHead>
-            <div className="mt-12 grid gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-8">
-              {/* the Director: a small portrait beside the name on phones and tablets, a large one from 1024px */}
-              <div className="director lg:col-span-4" data-reveal>
-                <div className={`portrait-slot${isPlaceholder(p.leadership.photo) ? " is-empty" : ""}`}>
-                  {isPlaceholder(p.leadership.photo) ? (
-                    <span className="portrait-mono display" aria-hidden="true">
-                      K
-                    </span>
-                  ) : null}
-                  <Fact value={p.leadership.photo} />
-                </div>
-                <p className="director-id">
-                  <Fact value={p.leadership.name} />
-                  <span className="label text-mute">{p.leadership.role}, Krini Crude</span>
+            <div className="ab3-lead-top">
+              <figure className={`ab3-portrait${hasPhoto ? "" : " is-empty"}`}>
+                {hasPhoto ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={String(lead.photo)} alt={hasDirector ? String(lead.name) : `The ${lead.role} of Krini Crude`} width={800} height={1000} loading="lazy" decoding="async" />
+                ) : (
+                  <svg viewBox="0 0 120 150" aria-hidden="true">
+                    <circle cx="60" cy="52" r="26" />
+                    <path d="M14 150c0-30 20.6-50 46-50s46 20 46 50Z" />
+                  </svg>
+                )}
+              </figure>
+              <div className="ab3-lead-copy">
+                <p className="ab3-k">Leadership</p>
+                <h2 id="lead-title" className="ab3-lead-name">
+                  {hasDirector ? String(lead.name) : `Our ${lead.role}`}
+                </h2>
+                <p className="ab3-lead-role">{lead.role}, Krini Crude</p>
+                <span className="ab3-qmark" aria-hidden="true">
+                  &ldquo;
+                </span>
+                <p className="ab3-lead-text">
+                  {hasMessage
+                    ? String(lead.message)
+                    : `Our ${lead.role} personally oversees Research & Development, leading a well-trained, technically strong team dedicated to innovation and excellence.`}
                 </p>
               </div>
-              <div className="lg:col-span-7 lg:col-start-6">
-                <p className="label text-mute" data-reveal>
-                  {p.rd.desk}
-                </p>
-                <h2 id="rd-title" className="display mt-5 text-h leading-[0.95]" data-split>
-                  {p.rd.heading}
-                </h2>
-                <div className="letter" data-reveal>
-                  <p className="letter-head label">
-                    <span>Krini Crude · Research &amp; development</span>
-                    <span>Chennai</span>
-                  </p>
-                  <p className="text-xl leading-relaxed text-bone">{p.leadership.note}</p>
-                  <div className="mt-6">
-                    <Fact value={p.leadership.message} />
-                  </div>
-                </div>
-                <ul className="routes" aria-label="How our products are formulated">
-                  {a.routes.map((r) => (
-                    <li key={r.title} className="route" data-reveal>
-                      <span className="route-icon" data-draw>
-                        <Icon name={r.icon as IconName} />
-                      </span>
-                      <h3 className="route-title">{r.title}</h3>
-                      <p className="route-short">{r.short}</p>
-                      <p className="route-body">{r.body}</p>
+            </div>
+
+            <div className="ab3-vm">
+              <div className="ab3-vision">
+                <p className="ab3-k">Our vision</p>
+                <p className="ab3-vision-line">Innovation and excellence in manufacturing.</p>
+              </div>
+              <div className="ab3-mission">
+                <p className="ab3-k">Our mission</p>
+                <ol>
+                  {MISSION.map((m, i) => (
+                    <li key={m.title}>
+                      <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                      <div>
+                        <b>{m.title}</b>
+                        <p>{m.body}</p>
+                      </div>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Values: a spec sheet */}
-        <section id="values" className="section border-t border-bone/10" aria-labelledby="values-title">
+        {/* 4. Where we are */}
+        <section className="ab3-sec ab3-soft" aria-labelledby="visit-title">
           <div className="frame">
-            <SectionIntro label={p.values.label} heading={p.values.heading} id="values-title" aside={<p className="max-w-md text-mute">{p.values.lead}</p>} />
-            <ol className="spec mt-16 lg:mt-24">
-              {site.principles.map((pr, i) => (
-                <li key={pr.title} className="spec-row" data-reveal>
-                  <span className="spec-code label tabular-nums">KC–{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="display-tight text-xl leading-tight">{pr.title}</h3>
-                  <p className="text-mute">
-                    {pr.body}
-                    {pr.detail ? (
-                      <span className="ml-3 inline-block align-middle">
-                        <Fact value={pr.detail} />
-                      </span>
-                    ) : null}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* Figures */}
-        <section id="figures" className="section figures-band theme-yellow" aria-labelledby="figures-title">
-          <div className="frame">
-            <SectionIntro label={p.figures.label} heading={p.figures.heading} id="figures-title" />
-            <div className="mt-16 lg:mt-24">
-              <Figures />
+            <div className="ab3-head">
+              <div>
+                <p className="ab3-k">Where we are</p>
+                <h2 id="visit-title" className="ab3-h2">
+                  An office in Anna Nagar, a factory in Tiruverkadu.
+                </h2>
+              </div>
+              <a href={enquireHref("Enquiry")} className="ab3-btn ab3-btn-dark" data-enquire="Enquiry">
+                Enquire now <Arrow />
+              </a>
             </div>
-          </div>
-        </section>
-
-        {/* Where we are */}
-        <section id="places" className="section border-t border-bone/10" aria-labelledby="places-title">
-          <div className="frame">
-            <SectionIntro label={p.places.label} heading={p.places.heading} id="places-title" />
-            <div className="place-grid mt-12 lg:mt-24">
+            <div className="ab3-visit">
               {[
-                { label: "Office address", lines: c.office, map: c.officeMap },
-                { label: "Factory address", lines: c.factory, map: c.factoryMap },
+                { label: "Office", lines: c.office, map: c.officeMap, glyph: "contact" as const },
+                { label: "Factory", lines: c.factory, map: c.factoryMap, glyph: "services" as const },
               ].map((pl) => (
-                <div key={pl.label} className="place-box" data-reveal>
-                  <p className="place-label label">
-                    <Glyph name={pl.label === "Office address" ? "contact" : "services"} size={16} /> {pl.label}
-                  </p>
-                  <address className="place-address">
-                    {pl.lines.map((l) => (
-                      <span key={l} className="block">
-                        {l}
-                      </span>
-                    ))}
-                  </address>
-                  <a href={pl.map} className="btn btn-ghost place-dir" target="_blank" rel="noopener noreferrer">
-                    <Glyph name="route" size={16} /> Get directions
+                <div key={pl.label} className="ab3-place">
+                  <span className="ab3-place-ic" aria-hidden="true">
+                    <Glyph name={pl.glyph} size={20} />
+                  </span>
+                  <div>
+                    <p className="ab3-place-k">{pl.label}</p>
+                    <address>{pl.lines.join(" ")}</address>
+                  </div>
+                  <a href={pl.map} target="_blank" rel="noopener noreferrer" aria-label={`Directions to our ${pl.label.toLowerCase()}`}>
+                    Directions <Arrow />
                   </a>
                 </div>
               ))}
             </div>
           </div>
         </section>
-
-        <Faq items={p.faq} />
-        <CtaBand />
       </div>
     </Shell>
-  );
-}
-
-/** A round seal with the company's line turning around the brand mark (CSS, .seal). */
-function Seal({ text }: { text: string }) {
-  return (
-    <div className="seal" aria-hidden="true">
-      <svg viewBox="0 0 120 120" className="seal-ring">
-        <defs>
-          <path id="seal-path" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
-        </defs>
-        <text className="seal-text">
-          <textPath href="#seal-path" textLength="286" lengthAdjust="spacing">
-            {`${text.toUpperCase()} · `}
-          </textPath>
-        </text>
-      </svg>
-      <span className="seal-mark">
-        <span className="seal-dot" />
-      </span>
-    </div>
   );
 }

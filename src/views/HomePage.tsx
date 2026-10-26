@@ -1,61 +1,146 @@
-import { site } from "../content/site";
 import { seo } from "../content/pages";
 import { faqPage, webPage } from "../content/schema";
+import { routes, site } from "../content/site";
+import { lines } from "../content/catalogue";
 import { Shell } from "../components/Shell";
 import { ScrollHero } from "../components/ScrollHero";
-import { Range } from "../components/Range";
-import { CtaBand } from "../components/CtaBand";
-import { Faq } from "../components/Faq";
-import { MediaSlot, SectionHead } from "../components/ui";
+import { Arrow, Icon, type IconName } from "../components/ui";
 
 /**
- * Home, kept to what search engines and first-time visitors need: the hero (a
- * film played by scrolling; a line saying what Krini Crude is and where, the
- * name and its tagline are the page's h1), the three ranges (lubricants and
- * greases, construction chemicals, aerosols, with their products and grades),
- * "Welcome to Krini Crude" (who we are, in Chennai), the questions buyers ask
- * (with the page's FAQPage structured data) and a way to get in touch, with
- * the office and factory addresses. Each part points on to its own page.
+ * Home, kept to what a first-time visitor and a search engine need:
+ *  1. the hero (a film played by scrolling; the name and its tagline are the page's h1);
+ *  2. what we make: the three lines (construction chemicals, lubricants, aerosols), each with
+ *     its brand's logo and its products by name, linking to the products (styles: app/home.css);
+ *  3. industries we serve: the live site's four, each linking to its products;
+ *  4. questions buyers ask, as an accordion (with the page's FAQPage structured data), only those
+ *     whose answers are not already on the page.
+ * The phone, email and WhatsApp are in the footer, Enquire now in the menu bar.
+ * Who we are lives on the About page, so it is not repeated here.
  */
+
+/** The order the lines are shown in: construction first. */
+const LINE_ORDER = ["construction", "lubricants", "aerosols"] as const;
+
+const INDUSTRY_ICON: Record<string, IconName> = { "auto-assembly": "car", "auto-component": "gear", construction: "crane", paint: "spray" };
+const LINE_SLUG: Record<string, string> = { lubricants: "lubricants", construction: "construction-chemicals", aerosols: "aerosols" };
+
 export function HomePage() {
   const faq = site.pages.home.faq;
+  // only questions whose answers are not already on the page: the products (cards above), the
+  // industries (section above) and the addresses (About and Contact) are not asked again
+  const questions = faq.items.filter((f) => !/office and factory|which industries|lubricants and oils|shuttering oil|aerosol sprays/i.test(f.q));
+  const shown = LINE_ORDER.map((id) => lines.find((l) => l.id === id)).filter((l): l is (typeof lines)[number] => Boolean(l));
   return (
-    <Shell current="home" schema={[webPage(seo.home), faqPage(seo.home.path, faq.items)]}>
+    <Shell current="home" schema={[webPage(seo.home), faqPage(seo.home.path, questions)]}>
       <ScrollHero />
-      <Range />
-      <HomeAbout />
-      <Faq items={faq.items} label={faq.label} heading={faq.heading} lead={faq.lead} />
-      <CtaBand places />
+
+      <section id="range" className="hm-make hm-soft" aria-labelledby="make-title">
+        <div className="frame">
+          <div className="hm-head hm-head-row">
+            <div>
+              <p className="hm-k">What we make</p>
+              <h2 id="make-title" className="hm-h2">
+                Three product lines, three brands.
+              </h2>
+            </div>
+            <a href={routes.products} className="hm-all">
+              View all products <Arrow />
+            </a>
+          </div>
+
+          <ul className="hm-lines">
+            {shown.map((l, i) => (
+              <li key={l.id}>
+                <a href={routes.line(l.slug)} className="hm-line">
+                  <span className="hm-line-top">
+                    <span className="hm-line-n" aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {l.brand.logoFull ?? l.brand.logo ? (
+                      <span className="hm-line-logo" title={`Brand: ${l.brand.name}`}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={l.brand.logoFull ?? l.brand.logo} alt={l.brand.name} loading="lazy" decoding="async" />
+                      </span>
+                    ) : (
+                      <span className="hm-line-brand">{l.brand.name}</span>
+                    )}
+                  </span>
+                  <h3>{l.title}</h3>
+                  <span className="hm-line-items">
+                    {l.strap.split("•").map((x) => (
+                      <span key={x}>{x.trim()}</span>
+                    ))}
+                  </span>
+                  <em>
+                    View products <Arrow />
+                  </em>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="industries" className="hm-make" aria-labelledby="ind-title">
+        <div className="frame">
+          <div className="hm-head">
+            <div>
+              <p className="hm-k">Industry we serve</p>
+              <h2 id="ind-title" className="hm-h2">
+                Delivering end to end lubricant solutions.
+              </h2>
+            </div>
+          </div>
+          <ul className="hm-inds">
+            {site.industries.map((ind) => (
+              <li key={ind.id} className="hm-ind">
+                <span className="hm-ind-ic" aria-hidden="true">
+                  <Icon name={INDUSTRY_ICON[ind.id] ?? "factory"} />
+                </span>
+                <h3>{ind.title}</h3>
+                <p>{ind.body}</p>
+                <a href={routes.line(LINE_SLUG[ind.line] ?? ind.line)} aria-label={`Read more: ${ind.title}`}>
+                  Read more <Arrow />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="faq" className="hm-make" aria-labelledby="faq-title">
+        <div className="frame hm-faq">
+          <div className="hm-faq-head">
+            <p className="hm-k">{faq.label}</p>
+            <h2 id="faq-title" className="hm-h2">
+              {faq.heading}
+            </h2>
+            <p className="hm-lead">{faq.lead}</p>
+          </div>
+          <div className="hm-faq-list">
+            {questions.map((f, i) => (
+              <details key={f.q} className="hm-q" open={i === 0}>
+                <summary>
+                  <span className="hm-q-n" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="hm-q-t">{f.q}</span>
+                  <span className="hm-q-ic" aria-hidden="true" />
+                </summary>
+                <div className="hm-q-a">
+                  <p>{f.a}</p>
+                  {"link" in f && f.link ? (
+                    <a href={f.link.href}>
+                      {f.link.label} <Arrow />
+                    </a>
+                  ) : null}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </Shell>
   );
 }
-
-function HomeAbout() {
-  const a = site.about;
-  const h = site.pages.home.about;
-  return (
-    <section id="about" className="section" aria-labelledby="about-title">
-      <div className="frame">
-        <SectionHead>{h.label}</SectionHead>
-        <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-12 lg:items-center lg:gap-8">
-          <div className="welcome-text lg:col-span-7">
-            <h2 id="about-title" className="display text-display-wide" data-split>
-              {h.heading[0]}{" "}
-              <br />
-              {h.heading[1]}
-            </h2>
-            <p className="welcome-lead mt-8" data-reveal>
-              {a.lead}
-            </p>
-          </div>
-          <figure className="welcome-fig lg:col-span-5 lg:col-start-8" data-drift="0.05">
-            <div className="media welcome-media aspect-[4/3] rounded-sm" data-shutter>
-              <MediaSlot label="Welcome photo" w={1200} h={900} />
-            </div>
-          </figure>
-        </div>
-      </div>
-    </section>
-  );
-}
-

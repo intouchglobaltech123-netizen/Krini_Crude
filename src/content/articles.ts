@@ -214,7 +214,7 @@ export const articles: Article[] = [
         type: "ul",
         items: [
           "Shuttering oil and shuttering grease are used on formwork on site: walls, columns, slabs and beams.",
-          "Mold release oil and grease are used on moulds, typically for precast concrete units and products.",
+          "Mold release oil (precast shuttering oil, such as our Silease 360) is used on moulds, typically for precast concrete units and products.",
         ],
       },
       {

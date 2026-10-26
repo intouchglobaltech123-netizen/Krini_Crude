@@ -81,7 +81,7 @@ export const site = {
         line: "construction",
         label: "Construction",
         items: [
-          { product: "shuttering-oil", label: "Shuttering Oil", sub: [{ label: "Silease 360" }, { label: "Magic Oil" }, { label: "Nikri 30" }, { label: "Nikri AL" }] },
+          { product: "shuttering-oil", label: "Shuttering Oil", sub: [{ label: "Repel" }, { label: "Silease 360" }, { label: "Magic Oil" }, { label: "Nikri 30" }, { label: "Nikri AL" }] },
           { product: "shuttering-grease", label: "Shuttering Grease", sub: [{ label: "Krini Shuttering Grease" }, { label: "Repel Shuttering Grease" }] },
         ],
       },
@@ -117,10 +117,54 @@ export const site = {
      * is and where, in the words people search with (the name and the tagline alone don't).
      */
     kicker: "Lubricant manufacturer in Chennai",
-    tagline: "Premium Quality Industrial Solutions",
-    /** The live site's second hero line, under the tagline. */
-    motto: "Innovation & Excellence in Manufacturing",
-    promise: "Engineered for Performance",
+    /** The hero's headline, beside the name (from the hero brief). */
+    tagline: "Built on Precision. Engineered to Last.",
+    /** The supporting line under the headline. */
+    motto: "Specialists in beam shuttering, concrete casting, and metal deck slab solutions.",
+    promise: "Built on Precision. Engineered to Last.",
+    /** The hero's two buttons (opening screen on phones, and the last screen). */
+    ctas: {
+      primary: { label: "Explore Our Solutions", href: "/products" },
+      secondary: { label: "Contact Us", href: "/contact" },
+    },
+    /**
+     * The hero film (the client's building-first film, Google Flow), one part per scroll: the finished
+     * building, then Magic Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel in
+     * the pit, the oiled box poured and stripped clean, a precast mould, and the building rising to its
+     * defect-free finish
+     * (heroSeq.stops says where each part ends). Product claims are krinicrude.com's own.
+     */
+    stages: [
+      /* each stage's words say exactly what its part of the film shows */
+      {
+        name: "Oil on the Mivan panels",
+        rail: "Oiling",
+        product: "Magic Shuttering Oil",
+        line: "Magic oil is rolled on to the face of the aluminium panel that meets the concrete: one thin, even, glossy film.",
+        link: { label: "Magic Shuttering Oil", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Pour and clean strip",
+        rail: "Pour",
+        product: "Magic Shuttering Oil",
+        line: "Concrete is poured against the oiled faces, and the panels strip clean: nothing sticks, no stains.",
+        link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
+      },
+      {
+        name: "Precast moulds",
+        rail: "Precast",
+        product: "Silease 360 precast shuttering oil",
+        line: "The oiled steel mould is poured, and the precast unit lifts out clean.",
+        link: { label: "Precast shuttering oil", href: "/products/construction-chemicals" },
+      },
+      {
+        /* a non-breaking hyphen, so the big heading never breaks after "Defect-" */
+        name: "Defect\u2011free finish",
+        rail: "Finish",
+        product: "",
+        line: "Floor by floor to the finished building: smooth, even concrete with no blowholes, no stains, no honeycombing.",
+      },
+    ],
   },
   /**
    * The showroom, right after the hero: the three product lines side by side,
@@ -135,7 +179,7 @@ export const site = {
     /** Under each plinth: the line's products, named as on the live site. Keyed by product line id. */
     lines: {
       lubricants: "Cutting Oil, Soluble Cutting Oil, Rust Preventive Oil, Hydraulic Oil, Gear Oil, Engine Oil",
-      construction: "Shuttering Oil, Shuttering Grease, Mold Release Oil, Mold Release Grease",
+      construction: "Shuttering Oil, Precast Shuttering Oil, Shuttering Grease",
       aerosols: "Vibrant Colour Sprays, Lock Bond Adhesive Spray, Anti-Spatter Spray, Release Spray",
     },
   },
@@ -167,7 +211,6 @@ export const site = {
       spec: [
         { label: "Greases", values: ["Bearings", "Joints", "Slides"], href: "/products/lubricants#greases" },
         { label: "Shuttering", values: ["Krini", "Repel"], href: "/products/construction-chemicals#shuttering-grease" },
-        { label: "Mold release", values: ["Precast moulds"], href: "/products/construction-chemicals#mold-release-grease" },
       ],
       link: "View greases",
       href: "/products/lubricants#greases",
@@ -228,7 +271,7 @@ export const site = {
     {
       id: "construction",
       title: "Construction Industry",
-      body: "Mold release with excellent tribology chemistry. Formulated not just as physical release but also chemically engineered for superior performance and concrete finish.",
+      body: "Shuttering oils and greases with excellent tribology chemistry. Formulated not just as physical release but also chemically engineered for superior performance and concrete finish.",
       line: "construction",
     },
     {
@@ -267,7 +310,7 @@ export const site = {
         body: "Standard, speciality and niche-market products across lubricants, construction chemicals and aerosols.",
         more: [
           "Metalworking fluids and industrial oils (the 1-COOL series), greases",
-          "Shuttering and mold release oils and greases",
+          "Ready-to-use shuttering oils and greases",
           "Aerosol spray paints, anti-spatter, adhesive and release sprays",
         ],
       },
@@ -465,7 +508,7 @@ export const site = {
         label: "What we make",
         heading: ["Lubricants, greases", "and aerosols."],
         /** What the range is and where it is made, product by product (each named as in catalogue.ts). */
-        lead: "Made at our factory in Tiruverkadu, Chennai: 1-COOL cutting oils and coolants, rust preventives, hydraulic, gear and engine oils; greases for bearings, formwork and precast moulds; and aerosol sprays for painting, welding and maintenance.",
+        lead: "Made at our factory in Tiruverkadu, Chennai: 1-COOL cutting oils and coolants, rust preventives, hydraulic, gear and engine oils; greases for bearings and formwork; and aerosol sprays for painting, welding and maintenance.",
         credit: "",
         families: [
           {
@@ -496,7 +539,6 @@ export const site = {
             rows: [
               { label: "Greases", values: ["Bearings", "Joints", "Slides"], href: "/products/lubricants#greases" },
               { label: "Shuttering grease", values: ["Krini", "Repel"], href: "/products/construction-chemicals#shuttering-grease" },
-              { label: "Mold release grease", values: ["Precast moulds"], href: "/products/construction-chemicals#mold-release-grease" },
             ],
             link: "View greases",
             href: "/products/lubricants#greases",
@@ -546,8 +588,8 @@ export const site = {
             link: { label: "View lubricants", href: routes.line("lubricants") },
           },
           {
-            q: "Do you make shuttering oil and mold release agents?",
-            a: "Yes. Shuttering oils (Silease 360, Magic Oil, Nikri 30 and Nikri AL), shuttering greases (Krini and Repel), and mold release oils and greases for precast moulds. They stop concrete sticking, so formwork strips cleanly and can be used again.",
+            q: "Do you make shuttering oil and shuttering grease?",
+            a: "Yes. Shuttering oils (Repel, Silease 360 for precast, Magic Oil, Nikri 30 and Nikri AL) and shuttering greases (Krini and Repel), all ready to use with no dilution. They stop concrete sticking, so formwork strips cleanly and can be used again.",
             link: { label: "View construction chemicals", href: routes.line("construction-chemicals") },
           },
           {
@@ -640,7 +682,7 @@ export const site = {
       faq: [
         {
           q: "What does Krini Crude manufacture?",
-          a: "Lubricants and greases (including the 1-COOL metalworking fluid series), construction chemicals (shuttering and mold release oils and greases) and aerosol products (spray paints, anti-spatter, adhesive and release sprays): 70+ products in all.",
+          a: "Lubricants and greases (including the 1-COOL metalworking fluid series), construction chemicals (shuttering oils and greases) and aerosol products (spray paints, anti-spatter, adhesive and release sprays): 70+ products in all.",
         },
         {
           q: "Where is Krini Crude based?",
@@ -695,7 +737,7 @@ export const site = {
       seo: {
         title: "Products: Lubricants, Construction Chemicals & Aerosols | Krini Crude",
         description:
-          "70+ products made in Chennai: 1-COOL cutting oils and coolants, hydraulic, gear and engine oils, shuttering and mold release oils, and aerosol sprays.",
+          "70+ products made in Chennai: 1-COOL cutting oils and coolants, hydraulic, gear and engine oils, shuttering oils and greases, and aerosol sprays.",
       },
       label: "Products · 70+ products",
       heading: "Industrial lubricants, construction chemicals and aerosol sprays.",

@@ -62,10 +62,10 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
             {/* the logo, exactly as supplied (icon and words), on the left; the four pages in one box and Enquire now on the right */}
             <a href={routes.home} className="nav-logo nav-logo-c shrink-0" aria-label="Krini Crude, home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo-krini-h.webp" alt="" width={739} height={220} className="nav-mark nav-logo-full nav-logo-dark" />
+              <img src="/images/logo-krini-h.webp?v=kc2" alt="" width={739} height={220} className="nav-mark nav-logo-full nav-logo-dark" />
               {/* the same logo with white words, for the dark home film on a phone */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo-krini-h-light.webp" alt="" width={739} height={220} className="nav-logo-lite" />
+              <img src="/images/logo-krini-h-light.webp?v=kc2" alt="" width={739} height={220} className="nav-logo-lite" />
             </a>
             <nav aria-label="Primary" className="nav-box hidden lg:block">
               <ul className="nav-list">

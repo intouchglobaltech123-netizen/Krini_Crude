@@ -6329,7 +6329,6 @@ html.motion [data-shutter] {
     opacity: 0;
     visibility: hidden;
     transform: translate3d(0, 26px, 0);
-    filter: blur(8px);
     transition:
       opacity 0.7s var(--ease-film),
       transform 0.9s var(--ease-film),
@@ -6383,8 +6382,10 @@ html.motion [data-shutter] {
   }
   .sh-motto {
     margin-top: 0.5rem;
+    max-width: 34ch;
     font-size: var(--fs-p);
     color: rgb(var(--c-amber));
+    text-wrap: balance;
   }
   .sh-big {
     margin-top: 0.8rem;

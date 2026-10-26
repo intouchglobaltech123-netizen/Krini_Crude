@@ -65,7 +65,7 @@ export function organization(): Node {
       "Engine oils",
       "Greases",
       "Shuttering oil",
-      "Mold release agents",
+      "Shuttering grease",
       "Aerosol spray paints",
       "Anti-spatter spray",
       "Private label manufacturing",

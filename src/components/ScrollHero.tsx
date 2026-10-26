@@ -1,9 +1,9 @@
-import { enquireHref, routes, site } from "../content/site";
+import { site } from "../content/site";
 import { heroSeq } from "../content/media";
 import { Arrow, Name } from "./ui";
 
-/** The four steps as named on the rail beside the hero; where each starts in the scroll is heroSeq.beats. */
-const STEPS = ["Krini Crude", "What we make", "Aerosols", "Get started"];
+/** The steps as named on the rail beside the hero (the name, then the stages of the film); where each starts is heroSeq.beats. */
+const STEPS = ["Krini Crude", ...site.film.stages.map((s) => s.rail)];
 /** Phones, under the buttons: three of the live site's figures (site.stats). */
 const [productsStat, , clientsStat] = site.stats;
 const OPEN_STATS = [
@@ -13,26 +13,22 @@ const OPEN_STATS = [
 ];
 
 /**
- * Home's hero, "From rust to radiance": a Google Flow film, one take, played
- * by scrolling. Golden oil pours over a rusty gear shaft, a thick coat of
- * grease follows, a spray can mists it, and the camera pulls back to the gear:
- * each thing Krini Crude does (site.work) in turn. Four screens, three
- * scrolls: the stage stays on screen while the scroll position picks the
- * film's frame (src/motion/scrollhero.ts draws it on a canvas) and the step
- * whose words are shown: the name, then the three lines of products side by
- * side while the oil pours and the grease coats, then the spray can at work
- * (the film on its own, no words), then the promise and the buttons. The h1 is the name with a
- * small line over it saying what Krini Crude is and where (site.film.kicker:
- * "Lubricant manufacturer in Chennai") and the tagline under it. On the first screen the
- * three lines are small pills, each a jump to its part of the film (without
- * JavaScript, a link to its page); each line's words carry a spec plate of its
- * products and grades (site.work[].spec, as published on krinicrude.com).
- * With reduced motion or without JavaScript the hero is one screen: the film's
- * last frame, the name, the promise and the buttons. Docs: docs/HERO.md.
+ * Home's hero: Krini Crude's oils at work, a Google Flow film (src/content/media.ts heroSeq;
+ * src/motion/scrollhero.ts plays it). The client's building-first film: the finished building, Magic
+ * Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel, the oiled formwork box
+ * poured and stripped clean, a precast mould, and the building rising to its completed, defect-free
+ * finish. On wider screens each scroll plays the next part: the name
+ * over the building, then one screen per stage (site.film.stages) with the product named, and last
+ * the finished building under the buttons. The rail on the right names
+ * every stage and jumps to it. On an upright phone the film plays as a video at the top of one
+ * screen, the stage on screen named over it (.sh-chip). With reduced motion or without JavaScript
+ * the hero is one screen: the finished building, the name, the headline and the buttons.
+ * Docs: docs/HERO.md.
  */
 export function ScrollHero() {
-  const { film, work } = site;
-  const count = String(work.length).padStart(2, "0");
+  const { film } = site;
+  const stages = film.stages;
+  const total = String(stages.length).padStart(2, "0");
   return (
     <section id="top" className="sh theme-navy" data-hero data-scrollhero aria-labelledby="hero-title" suppressHydrationWarning>
       <div className="sh-stage" data-sh-stage>
@@ -45,6 +41,14 @@ export function ScrollHero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="sh-mark" data-sh-mark src={heroSeq.mark.src} alt="" width={35} height={17} aria-hidden="true" />
         <div className="sh-scrim" aria-hidden="true" />
+        {/* phones: the film plays on its own, so the stage on screen is named over it */}
+        <p className="sh-chip label" aria-hidden="true">
+          {stages.map((st, i) => (
+            <span key={st.name} data-sh-chip={i + 1}>
+              <b>{String(i + 1).padStart(2, "0")}</b> {st.name}
+            </span>
+          ))}
+        </p>
 
         <div className="sh-words frame">
           <div className="sh-step sh-open is-on" data-sh-step="0">
@@ -56,22 +60,13 @@ export function ScrollHero() {
               <span className="sh-tagline">{film.tagline}</span>
             </h1>
             <p className="sh-motto">{film.motto}</p>
-            <ul className="sh-jumps" aria-label="What we make">
-              {work.map((w, i) => (
-                <li key={w.id}>
-                  <a href={w.href} className="sh-jump label" data-sh-jump={w.id === "aerosols" ? 2 : 1}>
-                    {w.rail}
-                  </a>
-                </li>
-              ))}
-            </ul>
             {/* phones: the film plays as a video on one screen, so the buttons sit here */}
             <div className="sh-open-ctas">
-              <a href={routes.products} className="btn btn-primary">
-                View products <Arrow />
+              <a href={film.ctas.primary.href} className="btn btn-primary">
+                {film.ctas.primary.label} <Arrow />
               </a>
-              <a href={enquireHref("Request a quote")} className="btn btn-ghost" data-enquire="Request a quote">
-                Get a quote <Arrow />
+              <a href={film.ctas.secondary.href} className="btn btn-ghost">
+                {film.ctas.secondary.label} <Arrow />
               </a>
             </div>
             <dl className="sh-open-stats">
@@ -84,46 +79,43 @@ export function ScrollHero() {
             </dl>
           </div>
 
-          <div className="sh-step sh-lines" data-sh-step={1}>
-            <p className="sh-count label" aria-hidden="true">
-              <span className="text-amber">What we make</span>
+          {/* the build, one stage a screen: the stage's number and name over the film */}
+          {stages.slice(0, -1).map((st, i) => (
+            <div key={st.name} className="sh-step sh-build" data-sh-step={i + 1}>
+              <p className="sh-count label">
+                <span className="text-amber">Stage {String(i + 1).padStart(2, "0")}</span>
+                <span aria-hidden="true"> / {total}</span>
+              </p>
+              <h2 className="sh-big display-tight">{st.name}</h2>
+              {st.product ? (
+                <p className="sh-product">
+                  <span className="sh-product-k label">Krini product</span>
+                  <span className="sh-product-v">{st.product}</span>
+                </p>
+              ) : null}
+              <p className="sh-body">{st.line}</p>
+              {"link" in st && st.link ? (
+                <a href={st.link.href} className="sh-link label">
+                  {st.link.label} <Arrow />
+                </a>
+              ) : null}
+            </div>
+          ))}
+
+          <div className="sh-step sh-end" data-sh-step={stages.length}>
+            <p className="sh-count label">
+              <span className="text-amber">Stage {total}</span>
+              <span aria-hidden="true"> / {total}</span>
             </p>
-            <h2 className="sr-only">What we make</h2>
-            <ol className="sh-lines-list">
-              {work.map((w, i) => (
-                <li key={w.id} className="sh-line">
-                  <span className="sh-line-n label tabular-nums" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")} / {count}
-                  </span>
-                  <h3 className="sh-line-name display-tight">{w.name}</h3>
-                  <p className="sh-line-body">{w.body}</p>
-                  <p className="sh-line-grades">
-                    {w.spec.map((row) => (
-                      <span key={row.label} className="grade">
-                        {row.label}
-                      </span>
-                    ))}
-                  </p>
-                </li>
-              ))}
-            </ol>
-            <a href={routes.products} className="sh-link label">
-              View all products <Arrow />
-            </a>
-          </div>
-
-          {/* aerosols: the spray can at work, the film on its own (the line is in "What we make") */}
-          <div className="sh-step sh-spray" data-sh-step={2} aria-hidden="true" />
-
-          <div className="sh-step sh-end" data-sh-step={3}>
-            <p className="sh-big display-tight">{film.promise}</p>
-            <p className="sh-body">{site.hero.lead}</p>
+            {/* the promise is the opening headline (film.tagline), so it is not said again here */}
+            <h2 className="sh-big display-tight">{stages[stages.length - 1].name}</h2>
+            {stages[stages.length - 1].line ? <p className="sh-body">{stages[stages.length - 1].line}</p> : null}
             <div className="sh-ctas">
-              <a href={routes.products} className="btn btn-primary" data-magnetic>
-                View products <Arrow />
+              <a href={film.ctas.primary.href} className="btn btn-primary" data-magnetic>
+                {film.ctas.primary.label} <Arrow />
               </a>
-              <a href={enquireHref("Request a quote")} className="btn btn-ghost" data-enquire="Request a quote" data-magnetic>
-                Get a quote <Arrow />
+              <a href={film.ctas.secondary.href} className="btn btn-ghost" data-magnetic>
+                {film.ctas.secondary.label} <Arrow />
               </a>
             </div>
           </div>
@@ -134,7 +126,7 @@ export function ScrollHero() {
           <span className="sh-mouse">
             <span className="sh-wheel" />
           </span>
-          <span className="sh-scroll-text">Scroll to see what we do</span>
+          <span className="sh-scroll-text">Scroll to see it in action</span>
           <svg className="sh-chev" width="14" height="9" viewBox="0 0 14 9" fill="none">
             <path d="M1 1.5 7 7.5l6-6" stroke="currentColor" strokeWidth="1.6" />
           </svg>

@@ -5,6 +5,8 @@ const nextConfig = {
   output: process.env.STATIC_EXPORT ? "export" : undefined,
   images: { unoptimized: true },
   poweredByHeader: false,
+  // the deploy (Vercel) should not fail on lint warnings or style rules; run `npm run lint` locally instead
+  eslint: { ignoreDuringBuilds: true },
   // no Next.js badge in the corner while developing
   devIndicators: false,
   async headers() {
