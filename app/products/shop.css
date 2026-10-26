@@ -388,7 +388,7 @@ section.pshop .pshop-grid .kcard-tag {
 /* the pack on the left and, beside it, the product itself in a beaker (catalogue.ts beaker) */
 section.pshop .pshop-grid .kcard-media.has-beaker {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.85fr) minmax(0, 0.75fr);
   grid-template-rows: minmax(0, 1fr);
   align-items: end;
   gap: 6px;
@@ -407,17 +407,19 @@ section.pshop .pshop-grid .kcard-media.has-beaker > .kplate {
   padding: 24px 0 0;
   background: transparent;
 }
-/* the beaker is cut out (transparent), the same size and place in every picture: it stands on the card's white, a soft shadow under it */
+/* the beaker is cut out (transparent), a neat sample beside the pack with a soft shadow */
 section.pshop .pshop-grid .kcard-media .kbeaker {
   display: block;
-  width: 100%;
+  width: 75%;
+  max-width: 48px;
   height: auto;
-  max-height: 100%;
+  max-height: 60%;
   aspect-ratio: 3 / 4;
-  margin-bottom: 4%;
+  margin: 0 auto 5%;
+  justify-self: center;
   object-fit: contain;
   object-position: 50% 100%;
-  filter: drop-shadow(0 6px 6px rgb(15 23 42 / 0.16));
+  filter: drop-shadow(0 4px 5px rgb(15 23 42 / 0.14));
   transition: transform 0.35s ease;
 }
 section.pshop .pshop-grid .kcard:hover .kcard-media .kbeaker {
@@ -429,9 +431,12 @@ section.pshop .pshop-grid .kcard:hover .kcard-media .kbeaker {
   }
   section.pshop .pshop-grid .kcard-media.has-beaker {
     gap: 4px;
+    grid-template-columns: minmax(0, 1.85fr) minmax(0, 0.75fr);
   }
   section.pshop .pshop-grid .kcard-media .kbeaker {
-    filter: drop-shadow(0 4px 4px rgb(15 23 42 / 0.16));
+    max-width: 38px;
+    max-height: 58%;
+    filter: drop-shadow(0 3px 3px rgb(15 23 42 / 0.14));
   }
 }
 /* the product page: the same line under its name */
@@ -714,6 +719,38 @@ section.pshop .pv .pg-slide > .pg-empty {
   max-width: 86%;
   max-height: 86%;
   border-radius: 12px;
+}
+/* the product video, as the last view: it fills the plate and plays when picked */
+section.pshop .pv .pg-slide-vid {
+  padding: 0;
+  background: #0f172a;
+}
+section.pshop .pv .pg-slide-vid > video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #0f172a;
+}
+section.pshop .pv .pg-thumb-vid {
+  position: relative;
+  overflow: hidden;
+}
+section.pshop .pv .pg-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(15 23 42 / 0.78);
+  color: #d4af37;
+  box-shadow: 0 2px 8px -2px rgb(15 23 42 / 0.5);
+}
+section.pshop .pv .pg-play svg {
+  margin-left: 2px;
 }
 section.pshop .pv .pg-brand,
 section.pshop .pv .pg-count {

@@ -490,3 +490,280 @@ main > section.hm-make {
     display: inline;
   }
 }
+
+
+/* ---- Phone hero: the WHOLE film, uncropped (the client, October 2026). It plays the full width of
+   the screen just under the top bar, at its own 16:9 (scrollhero.ts sets --sh-film-top and
+   --sh-film-h), with a fine gold line under it; under that the stage's name and the pause button,
+   then the name, the lines, the buttons and the figures. */
+@media (max-width: 639px) {
+  section.sh.is-band .sh-video {
+    top: var(--sh-film-top, 80px);
+    height: var(--sh-film-h);
+    object-fit: contain;
+    object-position: 50% 50%;
+    background: #000;
+  }
+  section.sh.is-band .sh-scrim {
+    background: none;
+  }
+  section.sh.is-band .sh-chip {
+    top: calc(var(--sh-film-top, 80px) + var(--sh-film-h) + 14px);
+  }
+  section.sh.is-band .sh-play {
+    top: calc(var(--sh-film-top, 80px) + var(--sh-film-h) + 9px);
+  }
+  section.sh.is-band .sh-play.is-big {
+    top: calc(var(--sh-film-top, 80px) + var(--sh-film-h) * 0.5 - 26px);
+  }
+  section.sh.is-band .sh-step.sh-open {
+    top: var(--sh-open-top, calc(var(--sh-film-top, 80px) + var(--sh-film-h) + 66px));
+    bottom: auto;
+  }
+}
+
+/* ---- Phone hero, tidy (the client, October 2026): no play / pause button over the film (it plays
+   by itself, on a loop), and the words one neat centred column: the kicker, the name, the
+   headline, the motto, the two buttons and the figures, at even spacing. */
+@media (max-width: 639px) {
+  section.sh.is-band .sh-play,
+  section.sh.is-band .sh-play.is-big {
+    display: none !important;
+  }
+  section.sh.is-band .sh-step.sh-open {
+    left: 0;
+    right: 0;
+    padding-inline: 18px;
+    text-align: center;
+  }
+  section.sh.is-band .sh-open .sh-title {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+  }
+  section.sh.is-band .sh-open .sh-tagline {
+    display: block;
+    text-align: center;
+    font-size: 1rem !important;
+    line-height: 1.35;
+  }
+  section.sh.is-band .sh-open .sh-motto {
+    max-width: 31ch;
+    margin: 10px auto 0 !important;
+    padding: 0;
+    text-align: center !important;
+    text-indent: 0;
+    font-size: 0.86rem !important;
+    line-height: 1.55;
+    color: rgb(227 194 90 / 0.92);
+  }
+  section.sh.is-band .sh-open-ctas {
+    margin-top: 18px;
+    gap: 10px;
+  }
+  section.sh.is-band .sh-open-ctas .btn {
+    min-height: 46px;
+    font-size: 0.82rem;
+  }
+  section.sh.is-band .sh-open-stats {
+    margin-top: 16px;
+  }
+}
+
+/* ---- Phone: "What we make" as three tiles side by side (the number, the brand, the line's name,
+   View), and "Industry we serve" two to a row */
+@media (max-width: 639px) {
+  .hm-lines {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .hm-make .hm-line {
+    align-items: center;
+    gap: 8px;
+    padding: 14px 8px 12px;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .hm-make .hm-line::before {
+    left: 50%;
+    width: 32px;
+    margin-left: -16px;
+  }
+  .hm-make .hm-line-top {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .hm-make .hm-line-n {
+    font-size: 1.35rem;
+  }
+  .hm-make .hm-line-logo {
+    height: 28px;
+    padding: 3px 6px;
+    border-radius: 8px;
+  }
+  .hm-make .hm-line-logo img {
+    max-width: 78px;
+  }
+  .hm-make .hm-line-brand {
+    padding: 4px 9px;
+    font-size: 0.68rem;
+  }
+  .hm-make .hm-line h3 {
+    font-size: 0.84rem !important;
+    line-height: 1.22 !important;
+    text-align: center;
+  }
+  .hm-make .hm-line-items {
+    display: none;
+  }
+  .hm-make .hm-line em {
+    justify-content: center;
+    gap: 3px;
+    padding-top: 2px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+  .hm-make .hm-line em svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .hm-inds {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .hm-make .hm-ind {
+    gap: 8px;
+    padding: 14px 12px;
+    border-radius: 16px;
+  }
+  .hm-make .hm-ind-ic {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .hm-make .hm-ind-ic svg {
+    width: 19px;
+    height: 19px;
+  }
+  .hm-make .hm-ind h3 {
+    font-size: 0.95rem !important;
+    line-height: 1.25 !important;
+  }
+  .hm-make .hm-ind p {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.8rem !important;
+    line-height: 1.5;
+    text-align: left !important;
+    word-spacing: normal;
+  }
+  .hm-make .hm-ind a {
+    font-size: 0.78rem !important;
+  }
+}
+
+/* ---- Phone hero: the stage's name centred under the film, in line with the words */
+@media (max-width: 639px) {
+  section.sh.is-band .sh-chip {
+    left: 0;
+    right: 0;
+  }
+  section.sh.is-band .sh-chip span {
+    left: 50%;
+    transform: translate(-50%, 6px);
+  }
+  section.sh[data-stage] .sh-chip span[data-sh-chip] {
+    transform: translate(-50%, 6px);
+  }
+  section.sh[data-stage="1"] .sh-chip [data-sh-chip="1"],
+  section.sh[data-stage="2"] .sh-chip [data-sh-chip="2"],
+  section.sh[data-stage="3"] .sh-chip [data-sh-chip="3"],
+  section.sh[data-stage="4"] .sh-chip [data-sh-chip="4"] {
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ---- Phone: "What we make", refined tiles. Every tile alike: a small gold number, the brand on
+   a white plate of one size (logos fitted in it, Vibrant set as a word mark), the line's name on two
+   lines, and a round gold arrow at the foot (the whole tile is the link). */
+@media (max-width: 639px) {
+  .hm-make .hm-line {
+    gap: 10px;
+    padding: 16px 10px 14px;
+    border-radius: 16px;
+    border-color: rgb(15 23 42 / 0.07);
+    background: linear-gradient(180deg, #fff 60%, #fbf8ef);
+    box-shadow: 0 12px 26px -20px rgb(15 23 42 / 0.45);
+  }
+  .hm-make .hm-line::before {
+    width: 40px;
+    margin-left: -20px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+  }
+  .hm-make .hm-line-top {
+    width: 100%;
+    gap: 10px;
+  }
+  .hm-make .hm-line-n {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--hm-gold-deep);
+    -webkit-text-stroke: 0;
+  }
+  .hm-make .hm-line-logo,
+  .hm-make .hm-line-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 42px;
+    padding: 6px 8px;
+    border: 1px solid rgb(15 23 42 / 0.08);
+    border-radius: 10px;
+    background: #fff;
+  }
+  .hm-make .hm-line-logo img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .hm-make .hm-line-brand {
+    font-size: 0.95rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.01em;
+    color: var(--hm-navy);
+  }
+  .hm-make .hm-line h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5em;
+    font-size: 0.86rem !important;
+    line-height: 1.25 !important;
+  }
+  /* the foot: a round gold arrow (the words stay for screen readers) */
+  .hm-make .hm-line em {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin: auto auto 0;
+    padding: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--hm-gold-hi), #c9a43a);
+    box-shadow: 0 6px 14px -6px rgb(201 164 58 / 0.8);
+    font-size: 0;
+    color: var(--hm-navy);
+  }
+  .hm-make .hm-line em svg {
+    width: 15px;
+    height: 15px;
+  }
+}

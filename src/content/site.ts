@@ -140,7 +140,7 @@ export const site = {
         name: "Oil on the Mivan panels",
         rail: "Oiling",
         product: "Magic Shuttering Oil",
-        line: "Magic oil is rolled on to the face of the aluminium panel that meets the concrete: one thin, even, glossy film.",
+        line: "Magic Shuttering Oil is rolled up and down the aluminium panel: a thin, wet, even film before every pour.",
         link: { label: "Magic Shuttering Oil", href: "/products/construction-chemicals" },
       },
       {
@@ -154,7 +154,7 @@ export const site = {
         name: "Precast moulds",
         rail: "Precast",
         product: "Silease 360 precast shuttering oil",
-        line: "The oiled steel mould is poured, and the precast unit lifts out clean.",
+        line: "Oil is rolled on to the steel mould with a big roller first; only then is the concrete poured, and the unit lifts out clean.",
         link: { label: "Precast shuttering oil", href: "/products/construction-chemicals" },
       },
       {
@@ -636,20 +636,19 @@ export const site = {
         quote: "A distinguished reputation as proud pioneers in lubricants, construction chemicals and aerosol manufacturing.",
       },
       /**
-       * Drawn from krinicrude.com's own words: "Innovation & excellence in manufacturing"
-       * (its home page) and what it says Krini Crude is committed to (its About page).
-       * Replace with Krini Crude's formal vision and mission statements, if it has them.
+       * Service first, in plain English: Krini Crude works to each customer's need (tailor-made
+       * products, private label, after-sales support), so the vision and mission say that simply.
        */
       vision: {
         label: "Vision & mission",
         visionLabel: "Our vision",
-        vision: "Innovation and excellence in manufacturing.",
+        vision: "Your need comes first: the right product, made for your work.",
         missionLabel: "Our mission",
         mission: [
-          { title: "Research & development", body: "Invest substantially in R&D, overseen by our Director." },
-          { title: "Modern technology", body: "Keep acquiring modern technologies." },
-          { title: "Reach", body: "Expand geographically: all major states in India today, brands across the globe." },
-          { title: "Support", body: "Give every client tailor-made products and comprehensive after-sales support." },
+          { title: "Listen first", body: "We learn what your site, machine or product really needs." },
+          { title: "Make it to fit", body: "We make or adjust the product to match that need." },
+          { title: "Deliver on time", body: "The right quantity and pack, when you need it." },
+          { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
         ],
       },
       rd: { label: "Research & development", desk: "From the Director’s desk", heading: "Formulation is where the work starts." },

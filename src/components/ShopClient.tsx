@@ -537,7 +537,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
           <div className="pv-wrap">
           <div className="pv-top">
             <div className="pv-media">
-              <Gallery key={pv.key} views={pv.views} name={pv.name} brand={pv.brand} brandLogo={pv.brandLogo} plateLogo={pv.brandLogoFull} alt={pv.imageAlt ?? pv.name} />
+              <Gallery key={pv.key} views={pv.views} video={pv.video} name={pv.name} brand={pv.brand} brandLogo={pv.brandLogo} plateLogo={pv.brandLogoFull} alt={pv.imageAlt ?? pv.name} />
             </div>
             <div className="pv-info">
               <p className="pv-crumbs">
@@ -597,8 +597,9 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   <WaIcon /> Order on WhatsApp
                 </a>
               </div>
-              {/* the data sheet (construction chemicals only) and the AI-generated video */}
-              <div className={`pv-docs${pv.sheet ? "" : " is-solo"}`}>
+              {/* the data sheet and the test report, where we have them (the video is in the photos) */}
+              {pv.sheet || pv.report ? (
+              <div className={`pv-docs${pv.sheet && pv.report ? "" : " is-solo"}`}>
                 {pv.sheet ? (
                   <a href={pv.sheet} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
                     <DocIcon />
@@ -617,14 +618,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                     </span>
                   </a>
                 ) : null}
-                <button type="button" className="pv-doc pv-doc-vid" onClick={() => setVidOpen(true)} disabled={!pv.video} aria-disabled={!pv.video}>
-                  <PlayIcon />
-                  <span>
-                    <b>Product video</b>
-                    <small>{pv.video ? "AI-generated · Watch" : "AI-generated · Coming soon"}</small>
-                  </span>
-                </button>
               </div>
+              ) : null}
               <ul className="pv-assure">
                 <li>ISO certified factory, Chennai</li>
                 <li>No payment online</li>
@@ -1034,9 +1029,23 @@ function Photo({ src, alt }: { src?: string; alt: string; brand?: string; brandL
  * A product page's photos: the pack from the front and the back, one at a time. Scroll or
  * swipe across, use the arrows, or tap a view below; a view whose photo has not come yet says so.
  */
-function Gallery({ views, name, brand, brandLogo, plateLogo, alt }: { views: ShopItem["views"]; name: string; brand: string; brandLogo?: string; plateLogo?: string; alt: string }) {
+function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt }: { views: ShopItem["views"]; video?: string; name: string; brand: string; brandLogo?: string; plateLogo?: string; alt: string }) {
   const track = useRef<HTMLDivElement>(null);
+  const vid = useRef<HTMLVideoElement>(null);
   const [at, setAt] = useState(0);
+  // like a shop's product page: the video sits beside the photos as one more view, and plays when it is picked
+  const poster = photos.find((v) => v.src)?.src;
+  const views: { label: string; src?: string; video?: string }[] = video ? [...photos, { label: "Video", video }] : photos;
+  const vidAt = video ? views.length - 1 : -1;
+  useEffect(() => {
+    const v = vid.current;
+    if (!v) return;
+    if (at === vidAt) {
+      v.play().catch(() => {});
+    } else {
+      v.pause();
+    }
+  }, [at, vidAt]);
   const go = (k: number) => {
     const t = track.current;
     if (!t) return;
@@ -1053,8 +1062,10 @@ function Gallery({ views, name, brand, brandLogo, plateLogo, alt }: { views: Sho
       <div className="pg-stage">
         <div className="pg-track" ref={track} onScroll={onScroll} data-lenis-prevent tabIndex={0} aria-label={`${name}: photos`}>
           {views.map((v) => (
-            <figure className="pg-slide" key={v.label}>
-              {v.src ? (
+            <figure className={v.video ? "pg-slide pg-slide-vid" : "pg-slide"} key={v.label}>
+              {v.video ? (
+                <video ref={vid} src={v.video} poster={poster} controls muted playsInline loop preload="metadata" aria-label={`${name}: product video`} />
+              ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt={`${alt}, ${v.label.toLowerCase()} view`} decoding="async" />
               ) : v.label === "Front" ? (
@@ -1092,8 +1103,20 @@ function Gallery({ views, name, brand, brandLogo, plateLogo, alt }: { views: Sho
       <div className="pg-thumbs" role="group" aria-label="Views">
         {views.map((v, k) => (
           <button key={v.label} type="button" className="pg-thumb" aria-pressed={at === k} onClick={() => go(k)}>
-            <span className="pg-thumb-img">
-              {v.src ? (
+            <span className={v.video ? "pg-thumb-img pg-thumb-vid" : "pg-thumb-img"}>
+              {v.video ? (
+                <>
+                  {poster ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={poster} alt="" loading="lazy" decoding="async" />
+                  ) : null}
+                  <span className="pg-play" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5.5v13l11-6.5-11-6.5Z" />
+                    </svg>
+                  </span>
+                </>
+              ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt="" loading="lazy" decoding="async" />
               ) : (

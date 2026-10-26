@@ -33,10 +33,10 @@ const WAYS = [
 ];
 
 const MISSION = [
-  { title: "Investment", body: "Invest substantially in research and development." },
-  { title: "Modern technology", body: "Keep acquiring modern technologies." },
-  { title: "Reach", body: "Keep expanding geographically." },
-  { title: "Support", body: "Comprehensive after-sales support for every client." },
+  { title: "Listen first", body: "We learn what your site, machine or product really needs." },
+  { title: "Make it to fit", body: "We make or adjust the product to match that need." },
+  { title: "Deliver on time", body: "The right quantity and pack, when you need it." },
+  { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
 ];
 
 const MARKETS = ["Industrial", "Automotive", "Marine", "Construction", "Infrastructure", "Specialist sectors"];
@@ -152,7 +152,7 @@ export function AboutPage() {
             <div className="ab3-vm">
               <div className="ab3-vision">
                 <p className="ab3-k">Our vision</p>
-                <p className="ab3-vision-line">Innovation and excellence in manufacturing.</p>
+                <p className="ab3-vision-line">Your need comes first: the right product, made for your work.</p>
               </div>
               <div className="ab3-mission">
                 <p className="ab3-k">Our mission</p>

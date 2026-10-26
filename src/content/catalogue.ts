@@ -353,6 +353,7 @@ export const lines: Line[] = [
               imageAlt: "1-COOL Rust Proteck R5 rust preventive oil 20L pail",
               sheetUrl: "/documents/rust-preventive-oil-pds.pdf",
               sheetLabel: "1-COOL Rust Proteck R5 Product Data Sheet (PDS 2026)",
+              videoUrl: "/videos/products/1-cool-rust-proteck-r5.mp4",
               description:
                 "1-COOL RUST PROTECK R5 is a rust preventive oil with dewatering properties, designed to protect metal components from rust and corrosion. It quickly displaces moisture and forms a protective film on the metal surface.",
               purpose: [
