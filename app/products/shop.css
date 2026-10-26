@@ -720,40 +720,6 @@ section.pshop .pv .pg-slide > .pg-empty {
   max-height: 86%;
   border-radius: 12px;
 }
-<<<<<<< HEAD
-/* the product video, as the last view: it fills the plate and plays when picked */
-section.pshop .pv .pg-slide-vid {
-  padding: 0;
-  background: #0f172a;
-}
-section.pshop .pv .pg-slide-vid > video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #0f172a;
-}
-section.pshop .pv .pg-thumb-vid {
-  position: relative;
-  overflow: hidden;
-}
-section.pshop .pv .pg-play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 30px;
-  height: 30px;
-  margin: -15px 0 0 -15px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgb(15 23 42 / 0.78);
-  color: #d4af37;
-  box-shadow: 0 2px 8px -2px rgb(15 23 42 / 0.5);
-}
-section.pshop .pv .pg-play svg {
-  margin-left: 2px;
-}
-=======
 section.pshop .pv .pg-thumb-vid-preview {
   position: relative;
   width: 100%;
@@ -807,7 +773,6 @@ section.pshop .pv .pg-video-media {
   box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.25);
   outline: none;
 }
->>>>>>> origin/sandhu
 section.pshop .pv .pg-brand,
 section.pshop .pv .pg-count {
   display: none;
@@ -1741,11 +1706,7 @@ section.pshop .rv-item p {
     mix-blend-mode: multiply;
   }
   section.pshop .pv .pg-slide-vid {
-    padding: 0;
-    background: #0f172a;
-  }
-  section.pshop .pv .pg-slide-vid > video {
-    mix-blend-mode: normal;
+    padding: 12px;
   }
   section.pshop .pv .pg-thumb-img {
     width: 54px;

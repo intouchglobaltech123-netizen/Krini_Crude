@@ -1029,9 +1029,6 @@ function Photo({ src, alt }: { src?: string; alt: string; brand?: string; brandL
  * A product page's photos: the pack from the front and the back, one at a time. Scroll or
  * swipe across, use the arrows, or tap a view below; a view whose photo has not come yet says so.
  */
-<<<<<<< HEAD
-function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt }: { views: ShopItem["views"]; video?: string; name: string; brand: string; brandLogo?: string; plateLogo?: string; alt: string }) {
-=======
 function Gallery({
   views,
   video,
@@ -1049,30 +1046,9 @@ function Gallery({
   plateLogo?: string;
   alt: string;
 }) {
->>>>>>> origin/sandhu
   const track = useRef<HTMLDivElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
   const [at, setAt] = useState(0);
-<<<<<<< HEAD
-  // like a shop's product page: the video sits beside the photos as one more view, and plays when it is picked
-  const poster = photos.find((v) => v.src)?.src;
-  const views: { label: string; src?: string; video?: string }[] = video ? [...photos, { label: "Video", video }] : photos;
-  const vidAt = video ? views.length - 1 : -1;
-  useEffect(() => {
-    const v = vid.current;
-    if (!v) return;
-    if (at === vidAt) {
-      // with sound; a browser that blocks sound without a tap first plays it muted instead
-      v.muted = false;
-      v.play().catch(() => {
-        v.muted = true;
-        v.play().catch(() => {});
-      });
-    } else {
-      v.pause();
-    }
-  }, [at, vidAt]);
-=======
 
   type GalleryItem =
     | { kind: "image"; label: string; src?: string }
@@ -1089,7 +1065,22 @@ function Gallery({
     ...(sampleView ? [{ kind: "image" as const, label: "Sample", src: sampleView.src }] : []),
   ];
 
->>>>>>> origin/sandhu
+  // the video plays with sound when its view is picked; a browser that blocks sound without a tap
+  // first plays it muted instead; it pauses when another view is picked
+  const vidAt = allViews.findIndex((v) => v.kind === "video" && v.video);
+  useEffect(() => {
+    const v = vid.current;
+    if (!v) return;
+    if (at === vidAt) {
+      v.muted = false;
+      v.play().catch(() => {
+        v.muted = true;
+        v.play().catch(() => {});
+      });
+    } else {
+      v.pause();
+    }
+  }, [at, vidAt]);
   const go = (k: number) => {
     const t = track.current;
     if (!t) return;
@@ -1104,13 +1095,6 @@ function Gallery({
   return (
     <div className="pg">
       <div className="pg-stage">
-<<<<<<< HEAD
-        <div className="pg-track" ref={track} onScroll={onScroll} data-lenis-prevent tabIndex={0} aria-label={`${name}: photos`}>
-          {views.map((v) => (
-            <figure className={v.video ? "pg-slide pg-slide-vid" : "pg-slide"} key={v.label}>
-              {v.video ? (
-                <video ref={vid} src={v.video} poster={poster} controls playsInline loop preload="metadata" aria-label={`${name}: product video`} />
-=======
         <div className="pg-track" ref={track} onScroll={onScroll} data-lenis-prevent tabIndex={0} aria-label={`${name}: media`}>
           {allViews.map((v, k) => (
             <figure className={`pg-slide${v.kind === "video" ? " pg-slide-vid" : ""}`} key={v.label}>
@@ -1118,10 +1102,10 @@ function Gallery({
                 v.video ? (
                   <div className="pg-video-stage">
                     <video
+                      ref={vid}
                       src={v.video}
                       controls
                       playsInline
-                      muted
                       loop
                       preload="metadata"
                       className="pg-video-media"
@@ -1136,7 +1120,6 @@ function Gallery({
                     <span>Video coming soon</span>
                   </div>
                 )
->>>>>>> origin/sandhu
               ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt={`${alt}, ${v.label.toLowerCase()} view`} decoding="async" />
@@ -1173,23 +1156,6 @@ function Gallery({
         </button>
       </div>
       <div className="pg-thumbs" role="group" aria-label="Views">
-<<<<<<< HEAD
-        {views.map((v, k) => (
-          <button key={v.label} type="button" className="pg-thumb" aria-pressed={at === k} onClick={() => go(k)}>
-            <span className={v.video ? "pg-thumb-img pg-thumb-vid" : "pg-thumb-img"}>
-              {v.video ? (
-                <>
-                  {poster ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={poster} alt="" loading="lazy" decoding="async" />
-                  ) : null}
-                  <span className="pg-play" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5.5v13l11-6.5-11-6.5Z" />
-                    </svg>
-                  </span>
-                </>
-=======
         {allViews.map((v, k) => (
           <button key={v.label} type="button" className={`pg-thumb${v.kind === "video" ? " pg-thumb-vid" : ""}`} aria-pressed={at === k} onClick={() => go(k)}>
             <span className="pg-thumb-img">
@@ -1208,7 +1174,6 @@ function Gallery({
                     <polygon points="6 4 20 12 6 20 6 4" />
                   </svg>
                 )
->>>>>>> origin/sandhu
               ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt="" loading="lazy" decoding="async" />
