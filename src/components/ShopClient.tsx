@@ -1029,10 +1029,31 @@ function Photo({ src, alt }: { src?: string; alt: string; brand?: string; brandL
  * A product page's photos: the pack from the front and the back, one at a time. Scroll or
  * swipe across, use the arrows, or tap a view below; a view whose photo has not come yet says so.
  */
+<<<<<<< HEAD
 function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt }: { views: ShopItem["views"]; video?: string; name: string; brand: string; brandLogo?: string; plateLogo?: string; alt: string }) {
+=======
+function Gallery({
+  views,
+  video,
+  name,
+  brand,
+  brandLogo,
+  plateLogo,
+  alt,
+}: {
+  views: ShopItem["views"];
+  video?: string;
+  name: string;
+  brand: string;
+  brandLogo?: string;
+  plateLogo?: string;
+  alt: string;
+}) {
+>>>>>>> origin/sandhu
   const track = useRef<HTMLDivElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
   const [at, setAt] = useState(0);
+<<<<<<< HEAD
   // like a shop's product page: the video sits beside the photos as one more view, and plays when it is picked
   const poster = photos.find((v) => v.src)?.src;
   const views: { label: string; src?: string; video?: string }[] = video ? [...photos, { label: "Video", video }] : photos;
@@ -1051,10 +1072,28 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
       v.pause();
     }
   }, [at, vidAt]);
+=======
+
+  type GalleryItem =
+    | { kind: "image"; label: string; src?: string }
+    | { kind: "video"; label: "AI Video"; video?: string };
+
+  const frontView = views.find((v) => v.label === "Front") ?? { label: "Front" };
+  const backView = views.find((v) => v.label === "Back") ?? { label: "Back" };
+  const sampleView = views.find((v) => v.label === "Sample");
+
+  const allViews: GalleryItem[] = [
+    { kind: "image", label: "Front", src: frontView.src },
+    { kind: "image", label: "Back", src: backView.src },
+    { kind: "video", label: "AI Video", video },
+    ...(sampleView ? [{ kind: "image" as const, label: "Sample", src: sampleView.src }] : []),
+  ];
+
+>>>>>>> origin/sandhu
   const go = (k: number) => {
     const t = track.current;
     if (!t) return;
-    const n = Math.max(0, Math.min(views.length - 1, k));
+    const n = Math.max(0, Math.min(allViews.length - 1, k));
     t.scrollTo({ left: n * t.clientWidth, behavior: "smooth" });
     setAt(n);
   };
@@ -1065,11 +1104,39 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
   return (
     <div className="pg">
       <div className="pg-stage">
+<<<<<<< HEAD
         <div className="pg-track" ref={track} onScroll={onScroll} data-lenis-prevent tabIndex={0} aria-label={`${name}: photos`}>
           {views.map((v) => (
             <figure className={v.video ? "pg-slide pg-slide-vid" : "pg-slide"} key={v.label}>
               {v.video ? (
                 <video ref={vid} src={v.video} poster={poster} controls playsInline loop preload="metadata" aria-label={`${name}: product video`} />
+=======
+        <div className="pg-track" ref={track} onScroll={onScroll} data-lenis-prevent tabIndex={0} aria-label={`${name}: media`}>
+          {allViews.map((v, k) => (
+            <figure className={`pg-slide${v.kind === "video" ? " pg-slide-vid" : ""}`} key={v.label}>
+              {v.kind === "video" ? (
+                v.video ? (
+                  <div className="pg-video-stage">
+                    <video
+                      src={v.video}
+                      controls
+                      playsInline
+                      muted
+                      loop
+                      preload="metadata"
+                      className="pg-video-media"
+                    />
+                  </div>
+                ) : (
+                  <div className="pg-empty">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polygon points="6 4 20 12 6 20 6 4" />
+                    </svg>
+                    <b>AI Video</b>
+                    <span>Video coming soon</span>
+                  </div>
+                )
+>>>>>>> origin/sandhu
               ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt={`${alt}, ${v.label.toLowerCase()} view`} decoding="async" />
@@ -1092,20 +1159,21 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
           <Brand name={brand} logo={brandLogo} />
         </span>
         <span className="pg-count" aria-live="polite">
-          {views[at]?.label} · {at + 1}/{views.length}
+          {allViews[at]?.label} · {at + 1}/{allViews.length}
         </span>
         <button type="button" className="pg-arrow pg-prev" onClick={() => go(at - 1)} disabled={at === 0} aria-label="Previous view">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M15 5l-7 7 7 7" />
           </svg>
         </button>
-        <button type="button" className="pg-arrow pg-next" onClick={() => go(at + 1)} disabled={at === views.length - 1} aria-label="Next view">
+        <button type="button" className="pg-arrow pg-next" onClick={() => go(at + 1)} disabled={at === allViews.length - 1} aria-label="Next view">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M9 5l7 7-7 7" />
           </svg>
         </button>
       </div>
       <div className="pg-thumbs" role="group" aria-label="Views">
+<<<<<<< HEAD
         {views.map((v, k) => (
           <button key={v.label} type="button" className="pg-thumb" aria-pressed={at === k} onClick={() => go(k)}>
             <span className={v.video ? "pg-thumb-img pg-thumb-vid" : "pg-thumb-img"}>
@@ -1121,6 +1189,26 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
                     </svg>
                   </span>
                 </>
+=======
+        {allViews.map((v, k) => (
+          <button key={v.label} type="button" className={`pg-thumb${v.kind === "video" ? " pg-thumb-vid" : ""}`} aria-pressed={at === k} onClick={() => go(k)}>
+            <span className="pg-thumb-img">
+              {v.kind === "video" ? (
+                v.video ? (
+                  <span className="pg-thumb-vid-preview">
+                    <video src={v.video} muted playsInline preload="metadata" />
+                    <span className="pg-thumb-play-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="6 4 20 12 6 20 6 4" />
+                      </svg>
+                    </span>
+                  </span>
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="6 4 20 12 6 20 6 4" />
+                  </svg>
+                )
+>>>>>>> origin/sandhu
               ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt="" loading="lazy" decoding="async" />
