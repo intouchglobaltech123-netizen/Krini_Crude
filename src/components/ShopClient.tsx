@@ -1041,7 +1041,12 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
     const v = vid.current;
     if (!v) return;
     if (at === vidAt) {
-      v.play().catch(() => {});
+      // with sound; a browser that blocks sound without a tap first plays it muted instead
+      v.muted = false;
+      v.play().catch(() => {
+        v.muted = true;
+        v.play().catch(() => {});
+      });
     } else {
       v.pause();
     }
@@ -1064,7 +1069,7 @@ function Gallery({ views: photos, video, name, brand, brandLogo, plateLogo, alt 
           {views.map((v) => (
             <figure className={v.video ? "pg-slide pg-slide-vid" : "pg-slide"} key={v.label}>
               {v.video ? (
-                <video ref={vid} src={v.video} poster={poster} controls muted playsInline loop preload="metadata" aria-label={`${name}: product video`} />
+                <video ref={vid} src={v.video} poster={poster} controls playsInline loop preload="metadata" aria-label={`${name}: product video`} />
               ) : v.src ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={v.src} alt={`${alt}, ${v.label.toLowerCase()} view`} decoding="async" />

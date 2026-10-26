@@ -534,7 +534,7 @@ export const lines: Line[] = [
               image: "/images/magic-shuttering-oil.webp",
               imageAlt: "Magic Shuttering Oil 200L drum",
               /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
-              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=1",
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=2",
               pdsRevision: "Rev. 09/2026",
               description:
                 "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
