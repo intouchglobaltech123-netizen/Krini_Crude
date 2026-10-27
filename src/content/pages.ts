@@ -30,13 +30,13 @@ export const seo = {
     ...site.pages.about.seo,
     path: routes.about,
     image: "/images/og-about.jpg",
-    imageAlt: "Helical gears in an open gearbox, with a stream of oil feeding the mesh",
+    imageAlt: "Storage tanks and drums at the Krini Crude factory, Tiruverkadu, Chennai",
   },
   services: {
     ...site.pages.services.seo,
     path: routes.services,
     image: "/images/og-services.jpg",
-    imageAlt: "Production hall with stainless-steel tanks, valves and yellow safety lines",
+    imageAlt: "The aerosol filling hall at the Krini Crude factory: compressor, air receiver and filling machines",
   },
   products: {
     ...site.pages.products.seo,
@@ -54,7 +54,7 @@ export const seo = {
     ...site.pages.contact.seo,
     path: routes.contact,
     image: "/images/og-contact.jpg",
-    imageAlt: "An industrial plant at dusk",
+    imageAlt: "Storage tanks and drums at the Krini Crude factory, Tiruverkadu, Chennai",
   },
   process: {
     ...processPage.seo,

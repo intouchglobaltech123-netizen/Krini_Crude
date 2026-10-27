@@ -454,7 +454,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                           </svg>
-                          ISO 9001
+                          ISO 9001:2015
                         </span>
                       )}
                       <span className="kcard-spec-item" title="Packaging">
@@ -621,7 +621,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </div>
               ) : null}
               <ul className="pv-assure">
-                <li>ISO certified factory, Chennai</li>
+                <li>ISO 9001:2015 certified factory, Chennai</li>
                 <li>No payment online</li>
                 <li>Reply on WhatsApp</li>
               </ul>
@@ -1060,7 +1060,8 @@ function Gallery({
 
   const allViews: GalleryItem[] = [
     { kind: "image", label: "Front", src: frontView.src },
-    { kind: "image", label: "Back", src: backView.src },
+    // a back view only where the product has one (construction chemicals show the front only)
+    ...(views.some((v) => v.label === "Back") ? [{ kind: "image" as const, label: "Back", src: backView.src }] : []),
     { kind: "video", label: "AI Video", video },
     ...(sampleView ? [{ kind: "image" as const, label: "Sample", src: sampleView.src }] : []),
   ];

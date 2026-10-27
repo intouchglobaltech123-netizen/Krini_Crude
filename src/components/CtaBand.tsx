@@ -47,7 +47,7 @@ export function CtaBand({
                 <Glyph name="clock" size={16} /> Open {c.hours}
               </li>
               <li>
-                <Glyph name="services" size={16} /> ISO certified · Chennai
+                <Glyph name="services" size={16} /> ISO 9001:2015 certified · Chennai
               </li>
             </ul>
             <div className="cta3-reach">

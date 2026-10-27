@@ -1141,3 +1141,74 @@ main > div.ab3 > section {
     hyphens: auto;
   }
 }
+
+/* ---- Inside our factory: three photographs from the plant with a short caption each; three in a
+   row on larger screens, on phones the first full width and the other two side by side. */
+.ab3-plant {
+  padding-top: 0;
+}
+.ab3-plant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.ab3-plant-fig {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+}
+.ab3-plant-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.ab3-plant-fig figcaption {
+  display: grid;
+  gap: 3px;
+  padding: 14px 16px 16px;
+}
+.ab3-plant-fig b {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ab-ink);
+}
+.ab3-plant-fig span {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ab-text);
+}
+@media (max-width: 899px) {
+  .ab3-plant-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .ab3-plant-fig:first-child {
+    grid-column: 1 / -1;
+  }
+  .ab3-plant-fig:first-child img {
+    aspect-ratio: 16 / 10;
+  }
+}
+@media (max-width: 639px) {
+  .ab3-plant-grid {
+    margin-top: 14px;
+  }
+  .ab3-plant-fig {
+    border-radius: 14px;
+  }
+  .ab3-plant-fig figcaption {
+    padding: 10px 12px 12px;
+  }
+  .ab3-plant-fig b {
+    font-size: 0.92rem;
+  }
+  .ab3-plant-fig span {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}

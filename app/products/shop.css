@@ -1769,3 +1769,65 @@ section.pshop .rv-item p {
     font-size: 15px !important;
   }
 }
+
+/* ---- Product cards, cleaner (the client, October 2026): the brand logo (Lubecon, 1-COOL) on its
+   own, without the white plate behind it; the pack a size up and in the middle of the photo area,
+   with the sample beaker small at the bottom right corner instead of in a column of its own. */
+section.pshop .pshop-grid .kcard-media > .kbrand.has-logo,
+section.pshop .pshop-grid .kcard-media > .kbrand-lubecon.has-logo {
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+section.pshop .pshop-grid .kcard-media > .kbrand-1cool.has-logo {
+  height: 13px;
+  top: 14px;
+}
+@media (min-width: 640px) {
+  section.pshop .pshop-grid .kcard-media,
+  section.pshop .pshop-grid .kcard-media.has-beaker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 30px 10px 8px;
+  }
+  /* the drum: centred and as tall as the area allows */
+  section.pshop .pshop-grid .kcard-media.has-beaker .kphoto,
+  section.pshop .pshop-grid .kcard-media.has-beaker.is-upright .kphoto {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+  section.pshop .pshop-grid .kcard-media .kbeaker {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 34px;
+    max-width: 34px;
+    height: auto;
+    max-height: none;
+    margin: 0;
+  }
+  /* 1-COOL pails and the other packs photographed with room around them: brought closer */
+  section.pshop .pshop-grid .kcard-media:not(.has-beaker) .kphoto {
+    max-height: 100%;
+    transform: scale(1.3);
+  }
+  section.pshop .pshop-grid .kcard:hover .kcard-media:not(.has-beaker) .kphoto {
+    transform: scale(1.36);
+  }
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-grid .kcard-media {
+    overflow: hidden;
+  }
+  section.pshop .pshop-grid .kcard-media:not(.has-beaker) .kphoto {
+    transform: scale(1.22);
+  }
+}

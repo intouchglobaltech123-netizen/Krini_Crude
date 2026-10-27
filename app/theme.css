@@ -11054,3 +11054,23 @@ main section.cta3 {
     overflow-x: hidden;
   }
 }
+
+/* ---- The new Krini Crude logo (October 2026): the drop on the formwork box, KRINI CRUDE and
+   "Lubricants Manufacturer" under it. It is taller for its width than the old one, so it is set a
+   size up to keep the name easy to read. */
+@media (max-width: 639px) {
+  .nav .nav-split .nav-logo-c .nav-logo-full,
+  .nav .nav-split .nav-logo-c .nav-logo-dark,
+  .nav.is-over .nav-split .nav-logo-c .nav-logo-lite,
+  .nav.is-over .nav-split .nav-logo-c .nav-logo-dark {
+    height: 62px !important;
+    width: auto !important;
+  }
+}
+@media (min-width: 640px) {
+  .nav .nav-split .nav-logo-c .nav-logo-dark,
+  .nav.is-over .nav-split .nav-logo-c .nav-logo-lite {
+    height: 86px !important;
+    width: auto !important;
+  }
+}

@@ -22,7 +22,7 @@ import { isPlaceholder } from "../content/placeholder";
 const FIGURES = [
   { value: "70+", label: "Products" },
   { value: "1000+", label: "Happy clients" },
-  { value: "ISO", label: "Certified company" },
+  { value: "ISO", label: "9001:2015 certified" },
   { value: "Pan-India", label: "All major states" },
 ];
 
@@ -37,6 +37,28 @@ const MISSION = [
   { title: "Make it to fit", body: "We make or adjust the product to match that need." },
   { title: "Deliver on time", body: "The right quantity and pack, when you need it." },
   { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
+];
+
+/** Photographs from the factory in Tiruverkadu. */
+const PLANT = [
+  {
+    src: "/images/factory/tanks-43.webp",
+    title: "Blending and storage",
+    text: "Storage tanks, a blending vessel and drums ready for dispatch.",
+    alt: "Grey and yellow storage tanks, a blending vessel, a stacker and blue drums at the Krini Crude factory",
+  },
+  {
+    src: "/images/factory/aerosol-43.webp",
+    title: "Aerosol filling",
+    text: "Compressed air, filtering and filling for our Vibrant spray cans.",
+    alt: "The aerosol filling hall: compressor, air receiver, filters and filling machines, with Vibrant cans on the table",
+  },
+  {
+    src: "/images/factory/lab-43.webp",
+    title: "Quality laboratory",
+    text: "Every batch is checked on the bench before it leaves.",
+    alt: "The laboratory bench with burettes, flasks, measuring cylinders, a balance and oil samples",
+  },
 ];
 
 /** The markets, each with a small line icon (24 x 24, drawn in the current colour). */
@@ -82,7 +104,7 @@ export function AboutPage() {
               </div>
               <figure className="ab3-hero-media">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/manufacturing-169.webp" alt="Stainless-steel blending tanks on the manufacturing floor" width={1600} height={900} decoding="async" fetchPriority="high" />
+                <img src="/images/factory/tanks-169.webp" alt="Storage tanks, a stacker and drums at the Krini Crude factory in Tiruverkadu, Chennai" width={1440} height={810} decoding="async" fetchPriority="high" />
               </figure>
             </div>
             <dl className="ab3-figures">
@@ -127,6 +149,28 @@ export function AboutPage() {
                 ))}
               </ol>
             </article>
+          </div>
+        </section>
+
+        {/* Inside our factory: the three rooms, photographed at the plant */}
+        <section className="ab3-sec ab3-plant" aria-labelledby="plant-title">
+          <div className="frame">
+            <p className="ab3-k">Our factory</p>
+            <h2 id="plant-title" className="ab3-h2">
+              Inside our factory in Tiruverkadu.
+            </h2>
+            <div className="ab3-plant-grid">
+              {PLANT.map((ph) => (
+                <figure key={ph.src} className="ab3-plant-fig">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ph.src} alt={ph.alt} width={1200} height={900} loading="lazy" decoding="async" />
+                  <figcaption>
+                    <b>{ph.title}</b>
+                    <span>{ph.text}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 

@@ -683,7 +683,7 @@ export const lines: Line[] = [
             text: "High-performance release oil for Mivan aluminium formwork, MS, plywood and all formworks.",
             details: {
               status: "verified",
-              image: "/images/magic-shuttering-oil.webp",
+              image: "/images/products/magic-shuttering-oil-pack.webp",
               imageAlt: "Magic Shuttering Oil 200L drum",
               /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
               videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=2",
@@ -736,6 +736,10 @@ export const lines: Line[] = [
             tagline: "Premium shuttering oil (pinhole reduction)",
             beaker: "/images/products/oil-sample.webp",
             text: "Premium shuttering oil suitable for aluminium and all formwork, ensuring clean stripping and smooth concrete surface finishes.",
+            details: {
+              image: "/images/products/repel-shuttering-oil-pack.webp",
+              imageAlt: "Repel Shuttering Oil 200L drum",
+            },
           },
           {
             name: "Silease 360 Shuttering Oil",
@@ -745,7 +749,7 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "Rev. 09/2026",
-              image: "/images/silease-360-shuttering-oil.webp",
+              image: "/images/products/silease-360-shuttering-oil-pack.webp",
               imageAlt: "Silease 360 Precast Shuttering Oil 200L drum",
               description:
                 "SILEASE 360 is a ready-to-use mould release oil developed for precast concrete production. It forms a uniform release film on the formwork, supports clean demoulding and helps reduce surface pinholes and honeycombing when applied correctly.",
@@ -796,7 +800,7 @@ export const lines: Line[] = [
             /* krinicrude.com/product/nikri30, read October 2026: its key features and coverage, word for word */
             details: {
               status: "verified",
-              image: "/images/nikri-30-shuttering-oil.webp",
+              image: "/images/products/nikri-30-shuttering-oil-pack.webp",
               imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
               sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
@@ -815,7 +819,7 @@ export const lines: Line[] = [
             details: {
               status: "verified",
               pdsRevision: "NIKRI AL / 2026",
-              image: "/images/nikri-al-shuttering-oil.webp",
+              image: "/images/products/nikri-al-shuttering-oil-pack.webp",
               imageAlt: "Nikri AL Emulsion-based Shuttering Oil 200L drum for Mivan aluminium formwork",
               sheetUrl: "/documents/nikri-al-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri AL Shuttering Oil Product Data Sheet",

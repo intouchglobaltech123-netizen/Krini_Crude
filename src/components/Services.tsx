@@ -1,5 +1,5 @@
 import { enquireHref, site } from "../content/site";
-import { Arrow, Fact, Icon, SectionHead, type IconName, MediaSlot } from "./ui";
+import { Arrow, Fact, Icon, SectionHead, type IconName } from "./ui";
 
 /**
  * The Services page's sections: the production hall, what we do, private
@@ -15,10 +15,22 @@ export function ServicesHall() {
   return (
     <figure className="pb-4">
       <div className="media relative mx-auto aspect-[4/3] w-full max-w-[1600px] sm:aspect-[16/9] lg:aspect-[21/9]" data-shutter data-zoom-frame>
-        <MediaSlot label="Production hall photo" w={2100} h={900} />
+        <picture>
+          <source media="(min-width: 1024px)" srcSet="/images/factory/hall-219.webp" />
+          <source media="(min-width: 640px)" srcSet="/images/factory/hall-169.webp" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/factory/aerosol-43.webp"
+            alt="The aerosol filling hall at our factory: compressor, air receiver, filters and filling machines"
+            width={1200}
+            height={900}
+            className="absolute inset-0 h-full w-full object-cover"
+            decoding="async"
+          />
+        </picture>
       </div>
       <figcaption className="frame mt-4 flex items-center justify-between">
-        <span className="label text-mute">Production hall</span>
+        <span className="label text-mute">Production hall, Tiruverkadu</span>
       </figcaption>
     </figure>
   );
@@ -50,7 +62,8 @@ export function ServicesList({ label, heading }: { label: string; heading: strin
           {s.items.map((c, i) => (
             <li key={c.title} className="svc-card group" data-reveal>
               <div className="svc-media media">
-                <MediaSlot label="Service photo" w={1200} h={900} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.image} alt={c.imageAlt} width={1200} height={900} loading="lazy" decoding="async" className="block aspect-[4/3] h-auto w-full object-cover" />
                 <span className="svc-num label">{String(i + 1).padStart(2, "0")}</span>
               </div>
               <div className="svc-body">
