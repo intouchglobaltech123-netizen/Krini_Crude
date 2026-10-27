@@ -1418,3 +1418,47 @@ main > section.hm-make {
     line-height: 1.25;
   }
 }
+
+/* Phones, last stage: two neat pill buttons, the gold one a little wider for its longer label,
+   the same height and type, no arrows, so neither label is squeezed */
+@media (max-width: 639px) {
+  section.sh.is-film .sh-step .sh-ctas {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 0;
+    height: 48px;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn .arrow,
+  section.sh.is-film .sh-step .sh-ctas .btn svg {
+    display: none;
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn-primary {
+    border: 0;
+    background: linear-gradient(180deg, #ecd06e 0%, #d4af37 55%, #c39d2c 100%);
+    color: #14110a;
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    box-shadow: none;
+  }
+}
