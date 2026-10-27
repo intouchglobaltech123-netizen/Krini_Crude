@@ -1314,3 +1314,107 @@ main > section.hm-make {
     white-space: nowrap;
   }
 }
+
+/* Phones: the words over the film kept simple and tidy: a small stage tag, the title, one short line,
+   then two even buttons (the second an outline, not a solid white block) */
+@media (max-width: 639px) {
+  section.sh.is-film .sh-step .sh-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 0 12px;
+    padding: 5px 11px;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 999px;
+    background: rgba(8, 7, 5, 0.42);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 10.5px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  section.sh.is-film .sh-step .sh-count::after {
+    display: none;
+  }
+  section.sh.is-film .sh-step .sh-big {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 7.2vw, 30px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+  }
+  section.sh.is-film .sh-step .sh-body {
+    max-width: 100%;
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    text-align: left !important;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  section.sh.is-film .sh-step .sh-link {
+    display: none;
+  }
+  section.sh.is-film .sh-step .sh-product {
+    margin: 0 0 10px;
+  }
+  section.sh.is-film .sh-step .sh-ctas {
+    margin-top: 20px;
+    gap: 10px;
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn {
+    height: 48px;
+    padding: 0 12px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+  section.sh.is-film .sh-step .sh-ctas .btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #fff;
+  }
+}
+
+/* Phones, stages 1-3: just the stage tag, the stage name and the Krini product (a gold line on the
+   left, "Krini product" small above the product's name); the longer sentence stays for wider screens */
+@media (max-width: 639px) {
+  section.sh.is-film .sh-build .sh-body {
+    display: none;
+  }
+  section.sh.is-film .sh-build .sh-big {
+    margin-bottom: 14px;
+  }
+  section.sh.is-film .sh-step .sh-product {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0;
+    padding: 2px 0 2px 12px;
+    border: 0;
+    border-left: 2px solid #d4af37;
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  section.sh.is-film .sh-step .sh-product .sh-product-k {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  section.sh.is-film .sh-step .sh-product .sh-product-v {
+    color: #e7c75e;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+}
