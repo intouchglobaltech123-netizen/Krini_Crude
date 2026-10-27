@@ -554,10 +554,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 {pv.brandLogo ? <Brand name={pv.brand} logo={pv.brandLogo} /> : <b>{pv.brand}</b>}
               </p>
               <p className="pv-text">{pv.text}</p>
-              <p className="pv-price">
-                <b>Price on request</b>
-                <span>Add it to the cart and send the list: we reply with price, stock and delivery.</span>
-              </p>
               {pv.grades.length ? (
                 <div className="pv-block">
                   <p className="pv-k">Grade</p>
@@ -625,6 +621,19 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 <li>No payment online</li>
                 <li>Reply on WhatsApp</li>
               </ul>
+              {/* larger screens: three key features under the buttons, beside the tall photo */}
+              <div className="pv-side">
+                {pv.highlights.length ? (
+                  <div className="pv-side-box">
+                    <p className="pv-side-k">Key features</p>
+                    <ul className="pv-side-list">
+                      {pv.highlights.slice(0, 3).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
 
