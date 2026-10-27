@@ -2402,3 +2402,67 @@ section.pshop .pshop-grid .kcard-ask .kcard-enq svg {
     display: none;
   }
 }
+
+/* ---- Phones: the line names in full (the client, October 2026), never cut short with "…":
+   a long name such as Construction Chemicals goes onto two lines, and all four pills keep one
+   height. */
+@media (max-width: 639px) {
+  section.pshop .pshop-cats {
+    align-items: stretch;
+  }
+  section.pshop .pshop-catw {
+    display: flex;
+  }
+  section.pshop .pshop-cat,
+  section.pshop .pshop-catw > .pshop-cat {
+    height: auto;
+    min-height: 44px;
+    padding-block: 6px;
+    white-space: normal;
+  }
+  section.pshop .pshop-catw > .pshop-cat {
+    height: 100%;
+  }
+  section.pshop .pshop-cat .pshop-cat-t {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    font-size: 12.5px !important;
+    line-height: 1.15;
+    word-break: normal;
+    -webkit-hyphens: none;
+    hyphens: none;
+  }
+}
+
+/* ---- The product video fills its frame (the client, October 2026): no white or grey border
+   round it, on phones and on laptops; the picture covers the whole square, cropped at its sides,
+   and its controls stay at the foot. */
+section.pshop .pv .pg-stage {
+  overflow: hidden;
+}
+section.pshop .pv .pg-slide.pg-slide-vid {
+  padding: 0;
+  background: #0f172a;
+  overflow: hidden;
+}
+section.pshop .pv .pg-slide-vid .pg-video-stage {
+  width: 100%;
+  height: 100%;
+}
+section.pshop .pv .pg-slide-vid .pg-video-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 0;
+  box-shadow: none;
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pg-slide.pg-slide-vid {
+    padding: 0;
+  }
+}
