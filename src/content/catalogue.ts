@@ -156,6 +156,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/cutting-oil.webp",
               imageAlt: "1-COOL Cutting Oil high performance metal working fluid 20L pail",
+              videoUrl: "/videos/products/1-cool-cutting-oil.mp4",
               description:
                 "1-COOL CUTTING OIL is a high performance metal working fluid formulated for machining operations. It provides effective lubrication and cooling to improve tool life and surface finish across ferrous and non-ferrous metals.",
               purposeTitle: "Applications",
@@ -496,6 +497,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/gear-oil.webp",
               imageAlt: "1-COOL Gear Oil high performance lubricating oil 20L pail",
+              videoUrl: "/videos/products/1-cool-gear-oil.mp4",
               description:
                 "1-COOL GEAR OIL is a high performance lubricating oil designed for industrial enclosed gear systems operating under normal to heavy load conditions. Formulated with premium base oils and advanced additives to provide wear protection, smooth operation and long service life.",
               purposeTitle: "Applications",
@@ -1316,6 +1318,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/release-spray.webp",
               imageAlt: "Release Spray 550ml mould release agent aerosol can",
+              videoUrl: "/videos/products/release-spray.mp4",
               description:
                 "RELEASE SPRAY is a high performance mould release agent designed to prevent concrete from sticking to formwork, moulds and other surfaces. It provides easy demoulding with a smooth surface finish while saving labor and preparation time.",
               purposeTitle: "Applications",
