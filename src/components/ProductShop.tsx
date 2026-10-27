@@ -108,7 +108,15 @@ function isUpright(src?: string) {
 }
 
 /** Construction chemicals whose video is shown now; the others wait for their AI videos. */
-const CONSTRUCTION_VIDEOS = new Set(["krini-shuttering-grease", "repel-shuttering-grease"]);
+const CONSTRUCTION_VIDEOS = new Set([
+  "krini-shuttering-grease",
+  "repel-shuttering-grease",
+  "silease-360-shuttering-oil",
+  "magic-shuttering-oil",
+  "nikri-30-shuttering-oil",
+  "nikri-al-shuttering-oil",
+  "repel-shuttering-oil",
+]);
 /** Construction chemicals that keep their back view (the two greases); the drums show the front only. */
 const CONSTRUCTION_BACKS = new Set(["krini-shuttering-grease", "repel-shuttering-grease"]);
 
@@ -190,7 +198,7 @@ function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
     reportLabel: d.reportLabel,
     // construction chemicals: no video yet (their AI videos come later, so the video view says "coming
     // soon"), except the two shuttering greases, whose videos stay on (the client, October 2026)
-    video: line.id === "construction" && !CONSTRUCTION_VIDEOS.has(slug) ? undefined : videoOf(slug, d),
+    video: line.id === "construction" && !CONSTRUCTION_VIDEOS.has(slug) && !d.videoUrl ? undefined : videoOf(slug, d),
     about: d.description ?? (r ? `${r.text}. ${p.about}` : p.about),
     highlights,
     applications: d.purpose ?? p.uses ?? [],

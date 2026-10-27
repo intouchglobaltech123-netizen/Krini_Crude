@@ -555,7 +555,6 @@ export const site = {
               { label: "Galva zinc", values: ["Zinc coating spray"], href: "/products/aerosols#colour-sprays" },
               { label: "Lock Bond", values: ["Adhesive, 400 ml"], href: "/products/aerosols#lock-bond-adhesive-spray" },
               { label: "Anti-spatter", values: ["Silicone-free"], href: "/products/aerosols#anti-spatter-spray" },
-              { label: "Release spray", values: ["Moulds and surfaces"], href: "/products/aerosols#release-spray" },
             ],
             link: "View aerosols",
             href: "/products/aerosols",

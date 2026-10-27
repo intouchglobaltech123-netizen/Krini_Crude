@@ -207,7 +207,7 @@ export const lines: Line[] = [
               imageAlt: "1-COOL Aquacut 150 water soluble coolant oil 20L pail",
               sheetUrl: "/documents/1-cool-aquacut-150-pds-2024.pdf",
               sheetLabel: "1-COOL Aquacut 150 Product Data Sheet (PDS 2024)",
-              videoUrl: "/videos/products/1-cool-aquacut-150.mp4",
+              videoUrl: "/videos/products/1-cool-aquacut-150.mp4?v=2",
               description:
                 "1-COOL AQUACUT 150 is a premium mineral coolant cutting fluid developed for use in light to heavy duty machining of ferrous and non-ferrous metal alloys, as well as general purpose grinding. Formulated with special lubricity and E.P. additives and rust inhibitors, it delivers extended sump life and improved tool longevity.",
               metaLine:
@@ -329,9 +329,10 @@ export const lines: Line[] = [
               status: "verified",
               pdsRevision: "PDS 2026",
               image: "/images/1-cool-al-7000.webp",
-              imageAlt: "1-COOL AL 7000 aluminium machining fluid 20L pail",
+              imageAlt: "1-COOL AL 7000 semi synthetic coolant oil 26L pail",
               sheetUrl: "/documents/1-cool-al-7000-pds.pdf",
               sheetLabel: "1-COOL AL 7000 Product Data Sheet (PDS 2026)",
+              videoUrl: "/videos/products/1-cool-al-7000.mp4",
               description:
                 "1-COOL AL 7000 is a high performance metal working fluid designed for machining aluminium and its alloys. It provides excellent cooling, lubrication and surface finish during high speed machining operations.",
               dilution: "3% – 10%",
@@ -546,6 +547,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/engine-oil.webp",
               imageAlt: "1-COOL Engine Oil high performance lubricant 20L pail",
+              videoUrl: "/videos/products/1-cool-engine-oil.mp4",
               description:
                 "1-COOL ENGINE OIL is a high performance lubricant designed for diesel and gasoline engines operating under normal to heavy duty conditions. Formulated with premium base oils and advanced detergent-dispersant additives for engine cleanliness, thermal stability and wear protection.",
               purposeTitle: "Applications",
@@ -688,7 +690,7 @@ export const lines: Line[] = [
               image: "/images/products/magic-shuttering-oil-pack.webp",
               imageAlt: "Magic Shuttering Oil 200L drum",
               /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
-              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=2",
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=3",
               pdsRevision: "Rev. 09/2026",
               description:
                 "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
@@ -741,6 +743,7 @@ export const lines: Line[] = [
             details: {
               image: "/images/products/repel-shuttering-oil-pack.webp",
               imageAlt: "Repel Shuttering Oil 200L drum",
+              videoUrl: "/videos/products/repel-shuttering-oil.mp4",
             },
           },
           {
@@ -753,6 +756,7 @@ export const lines: Line[] = [
               pdsRevision: "Rev. 09/2026",
               image: "/images/products/silease-360-shuttering-oil-pack.webp",
               imageAlt: "Silease 360 Precast Shuttering Oil 200L drum",
+              videoUrl: "/videos/products/silease-360-shuttering-oil.mp4",
               description:
                 "SILEASE 360 is a ready-to-use mould release oil developed for precast concrete production. It forms a uniform release film on the formwork, supports clean demoulding and helps reduce surface pinholes and honeycombing when applied correctly.",
               purpose: [
@@ -806,6 +810,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
               sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
+              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4",
               description: "Road Project Shuttering Oil. Cost Effective MS, Plywood & Road Projects Shuttering Oil.",
               purposeTitle: "Suitable formwork & projects",
               purpose: ["MS (mild steel) formwork", "Plywood formwork", "Road projects"],
@@ -825,6 +830,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri AL Emulsion-based Shuttering Oil 200L drum for Mivan aluminium formwork",
               sheetUrl: "/documents/nikri-al-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri AL Shuttering Oil Product Data Sheet",
+              videoUrl: "/videos/products/nikri-al-shuttering-oil.mp4",
               description:
                 "NIKRI AL is an emulsion-based shuttering oil that forms a uniform release film between concrete and formwork, supporting cleaner stripping and a smoother concrete finish.",
               purpose: [
@@ -1308,58 +1314,6 @@ export const lines: Line[] = [
           },
         ],
         tbc: [],
-      },
-      {
-        id: "release-spray",
-        name: "Release Spray",
-        variants: ["550 ml aerosol", "Clean & Easy Demoulding"],
-        range: [
-          {
-            name: "Release Spray 550ml",
-            text: "High-performance mould release aerosol agent designed to prevent concrete from sticking to formwork.",
-            details: {
-              status: "verified",
-              pdsRevision: "PDS 2026",
-              image: "/images/release-spray.webp",
-              imageAlt: "Release Spray 550ml mould release agent aerosol can",
-              videoUrl: "/videos/products/release-spray.mp4",
-              description:
-                "RELEASE SPRAY is a high performance mould release agent designed to prevent concrete from sticking to formwork, moulds and other surfaces. It provides easy demoulding with a smooth surface finish while saving labor and preparation time.",
-              purposeTitle: "Applications",
-              purpose: [
-                "Concrete formwork and moulds",
-                "Shuttering plates (steel and aluminium)",
-                "Plywood and timber shuttering moulds",
-                "Precast concrete products and architectural panels",
-                "Construction and infrastructure works",
-              ],
-              benefits: [
-                "Prevents concrete adhesion and reduces surface blemishes",
-                "Ensures easy, clean demoulding without damaging mould edges",
-                "Delivers a fair-faced, uniform concrete surface finish",
-                "Saves time and labour with fast, even aerosol spray application",
-                "Suitable for various formwork materials including steel, wood, and plastic",
-              ],
-              properties: [
-                { property: "Appearance", value: "Clear Aerosol Spray", spec: "Visual" },
-                { property: "Net Volume", value: "550 ml", spec: "Standard Can" },
-                { property: "Propellant", value: "Eco-Friendly", spec: "Standard" },
-                { property: "Demoulding Action", value: "Easy Release / Non-Sticking", spec: "Performance" },
-              ],
-              application: [
-                "Shake the can well before use.",
-                "Spray evenly on clean and dry surface from a distance of 15–20 cm.",
-                "Allow a thin, uniform film to form. No wiping required.",
-              ],
-              packing: "Standard packing: 550 ml aerosol spray cans (Cartons of 12 / 24 cans)",
-              storage:
-                "Pressurised container. Store below 50 °C away from heat, sparks, open flame and direct sunlight. Use in well-ventilated area.",
-              shelfLife: "24 months from date of manufacture when stored as recommended.",
-            },
-          },
-        ],
-        about: "A release agent in aerosol form, for quick, even application on moulds and surfaces.",
-        uses: ["Concrete formwork, shuttering plates and precast moulds", "Site and factory formwork preparation"],
       },
     ],
     industries: ["paint"],
