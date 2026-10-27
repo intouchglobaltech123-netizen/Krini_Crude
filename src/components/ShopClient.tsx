@@ -71,11 +71,11 @@ const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9 
 /**
  * Products as a simple shop (Products page). A search box and the three lines
  * as chips narrow the cards; each card has a photo, what it is, a short line
- * about it, a grade to pick where there are grades, and Add to cart. The cart
- * (remembered on this device) opens from the side: change quantities, add a
- * note, and send the whole list on WhatsApp in one tap. There is
- * no payment online: Krini Crude replies with price, stock and delivery.
- * Every product is in the page's HTML; the search and cart need scripts.
+ * about it, a grade to pick where there are grades, and Add to enquiry. It is an
+ * enquiry, not an order (the client, October 2026): the enquiry list (remembered on
+ * this device) opens from the side, the visitor adds a question, and sends the list
+ * on WhatsApp in one tap; Krini Crude replies with details, price and availability.
+ * Every product is in the page's HTML; the search and the list need scripts.
  */
 export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[]; lines: ShopLine[]; whatsapp: string; email?: string; top?: ReactNode }) {
   const [query, setQuery] = useState("");
@@ -234,11 +234,11 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
   const setQty = (id: string, qty: number) => setCart((c) => (qty <= 0 ? c.filter((l) => l.id !== id) : c.map((l) => (l.id === id ? { ...l, qty } : l))));
 
   const order = [
-    "Hi Krini Crude, I would like to order:",
-    ...cart.map((l, i) => `${i + 1}. ${l.name}${l.grade ? ` (${l.grade})` : ""} · ${l.type} · Qty: ${l.qty}`),
-    notes.trim() ? `Notes: ${notes.trim()}` : "",
-    "Company / name: ",
-    "Delivery location: ",
+    "Hi Krini Crude, I have a query about these products:",
+    ...cart.map((l, i) => `${i + 1}. ${l.name}${l.grade ? ` (${l.grade})` : ""} · ${l.type}${l.qty > 1 ? ` · Approx. qty: ${l.qty}` : ""}`),
+    notes.trim() ? `My question: ${notes.trim()}` : "My question: ",
+    "Name / company: ",
+    "City: ",
   ]
     .filter(Boolean)
     .join("\n");
@@ -257,10 +257,11 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
   const pvWa = pv
     ? `${whatsapp.split("?")[0]}?text=${encodeURIComponent(
         [
-          "Hi Krini Crude, I would like to order:",
-          `1. ${pv.name}${pvGrade ? ` (${pvGrade})` : ""} · ${pv.type} · Qty: ${pvQty}`,
-          "Company / name: ",
-          "Delivery location: ",
+          "Hi Krini Crude, I have a query about:",
+          `${pv.name}${pvGrade ? ` (${pvGrade})` : ""} · ${pv.type}`,
+          "My question: ",
+          "Name / company: ",
+          "City: ",
         ].join("\n"),
       )}`
     : "";
@@ -294,15 +295,15 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </div>
             ) : null}
           </div>
-          <ol className="pshop-steps" aria-label="How ordering works">
+          <ol className="pshop-steps" aria-label="How to ask us">
             <li>
-              <b>1</b> Add to cart
+              <b>1</b> Pick the products
             </li>
             <li>
-              <b>2</b> Send the list on WhatsApp
+              <b>2</b> Send your query on WhatsApp
             </li>
             <li>
-              <b>3</b> We confirm price and delivery
+              <b>3</b> We reply with the details
             </li>
           </ol>
         </div>
@@ -467,12 +468,12 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   </div>
                   <div className="kcard-foot">
                     {line ? (
-                      <div className="kcard-step" aria-label={`${it.name} in cart`}>
+                      <div className="kcard-step" aria-label={`${it.name} in your enquiry`}>
                         <button type="button" onClick={() => setQty(line.id, line.qty - 1)} aria-label="One less">
                           −
                         </button>
                         <span>
-                          <b>{line.qty}</b> in cart{line.grade ? ` (${line.grade})` : ""}
+                          In enquiry{line.grade ? ` (${line.grade})` : ""}{line.qty > 1 ? <> · <b>{line.qty}</b></> : null}
                         </span>
                         <button type="button" onClick={() => setQty(line.id, line.qty + 1)} aria-label="One more">
                           +
@@ -480,7 +481,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                       </div>
                     ) : (
                       <button type="button" className="kcard-add" onClick={() => add(it)}>
-                        <CartIcon /> Add to cart
+                        <CartIcon /> Add to enquiry
                       </button>
                     )}
                   </div>
@@ -507,8 +508,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
         className={`pshop-float${bump ? " is-bump" : ""}`}
         key={`fab-${bump}`}
         onClick={() => setOpen(true)}
-        aria-label={`Open cart, ${count} items`}
-        title={`Open cart (${count})`}
+        aria-label={`Open your enquiry list, ${count} items`}
+        title={`Your enquiry list (${count})`}
       >
         <span className="pshop-float-icon">
           <CartIcon />
@@ -527,7 +528,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 </svg>
               </button>
               <p className="pv-bar-t">{pv.name}</p>
-              <button type="button" className="pv-cartbtn" onClick={() => setOpen(true)} aria-label={`Open cart, ${count} items`}>
+              <button type="button" className="pv-cartbtn" onClick={() => setOpen(true)} aria-label={`Open your enquiry list, ${count} items`}>
                 <CartIcon />
                 {count ? <b>{count}</b> : null}
               </button>
@@ -567,7 +568,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 </div>
               ) : null}
               <div className="pv-block pv-qtyrow">
-                <p className="pv-k">Quantity</p>
+                <p className="pv-k">Approx. quantity (optional)</p>
                 <div className="pv-qty">
                   <button type="button" onClick={() => setPvQty((q) => Math.max(1, q - 1))} aria-label="One less">
                     −
@@ -582,15 +583,15 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               <div className="pv-cta">
                 {pvLine ? (
                   <button type="button" className="pv-add is-in" onClick={() => setOpen(true)}>
-                    <CartIcon /> Go to cart ({pvLine.qty})
+                    <CartIcon /> In your enquiry: view list
                   </button>
                 ) : (
                   <button type="button" className="pv-add" onClick={() => addQty(pv, pvQty)}>
-                    <CartIcon /> Add to cart
+                    <CartIcon /> Add to enquiry
                   </button>
                 )}
                 <a href={pvWa} className="pv-wa" target="_blank" rel="noopener noreferrer">
-                  <WaIcon /> Order on WhatsApp
+                  <WaIcon /> Ask on WhatsApp
                 </a>
               </div>
               {/* the data sheet and the test report, where we have them (the video is in the photos) */}
@@ -824,8 +825,13 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 {similar.map((s2) => (
                   <li key={s2.key}>
                     <button type="button" className="pv-mini" onClick={() => openProduct(s2.key)}>
-                      <span className="pv-mini-media">
+                      <span className={`pv-mini-media${s2.beaker ? " has-beaker" : ""}`}>
                         <Photo src={s2.image} alt="" brand={s2.brand} brandLogo={s2.brandLogoFull} name={s2.name} />
+                        {s2.beaker ? (
+                          // the product itself in a beaker, beside the pack (as on the product cards)
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img className="pv-mini-beaker" src={s2.beaker} alt="" width={480} height={640} loading="lazy" decoding="async" />
+                        ) : null}
                       </span>
                       <span className="pv-mini-type">{s2.type}</span>
                       <span className="pv-mini-name">{s2.name}</span>
@@ -855,19 +861,19 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             </div>
           ) : null}
 
-          {/* phones: always at the foot, Add to cart and Order on WhatsApp */}
+          {/* phones: always at the foot, Add to enquiry and Ask on WhatsApp */}
           <div className="pv-buy">
             {pvLine ? (
               <button type="button" className="pv-add is-in" onClick={() => setOpen(true)}>
-                <CartIcon /> Go to cart ({pvLine.qty})
+                <CartIcon /> In your enquiry: view list
               </button>
             ) : (
               <button type="button" className="pv-add" onClick={() => addQty(pv, pvQty)}>
-                <CartIcon /> Add to cart
+                <CartIcon /> Add to enquiry
               </button>
             )}
             <a href={pvWa} className="pv-wa" target="_blank" rel="noopener noreferrer">
-              <WaIcon /> Order on WhatsApp
+              <WaIcon /> Ask on WhatsApp
             </a>
           </div>
         </div>
@@ -880,14 +886,14 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             <CartIcon />
           </span>
           <div className="cart-head-t">
-            <h2 id="cart-title">Your cart</h2>
+            <h2 id="cart-title">Your enquiry list</h2>
             <p>
               {cart.length
                 ? `${cart.length} ${cart.length === 1 ? "product" : "products"} · ${count} ${count === 1 ? "item" : "items"}`
                 : "Nothing added yet"}
             </p>
           </div>
-          <button type="button" ref={closeRef} className="cart-close" onClick={() => setOpen(false)} aria-label="Close cart" tabIndex={open ? 0 : -1}>
+          <button type="button" ref={closeRef} className="cart-close" onClick={() => setOpen(false)} aria-label="Close the enquiry list" tabIndex={open ? 0 : -1}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
               <path d="M6 6l12 12M18 6 6 18" />
             </svg>
@@ -934,8 +940,8 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               <span className="cart-empty-ic" aria-hidden="true">
                 <CartIcon />
               </span>
-              <p>Your cart is empty</p>
-              <span>Add products from the list, then send us the order on WhatsApp.</span>
+              <p>No products added yet</p>
+              <span>Add the products you want to ask about, then send your query on WhatsApp.</span>
               <button type="button" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
                 Browse products
               </button>
@@ -952,13 +958,13 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             <p className="cart-next-k">What happens next</p>
             <ol>
               <li>
-                <b>1</b> You send the list on WhatsApp
+                <b>1</b> You send your query on WhatsApp
               </li>
               <li>
-                <b>2</b> We check stock and reply with price and delivery
+                <b>2</b> Our team replies with the details, price and availability
               </li>
               <li>
-                <b>3</b> You confirm, and we dispatch
+                <b>3</b> Ask us anything else on the same chat
               </li>
             </ol>
           </div>
@@ -966,21 +972,21 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
 
         <div className="cart-foot">
           <label className="cart-notes">
-            <span>Add a note (optional)</span>
+            <span>Your question (optional)</span>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={2}
-              placeholder="Pack size, quantity in litres or kg, delivery city…"
+              placeholder="What would you like to know? Usage, pack size, price, your city…"
               tabIndex={open ? 0 : -1}
             />
           </label>
           <a href={cart.length ? waHref : undefined} aria-disabled={!cart.length} className="cart-wa" target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
-            <WaIcon /> Send order on WhatsApp
+            <WaIcon /> Send query on WhatsApp
           </a>
           {cart.length ? (
             <button type="button" className="cart-clear cart-clear-solo" onClick={() => setCart([])} tabIndex={open ? 0 : -1}>
-              Clear cart
+              Clear list
             </button>
           ) : null}
           <p className="cart-fine">
@@ -988,7 +994,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               <path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.4 7.5 9.5 4.3-1.1 7.5-5 7.5-9.5V6L12 3Z" />
               <path d="m9 12 2 2 4-4" />
             </svg>
-            No payment now. We confirm price, stock and delivery first.
+            Just an enquiry, not an order. Our team replies on WhatsApp.
           </p>
         </div>
       </aside>
@@ -1398,12 +1404,12 @@ function DrumIcon() {
   );
 }
 
+/** The enquiry list's mark: a speech bubble with lines (an enquiry, not a shopping cart). */
 function CartIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M3 4h2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L20.5 8H6.2" />
-      <circle cx="9.5" cy="19.5" r="1.3" />
-      <circle cx="17" cy="19.5" r="1.3" />
+      <path d="M20 12.5a7.5 7.5 0 0 1-11 6.6L4 20l1.1-4.2A7.5 7.5 0 1 1 20 12.5Z" />
+      <path d="M8.8 10.8h6.4M8.8 14h4.2" />
     </svg>
   );
 }

@@ -229,13 +229,13 @@ function itemsOf(line: Line): ShopItem[] {
   return line.products.flatMap((p) => (p.range?.length ? p.range.map((r) => itemOf(line, p, r)) : [itemOf(line, p)]));
 }
 
-/** A WhatsApp chat to the sales number with the order already written. */
+/** A WhatsApp chat to the sales number with the query already started (an enquiry, not an order). */
 export const orderHref = (name: string, line: string) =>
   `${site.contact.whatsapp.split("?")[0]}?text=${encodeURIComponent(
-    `Hi Krini Crude, I would like to order:\n• ${name} (${line})\nQuantity: \nDelivery location: `,
+    `Hi Krini Crude, I have a query about:\n• ${name} (${line})\nMy question: \nCity: `,
   )}`;
 
-/** The WhatsApp mark for the Order now buttons. */
+/** The WhatsApp mark for the Ask on WhatsApp buttons. */
 export function WhatsAppIcon() {
   // no WhatsApp logo next to WhatsApp buttons and links (asked for, October 2026): the words say it
   return null;
@@ -243,8 +243,8 @@ export function WhatsAppIcon() {
 
 /**
  * The Products page's shop: every product, from the catalogue, handed to
- * ShopClient (search, the lines as chips, Add to cart, and the cart that sends
- * the order on WhatsApp).
+ * ShopClient (search, the lines as chips, Add to enquiry, and the enquiry list
+ * that sends the query on WhatsApp).
  */
 export function ProductShop({ top }: { top?: ReactNode }) {
   const shopLines = SHOP_ORDER.map((id) => lines.find((l) => l.id === id)!).filter(Boolean);

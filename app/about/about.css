@@ -1212,3 +1212,40 @@ main > div.ab3 > section {
     line-height: 1.4;
   }
 }
+
+/* ---- No photo twice (the client, October 2026): the blending and storage room is the photo at the
+   top, named by a small caption on it; "Inside our factory" shows the other two rooms, the aerosol
+   hall and the laboratory, side by side on every screen. */
+.ab3-hero-cap {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgb(10 12 16 / 0.62);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.ab3-plant-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 899px) {
+  .ab3-plant-fig:first-child {
+    grid-column: auto;
+  }
+  .ab3-plant-fig:first-child img {
+    aspect-ratio: 4 / 3;
+  }
+}
+@media (max-width: 639px) {
+  .ab3-hero-cap {
+    left: 8px;
+    bottom: 8px;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+}

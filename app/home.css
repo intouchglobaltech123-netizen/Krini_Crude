@@ -1092,3 +1092,95 @@ main > section.hm-make {
     font-size: 0.74rem;
   }
 }
+
+/* ---- Phone hero, polished (the client, October 2026): the words always sit on a dark base (the
+   fade now starts just above the stage's pill, wherever the words begin, so a bright building
+   never shows through the name), the stage's pill is solid and easy to read with a little more
+   room above the kicker, even spacing down the block, and only the small gold chevron at the foot
+   (the word "Scroll" is left out so the figures have room to breathe). */
+@media (max-width: 639px) {
+  section.sh.is-band.is-tall .sh-scrim {
+    background:
+      linear-gradient(180deg, rgb(8 9 12 / 0.55) 0, rgb(8 9 12 / 0) 150px),
+      linear-gradient(
+        180deg,
+        rgb(8 9 12 / 0) calc(var(--sh-open-top, 60vh) - 200px),
+        rgb(8 9 12 / 0.5) calc(var(--sh-open-top, 60vh) - 80px),
+        rgb(8 9 12 / 0.84) calc(var(--sh-open-top, 60vh) + 24px),
+        rgb(8 9 12 / 0.96) 100%
+      );
+  }
+  section.sh.is-band.is-tall .sh-chip {
+    top: calc(var(--sh-open-top, 60vh) - 50px);
+  }
+  section.sh.is-band.is-tall .sh-chip span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px 4px 4px;
+    border: 1px solid rgb(212 175 55 / 0.55);
+    border-radius: 999px;
+    background: rgb(12 13 17 / 0.84);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.9);
+  }
+  section.sh.is-band.is-tall .sh-chip b {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #d4af37;
+    color: #14120c;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-title {
+    gap: 0.45rem;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-tagline {
+    font-size: 0.98rem !important;
+    line-height: 1.35;
+    color: rgb(255 255 255 / 0.9);
+  }
+  section.sh.is-band.is-tall .sh-open-ctas {
+    gap: 10px;
+    margin: 20px 0 0;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn {
+    min-height: 48px;
+    padding: 0 8px;
+    border-radius: 14px;
+    font-size: 0.86rem;
+    letter-spacing: 0;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn-primary {
+    box-shadow: 0 12px 26px -14px rgb(212 175 55 / 0.75);
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn-ghost {
+    border-color: rgb(212 175 55 / 0.6);
+    background: rgb(12 13 17 / 0.55);
+    color: #fff;
+  }
+  section.sh.is-band.is-tall .sh-open-stats {
+    margin-top: 18px;
+    padding-top: 14px;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dd {
+    font-size: 1.18rem;
+    line-height: 1.1;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dt {
+    margin-top: 3px;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: rgb(255 255 255 / 0.66);
+  }
+  section.sh.is-band.is-tall .sh-down span {
+    display: none;
+  }
+}

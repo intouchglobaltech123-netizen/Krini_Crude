@@ -39,14 +39,11 @@ const MISSION = [
   { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
 ];
 
-/** Photographs from the factory near Madhavaram. */
+/**
+ * Photographs from the factory near Madhavaram. The blending and storage room is the photo at the
+ * top of the page, so it is not shown again here (the client, October 2026: no photo twice).
+ */
 const PLANT = [
-  {
-    src: "/images/factory/tanks-43.webp",
-    title: "Blending and storage",
-    text: "Storage tanks, a blending vessel and drums ready for dispatch.",
-    alt: "Grey and yellow storage tanks, a blending vessel, a stacker and blue drums at the Krini Crude factory",
-  },
   {
     src: "/images/factory/aerosol-43.webp",
     title: "Aerosol filling",
@@ -105,6 +102,7 @@ export function AboutPage() {
               <figure className="ab3-hero-media">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/factory/tanks-169.webp" alt="Storage tanks, a stacker and drums at the Krini Crude factory near Madhavaram, Chennai" width={1440} height={810} decoding="async" fetchPriority="high" />
+                <figcaption className="ab3-hero-cap">Blending and storage at our factory</figcaption>
               </figure>
             </div>
             <dl className="ab3-figures">
@@ -152,7 +150,7 @@ export function AboutPage() {
           </div>
         </section>
 
-        {/* Inside our factory: the three rooms, photographed at the plant */}
+        {/* Inside our factory: the aerosol hall and the laboratory (the tanks are the photo at the top) */}
         <section className="ab3-sec ab3-plant" aria-labelledby="plant-title">
           <div className="frame">
             <p className="ab3-k">Our factory</p>
