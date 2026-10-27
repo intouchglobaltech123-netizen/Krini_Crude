@@ -125,6 +125,14 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   let band = false;
   /** An upright phone with the portrait film (heroSeq.tall): the film fills the whole screen, the words over its foot. */
   let tall = false;
+  /**
+   * A tablet (a touch screen wider than a phone, or any screen under 1025px wide that is not an
+   * upright phone): the film plays through by itself, once, like on a phone, and the page scrolls
+   * freely; only computers with a mouse or trackpad play it part by part, one part per scroll
+   * (the client, October 2026). An upright tablet plays the portrait film.
+   */
+  let tablet = false;
+  let tabTall = false;
   let filmH = 0;
   let filmTop = 0;
   const measure = () => {
@@ -132,6 +140,9 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     H = stage.clientHeight;
     band = W < 640 && H > W;
     tall = band && Boolean(heroSeq.tall.video);
+    tablet = !band && (window.matchMedia("(pointer: coarse)").matches || W < 1025);
+    tabTall = tablet && H > W && Boolean(heroSeq.tall.video);
+    root.classList.toggle("is-tablet", tablet);
     root.classList.toggle("is-band", band);
     root.classList.toggle("is-tall", tall);
     root.classList.toggle("is-film", !band);
@@ -296,6 +307,11 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   let playing = 0;
   /** A phone: the film has played to its end and now rests on its last frame (no loop). */
   let bandDone = false;
+  /** A tablet: the film has played to its end (tabDone), has been started (tabStarted), the start's wait. */
+  let tabDone = false;
+  let tabStarted = false;
+  let tabTimer = 0;
+  d.add(() => window.clearTimeout(tabTimer));
   let inView = true;
   const ensureVideo = () => {
     if (video) return video;
@@ -307,7 +323,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.playsInline = true;
     v.autoplay = band && !waitForTap;
     v.preload = "auto";
-    v.poster = tall ? heroSeq.tall.first : heroSeq.first;
+    v.poster = tall || tabTall ? heroSeq.tall.first : heroSeq.first;
     v.disablePictureInPicture = true;
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
@@ -322,6 +338,13 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     stage.insertBefore(v, canvas);
     d.on(v, "timeupdate", placeVideo);
     d.on(v, "ended", () => {
+      if (tablet) {
+        // a tablet: the film has played once; it stays on its last frame
+        tabDone = true;
+        placeVideo();
+        syncBtn();
+        return;
+      }
       if (band) {
         // a phone: the film has played once; it stays on its last frame
         bandDone = true;
@@ -349,7 +372,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   });
   /** Which film this screen plays: the upright film on an upright phone, the wide one elsewhere. */
   function filmSrc() {
-    return tall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
+    return tall || tabTall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
   }
   /**
    * The window was resized (or the phone turned): when the screen now wants the other film (a
@@ -361,9 +384,11 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     if (video.getAttribute("src") === want) return;
     video.pause();
     video.setAttribute("src", want);
-    video.poster = tall ? heroSeq.tall.first : heroSeq.first;
+    video.poster = tall || tabTall ? heroSeq.tall.first : heroSeq.first;
     video.loop = false;
     bandDone = false;
+    tabDone = false;
+    tabStarted = false;
     part = 0;
     target = -1;
     video.load();
@@ -411,6 +436,22 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   };
   function placeVideo() {
     if (!video) return;
+    if (tablet) {
+      // a tablet: the film plays through; the words of each step come in at its moment in the film
+      video.style.objectPosition = "50% 50%";
+      const now = video.currentTime || 0;
+      const beats: readonly number[] = tabTall ? heroSeq.tall.beats : heroSeq.beats;
+      let k = 0;
+      while (k + 1 < beats.length && now >= beats[k + 1]) k++;
+      if (part !== k || hero.dataset.stage !== String(k)) {
+        part = k;
+        setStep(k);
+        hero.dataset.stage = String(k);
+      }
+      hero.classList.toggle("at-end", false);
+      if (bar && video.duration) bar.style.transform = `scaleX(${(now / video.duration).toFixed(4)})`;
+      return;
+    }
     if (!band) {
       video.style.objectPosition = "50% 50%";
       const now = video.currentTime || 0;
@@ -454,9 +495,40 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       holdEnd(v);
       return;
     }
-    // phones play the film once through; wider screens play it part by part, one part per scroll (goPart)
+    // phones and tablets play the film once through; computers play it part by part, one part per
+    // scroll (goPart)
     v.loop = false;
+    target = tablet ? -1 : target;
     placeVideo();
+    if (tablet) {
+      v.autoplay = false;
+      if (!tabDone && v.duration && v.currentTime >= v.duration - 0.1) tabDone = true;
+      if (tabDone || userPaused || !inView || document.hidden) {
+        window.clearTimeout(tabTimer);
+        v.pause();
+        syncBtn();
+        return;
+      }
+      const go = () => {
+        if (!inView || document.hidden || userPaused || tabDone) return;
+        void v.play().catch(() => {
+          refused = true;
+          syncBtn();
+        });
+        if (!playing) playing = requestAnimationFrame(tick);
+      };
+      if (!tabStarted) {
+        // the first time: the name and the buttons stay a moment on the opening frame, then the film runs
+        tabStarted = true;
+        v.pause();
+        window.clearTimeout(tabTimer);
+        tabTimer = window.setTimeout(go, 2200);
+      } else if (v.paused) {
+        go();
+      }
+      syncBtn();
+      return;
+    }
     if (!band) {
       // the film waits on its current stop until the next scroll
       v.autoplay = false;
@@ -518,8 +590,9 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       userPaused = false;
       v.loop = false;
       // after the film has ended, the button plays it again from the start
-      if (bandDone || v.ended) {
+      if (bandDone || tabDone || v.ended) {
         bandDone = false;
+        tabDone = false;
         v.currentTime = 0;
       }
       void v.play().catch(() => {});
@@ -668,7 +741,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     e.stopImmediatePropagation();
   };
   const partStep = (down: boolean, e: Event) => {
-    if (band) return;
+    if (band || tablet) return;
     const r = root.getBoundingClientRect();
     if (Math.abs(r.top) > 4) return; // only while the hero fills the screen
     const now = performance.now();
@@ -732,8 +805,15 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   // the rail: each mark jumps to its step (the middle of it)
   ticks.forEach((tick, i) => {
     d.on(tick, "click", () => {
-      if (video && !band) {
+      if (video && tablet) {
         arrived = false;
+        tabDone = false;
+        tabStarted = true;
+        video.currentTime = i === 0 ? 0 : (tabTall ? heroSeq.tall.beats : heroSeq.beats)[i] ?? 0;
+        void video.play().catch(() => {});
+        return;
+      }
+      if (video && !band) {
         // jump to the start of that part and play it
         video.currentTime = i === 0 ? 0 : stops[i - 1];
         goPart(i, true);
