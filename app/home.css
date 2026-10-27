@@ -1301,3 +1301,16 @@ main > section.hm-make {
     bottom: max(8px, env(safe-area-inset-bottom));
   }
 }
+
+/* ---- Phones show the website's own hero (the client, October 2026: the same film and words as on
+   a laptop, full screen, playing through once). The "Krini product" tag stays on one line. */
+@media (max-width: 639px) {
+  section.sh.is-film .sh-product {
+    gap: 8px;
+    padding: 4px 12px 4px 4px;
+  }
+  section.sh.is-film .sh-product .sh-product-k {
+    flex: none;
+    white-space: nowrap;
+  }
+}

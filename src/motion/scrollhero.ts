@@ -138,9 +138,13 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   const measure = () => {
     W = stage.clientWidth;
     H = stage.clientHeight;
-    band = W < 640 && H > W;
-    tall = band && Boolean(heroSeq.tall.video);
-    tablet = !band && (window.matchMedia("(pointer: coarse)").matches || W < 1025);
+    // phones and tablets show the website's words and layout, full screen, the film playing through
+    // once (the client, October 2026); an upright phone or tablet plays the portrait film made for
+    // it (heroSeq.tall), a screen held sideways the website's film. The phone band layout is no
+    // longer used
+    band = false;
+    tall = false;
+    tablet = W < 1025 || window.matchMedia("(pointer: coarse)").matches;
     tabTall = tablet && H > W && Boolean(heroSeq.tall.video);
     root.classList.toggle("is-tablet", tablet);
     root.classList.toggle("is-band", band);
@@ -372,7 +376,8 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   });
   /** Which film this screen plays: the upright film on an upright phone, the wide one elsewhere. */
   function filmSrc() {
-    return tall || tabTall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
+    // the same film; phones and small tablets load its lighter 720p copy
+    return tall || tabTall ? heroSeq.tall.video : band || W < 900 ? heroSeq.videoSmall : heroSeq.video;
   }
   /**
    * The window was resized (or the phone turned): when the screen now wants the other film (a
@@ -437,8 +442,17 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   function placeVideo() {
     if (!video) return;
     if (tablet) {
-      // a tablet: the film plays through; the words of each step come in at its moment in the film
-      video.style.objectPosition = "50% 50%";
+      // a phone or tablet: the film plays through; the words of each step come in at its moment in
+      // the film. On a screen narrower than the film the crop follows its subject (heroSeq.focus)
+      if (tabTall) {
+        // the portrait film: composed for a tall screen, so it is simply centred
+        video.style.objectPosition = "50% 50%";
+      } else {
+        const s = Math.max(W / FW, H / FH);
+        const dw = FW * s;
+        const dx = clamp(W / 2 - dw * focusAt(video.currentTime || 0), W - dw, 0);
+        video.style.objectPosition = dw > W + 1 ? `${dx.toFixed(1)}px 50%` : "50% 50%";
+      }
       const now = video.currentTime || 0;
       const beats: readonly number[] = tabTall ? heroSeq.tall.beats : heroSeq.beats;
       let k = 0;

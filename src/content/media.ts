@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "roof9";
+const seqVersion = "roof12";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
@@ -82,9 +82,10 @@ export const heroSeq = {
   videoRate: 1,
   /**
    * Upright phones: the same story made again as a portrait (9:16) film in Google Flow, every scene
-   * composed for a tall screen (not a crop of the wide film), 720x1280, 22 s. The precast part follows the
-   * wide film: the worker oils the curved steel mould standing outside it, a crane bucket pours the
-   * concrete with no one in the way, and the arch is lifted off a core of the same curve. Then, on
+   * composed for a tall screen (not a crop of the wide film), 720x1280, 22 s. The precast part is the wide
+   * film's precast scenes made again full-screen in portrait from its own frames: the worker outside the
+   * blue mould rolling on mild oil beside the LUBECON bucket, the crane bucket pouring into the curved
+   * mould, and the yellow beam lifting the finished arch out. Then, on
    * site, a crane sets a precast wall panel into the top floor of the tower, which dissolves into the
    * finished building held still (the frame it opens on, so the loop has no jump). beats: where
    * each stage's name changes over it (the same stages as beats above).
@@ -92,7 +93,7 @@ export const heroSeq = {
   tall: {
     video: `${base}/videos/krini-hero-tall.mp4?v=${seqVersion}`,
     first: `${base}/images/hero-seq/first-tall.webp?v=${seqVersion}`,
-    beats: [0, 0.8, 3.5, 8.6, 20.6] as readonly number[],
+    beats: [0, 0.8, 3.5, 8.4, 20.5] as readonly number[],
   },
   first: `${base}/images/hero-seq/first.webp?v=${seqVersion}`,
   /**
