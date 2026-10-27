@@ -151,8 +151,9 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     root.style.setProperty(
       "--sh-open-top",
       tall
-        ? // the portrait film fills the screen: the words sit over its foot, just above "Scroll"
-          `${Math.round(Math.max(barBottom + 90, H - 58 - wordsH))}px`
+        ? // the portrait film fills the screen: the words sit low over its foot, just above the
+          // small gold arrow at the very bottom (moved down, the client, October 2026)
+          `${Math.round(Math.max(barBottom + 90, H - 34 - wordsH))}px`
         : `${Math.round(Math.max(filmTop + filmH + 66, (filmTop + filmH + 52 + H - 64 - wordsH) / 2))}px`,
     );
     dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -288,7 +289,8 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   d.add(() => cancelAnimationFrame(raf));
 
   // ---- on an upright phone the film itself plays, as a muted video, once through (it then rests
-  // on its last frame, the finished building) and only while the hero is on screen; its crop follows the film's subject (heroSeq.focus), and the gold line along
+  // on its last frame, the finished building) and only while the hero is on screen; its crop
+  // follows the film's subject (heroSeq.focus), and the gold line along
   // the foot of the screen shows how far through it is
   let video: HTMLVideoElement | null = null;
   let playing = 0;

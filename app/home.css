@@ -1184,3 +1184,120 @@ main > section.hm-make {
     display: none;
   }
 }
+
+/* ---- Phone hero, minimal (the client, October 2026): fewer lines and less weight over the film.
+   A small stage pill, the kicker as one quiet line (no gold rules), a slightly smaller name, a
+   light headline, two slim pill buttons, and the three figures as one short line of text
+   ("70+ Products | 1000+ Happy clients | ISO 9001:2015") instead of a boxed strip. */
+@media (max-width: 639px) {
+  section.sh.is-band.is-tall .sh-chip span {
+    gap: 7px;
+    padding: 3px 12px 3px 3px;
+    font-size: 0.7rem;
+  }
+  section.sh.is-band.is-tall .sh-chip b {
+    width: 21px;
+    height: 21px;
+    font-size: 0.6rem;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-title {
+    gap: 0.4rem;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-kicker {
+    gap: 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: rgb(255 255 255 / 0.62);
+  }
+  section.sh.is-band.is-tall .sh-open .sh-kicker::before,
+  section.sh.is-band.is-tall .sh-open .sh-kicker::after {
+    display: none;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-name {
+    font-size: clamp(2rem, 9.6vw, 2.45rem) !important;
+    letter-spacing: 0.01em;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-tagline {
+    font-size: 0.9rem !important;
+    font-weight: 400;
+    color: rgb(255 255 255 / 0.78);
+  }
+  section.sh.is-band.is-tall .sh-open-ctas {
+    gap: 8px;
+    max-width: 340px;
+    margin: 18px auto 0;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn {
+    min-height: 44px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn-primary {
+    box-shadow: none;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn-ghost {
+    border: 1px solid rgb(255 255 255 / 0.34);
+    background: transparent;
+    color: #fff;
+  }
+  section.sh.is-band.is-tall .sh-open-stats {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 0;
+    margin: 16px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  section.sh.is-band.is-tall .sh-open-stats > div {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 4px;
+    padding: 0 10px;
+    border-left: 0;
+  }
+  section.sh.is-band.is-tall .sh-open-stats > div + div {
+    border-left: 1px solid rgb(255 255 255 / 0.2);
+  }
+  section.sh.is-band.is-tall .sh-open-stats dd {
+    order: -1;
+    font-size: 0.86rem;
+    line-height: 1;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dt {
+    margin: 0;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: rgb(255 255 255 / 0.6);
+  }
+}
+/* narrow phones: the figures stay on one line */
+@media (max-width: 400px) {
+  section.sh.is-band.is-tall .sh-open-stats {
+    flex-wrap: nowrap;
+  }
+  section.sh.is-band.is-tall .sh-open-stats > div {
+    gap: 3px;
+    padding: 0 7px;
+    white-space: nowrap;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dd {
+    font-size: 0.78rem;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dt {
+    font-size: 0.54rem;
+    letter-spacing: 0.03em;
+  }
+}
+/* the words sit lower (scrollhero.ts): the gold arrow goes right down to the foot of the screen */
+@media (max-width: 639px) {
+  section.sh.is-band.is-tall .sh-down {
+    bottom: max(8px, env(safe-area-inset-bottom));
+  }
+}
