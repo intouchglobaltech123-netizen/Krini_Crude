@@ -6885,3 +6885,27 @@ html.motion [data-shutter] {
     }
   }
 }
+
+/* ---- Phones: every paragraph justified (straight edges on both sides, the client, October 2026),
+   including the ones that were left-aligned: the About page's lines, the plant captions and the
+   mission steps, Home's "Industries we serve" lines, the closing call to action and a product's
+   page (its description, steps, storage and notes). Headings,
+   titles, buttons and labels keep their own alignment; a paragraph's last line stays at the left,
+   and long words are hyphenated so the gaps stay even. */
+@media (max-width: 639px) {
+  .ab3 .ab3-sub,
+  .ab3 .ab3-lead-text,
+  .ab3 .ab3-vision-line,
+  .ab3 .ab3-ways p,
+  .ab3 li p,
+  .ab3 .ab3-plant-fig span,
+  .hm-ind p,
+  .hm-make .hm-inds .hm-ind p,
+  .cta3-body,
+  section.pshop .pv .pv-wrap :is(p, dd, li > span) {
+    text-align: justify !important;
+    text-align-last: left !important;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
