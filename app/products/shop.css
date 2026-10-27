@@ -1831,3 +1831,21 @@ section.pshop .pshop-grid .kcard-media > .kbrand-1cool.has-logo {
     transform: scale(1.22);
   }
 }
+
+/* ---- Product page photos: the whole pack always in view (the client, October 2026). On wide screens
+   the frame is capped in height while the photo was sized to its width, so a tall drum ran past the
+   bottom; the photo now sits inside the frame with even space around it, never cropped. */
+section.pshop .pv .pg-slide {
+  position: relative;
+}
+section.pshop .pv .pg-slide > img {
+  position: absolute;
+  inset: 6% 8%;
+  width: 84%;
+  height: 88%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
