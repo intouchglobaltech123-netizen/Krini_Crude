@@ -175,14 +175,15 @@ export function ContactSplit({ endpoint = "" }: { endpoint?: string }) {
 /** The factory on a map, full width under the split screen. */
 export function ContactMap() {
   const c = site.contact;
-  const q = encodeURIComponent(`Krini Crude, ${c.factory.join(" ")}`);
+  // the factory's own pin (site.contact.factoryGeo), so the map opens exactly on it
+  const q = `${c.factoryGeo.lat},${c.factoryGeo.lng}`;
   return (
     <section className="cx-map" aria-label="Map to our factory">
       <div className="frame">
         <div className="cx-map-frame">
           <iframe
             title="Krini Crude factory, Vilangadupakkam, near Madhavaram, Chennai, on Google Maps"
-            src={`https://maps.google.com/maps?q=${q}&z=15&output=embed`}
+            src={`https://maps.google.com/maps?q=${q}&z=16&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />

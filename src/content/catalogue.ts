@@ -156,6 +156,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/cutting-oil.webp",
               imageAlt: "1-COOL Cutting Oil high performance metal working fluid 20L pail",
+              videoUrl: "/videos/products/1-cool-cutting-oil.mp4",
               description:
                 "1-COOL CUTTING OIL is a high performance metal working fluid formulated for machining operations. It provides effective lubrication and cooling to improve tool life and surface finish across ferrous and non-ferrous metals.",
               purposeTitle: "Applications",
@@ -206,7 +207,7 @@ export const lines: Line[] = [
               imageAlt: "1-COOL Aquacut 150 water soluble coolant oil 20L pail",
               sheetUrl: "/documents/1-cool-aquacut-150-pds-2024.pdf",
               sheetLabel: "1-COOL Aquacut 150 Product Data Sheet (PDS 2024)",
-              videoUrl: "/videos/products/1-cool-aquacut-150.mp4",
+              videoUrl: "/videos/products/1-cool-aquacut-150.mp4?v=2",
               description:
                 "1-COOL AQUACUT 150 is a premium mineral coolant cutting fluid developed for use in light to heavy duty machining of ferrous and non-ferrous metal alloys, as well as general purpose grinding. Formulated with special lubricity and E.P. additives and rust inhibitors, it delivers extended sump life and improved tool longevity.",
               metaLine:
@@ -328,9 +329,10 @@ export const lines: Line[] = [
               status: "verified",
               pdsRevision: "PDS 2026",
               image: "/images/1-cool-al-7000.webp",
-              imageAlt: "1-COOL AL 7000 aluminium machining fluid 20L pail",
+              imageAlt: "1-COOL AL 7000 semi synthetic coolant oil 26L pail",
               sheetUrl: "/documents/1-cool-al-7000-pds.pdf",
               sheetLabel: "1-COOL AL 7000 Product Data Sheet (PDS 2026)",
+              videoUrl: "/videos/products/1-cool-al-7000.mp4",
               description:
                 "1-COOL AL 7000 is a high performance metal working fluid designed for machining aluminium and its alloys. It provides excellent cooling, lubrication and surface finish during high speed machining operations.",
               dilution: "3% – 10%",
@@ -496,6 +498,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/gear-oil.webp",
               imageAlt: "1-COOL Gear Oil high performance lubricating oil 20L pail",
+              videoUrl: "/videos/products/1-cool-gear-oil.mp4",
               description:
                 "1-COOL GEAR OIL is a high performance lubricating oil designed for industrial enclosed gear systems operating under normal to heavy load conditions. Formulated with premium base oils and advanced additives to provide wear protection, smooth operation and long service life.",
               purposeTitle: "Applications",
@@ -544,6 +547,7 @@ export const lines: Line[] = [
               pdsRevision: "PDS 2026",
               image: "/images/engine-oil.webp",
               imageAlt: "1-COOL Engine Oil high performance lubricant 20L pail",
+              videoUrl: "/videos/products/1-cool-engine-oil.mp4",
               description:
                 "1-COOL ENGINE OIL is a high performance lubricant designed for diesel and gasoline engines operating under normal to heavy duty conditions. Formulated with premium base oils and advanced detergent-dispersant additives for engine cleanliness, thermal stability and wear protection.",
               purposeTitle: "Applications",
@@ -686,7 +690,7 @@ export const lines: Line[] = [
               image: "/images/products/magic-shuttering-oil-pack.webp",
               imageAlt: "Magic Shuttering Oil 200L drum",
               /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
-              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=2",
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=3",
               pdsRevision: "Rev. 09/2026",
               description:
                 "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
@@ -739,6 +743,7 @@ export const lines: Line[] = [
             details: {
               image: "/images/products/repel-shuttering-oil-pack.webp",
               imageAlt: "Repel Shuttering Oil 200L drum",
+              videoUrl: "/videos/products/repel-shuttering-oil.mp4",
             },
           },
           {
@@ -751,6 +756,7 @@ export const lines: Line[] = [
               pdsRevision: "Rev. 09/2026",
               image: "/images/products/silease-360-shuttering-oil-pack.webp",
               imageAlt: "Silease 360 Precast Shuttering Oil 200L drum",
+              videoUrl: "/videos/products/silease-360-shuttering-oil.mp4",
               description:
                 "SILEASE 360 is a ready-to-use mould release oil developed for precast concrete production. It forms a uniform release film on the formwork, supports clean demoulding and helps reduce surface pinholes and honeycombing when applied correctly.",
               purpose: [
@@ -804,6 +810,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
               sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
+              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4",
               description: "Road Project Shuttering Oil. Cost Effective MS, Plywood & Road Projects Shuttering Oil.",
               purposeTitle: "Suitable formwork & projects",
               purpose: ["MS (mild steel) formwork", "Plywood formwork", "Road projects"],
@@ -823,6 +830,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri AL Emulsion-based Shuttering Oil 200L drum for Mivan aluminium formwork",
               sheetUrl: "/documents/nikri-al-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri AL Shuttering Oil Product Data Sheet",
+              videoUrl: "/videos/products/nikri-al-shuttering-oil.mp4",
               description:
                 "NIKRI AL is an emulsion-based shuttering oil that forms a uniform release film between concrete and formwork, supporting cleaner stripping and a smoother concrete finish.",
               purpose: [

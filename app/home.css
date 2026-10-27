@@ -934,3 +934,46 @@ main > section.hm-make {
     margin: 0;
   }
 }
+
+/* ---- Phone hero, portrait film (the client, October 2026): an upright phone plays a film made
+   upright (heroSeq.tall, not a crop of the wide one). It fills the whole screen behind the top bar;
+   a soft dark fade at the top keeps the bar readable and a deeper one at the foot carries the
+   stage's name, the words, the buttons and the figures over the film (scrollhero.ts sets
+   .is-tall, --sh-bar-bottom and --sh-open-top). */
+@media (max-width: 639px) {
+  section.sh.is-band.is-tall .sh-video {
+    top: 0;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+  section.sh.is-band.is-tall .sh-scrim {
+    background:
+      linear-gradient(180deg, rgb(8 9 12 / 0.62) 0, rgb(8 9 12 / 0.18) calc(var(--sh-bar-bottom, 80px) + 40px), transparent 34%),
+      linear-gradient(0deg, rgb(8 9 12 / 0.94) 0, rgb(8 9 12 / 0.82) 30%, rgb(8 9 12 / 0.35) 52%, transparent 66%);
+  }
+  section.sh.is-band.is-tall .sh-chip {
+    top: calc(var(--sh-open-top, 60vh) - 40px);
+  }
+  section.sh.is-band.is-tall .sh-chip span {
+    padding: 6px 12px;
+    border: 1px solid rgb(212 175 55 / 0.4);
+    border-radius: 999px;
+    background: rgb(10 11 14 / 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+  }
+  section.sh.is-band.is-tall .sh-step.sh-open {
+    top: var(--sh-open-top, 60vh);
+  }
+  section.sh.is-band.is-tall .sh-open .sh-title,
+  section.sh.is-band.is-tall .sh-open .sh-motto {
+    text-shadow: 0 2px 14px rgb(0 0 0 / 0.55);
+  }
+  section.sh.is-band.is-tall .sh-open-stats {
+    background: rgb(10 11 14 / 0.5);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}

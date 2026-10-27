@@ -129,8 +129,8 @@ export const site = {
     },
     /**
      * The hero film (the client's building-first film, Google Flow), one part per scroll: the finished
-     * building, then Magic Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel in
-     * the pit, the oiled box poured and stripped clean, a precast mould, and the building rising to its
+     * building, then Magic Shuttering Oil rolled on to the concrete face of a Mivan aluminium panel on
+     * the top floor, the oiled column formwork on that same rooftop poured and stripped to a fair finish, a precast mould, and the building rising to its
      * defect-free finish
      * (heroSeq.stops says where each part ends). Product claims are krinicrude.com's own.
      */
@@ -147,7 +147,7 @@ export const site = {
         name: "Pour and clean strip",
         rail: "Pour",
         product: "Magic Shuttering Oil",
-        line: "Concrete is poured against the oiled faces, and the panels strip clean: nothing sticks, no stains.",
+        line: "Concrete is poured against the oiled faces, and the panels strip clean to a smooth fair finish: nothing sticks, no stains.",
         link: { label: "Shuttering oils & greases", href: "/products/construction-chemicals" },
       },
       {
@@ -468,7 +468,9 @@ export const site = {
     factory: ["Plot 148 & 149, Gomathi Nagar,", "Vilangadupakkam, Near Madhavaram,", "Chennai - 600052,", "Tamil Nadu, India"],
     /** Google Maps searches for the two addresses. */
     officeMap: "https://www.google.com/maps/search/?api=1&query=95%2F20B%20Gujji%20Main%20Road%2C%20Anna%20Nagar%20East%2C%20Chennai%20600102",
-    factoryMap: "https://www.google.com/maps/search/?api=1&query=Plot%20148%20%26%20149%2C%20Gomathi%20Nagar%2C%20Vilangadupakkam%2C%20Chennai%20600052",
+    factoryMap: "https://maps.app.goo.gl/hTZXcKDsdfqZwfa79",
+    /** The factory's pin on Google Maps (the client's link above), for the map on Contact. */
+    factoryGeo: { lat: 13.1883258, lng: 80.2185563 },
     hours: "9:00 AM – 6:00 PM",
     enquiryTypes: ["Enquiry", "Request a quote", "Private label", "Custom formulation"],
   },

@@ -123,18 +123,23 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
    * stage's name, the words and the buttons under it (the client, October 2026).
    */
   let band = false;
+  /** An upright phone with the portrait film (heroSeq.tall): the film fills the whole screen, the words over its foot. */
+  let tall = false;
   let filmH = 0;
   let filmTop = 0;
   const measure = () => {
     W = stage.clientWidth;
     H = stage.clientHeight;
     band = W < 640 && H > W;
+    tall = band && Boolean(heroSeq.tall.video);
     root.classList.toggle("is-band", band);
+    root.classList.toggle("is-tall", tall);
     root.classList.toggle("is-film", !band);
     // on a phone: the whole film, uncropped, from just under the top bar
     const barBottom = document.querySelector<HTMLElement>("[data-nav] .nav-main")?.getBoundingClientRect().bottom || 80;
-    filmTop = band ? Math.round(clamp(barBottom + 10, 60, 140)) : 0;
-    filmH = band ? Math.round((W * FH) / FW) : H;
+    filmTop = band && !tall ? Math.round(clamp(barBottom + 10, 60, 140)) : 0;
+    filmH = band && !tall ? Math.round((W * FH) / FW) : H;
+    root.style.setProperty("--sh-bar-bottom", `${Math.round(barBottom)}px`);
     root.style.setProperty("--sh-film-top", `${filmTop}px`);
     root.style.setProperty("--sh-film-h", `${filmH}px`);
     root.style.setProperty("--sh-band-top", `${filmTop}px`);
@@ -143,7 +148,13 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     // goes in between); on a short phone they follow straight on under it
     const wordsH = root.querySelector<HTMLElement>(".sh-open")?.offsetHeight || 300;
     // midway between the stage's name (under the film) and "Scroll" (at the foot of the screen)
-    root.style.setProperty("--sh-open-top", `${Math.round(Math.max(filmTop + filmH + 66, (filmTop + filmH + 52 + H - 64 - wordsH) / 2))}px`);
+    root.style.setProperty(
+      "--sh-open-top",
+      tall
+        ? // the portrait film fills the screen: the words sit over its foot, just above "Scroll"
+          `${Math.round(Math.max(barBottom + 90, H - 58 - wordsH))}px`
+        : `${Math.round(Math.max(filmTop + filmH + 66, (filmTop + filmH + 52 + H - 64 - wordsH) / 2))}px`,
+    );
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
@@ -279,12 +290,12 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.playsInline = true;
     v.autoplay = band && !waitForTap;
     v.preload = "auto";
-    v.poster = heroSeq.first;
+    v.poster = tall ? heroSeq.tall.first : heroSeq.first;
     v.disablePictureInPicture = true;
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("aria-hidden", "true");
-    v.src = band ? heroSeq.videoSmall : heroSeq.video;
+    v.src = tall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
     const rate = () => {
       v.defaultPlaybackRate = heroSeq.videoRate;
       v.playbackRate = heroSeq.videoRate;
@@ -377,8 +388,9 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     }
     // which stage of the build is on screen (the name over the empty plot is stage 0)
     const now = video.currentTime || 0;
+    const beats: readonly number[] = tall ? heroSeq.tall.beats : heroSeq.beats;
     let k = 0;
-    while (k + 1 < heroSeq.beats.length && now >= heroSeq.beats[k + 1]) k++;
+    while (k + 1 < beats.length && now >= beats[k + 1]) k++;
     if (hero.dataset.stage !== String(k)) hero.dataset.stage = String(k);
     if (bar && video.duration) bar.style.transform = `scaleX(${(video.currentTime / video.duration).toFixed(4)})`;
   }
@@ -410,7 +422,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     // (or, with reduced motion, until they first tap play)
     if (v.ended || (!v.loop && v.duration && v.currentTime >= v.duration - 0.1)) v.currentTime = 0;
     v.loop = true;
-    v.poster = heroSeq.first;
+    v.poster = tall ? heroSeq.tall.first : heroSeq.first;
     if (inView && !document.hidden && !userPaused && !(waitForTap && !started)) {
       v.play().catch(() => {
         // autoplay refused (a battery saver or data saver, say): the first frame stays, with the
