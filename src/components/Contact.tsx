@@ -181,13 +181,13 @@ export function ContactMap() {
       <div className="frame">
         <div className="cx-map-frame">
           <iframe
-            title="Krini Crude factory, Tiruverkadu, Chennai, on Google Maps"
+            title="Krini Crude factory, Vilangadupakkam, near Madhavaram, Chennai, on Google Maps"
             src={`https://maps.google.com/maps?q=${q}&z=15&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
           <a href={c.factoryMap} className="cx-map-card" target="_blank" rel="noopener noreferrer">
-            <span className="cx-map-k">Factory · Tiruverkadu</span>
+            <span className="cx-map-k">Factory · Near Madhavaram</span>
             <span className="cx-map-v">Open in Google Maps</span>
             <Arrow />
           </a>

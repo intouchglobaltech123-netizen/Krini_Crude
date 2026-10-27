@@ -39,7 +39,7 @@ const MISSION = [
   { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
 ];
 
-/** Photographs from the factory in Tiruverkadu. */
+/** Photographs from the factory near Madhavaram. */
 const PLANT = [
   {
     src: "/images/factory/tanks-43.webp",
@@ -104,7 +104,7 @@ export function AboutPage() {
               </div>
               <figure className="ab3-hero-media">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/factory/tanks-169.webp" alt="Storage tanks, a stacker and drums at the Krini Crude factory in Tiruverkadu, Chennai" width={1440} height={810} decoding="async" fetchPriority="high" />
+                <img src="/images/factory/tanks-169.webp" alt="Storage tanks, a stacker and drums at the Krini Crude factory near Madhavaram, Chennai" width={1440} height={810} decoding="async" fetchPriority="high" />
               </figure>
             </div>
             <dl className="ab3-figures">
@@ -157,7 +157,7 @@ export function AboutPage() {
           <div className="frame">
             <p className="ab3-k">Our factory</p>
             <h2 id="plant-title" className="ab3-h2">
-              Inside our factory in Tiruverkadu.
+              Inside our factory near Madhavaram.
             </h2>
             <div className="ab3-plant-grid">
               {PLANT.map((ph) => (
@@ -236,7 +236,7 @@ export function AboutPage() {
               <div>
                 <p className="ab3-k">Where we are</p>
                 <h2 id="visit-title" className="ab3-h2">
-                  An office in Anna Nagar, a factory in Tiruverkadu.
+                  An office in Anna Nagar, a factory near Madhavaram.
                 </h2>
               </div>
               <a href={enquireHref("Enquiry")} className="ab3-btn ab3-btn-dark" data-enquire="Enquiry">

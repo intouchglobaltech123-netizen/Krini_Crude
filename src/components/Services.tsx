@@ -30,7 +30,7 @@ export function ServicesHall() {
         </picture>
       </div>
       <figcaption className="frame mt-4 flex items-center justify-between">
-        <span className="label text-mute">Production hall, Tiruverkadu</span>
+        <span className="label text-mute">Production hall, near Madhavaram</span>
       </figcaption>
     </figure>
   );

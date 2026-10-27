@@ -1006,9 +1006,9 @@ export const lines: Line[] = [
     seo: {
       title: "Spray Paints, Galva Zinc, Anti-Spatter & Adhesive Sprays | Krini Crude",
       description:
-        "Spray paints in black or any RAL shade, galva zinc, silicone-free anti-spatter, Lock Bond adhesive and release sprays, made by Krini Crude, Chennai.",
+        "Spray paints in black or any RAL shade, galva zinc, silicone-free anti-spatter and Lock Bond foam adhesive sprays, made by Krini Crude, Chennai.",
     },
-    heading: "Aerosol spray paints, anti-spatter, adhesive and release sprays.",
+    heading: "Aerosol spray paints, anti-spatter and foam adhesive sprays.",
     products: [
       {
         id: "colour-sprays",
@@ -1184,26 +1184,27 @@ export const lines: Line[] = [
         id: "lock-bond-adhesive-spray",
         name: "Lock Bond Adhesive Spray",
         variants: ["400 ml"],
-        about: "A multi-purpose industrial adhesive in an aerosol, for bonding in production and maintenance.",
+        about: "A foam adhesive in an aerosol, for bonding foam to foam and to fabric, wood and other materials in furniture, upholstery and packaging.",
         range: [
           {
             name: "Lock-Bond Adhesive Spray 400ml",
-            text: "Multi-purpose adhesive spray, lasts longer, non-toxic, ozone friendly, CFC and lead free.",
+            tagline: "Foam adhesive spray",
+            text: "Foam adhesive spray: fast tack, lasts longer, non-toxic, ozone friendly, CFC and lead free.",
             details: {
               status: "verified",
               pdsRevision: "400 ML",
               image: "/images/lock-bond-adhesive-spray-400ml.webp",
-              imageAlt: "Lock-Bond Multi Purpose Adhesive Aerosol Spray 400ml can",
+              imageAlt: "Lock-Bond foam adhesive aerosol spray 400ml can",
               sheetUrl: "/documents/lock-bond-adhesive-spray-400ml-pds.pdf",
               sheetLabel: "Lock-Bond Adhesive Spray Product Data Sheet",
               videoUrl: "/videos/products/lock-bond-adhesive-spray-400ml.mp4",
               description:
-                "LOCK-BOND ADHESIVE SPRAY is a premium multi-purpose industrial aerosol adhesive formulated for fast tack, high bonding strength, and long-lasting durability across a wide spectrum of materials. It is non-toxic, ozone-friendly, CFC and lead-free, ensuring safe handling in manufacturing, workshop assembly, and industrial maintenance.",
+                "LOCK-BOND ADHESIVE SPRAY is a foam adhesive in an aerosol, made for bonding foam: foam to foam, and foam to fabric, wood, plastics and other materials, in furniture, upholstery, mattresses and packaging. It gives fast tack and a strong, long-lasting bond, and is non-toxic, ozone-friendly, CFC and lead-free.",
               metaLine:
-                "Multi-purpose · Fast tack · High bonding strength · Lasts longer · Non-toxic · Ozone friendly & CFC-free · 400 ml aerosol",
-              purposeTitle: "Key Features & Suitable Materials",
+                "Foam adhesive · Fast tack · High bonding strength · Lasts longer · Non-toxic · Ozone friendly & CFC-free · 400 ml aerosol",
+              purposeTitle: "What it is for",
               purpose: [
-                "Multi Purpose Adhesive Spray: Bonds paper, cardboard, fabric, foam, plastics, leather, foil, wood & metals",
+                "Foam Adhesive Spray: Bonds foam to foam, and foam to fabric, leather, wood, plastics and metal",
                 "Lasts Longer: Formulated for enduring bond durability under industrial conditions",
                 "Non-Toxic: Safe formulation for workplace and operator handling",
                 "Ozone Friendly: 100% CFC and lead free propellant system",
@@ -1215,10 +1216,10 @@ export const lines: Line[] = [
                 "Clean spray pattern prevents bleed-through and wrinkling",
                 "Non-toxic and eco-conscious formulation with zero CFCs or lead",
                 "Long shelf life and dependable spray valve performance",
-                "Ideal for automotive interiors, upholstery, packaging, and sign-making",
+                "Ideal for foam in furniture, upholstery, mattresses, automotive interiors and packaging",
               ],
               properties: [
-                { property: "Product Type", value: "Aerosol Spray Adhesive" },
+                { property: "Product Type", value: "Foam Adhesive Spray (aerosol)" },
                 { property: "Net Volume", value: "400 ml" },
                 { property: "Tack Type", value: "Fast tack / High initial grab" },
                 { property: "Toxicity", value: "Non-Toxic" },
@@ -1238,7 +1239,7 @@ export const lines: Line[] = [
               storage:
                 "Store in a cool, well-ventilated dry area below 50 °C (122 °F). Keep away from open flames, heat sources, and direct sunlight. Pressurized container: do not pierce or incinerate.",
               shelfLife: "24 months from date of manufacture when stored properly",
-              note: "Manufactured by Krini Crude, Thiruverkadu Road, Chennai, Tamil Nadu, India - 600077.",
+              note: "Manufactured by Krini Crude, Plot 148 & 149, Gomathi Nagar, Vilangadupakkam, near Madhavaram, Chennai, Tamil Nadu, India - 600052.",
             },
           },
         ],
@@ -1307,57 +1308,6 @@ export const lines: Line[] = [
         ],
         tbc: [],
       },
-      {
-        id: "release-spray",
-        name: "Release Spray",
-        variants: ["550 ml aerosol", "Clean & Easy Demoulding"],
-        range: [
-          {
-            name: "Release Spray 550ml",
-            text: "High-performance mould release aerosol agent designed to prevent concrete from sticking to formwork.",
-            details: {
-              status: "verified",
-              pdsRevision: "PDS 2026",
-              image: "/images/release-spray.webp",
-              imageAlt: "Release Spray 550ml mould release agent aerosol can",
-              description:
-                "RELEASE SPRAY is a high performance mould release agent designed to prevent concrete from sticking to formwork, moulds and other surfaces. It provides easy demoulding with a smooth surface finish while saving labor and preparation time.",
-              purposeTitle: "Applications",
-              purpose: [
-                "Concrete formwork and moulds",
-                "Shuttering plates (steel and aluminium)",
-                "Plywood and timber shuttering moulds",
-                "Precast concrete products and architectural panels",
-                "Construction and infrastructure works",
-              ],
-              benefits: [
-                "Prevents concrete adhesion and reduces surface blemishes",
-                "Ensures easy, clean demoulding without damaging mould edges",
-                "Delivers a fair-faced, uniform concrete surface finish",
-                "Saves time and labour with fast, even aerosol spray application",
-                "Suitable for various formwork materials including steel, wood, and plastic",
-              ],
-              properties: [
-                { property: "Appearance", value: "Clear Aerosol Spray", spec: "Visual" },
-                { property: "Net Volume", value: "550 ml", spec: "Standard Can" },
-                { property: "Propellant", value: "Eco-Friendly", spec: "Standard" },
-                { property: "Demoulding Action", value: "Easy Release / Non-Sticking", spec: "Performance" },
-              ],
-              application: [
-                "Shake the can well before use.",
-                "Spray evenly on clean and dry surface from a distance of 15–20 cm.",
-                "Allow a thin, uniform film to form. No wiping required.",
-              ],
-              packing: "Standard packing: 550 ml aerosol spray cans (Cartons of 12 / 24 cans)",
-              storage:
-                "Pressurised container. Store below 50 °C away from heat, sparks, open flame and direct sunlight. Use in well-ventilated area.",
-              shelfLife: "24 months from date of manufacture when stored as recommended.",
-            },
-          },
-        ],
-        about: "A release agent in aerosol form, for quick, even application on moulds and surfaces.",
-        uses: ["Concrete formwork, shuttering plates and precast moulds", "Site and factory formwork preparation"],
-      },
     ],
     industries: ["paint"],
     faq: [
@@ -1370,8 +1320,8 @@ export const lines: Line[] = [
         a: "Yes. Our anti-spatter spray is silicone-free, which matters when welded parts are going to be painted or powder coated.",
       },
       {
-        q: "What sizes does Lock Bond adhesive spray come in?",
-        a: "Lock Bond Adhesive Spray comes in a 400 ml can.",
+        q: "What is Lock Bond adhesive spray for?",
+        a: "Lock Bond is a foam adhesive spray: it bonds foam to foam, and foam to fabric, wood and other materials, in furniture, upholstery, mattresses and packaging. It comes in a 400 ml can.",
       },
     ],
   },

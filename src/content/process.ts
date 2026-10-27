@@ -2,7 +2,7 @@
  * "How it's made": how crude oil becomes a Krini Crude lubricant, in ten steps
  * and four places. Steps 1 to 8 (in nature, at the oilfield, at the refinery)
  * describe the oil industry's general process. Steps 9 and 10 happen at Krini
- * Crude's factory in Tiruverkadu, Chennai (as the live site states); they
+ * Crude's factory near Madhavaram, Chennai (as the live site states); they
  * describe how lubricants are generally blended and packed, and the details
  * the live site does not give are marked TBC, to be confirmed by the team.
  */
@@ -17,7 +17,7 @@ export const places: readonly { id: PlaceId; label: string; bar: string; where: 
   { id: "nature", label: "In nature", bar: "Nature", where: "Underground, over millions of years" },
   { id: "oilfield", label: "At the oilfield", bar: "Oilfield", where: "Oilfields around the world" },
   { id: "refinery", label: "At the refinery", bar: "Refinery", where: "Oil refineries" },
-  { id: "plant", label: "At our plant", bar: "Our plant", where: "Tiruverkadu, Chennai" },
+  { id: "plant", label: "At our plant", bar: "Our plant", where: "Near Madhavaram, Chennai" },
 ];
 
 export type ProcessStep = {
@@ -145,7 +145,7 @@ export const processPage = {
   },
   label: "How it’s made",
   heading: "From crude oil to the drum.",
-  lead: "Every lubricant starts as crude oil, deep underground. It is drilled, shipped and refined into base oil, then blended with additives, tested and packed. The last two steps happen at our factory in Tiruverkadu, Chennai. Here is the whole journey.",
+  lead: "Every lubricant starts as crude oil, deep underground. It is drilled, shipped and refined into base oil, then blended with additives, tested and packed. The last two steps happen at our factory near Madhavaram, Chennai. Here is the whole journey.",
   facts: [
     { value: "10", label: "Steps" },
     { value: "4", label: "Places" },
@@ -199,7 +199,7 @@ export const processPage = {
     },
     {
       q: "Where are Krini Crude’s products made?",
-      a: "At our factory in Tiruverkadu, Chennai. Our office is in Anna Nagar East, Chennai.",
+      a: "At our factory in Vilangadupakkam, near Madhavaram, Chennai. Our office is in Anna Nagar East, Chennai.",
     },
     {
       q: "Can you make a product to our formulation?",

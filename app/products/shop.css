@@ -2020,3 +2020,116 @@ section.pshop .pv .pv-mini-media .kphoto {
   box-shadow: none !important;
   mix-blend-mode: normal;
 }
+
+/* ---- Phones: the sample beaker back on the card, small in the bottom right corner of the photo */
+@media (max-width: 639px) {
+  section.pshop .pshop-grid .kcard-media {
+    position: relative;
+  }
+  section.pshop .pshop-grid .kcard-media .kbeaker {
+    display: block;
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    width: 30px;
+    max-width: 30px;
+    height: auto;
+    max-height: none;
+    margin: 0;
+    filter: drop-shadow(0 3px 4px rgb(15 23 42 / 0.18));
+  }
+}
+
+/* ---- Phones: the top of Our products, polished (the client, October 2026): the title with a short
+   gold rule, the two brand logos side by side on one white card, and "How to order" as a navy card
+   with the three gold-numbered steps joined by a gold line. */
+@media (max-width: 639px) {
+  section.pshop .pshop-head {
+    gap: 14px;
+  }
+  section.pshop .pshop-head-main {
+    display: grid;
+    gap: 14px;
+  }
+  section.pshop .pshop-title {
+    position: relative;
+    padding-bottom: 12px;
+    font-size: 2rem !important;
+    line-height: 1.05 !important;
+  }
+  section.pshop .pshop-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 44px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #c9a43a, #e3c25a);
+  }
+  section.pshop .pshop-head-logos {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgb(15 23 42 / 0.07);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 24px -20px rgb(15 23 42 / 0.5);
+  }
+  section.pshop .pshop-head-logos .pshop-head-logo {
+    height: 40px;
+    max-width: 46%;
+    object-fit: contain;
+  }
+  section.pshop .pshop-head-logos .pshop-head-logo-lubricants {
+    height: 30px;
+  }
+  section.pshop .pshop-head-logos .pshop-head-logo + .pshop-head-logo {
+    padding-left: 12px;
+    border-left: 1px solid rgb(15 23 42 / 0.1);
+  }
+
+  section.pshop .pshop-steps {
+    margin-top: 0;
+    padding: 34px 8px 14px;
+    border: 0;
+    border-radius: 16px;
+    background:
+      radial-gradient(90% 120% at 100% 0%, rgb(212 175 55 / 0.18), transparent 60%),
+      linear-gradient(160deg, #172340, #0f172a);
+    box-shadow: 0 14px 28px -20px rgb(15 23 42 / 0.7);
+  }
+  section.pshop .pshop-steps::before {
+    content: "How to order";
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #e3c25a;
+  }
+  section.pshop .pshop-steps li {
+    padding-top: 6px;
+    font-size: 0.74rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+  section.pshop .pshop-steps li + li::before {
+    top: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, rgb(212 175 55 / 0.25), rgb(212 175 55 / 0.8));
+    opacity: 1;
+  }
+  section.pshop .pshop-steps li b {
+    width: 30px;
+    height: 30px;
+    color: #0f172a;
+    box-shadow: 0 0 0 4px rgb(15 23 42 / 0.9);
+  }
+}

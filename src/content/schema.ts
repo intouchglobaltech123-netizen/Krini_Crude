@@ -30,9 +30,9 @@ const office = {
 };
 const factory = {
   "@type": "PostalAddress",
-  streetAddress: "Ground Floor, 161A, Chinakoladi Lakshmi Nagar, Tiruverkadu",
+  streetAddress: "Plot 148 & 149, Gomathi Nagar, Vilangadupakkam, near Madhavaram",
   addressLocality: "Chennai",
-  postalCode: "600077",
+  postalCode: "600052",
   addressRegion: "Tamil Nadu",
   addressCountry: "IN",
 };

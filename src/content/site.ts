@@ -180,7 +180,7 @@ export const site = {
     lines: {
       lubricants: "Cutting Oil, Soluble Cutting Oil, Rust Preventive Oil, Hydraulic Oil, Gear Oil, Engine Oil",
       construction: "Shuttering Oil, Precast Shuttering Oil, Shuttering Grease",
-      aerosols: "Vibrant Colour Sprays, Lock Bond Adhesive Spray, Anti-Spatter Spray, Release Spray",
+      aerosols: "Vibrant Colour Sprays, Lock Bond Foam Adhesive Spray, Anti-Spatter Spray",
     },
   },
   /**
@@ -219,10 +219,10 @@ export const site = {
       id: "aerosols",
       name: "Aerosols & sprays",
       rail: "Aerosols",
-      body: "Colour, zinc, adhesive, anti-spatter and release sprays for industrial maintenance, automotive care and specialty applications.",
+      body: "Colour, zinc, foam adhesive and anti-spatter sprays for industrial maintenance, automotive care and specialty applications.",
       spec: [
         { label: "Colour", values: ["Black", "Any RAL", "Galva zinc"], href: "/products/aerosols#colour-sprays" },
-        { label: "Lock Bond", values: ["Adhesive, 400 ml"], href: "/products/aerosols#lock-bond-adhesive-spray" },
+        { label: "Lock Bond", values: ["Foam adhesive, 400 ml"], href: "/products/aerosols#lock-bond-adhesive-spray" },
         { label: "Anti-spatter", values: ["Silicone-free"], href: "/products/aerosols#anti-spatter-spray" },
       ],
       link: "View aerosols",
@@ -298,7 +298,7 @@ export const site = {
   /** Services: what Krini Crude does for customers, as stated on the live site. */
   services: {
     lead:
-      "Made at our factory in Tiruverkadu, Chennai. Our CEO personally oversees Research & Development, and we keep investing in R&D, modern technology and geographical expansion.",
+      "Made at our factory in Vilangadupakkam, near Madhavaram, Chennai. Our CEO personally oversees Research & Development, and we keep investing in R&D, modern technology and geographical expansion.",
     items: [
       {
         icon: "factory",
@@ -311,7 +311,7 @@ export const site = {
         more: [
           "Metalworking fluids and industrial oils (the 1-COOL series), greases",
           "Ready-to-use shuttering oils and greases",
-          "Aerosol spray paints, anti-spatter, adhesive and release sprays",
+          "Aerosol spray paints, anti-spatter and foam adhesive sprays",
         ],
       },
       {
@@ -364,7 +364,7 @@ export const site = {
         { title: "Raw materials", body: "Base oils, additives and components selected for the application." },
         { title: "Formulation", body: "Our formulation or yours, specified with our R&D team." },
         { title: "Testing", body: "Batches checked against the agreed specification before release." },
-        { title: "Manufacturing", body: "Blended and produced at our factory in Tiruverkadu, Chennai." },
+        { title: "Manufacturing", body: "Blended and produced at our factory near Madhavaram, Chennai." },
         { title: "Packaging", body: "Filled and packed in your brand’s livery." },
         { title: "Finished product", body: "Delivered ready for market, with after-sales support." },
       ],
@@ -465,10 +465,10 @@ export const site = {
     email: "info@krinicrude.com",
     /** The two addresses, line by line as on the live site's Contact page. */
     office: ["95/20B, Gujji Main Road,", "Anna Nagar East,", "Chennai - 600102,", "Tamil Nadu, India"],
-    factory: ["Ground Floor, 161A, Krini Crude,", "Chinakoladi Lakshmi Nagar,", "Tiruverkadu, Chennai,", "Tiruvallur - 600077,", "Tamil Nadu, India"],
+    factory: ["Plot 148 & 149, Gomathi Nagar,", "Vilangadupakkam, Near Madhavaram,", "Chennai - 600052,", "Tamil Nadu, India"],
     /** Google Maps searches for the two addresses. */
     officeMap: "https://www.google.com/maps/search/?api=1&query=95%2F20B%20Gujji%20Main%20Road%2C%20Anna%20Nagar%20East%2C%20Chennai%20600102",
-    factoryMap: "https://www.google.com/maps/search/?api=1&query=161A%20Chinakoladi%20Lakshmi%20Nagar%2C%20Tiruverkadu%2C%20Chennai%20600077",
+    factoryMap: "https://www.google.com/maps/search/?api=1&query=Plot%20148%20%26%20149%2C%20Gomathi%20Nagar%2C%20Vilangadupakkam%2C%20Chennai%20600052",
     hours: "9:00 AM – 6:00 PM",
     enquiryTypes: ["Enquiry", "Request a quote", "Private label", "Custom formulation"],
   },
@@ -508,7 +508,7 @@ export const site = {
         label: "What we make",
         heading: ["Lubricants, greases", "and aerosols."],
         /** What the range is and where it is made, product by product (each named as in catalogue.ts). */
-        lead: "Made at our factory in Tiruverkadu, Chennai: 1-COOL cutting oils and coolants, rust preventives, hydraulic, gear and engine oils; greases for bearings and formwork; and aerosol sprays for painting, welding and maintenance.",
+        lead: "Made at our factory near Madhavaram, Chennai: 1-COOL cutting oils and coolants, rust preventives, hydraulic, gear and engine oils; greases for bearings and formwork; and aerosol sprays for painting, welding and maintenance.",
         credit: "",
         families: [
           {
@@ -553,9 +553,8 @@ export const site = {
             rows: [
               { label: "Colour sprays", values: ["Black, glossy / matt", "Any RAL shade"], href: "/products/aerosols#colour-sprays" },
               { label: "Galva zinc", values: ["Zinc coating spray"], href: "/products/aerosols#colour-sprays" },
-              { label: "Lock Bond", values: ["Adhesive, 400 ml"], href: "/products/aerosols#lock-bond-adhesive-spray" },
+              { label: "Lock Bond", values: ["Foam adhesive, 400 ml"], href: "/products/aerosols#lock-bond-adhesive-spray" },
               { label: "Anti-spatter", values: ["Silicone-free"], href: "/products/aerosols#anti-spatter-spray" },
-              { label: "Release spray", values: ["Moulds and surfaces"], href: "/products/aerosols#release-spray" },
             ],
             link: "View aerosols",
             href: "/products/aerosols",
@@ -574,12 +573,12 @@ export const site = {
         items: [
           {
             q: "Is Krini Crude a manufacturer?",
-            a: "Yes. Krini Crude is an ISO 9001:2015 certified manufacturer of lubricants, greases, construction chemicals and aerosol sprays: more than 70 products, made at our factory in Tiruverkadu, Chennai, to our own formulations or to yours.",
+            a: "Yes. Krini Crude is an ISO 9001:2015 certified manufacturer of lubricants, greases, construction chemicals and aerosol sprays: more than 70 products, made at our factory near Madhavaram, Chennai, to our own formulations or to yours.",
             link: { label: "About Krini Crude", href: routes.about },
           },
           {
             q: "Where are your office and factory?",
-            a: "Our office is at 95/20B, Gujji Main Road, Anna Nagar East, Chennai 600102, and our factory at 161A, Chinakoladi Lakshmi Nagar, Tiruverkadu, Chennai 600077, Tamil Nadu. We supply all major states in India.",
+            a: "Our office is at 95/20B, Gujji Main Road, Anna Nagar East, Chennai 600102, and our factory at Plot 148 & 149, Gomathi Nagar, Vilangadupakkam, near Madhavaram, Chennai 600052, Tamil Nadu. We supply all major states in India.",
             link: { label: "Contact and directions", href: routes.contact },
           },
           {
@@ -594,7 +593,7 @@ export const site = {
           },
           {
             q: "Which aerosol sprays do you make?",
-            a: "Colour spray paints in black (glossy or matt) or any RAL shade, which we can match to your powder coating; Galva zinc spray; a silicone-free anti-spatter spray for welding; Lock Bond adhesive spray in 400 ml cans; and release sprays.",
+            a: "Colour spray paints in black (glossy or matt) or any RAL shade, which we can match to your powder coating; Galva zinc spray; a silicone-free anti-spatter spray for welding; and Lock Bond foam adhesive spray in 400 ml cans.",
             link: { label: "View aerosols", href: routes.line("aerosols") },
           },
           {
@@ -614,7 +613,7 @@ export const site = {
           },
           {
             q: "Does Krini Crude supply across India?",
-            a: "Yes. From our ISO 9001:2015 certified factory in Tiruverkadu, Chennai, Krini Crude supplies lubricants, construction chemicals and aerosols to customers in all major states in India, with more than 1000 happy clients and after-sales support on every product.",
+            a: "Yes. From our ISO 9001:2015 certified factory near Madhavaram, Chennai, Krini Crude supplies lubricants, construction chemicals and aerosols to customers in all major states in India, with more than 1000 happy clients and after-sales support on every product.",
             link: { label: "Contact our team", href: routes.contact },
           },
           {
@@ -679,12 +678,12 @@ export const site = {
         steps: [
           { title: "Enquiry", body: "Tell us the application, the products and the quantities, or the product you want under your brand." },
           { title: "Formulation", body: "Our formulation or yours, with our R&D team, overseen by our CEO." },
-          { title: "Manufacturing", body: "Made at our factory in Tiruverkadu, Chennai." },
+          { title: "Manufacturing", body: "Made at our factory near Madhavaram, Chennai." },
           { title: "Supply", body: "Under our brand or yours, to all major states in India." },
           { title: "After-sales", body: "Comprehensive after-sales support for every client." },
         ],
       },
-      places: { label: "Where we are", heading: "An office in Anna Nagar, a factory in Tiruverkadu." },
+      places: { label: "Where we are", heading: "An office in Anna Nagar, a factory near Madhavaram." },
       leadership: {
         role: "CEO",
         /** A fact from the live site; the name, message and photograph are to be supplied. */
@@ -696,11 +695,11 @@ export const site = {
       faq: [
         {
           q: "What does Krini Crude manufacture?",
-          a: "Lubricants and greases (including the 1-COOL metalworking fluid series), construction chemicals (shuttering oils and greases) and aerosol products (spray paints, anti-spatter, adhesive and release sprays): 70+ products in all.",
+          a: "Lubricants and greases (including the 1-COOL metalworking fluid series), construction chemicals (shuttering oils and greases) and aerosol products (spray paints, anti-spatter and foam adhesive sprays): 70+ products in all.",
         },
         {
           q: "Where is Krini Crude based?",
-          a: "Our office is at 95/20B, Gujji Main Road, Anna Nagar East, Chennai 600102, and our factory is in Chinakoladi Lakshmi Nagar, Tiruverkadu, Chennai 600077, Tamil Nadu.",
+          a: "Our office is at 95/20B, Gujji Main Road, Anna Nagar East, Chennai 600102, and our factory is at Plot 148 & 149, Gomathi Nagar, Vilangadupakkam, near Madhavaram, Chennai 600052, Tamil Nadu.",
         },
         { q: "Is Krini Crude ISO 9001:2015 certified?", a: "Yes, Krini Crude is an ISO 9001:2015 certified company." },
         { q: "Which markets do you supply?", a: "Industrial, automotive, marine, construction, infrastructure and more specialist sectors, across all major states in India." },
@@ -804,7 +803,7 @@ export const site = {
       seo: {
         title: "Contact Krini Crude | Enquiries, Quotes & Private Label, Chennai",
         description:
-          "Call +91 80153 43987, WhatsApp or email info@krinicrude.com. Office in Anna Nagar East, Chennai; factory in Tiruverkadu. Send an enquiry or request a quote.",
+          "Call +91 80153 43987, WhatsApp or email info@krinicrude.com. Office in Anna Nagar East, Chennai; factory near Madhavaram. Send an enquiry or request a quote.",
       },
       label: "Contact",
       heading: "Contact Krini Crude.",

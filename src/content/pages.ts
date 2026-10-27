@@ -30,7 +30,7 @@ export const seo = {
     ...site.pages.about.seo,
     path: routes.about,
     image: "/images/og-about.jpg",
-    imageAlt: "Storage tanks and drums at the Krini Crude factory, Tiruverkadu, Chennai",
+    imageAlt: "Storage tanks and drums at the Krini Crude factory near Madhavaram, Chennai",
   },
   services: {
     ...site.pages.services.seo,
@@ -54,7 +54,7 @@ export const seo = {
     ...site.pages.contact.seo,
     path: routes.contact,
     image: "/images/og-contact.jpg",
-    imageAlt: "Storage tanks and drums at the Krini Crude factory, Tiruverkadu, Chennai",
+    imageAlt: "Storage tanks and drums at the Krini Crude factory near Madhavaram, Chennai",
   },
   process: {
     ...processPage.seo,

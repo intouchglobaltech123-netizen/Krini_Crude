@@ -36,7 +36,7 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
           <div className="frame nav-strip-in">
             <p className="nav-strip-note">
               <span className="nav-strip-dot" aria-hidden="true" />
-              ISO 9001:2015 certified manufacturer · Factory in Tiruverkadu, Chennai
+              ISO 9001:2015 certified manufacturer · Factory near Madhavaram, Chennai
             </p>
             <ul className="nav-strip-reach">
               <li>
