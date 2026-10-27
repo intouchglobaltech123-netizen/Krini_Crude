@@ -25,7 +25,8 @@
   --c-yellow: 212 175 55;    /* #D4AF37  the gold, everywhere: buttons, rules, highlights */
   --c-navy: 185 145 30;      /* #B9911E  links and hover states: deep metallic gold */
 
-  --gutter: clamp(16px, 4vw, 56px);
+  /* the space at the left and right of every page (more room on both sides: the client, October 2026) */
+  --gutter: clamp(20px, 6vw, 112px);
   --nav-h: 68px; /* the space the top bar takes: 68px on phones and tablets, 80px from 1024px */
   --ease-film: cubic-bezier(0.22, 1, 0.36, 1);
 }

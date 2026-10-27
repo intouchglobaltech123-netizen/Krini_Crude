@@ -2167,3 +2167,238 @@ section.pshop .pv .pv-mini:hover .pv-mini-media .pv-mini-beaker {
     filter: drop-shadow(0 3px 3px rgb(15 23 42 / 0.16));
   }
 }
+
+/* ---- View and ask, no ordering (the client, October 2026): no cart, no quantities. One line at
+   the top says how to ask, and every product has two ways to message us: Enquire (the site's
+   enquiry form, in its pop-up) and WhatsApp. */
+section.pshop .pshop-ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 18px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background:
+    radial-gradient(90% 140% at 100% 0%, rgb(212 175 55 / 0.16), transparent 60%),
+    linear-gradient(160deg, #172340, #0f172a);
+  box-shadow: 0 14px 28px -22px rgb(15 23 42 / 0.7);
+}
+section.pshop .pshop-ask p {
+  max-width: 46ch;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgb(255 255 255 / 0.75);
+}
+section.pshop .pshop-ask p b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+}
+section.pshop .pshop-ask-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+section.pshop .pshop-ask-enq,
+section.pshop .pshop-ask-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+section.pshop .pshop-ask-enq {
+  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  color: #0f172a;
+}
+section.pshop .pshop-ask-wa {
+  background: #25d366;
+  color: #fff;
+}
+section.pshop .pshop-ask-enq:hover,
+section.pshop .pshop-ask-wa:hover {
+  filter: brightness(1.05);
+}
+@media (min-width: 1024px) {
+  section.pshop .pshop-ask {
+    max-width: 600px;
+  }
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-ask {
+    padding: 14px;
+  }
+  section.pshop .pshop-ask p {
+    font-size: 0.82rem;
+  }
+  section.pshop .pshop-ask-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  section.pshop .pshop-ask-enq,
+  section.pshop .pshop-ask-wa {
+    min-height: 44px;
+    padding: 0 10px;
+  }
+}
+
+/* the cards: Enquire (gold) and WhatsApp (green outline), side by side */
+section.pshop .pshop-grid .kcard-ask {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 6px;
+}
+section.pshop .pshop-grid .kcard-enq,
+section.pshop .pshop-grid .kcard-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 36px;
+  padding: 0 6px;
+  border-radius: 999px;
+  font-size: 12.5px !important;
+  font-weight: 800;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: filter 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+section.pshop .pshop-grid .kcard-enq {
+  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  color: #0f172a;
+}
+section.pshop .pshop-grid .kcard-enq svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+section.pshop .pshop-grid .kcard-wa {
+  border: 1px solid rgb(37 211 102 / 0.6);
+  background: #fff;
+  color: #128c4a;
+}
+section.pshop .pshop-grid .kcard-enq:hover {
+  filter: brightness(1.05);
+}
+section.pshop .pshop-grid .kcard-wa:hover {
+  background: #25d366;
+  color: #fff;
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-grid .kcard-ask {
+    gap: 5px;
+  }
+  section.pshop .pshop-grid .kcard-enq,
+  section.pshop .pshop-grid .kcard-wa {
+    min-height: 34px;
+    padding: 0 4px;
+    font-size: 11.5px !important;
+  }
+  section.pshop .pshop-grid .kcard-enq svg {
+    display: none;
+  }
+}
+/* the product page: the two message buttons are links now */
+section.pshop .pv .pv-add,
+section.pshop .pv .pv-wa {
+  text-decoration: none;
+}
+
+/* laptops and bigger screens: five products in a row (the client, October 2026) */
+@media (min-width: 1100px) {
+  section.pshop .pshop-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ---- One button (the client, October 2026): every product has just "Enquire on WhatsApp" */
+section.pshop .pshop-grid .kcard-ask {
+  grid-template-columns: minmax(0, 1fr);
+}
+section.pshop .pshop-grid .kcard-ask .kcard-enq {
+  gap: 6px;
+  min-height: 38px;
+  font-size: 12.5px !important;
+}
+section.pshop .pshop-ask-wa {
+  gap: 8px;
+  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  color: #0f172a;
+}
+section.pshop .pshop-ask-wa svg {
+  width: 17px;
+  height: 17px;
+}
+section.pshop .pv .pv-cta.pv-cta-one {
+  grid-template-columns: minmax(0, 1fr);
+}
+section.pshop .pv .pv-buy.pv-buy-one {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (max-width: 639px) {
+  section.pshop .pshop-ask-btns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  section.pshop .pshop-grid .kcard-ask .kcard-enq {
+    min-height: 36px;
+    padding: 0 6px;
+    font-size: 11.5px !important;
+  }
+}
+
+/* ---- Enquire on WhatsApp on the cards, tidy (the client, October 2026): one gold pill the full
+   width of the card, the words always inside it (smaller on narrow cards, the icon dropped when
+   there is no room), a soft shadow and a small lift on hover. */
+section.pshop .pshop-grid .kcard-ask {
+  container-type: inline-size;
+}
+section.pshop .pshop-grid .kcard-ask .kcard-enq {
+  gap: 7px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #e8c860 0%, #d4af37 55%, #c39d27 100%);
+  box-shadow: 0 8px 16px -10px rgb(184 146 30 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.45);
+  font-size: 12.5px !important;
+  letter-spacing: 0;
+  color: #0f172a;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+section.pshop .pshop-grid .kcard-ask .kcard-enq:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow: 0 12px 20px -10px rgb(184 146 30 / 0.9), inset 0 1px 0 rgb(255 255 255 / 0.45);
+}
+section.pshop .pshop-grid .kcard-ask .kcard-enq svg {
+  width: 15px;
+  height: 15px;
+}
+@container (max-width: 200px) {
+  section.pshop .pshop-grid .kcard-ask .kcard-enq {
+    gap: 5px;
+    padding: 0 8px;
+    font-size: 11.5px !important;
+  }
+  section.pshop .pshop-grid .kcard-ask .kcard-enq svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+@container (max-width: 165px) {
+  section.pshop .pshop-grid .kcard-ask .kcard-enq svg {
+    display: none;
+  }
+}

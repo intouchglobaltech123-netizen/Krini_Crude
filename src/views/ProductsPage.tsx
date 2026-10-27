@@ -8,8 +8,8 @@ import { ProductShop } from "../components/ProductShop";
 /**
  * Products, kept simple: the page opens on the shop (ProductShop), under the
  * breadcrumbs, with its heading as the page's h1: search,
- * the three lines as chips, every product as a card with Add to enquiry, and the
- * enquiry list that sends the query on WhatsApp. Nothing under it (no questions or
+ * the three lines as chips, every product as a card with Enquire on WhatsApp
+ * (to view and ask about, not to order). Nothing under it (no questions or
  * enquiry band on this page).
  */
 export function ProductsPage() {

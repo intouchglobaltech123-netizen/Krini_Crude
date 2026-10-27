@@ -610,7 +610,7 @@ export const site = {
           },
           {
             q: "How do I get a price from Krini Crude?",
-            a: "Send us your query on WhatsApp: pick the products you want to ask about on our Products page and tap Send query on WhatsApp, or call +91 80153 43987 or email info@krinicrude.com. Our team replies with the details, price and availability. Nothing is ordered or paid online.",
+            a: "Send us a message: tap Enquire on WhatsApp on any product on our Products page, or call +91 80153 43987 or email info@krinicrude.com. Our team replies with the details, price and availability. Nothing is ordered or paid online.",
             link: { label: "Browse products", href: routes.products },
           },
           {

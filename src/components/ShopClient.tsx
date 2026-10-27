@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 /** A label and its value (a row of a product page's tables). */
 export type ShopRow = { k: string; v: string };
 
-/** One product a buyer can order (built on the server: ProductShop.tsx). */
+/** One product on show (built on the server: ProductShop.tsx). */
 export type ShopItem = {
   key: string;
   /** The product's name as a file name: its photos are /images/products/<slug>-front.webp and so on. */
@@ -63,19 +63,15 @@ export type ShopItem = {
 };
 export type ShopReview = { name: string; rating: number; text: string; place?: string; date?: string };
 export type ShopLine = { id: string; title: string; brand?: string; logo?: string; logoFull?: string };
-type CartLine = { id: string; key: string; name: string; type: string; line: string; grade: string; qty: number };
-
-const STORE = "kc:cart";
 const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9 ]+/g, " ");
 
 /**
  * Products as a simple shop (Products page). A search box and the three lines
  * as chips narrow the cards; each card has a photo, what it is, a short line
- * about it, a grade to pick where there are grades, and Add to enquiry. It is an
- * enquiry, not an order (the client, October 2026): the enquiry list (remembered on
- * this device) opens from the side, the visitor adds a question, and sends the list
- * on WhatsApp in one tap; Krini Crude replies with details, price and availability.
- * Every product is in the page's HTML; the search and the list need scripts.
+ * about it, and the grades where there are any. Nothing is ordered here (the client, October
+ * 2026): the products are to view and ask about. Every product has one button, Enquire on
+ * WhatsApp, which opens a chat with the query already started. Every product is in the page's
+ * HTML; the search and the product pages need scripts.
  */
 export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[]; lines: ShopLine[]; whatsapp: string; email?: string; top?: ReactNode }) {
   const [query, setQuery] = useState("");
@@ -85,42 +81,24 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
   /** The line whose drop-down is open. */
   const [menu, setMenu] = useState<string | null>(null);
   const [grades, setGrades] = useState<Record<string, string>>({});
-  const [cart, setCart] = useState<CartLine[]>([]);
-  const [notes, setNotes] = useState("");
-  const [open, setOpen] = useState(false);
-  const [bump, setBump] = useState(0);
-  const [ready, setReady] = useState(false);
   /** The product whose page is open (its key), or none. */
   const [view, setView] = useState<string | null>(null);
-  const [pvQty, setPvQty] = useState(1);
   /** The product's video, open over its page. */
   const [vidOpen, setVidOpen] = useState(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
   const pvRef = useRef<HTMLDivElement>(null);
   const pvBackRef = useRef<HTMLButtonElement>(null);
 
-  // the cart is kept on this device between visits
+  // an enquiry list from the old shop (kept on this device) is no longer used
   useEffect(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem(STORE) || "{}");
-      if (Array.isArray(saved.cart)) setCart(saved.cart);
-      if (typeof saved.notes === "string") setNotes(saved.notes);
+      localStorage.removeItem("kc:cart");
     } catch {
-      /* nothing saved, or storage blocked */
+      /* storage blocked */
     }
-    setReady(true);
   }, []);
-  useEffect(() => {
-    if (!ready) return;
-    try {
-      localStorage.setItem(STORE, JSON.stringify({ cart, notes }));
-    } catch {
-      /* storage blocked: the cart lasts for this visit */
-    }
-  }, [cart, notes, ready]);
 
-  // while the cart or a product page is open, the page behind stays still
-  const locked = open || view !== null;
+  // while a product page is open, the page behind stays still
+  const locked = view !== null;
   useEffect(() => {
     if (!locked) return;
     const root = document.documentElement;
@@ -132,19 +110,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
       scroller?.start?.();
     };
   }, [locked]);
-
-  // the cart panel: Esc closes it
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.activeElement as HTMLElement | null;
-    closeRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      prev?.focus?.();
-    };
-  }, [open]);
 
   // a product page: a link of its own (#p=…), so the back button closes it and it can be shared
   useEffect(() => {
@@ -170,17 +135,16 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
     if ((history.state as { kcp?: string } | null)?.kcp) history.back();
     else history.replaceState(history.state, "", location.pathname + location.search);
   };
-  // a new product page opens at its top, quantity 1, the back button in focus; Esc goes back
+  // a new product page opens at its top, the back button in focus; Esc goes back
   useEffect(() => {
     if (!view) return;
-    setPvQty(1);
     setVidOpen(false);
     const top = () => pvRef.current?.scrollTo({ top: 0 });
     top();
     requestAnimationFrame(top);
     pvBackRef.current?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== "Escape" || document.querySelector(".pdrawer.is-open")) return;
+      if (e.key !== "Escape" || document.querySelector("[data-enquire-dialog][open]")) return;
       if (document.querySelector(".pv-vid")) setVidOpen(false);
       else closeProduct();
     };
@@ -215,34 +179,16 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
     };
   }, [menu]);
 
-  const count = cart.reduce((n, l) => n + l.qty, 0);
-  const lineId = (it: ShopItem, grade: string) => `${it.key}::${grade}`;
-  const inCart = (it: ShopItem) => cart.find((l) => l.id === lineId(it, grades[it.key] ?? "")) || cart.find((l) => l.key === it.key);
-
-  const add = (it: ShopItem) => {
-    const grade = grades[it.key] ?? "";
-    const id = lineId(it, grade);
-    setCart((c) => (c.some((l) => l.id === id) ? c.map((l) => (l.id === id ? { ...l, qty: l.qty + 1 } : l)) : [...c, { id, key: it.key, name: it.name, type: it.type, line: it.lineShort, grade, qty: 1 }]));
-    setBump((b) => b + 1);
+  /** What a message is about: the product, its grade when one is picked, and its kind. */
+  const about = (it: ShopItem) => {
+    const g = grades[it.key] ?? "";
+    return `${it.name}${g ? ` (${g})` : ""} · ${it.type}`;
   };
-  const addQty = (it: ShopItem, qty: number) => {
-    const grade = grades[it.key] ?? "";
-    const id = lineId(it, grade);
-    setCart((c) => (c.some((l) => l.id === id) ? c.map((l) => (l.id === id ? { ...l, qty: l.qty + qty } : l)) : [...c, { id, key: it.key, name: it.name, type: it.type, line: it.lineShort, grade, qty }]));
-    setBump((b) => b + 1);
-  };
-  const setQty = (id: string, qty: number) => setCart((c) => (qty <= 0 ? c.filter((l) => l.id !== id) : c.map((l) => (l.id === id ? { ...l, qty } : l))));
-
-  const order = [
-    "Hi Krini Crude, I have a query about these products:",
-    ...cart.map((l, i) => `${i + 1}. ${l.name}${l.grade ? ` (${l.grade})` : ""} · ${l.type}${l.qty > 1 ? ` · Approx. qty: ${l.qty}` : ""}`),
-    notes.trim() ? `My question: ${notes.trim()}` : "My question: ",
-    "Name / company: ",
-    "City: ",
-  ]
-    .filter(Boolean)
-    .join("\n");
-  const waHref = `${whatsapp.split("?")[0]}?text=${encodeURIComponent(order)}`;
+  /** Ask on WhatsApp: a chat with the query started. */
+  const waFor = (it: ShopItem) =>
+    `${whatsapp.split("?")[0]}?text=${encodeURIComponent(
+      ["Hi Krini Crude, I have a query about:", about(it), "My question: ", "Name / company: ", "City: "].join("\n"),
+    )}`;
   const pv = view ? items.find((i) => i.key === view) : undefined;
   // more products under it: the same kind first, then the same line, then the rest
   const similar = pv
@@ -253,18 +199,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
       ].slice(0, 6)
     : [];
   const pvGrade = pv ? grades[pv.key] ?? "" : "";
-  const pvLine = pv ? inCart(pv) : undefined;
-  const pvWa = pv
-    ? `${whatsapp.split("?")[0]}?text=${encodeURIComponent(
-        [
-          "Hi Krini Crude, I have a query about:",
-          `${pv.name}${pvGrade ? ` (${pvGrade})` : ""} · ${pv.type}`,
-          "My question: ",
-          "Name / company: ",
-          "City: ",
-        ].join("\n"),
-      )}`
-    : "";
 
   // the brands beside the heading: Lubecon on Construction Chemicals, 1-COOL on Lubricants, both on
   // All products (Aerosols are sold as Vibrant, which has no logo yet)
@@ -295,20 +229,9 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
               </div>
             ) : null}
           </div>
-          <ol className="pshop-steps" aria-label="How to ask us">
-            <li>
-              <b>1</b> Pick the products
-            </li>
-            <li>
-              <b>2</b> Send your query on WhatsApp
-            </li>
-            <li>
-              <b>3</b> We reply with the details
-            </li>
-          </ol>
         </div>
 
-        {/* Sticky bar: categories on the left, search bar & cart in remaining space on the right */}
+        {/* Sticky bar: categories on the left, the search bar in the remaining space on the right */}
         <div className="pshop-bar">
           <div className="pshop-cats" role="group" aria-label="Product lines">
             {[{ id: "all", title: "All products" }, ...lines].map((l) => {
@@ -413,7 +336,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
         {shown.length ? (
           <ul className="pshop-grid">
             {shown.map((it) => {
-              const line = inCart(it);
               return (
                 <li
                   key={it.key}
@@ -466,24 +388,10 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                       </span>
                     </div>
                   </div>
-                  <div className="kcard-foot">
-                    {line ? (
-                      <div className="kcard-step" aria-label={`${it.name} in your enquiry`}>
-                        <button type="button" onClick={() => setQty(line.id, line.qty - 1)} aria-label="One less">
-                          −
-                        </button>
-                        <span>
-                          In enquiry{line.grade ? ` (${line.grade})` : ""}{line.qty > 1 ? <> · <b>{line.qty}</b></> : null}
-                        </span>
-                        <button type="button" onClick={() => setQty(line.id, line.qty + 1)} aria-label="One more">
-                          +
-                        </button>
-                      </div>
-                    ) : (
-                      <button type="button" className="kcard-add" onClick={() => add(it)}>
-                        <CartIcon /> Add to enquiry
-                      </button>
-                    )}
+                  <div className="kcard-foot kcard-ask">
+                    <a href={waFor(it)} className="kcard-enq" target="_blank" rel="noopener noreferrer" aria-label={`Enquire about ${it.name} on WhatsApp`}>
+                      <MsgIcon /> Enquire on WhatsApp
+                    </a>
                   </div>
                 </li>
               );
@@ -502,21 +410,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
         )}
       </div>
 
-      {/* Floating circular cart button in bottom-right corner */}
-      <button
-        type="button"
-        className={`pshop-float${bump ? " is-bump" : ""}`}
-        key={`fab-${bump}`}
-        onClick={() => setOpen(true)}
-        aria-label={`Open your enquiry list, ${count} items`}
-        title={`Your enquiry list (${count})`}
-      >
-        <span className="pshop-float-icon">
-          <CartIcon />
-        </span>
-        <b className="pshop-float-badge">{count}</b>
-      </button>
-
       {/* a product's own page, over the shop: like a store's product page */}
       {pv ? (
         <div className="pv" role="dialog" aria-modal="true" aria-labelledby="pv-title" ref={pvRef} data-lenis-prevent>
@@ -528,10 +421,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 </svg>
               </button>
               <p className="pv-bar-t">{pv.name}</p>
-              <button type="button" className="pv-cartbtn" onClick={() => setOpen(true)} aria-label={`Open your enquiry list, ${count} items`}>
-                <CartIcon />
-                {count ? <b>{count}</b> : null}
-              </button>
+              
             </div>
           </div>
 
@@ -567,31 +457,10 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   </div>
                 </div>
               ) : null}
-              <div className="pv-block pv-qtyrow">
-                <p className="pv-k">Approx. quantity (optional)</p>
-                <div className="pv-qty">
-                  <button type="button" onClick={() => setPvQty((q) => Math.max(1, q - 1))} aria-label="One less">
-                    −
-                  </button>
-                  <b aria-live="polite">{pvQty}</b>
-                  <button type="button" onClick={() => setPvQty((q) => q + 1)} aria-label="One more">
-                    +
-                  </button>
-                </div>
-              </div>
               {/* larger screens: the buttons here, beside the photos (phones: the bar at the foot) */}
-              <div className="pv-cta">
-                {pvLine ? (
-                  <button type="button" className="pv-add is-in" onClick={() => setOpen(true)}>
-                    <CartIcon /> In your enquiry: view list
-                  </button>
-                ) : (
-                  <button type="button" className="pv-add" onClick={() => addQty(pv, pvQty)}>
-                    <CartIcon /> Add to enquiry
-                  </button>
-                )}
-                <a href={pvWa} className="pv-wa" target="_blank" rel="noopener noreferrer">
-                  <WaIcon /> Ask on WhatsApp
+              <div className="pv-cta pv-cta-one">
+                <a href={waFor(pv)} className="pv-add" target="_blank" rel="noopener noreferrer">
+                  <MsgIcon /> Enquire on WhatsApp
                 </a>
               </div>
               {/* the data sheet and the test report, where we have them (the video is in the photos) */}
@@ -861,143 +730,15 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             </div>
           ) : null}
 
-          {/* phones: always at the foot, Add to enquiry and Ask on WhatsApp */}
-          <div className="pv-buy">
-            {pvLine ? (
-              <button type="button" className="pv-add is-in" onClick={() => setOpen(true)}>
-                <CartIcon /> In your enquiry: view list
-              </button>
-            ) : (
-              <button type="button" className="pv-add" onClick={() => addQty(pv, pvQty)}>
-                <CartIcon /> Add to enquiry
-              </button>
-            )}
-            <a href={pvWa} className="pv-wa" target="_blank" rel="noopener noreferrer">
-              <WaIcon /> Ask on WhatsApp
+          {/* phones: always at the foot, Enquire on WhatsApp */}
+          <div className="pv-buy pv-buy-one">
+            <a href={waFor(pv)} className="pv-add" target="_blank" rel="noopener noreferrer">
+              <MsgIcon /> Enquire on WhatsApp
             </a>
           </div>
         </div>
       ) : null}
 
-      <div className={`pdrawer-dim${open ? " is-open" : ""}`} onClick={() => setOpen(false)} aria-hidden="true" />
-      <aside className={`pdrawer${open ? " is-open" : ""}`} role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden={!open} data-lenis-prevent>
-        <div className="cart-head">
-          <span className="cart-head-ic" aria-hidden="true">
-            <CartIcon />
-          </span>
-          <div className="cart-head-t">
-            <h2 id="cart-title">Your enquiry list</h2>
-            <p>
-              {cart.length
-                ? `${cart.length} ${cart.length === 1 ? "product" : "products"} · ${count} ${count === 1 ? "item" : "items"}`
-                : "Nothing added yet"}
-            </p>
-          </div>
-          <button type="button" ref={closeRef} className="cart-close" onClick={() => setOpen(false)} aria-label="Close the enquiry list" tabIndex={open ? 0 : -1}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-              <path d="M6 6l12 12M18 6 6 18" />
-            </svg>
-          </button>
-        </div>
-
-        <div className="cart-body">
-          {cart.length ? (
-            <ul className="cart-list">
-              {cart.map((l) => (
-                <li key={l.id} className="cart-item">
-                  <span className="cart-tile" aria-hidden="true">
-                    <DrumIcon />
-                  </span>
-                  <div className="cart-info">
-                    <b className="cart-name">{l.name}</b>
-                    <span className="cart-tags">
-                      <span className="cart-tag">{l.type}</span>
-                      {l.grade ? <span className="cart-tag cart-tag-grade">{l.grade}</span> : null}
-                    </span>
-                    <div className="cart-row">
-                      <div className="cart-qty" role="group" aria-label={`Quantity of ${l.name}`}>
-                        <button type="button" onClick={() => setQty(l.id, l.qty - 1)} aria-label="One less" tabIndex={open ? 0 : -1}>
-                          −
-                        </button>
-                        <span>{l.qty}</span>
-                        <button type="button" onClick={() => setQty(l.id, l.qty + 1)} aria-label="One more" tabIndex={open ? 0 : -1}>
-                          +
-                        </button>
-                      </div>
-                      <button type="button" className="cart-del" onClick={() => setQty(l.id, 0)} aria-label={`Remove ${l.name}`} tabIndex={open ? 0 : -1}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 12.5h9l1-12.5M10 11v5M14 11v5" />
-                        </svg>
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="cart-empty">
-              <span className="cart-empty-ic" aria-hidden="true">
-                <CartIcon />
-              </span>
-              <p>No products added yet</p>
-              <span>Add the products you want to ask about, then send your query on WhatsApp.</span>
-              <button type="button" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
-                Browse products
-              </button>
-            </div>
-          )}
-
-          {cart.length ? (
-            <button type="button" className="cart-more" onClick={() => setOpen(false)} tabIndex={open ? 0 : -1}>
-              + Add more products
-            </button>
-          ) : null}
-
-          <div className="cart-next">
-            <p className="cart-next-k">What happens next</p>
-            <ol>
-              <li>
-                <b>1</b> You send your query on WhatsApp
-              </li>
-              <li>
-                <b>2</b> Our team replies with the details, price and availability
-              </li>
-              <li>
-                <b>3</b> Ask us anything else on the same chat
-              </li>
-            </ol>
-          </div>
-        </div>
-
-        <div className="cart-foot">
-          <label className="cart-notes">
-            <span>Your question (optional)</span>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              rows={2}
-              placeholder="What would you like to know? Usage, pack size, price, your city…"
-              tabIndex={open ? 0 : -1}
-            />
-          </label>
-          <a href={cart.length ? waHref : undefined} aria-disabled={!cart.length} className="cart-wa" target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
-            <WaIcon /> Send query on WhatsApp
-          </a>
-          {cart.length ? (
-            <button type="button" className="cart-clear cart-clear-solo" onClick={() => setCart([])} tabIndex={open ? 0 : -1}>
-              Clear list
-            </button>
-          ) : null}
-          <p className="cart-fine">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M12 3 4.5 6v5.5c0 4.5 3.2 8.4 7.5 9.5 4.3-1.1 7.5-5 7.5-9.5V6L12 3Z" />
-              <path d="m9 12 2 2 4-4" />
-            </svg>
-            Just an enquiry, not an order. Our team replies on WhatsApp.
-          </p>
-        </div>
-      </aside>
     </section>
   );
 }
@@ -1393,21 +1134,10 @@ function SecIcon({ kind }: { kind: "about" | "star" | "target" | "specs" | "drop
   );
 }
 
-/** A small drum, for a product in the cart. */
-function DrumIcon() {
+/** A speech bubble: send us a message about the product. */
+function MsgIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <ellipse cx="12" cy="5" rx="7" ry="2.5" />
-      <path d="M5 5v14c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5" />
-      <path d="M5 10c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5M5 15c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" />
-    </svg>
-  );
-}
-
-/** The enquiry list's mark: a speech bubble with lines (an enquiry, not a shopping cart). */
-function CartIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M20 12.5a7.5 7.5 0 0 1-11 6.6L4 20l1.1-4.2A7.5 7.5 0 1 1 20 12.5Z" />
       <path d="M8.8 10.8h6.4M8.8 14h4.2" />
     </svg>

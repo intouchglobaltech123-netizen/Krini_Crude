@@ -243,8 +243,8 @@ export function WhatsAppIcon() {
 
 /**
  * The Products page's shop: every product, from the catalogue, handed to
- * ShopClient (search, the lines as chips, Add to enquiry, and the enquiry list
- * that sends the query on WhatsApp).
+ * ShopClient (search, the lines as chips, and on every product Enquire on WhatsApp:
+ * the products are to view and ask about, not to order).
  */
 export function ProductShop({ top }: { top?: ReactNode }) {
   const shopLines = SHOP_ORDER.map((id) => lines.find((l) => l.id === id)!).filter(Boolean);

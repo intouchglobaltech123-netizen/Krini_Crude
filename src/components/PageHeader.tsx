@@ -1,28 +1,14 @@
 import type { ReactNode } from "react";
 import type { Crumb } from "../content/pages";
 
-/** Where the page sits: Home / Products / Lubricants & Greases. The last crumb is the page itself. */
+/**
+ * Where the page sits (Home / Products / …). Not shown on the pages any more (the client, October
+ * 2026: no "Home / About" line at the top of every page); search engines still get the trail from
+ * the page's structured data (schema.ts breadcrumbs).
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
-  return (
-    <nav aria-label="Breadcrumb" className="crumbs label" data-reveal>
-      <ol>
-        {trail.map((c, i) =>
-          i < trail.length - 1 ? (
-            <li key={c.path}>
-              <a href={c.path}>{c.name}</a>
-              <span className="crumbs-sep" aria-hidden="true">
-                /
-              </span>
-            </li>
-          ) : (
-            <li key={c.path}>
-              <span aria-current="page">{c.name}</span>
-            </li>
-          ),
-        )}
-      </ol>
-    </nav>
-  );
+  return null;
 }
 
 export type FactItem = { value: string; label: string };

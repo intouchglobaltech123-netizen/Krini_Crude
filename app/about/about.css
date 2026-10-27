@@ -1249,3 +1249,118 @@ main > div.ab3 > section {
     font-size: 0.7rem;
   }
 }
+
+/* ---- Who we are + Ways to work with us, website view (the client, October 2026): two tiles of
+   one height. Left, white: the heading, the line and the six markets as a neat grid of icon tiles,
+   three to a row. Right, navy: the three ways as a numbered list, one under another, each with a
+   gold number disc, filling the tile evenly. */
+@media (min-width: 1024px) {
+  .ab3-bento {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: 20px;
+  }
+  .ab3-tile {
+    padding: clamp(28px, 2.8vw, 40px);
+    box-shadow: 0 24px 48px -36px rgb(15 23 42 / 0.35);
+  }
+  .ab3-who {
+    display: flex;
+    flex-direction: column;
+  }
+  .ab3-who .ab3-h2 {
+    max-width: 24ch;
+    font-size: clamp(1.6rem, 2.1vw, 2.05rem) !important;
+  }
+  .ab3-who .ab3-text {
+    margin: 14px 0 24px;
+  }
+  .ab3-who .ab3-chips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: auto;
+  }
+  .ab3-who .ab3-chips li {
+    gap: 10px;
+    min-height: 54px;
+    padding: 8px 12px;
+    border: 1px solid var(--ab-line);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fff, var(--ab-soft));
+    font-size: 0.9rem !important;
+    line-height: 1.2;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .ab3-who .ab3-chips li:hover {
+    border-color: rgb(212 175 55 / 0.55);
+    transform: translateY(-2px);
+  }
+  .ab3-who .ab3-chip-ic {
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border-radius: 50%;
+    background: rgb(212 175 55 / 0.14);
+  }
+
+  .ab3-ways {
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    background:
+      radial-gradient(80% 90% at 100% 0%, rgb(212 175 55 / 0.16), transparent 60%),
+      linear-gradient(160deg, var(--ab-navy-2), var(--ab-navy));
+    box-shadow: 0 28px 56px -34px rgb(15 23 42 / 0.75);
+  }
+  .ab3-ways .ab3-k {
+    color: var(--ab-gold-hi);
+  }
+  .ab3-ways ol {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
+    margin-top: 10px;
+  }
+  .ab3-ways li,
+  .ab3-ways li:first-child {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: start;
+    padding: 18px 0;
+    border-left: 0;
+  }
+  .ab3-ways li + li {
+    border-left: 0;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+  .ab3-ways li:last-child {
+    padding-bottom: 0;
+  }
+  .ab3-ways li > span {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--ab-gold-hi), var(--ab-gold));
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--ab-navy);
+    -webkit-text-stroke: 0;
+    box-shadow: 0 8px 18px -10px rgb(212 175 55 / 0.9);
+  }
+  .ab3-ways h3 {
+    margin: 2px 0 4px;
+    font-size: 1.12rem !important;
+    color: #fff;
+  }
+  .ab3-ways p {
+    font-size: 0.94rem !important;
+    color: rgb(255 255 255 / 0.72);
+  }
+}

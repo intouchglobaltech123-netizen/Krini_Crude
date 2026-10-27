@@ -246,10 +246,10 @@ function ProductSheet({ p, n, type, line }: { p: Product; n: string; type: strin
                           className="scard-wa"
                           target="_blank"
                           rel="noopener noreferrer"
-                          aria-label={`Ask about ${r.name} on WhatsApp`}
+                          aria-label={`Enquire about ${r.name} on WhatsApp`}
                         >
                           <WhatsAppIcon />
-                          Ask on WhatsApp
+                          Enquire on WhatsApp
                         </a>
                         {r.details ? (
                           <ProductDetailsTrigger
