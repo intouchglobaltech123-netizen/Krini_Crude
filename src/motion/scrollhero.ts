@@ -287,11 +287,13 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   d.add(() => sizeWatch.disconnect());
   d.add(() => cancelAnimationFrame(raf));
 
-  // ---- on an upright phone the film itself plays, as a muted looping video, only while the hero
-  // is on screen; its crop follows the film's subject (heroSeq.focus), and the gold line along
+  // ---- on an upright phone the film itself plays, as a muted video, once through (it then rests
+  // on its last frame, the finished building) and only while the hero is on screen; its crop follows the film's subject (heroSeq.focus), and the gold line along
   // the foot of the screen shows how far through it is
   let video: HTMLVideoElement | null = null;
   let playing = 0;
+  /** A phone: the film has played to its end and now rests on its last frame (no loop). */
+  let bandDone = false;
   let inView = true;
   const ensureVideo = () => {
     if (video) return video;
@@ -299,7 +301,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.className = "sh-video";
     v.muted = true;
     v.defaultMuted = true;
-    v.loop = true;
+    v.loop = false;
     v.playsInline = true;
     v.autoplay = band && !waitForTap;
     v.preload = "auto";
@@ -318,7 +320,13 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     stage.insertBefore(v, canvas);
     d.on(v, "timeupdate", placeVideo);
     d.on(v, "ended", () => {
-      if (band) return;
+      if (band) {
+        // a phone: the film has played once; it stays on its last frame
+        bandDone = true;
+        placeVideo();
+        syncBtn();
+        return;
+      }
       target = -1;
       partLock = Math.max(partLock, performance.now() + 450);
       placeVideo();
@@ -352,7 +360,8 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     video.pause();
     video.setAttribute("src", want);
     video.poster = tall ? heroSeq.tall.first : heroSeq.first;
-    video.loop = band;
+    video.loop = false;
+    bandDone = false;
     part = 0;
     target = -1;
     video.load();
@@ -443,8 +452,8 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       holdEnd(v);
       return;
     }
-    // phones loop the film; wider screens play it part by part, one part per scroll (goPart)
-    v.loop = band;
+    // phones play the film once through; wider screens play it part by part, one part per scroll (goPart)
+    v.loop = false;
     placeVideo();
     if (!band) {
       // the film waits on its current stop until the next scroll
@@ -455,10 +464,15 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       hero.dataset.stage = String(part);
       return;
     }
-    // a phone: the film plays on a loop while the hero is on screen, unless the visitor paused it
-    // (or, with reduced motion, until they first tap play)
-    if (v.ended || (!v.loop && v.duration && v.currentTime >= v.duration - 0.1)) v.currentTime = 0;
-    v.loop = true;
+    // a phone: the film plays once through while the hero is on screen, unless the visitor paused
+    // it (or, with reduced motion, until they first tap play); after its end it rests on the last frame
+    if (!bandDone && v.duration && v.currentTime >= v.duration - 0.1) bandDone = true;
+    if (bandDone) {
+      v.pause();
+      placeVideo();
+      syncBtn();
+      return;
+    }
     v.poster = tall ? heroSeq.tall.first : heroSeq.first;
     if (inView && !document.hidden && !userPaused && !(waitForTap && !started)) {
       v.play().catch(() => {
@@ -500,7 +514,12 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     const v = ensureVideo();
     if (v.paused) {
       userPaused = false;
-      v.loop = true;
+      v.loop = false;
+      // after the film has ended, the button plays it again from the start
+      if (bandDone || v.ended) {
+        bandDone = false;
+        v.currentTime = 0;
+      }
       void v.play().catch(() => {});
       if (!playing) playing = requestAnimationFrame(tick);
     } else {
@@ -555,8 +574,12 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   // with the film's last frame; an upright phone: the video held still on its last frame.
   const toEnd = () => {
     if (band) {
-      // a phone: the film plays from its start on a loop, as on a first visit
+      // a phone: the film plays once from its start, as on a first visit
       arrived = false;
+      if (video && (bandDone || video.ended)) {
+        bandDone = false;
+        video.currentTime = 0;
+      }
       scroller.scrollTo(0, { immediate: true, offset: 0 });
       startPlay();
       return;

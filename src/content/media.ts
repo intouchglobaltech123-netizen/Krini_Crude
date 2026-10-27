@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "roof6";
+const seqVersion = "roof7";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
@@ -75,7 +75,7 @@ export const heroSeq = {
   /** The last frame (the finished building): the hero without the motion, wide and cut 4:5 for phones. */
   end: `${base}/images/hero-seq/end.webp?v=${seqVersion}`,
   endTall: `${base}/images/hero-seq/end-tall.webp?v=${seqVersion}`,
-  /** Phones held upright play the film itself, as a video (muted, looping, videoRate times real time), with its first frame as the poster. */
+  /** Phones held upright play the film itself, as a video (muted, played once through, videoRate times real time), with its first frame as the poster. */
   video: `${base}/videos/krini-hero.mp4?v=${seqVersion}`,
   /** The same film at 1280x720, for phones (they show it in a band at the top of the screen). */
   videoSmall: `${base}/videos/krini-hero-720.mp4?v=${seqVersion}`,
