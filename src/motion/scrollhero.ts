@@ -267,11 +267,24 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   // the frame sheets are only for the scrolled film; an upright phone plays the video instead
   draw();
   d.on(window, "scroll", queue, { passive: true });
-  d.on(window, "resize", () => {
+  const onResize = () => {
     measure();
+    syncSrc();
     queue();
     startPlay();
+  };
+  d.on(window, "resize", onResize);
+  // the stage's own size too (a window snapped or a device toolbar does not always fire resize)
+  let lastW = stage.clientWidth;
+  let lastH = stage.clientHeight;
+  const sizeWatch = new ResizeObserver(() => {
+    if (stage.clientWidth === lastW && stage.clientHeight === lastH) return;
+    lastW = stage.clientWidth;
+    lastH = stage.clientHeight;
+    onResize();
   });
+  sizeWatch.observe(stage);
+  d.add(() => sizeWatch.disconnect());
   d.add(() => cancelAnimationFrame(raf));
 
   // ---- on an upright phone the film itself plays, as a muted looping video, only while the hero
@@ -295,7 +308,7 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("aria-hidden", "true");
-    v.src = tall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
+    v.src = filmSrc();
     const rate = () => {
       v.defaultPlaybackRate = heroSeq.videoRate;
       v.playbackRate = heroSeq.videoRate;
@@ -324,6 +337,30 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
     video?.pause();
     video?.remove();
   });
+  /** Which film this screen plays: the upright film on an upright phone, the wide one elsewhere. */
+  function filmSrc() {
+    return tall ? heroSeq.tall.video : band ? heroSeq.videoSmall : heroSeq.video;
+  }
+  /**
+   * The window was resized (or the phone turned): when the screen now wants the other film (a
+   * laptop window narrowed to phone size, or the other way round), swap it in and start it afresh.
+   */
+  function syncSrc() {
+    if (!video) return;
+    const want = filmSrc();
+    if (video.getAttribute("src") === want) return;
+    video.pause();
+    video.setAttribute("src", want);
+    video.poster = tall ? heroSeq.tall.first : heroSeq.first;
+    video.loop = band;
+    part = 0;
+    target = -1;
+    video.load();
+    if (!band) {
+      setStep(0);
+      hero.dataset.stage = "0";
+    }
+  }
   /** Wider screens: which step's words go with the film's current second. */
   /**
    * Wider screens: the film in parts, one per scroll. heroSeq.stops are the seconds where each part
