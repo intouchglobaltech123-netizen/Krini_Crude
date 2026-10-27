@@ -454,7 +454,7 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                           </svg>
-                          ISO 9001
+                          ISO 9001:2015
                         </span>
                       )}
                       <span className="kcard-spec-item" title="Packaging">
@@ -554,10 +554,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                 {pv.brandLogo ? <Brand name={pv.brand} logo={pv.brandLogo} /> : <b>{pv.brand}</b>}
               </p>
               <p className="pv-text">{pv.text}</p>
-              <p className="pv-price">
-                <b>Price on request</b>
-                <span>Add it to the cart and send the list: we reply with price, stock and delivery.</span>
-              </p>
               {pv.grades.length ? (
                 <div className="pv-block">
                   <p className="pv-k">Grade</p>
@@ -597,8 +593,9 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   <WaIcon /> Order on WhatsApp
                 </a>
               </div>
-              {/* the data sheet (construction chemicals only) and the AI-generated video */}
-              <div className={`pv-docs${pv.sheet ? "" : " is-solo"}`}>
+              {/* the data sheet and the test report, where we have them (the video is in the photos) */}
+              {pv.sheet || pv.report ? (
+              <div className={`pv-docs${pv.sheet && pv.report ? "" : " is-solo"}`}>
                 {pv.sheet ? (
                   <a href={pv.sheet} className="pv-doc" target="_blank" rel="noopener noreferrer" data-no-fast>
                     <DocIcon />
@@ -617,19 +614,26 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                     </span>
                   </a>
                 ) : null}
-                <button type="button" className="pv-doc pv-doc-vid" onClick={() => setVidOpen(true)} disabled={!pv.video} aria-disabled={!pv.video}>
-                  <PlayIcon />
-                  <span>
-                    <b>Product video</b>
-                    <small>{pv.video ? "AI-generated · Watch" : "AI-generated · Coming soon"}</small>
-                  </span>
-                </button>
               </div>
+              ) : null}
               <ul className="pv-assure">
-                <li>ISO certified factory, Chennai</li>
+                <li>ISO 9001:2015 certified factory, Chennai</li>
                 <li>No payment online</li>
                 <li>Reply on WhatsApp</li>
               </ul>
+              {/* larger screens: three key features under the buttons, beside the tall photo */}
+              <div className="pv-side">
+                {pv.highlights.length ? (
+                  <div className="pv-side-box">
+                    <p className="pv-side-k">Key features</p>
+                    <ul className="pv-side-list">
+                      {pv.highlights.slice(0, 3).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
 
@@ -1052,6 +1056,7 @@ function Gallery({
   alt: string;
 }) {
   const track = useRef<HTMLDivElement>(null);
+  const vid = useRef<HTMLVideoElement>(null);
   const [at, setAt] = useState(0);
 
   type GalleryItem =
@@ -1064,11 +1069,28 @@ function Gallery({
 
   const allViews: GalleryItem[] = [
     { kind: "image", label: "Front", src: frontView.src },
-    { kind: "image", label: "Back", src: backView.src },
+    // a back view only where the product has one (construction chemicals show the front only)
+    ...(views.some((v) => v.label === "Back") ? [{ kind: "image" as const, label: "Back", src: backView.src }] : []),
     { kind: "video", label: "AI Video", video },
     ...(sampleView ? [{ kind: "image" as const, label: "Sample", src: sampleView.src }] : []),
   ];
 
+  // the video plays with sound when its view is picked; a browser that blocks sound without a tap
+  // first plays it muted instead; it pauses when another view is picked
+  const vidAt = allViews.findIndex((v) => v.kind === "video" && v.video);
+  useEffect(() => {
+    const v = vid.current;
+    if (!v) return;
+    if (at === vidAt) {
+      v.muted = false;
+      v.play().catch(() => {
+        v.muted = true;
+        v.play().catch(() => {});
+      });
+    } else {
+      v.pause();
+    }
+  }, [at, vidAt]);
   const go = (k: number) => {
     const t = track.current;
     if (!t) return;
@@ -1090,10 +1112,10 @@ function Gallery({
                 v.video ? (
                   <div className="pg-video-stage">
                     <video
+                      ref={vid}
                       src={v.video}
                       controls
                       playsInline
-                      muted
                       loop
                       preload="metadata"
                       className="pg-video-media"

@@ -48,7 +48,7 @@ export const site = {
   seo: {
     title: "Lubricant & Construction Chemical Manufacturer, Chennai | Krini Crude",
     description:
-      "ISO certified lubricant manufacturer in Chennai: 1-COOL cutting oils, hydraulic, gear & engine oils, greases, shuttering oil, aerosol sprays and private label.",
+      "ISO 9001:2015 certified lubricant manufacturer in Chennai: 1-COOL cutting oils, hydraulic, gear & engine oils, greases, shuttering oil, aerosol sprays and private label.",
   },
   /**
    * The top menu, as on krinicrude.com: Home, About Us, the three product
@@ -140,7 +140,7 @@ export const site = {
         name: "Oil on the Mivan panels",
         rail: "Oiling",
         product: "Magic Shuttering Oil",
-        line: "Magic oil is rolled on to the face of the aluminium panel that meets the concrete: one thin, even, glossy film.",
+        line: "Magic Shuttering Oil is rolled up and down the aluminium panel: a thin, wet, even film before every pour.",
         link: { label: "Magic Shuttering Oil", href: "/products/construction-chemicals" },
       },
       {
@@ -154,7 +154,7 @@ export const site = {
         name: "Precast moulds",
         rail: "Precast",
         product: "Silease 360 precast shuttering oil",
-        line: "The oiled steel mould is poured, and the precast unit lifts out clean.",
+        line: "Oil is rolled on to the steel mould with a big roller first; only then is the concrete poured, and the unit lifts out clean.",
         link: { label: "Precast shuttering oil", href: "/products/construction-chemicals" },
       },
       {
@@ -241,7 +241,7 @@ export const site = {
     /** The whole welcome, on the About page. */
     story: [
       "Krini Crude is one of the leading manufacturers of premium quality industrial products in India. With extensive manufacturing experience, we have developed a distinguished reputation as proud pioneers in lubricants, construction chemicals, and aerosol manufacturing. We are manufacturing a range of standard, speciality and niche market products using own and customer specified formulations. Our markets include industrial, automotive, marine, construction, infrastructure, and more specialist sectors.",
-      "We are strong in R&D, with our Director personally overseeing the Research & Development operations. Our team comprises well-trained and technically strong staff and employees who are dedicated to innovation and excellence. We have given our products to corporate clients for rebranding, and with our extensive experience in this field, we can offer tailor-made products and comprehensive after-sales support for our valuable clients.",
+      "We are strong in R&D, with our CEO personally overseeing the Research & Development operations. Our team comprises well-trained and technically strong staff and employees who are dedicated to innovation and excellence. We have given our products to corporate clients for rebranding, and with our extensive experience in this field, we can offer tailor-made products and comprehensive after-sales support for our valuable clients.",
       "We also offer private label manufacturing to well recognized brands in the automotive aftermarket, construction industry, MRO, and general industrial categories and independent marketing companies across the globe. At Krini Crude, we are committed to investing substantially in Research & Development, acquiring modern technologies and geographical expansion.",
     ],
     /** The three ways a product is formulated (live site: own formulations, customer formulations, tailor-made). */
@@ -298,14 +298,14 @@ export const site = {
   /** Services: what Krini Crude does for customers, as stated on the live site. */
   services: {
     lead:
-      "Made at our factory in Tiruverkadu, Chennai. Our Director personally oversees Research & Development, and we keep investing in R&D, modern technology and geographical expansion.",
+      "Made at our factory in Tiruverkadu, Chennai. Our CEO personally oversees Research & Development, and we keep investing in R&D, modern technology and geographical expansion.",
     items: [
       {
         icon: "factory",
         title: "Manufacturing",
         short: "Lubricants, construction chemicals and aerosols.",
-        image: "/images/blog-storage.webp",
-        imageAlt: "Rows of stainless-steel tanks with valves and pipework along the aisle of a production hall",
+        image: "/images/factory/tanks-43.webp",
+        imageAlt: "Grey and yellow storage tanks, a stacker and blue drums at the Krini Crude factory",
         enquire: "Request a quote",
         body: "Standard, speciality and niche-market products across lubricants, construction chemicals and aerosols.",
         more: [
@@ -317,19 +317,19 @@ export const site = {
       {
         icon: "flask",
         title: "Research & Development",
-        short: "Overseen personally by our Director.",
-        image: "/images/blog-cutting-oil.webp",
-        imageAlt: "A drop of amber oil landing on a steel plate and spreading into a thin film",
+        short: "Overseen personally by our CEO.",
+        image: "/images/factory/lab-43.webp",
+        imageAlt: "The Krini Crude laboratory bench: burettes, flasks, measuring cylinders and a balance",
         enquire: "Custom formulation",
-        body: "R&D operations overseen personally by our Director, with continued investment in modern technology.",
+        body: "R&D operations overseen personally by our CEO, with continued investment in modern technology.",
         more: ["A well-trained, technically strong team", "Continued investment in R&D and modern technology"],
       },
       {
         icon: "formula",
         title: "Customised Formulation",
         short: "Our formulations, or yours.",
-        image: "/images/lubricants-43.webp",
-        imageAlt: "A drop of amber lubricant stretching from a steel nozzle",
+        image: "/images/factory/lab-bench-43.webp",
+        imageAlt: "An oil sample, a balance and a measuring cylinder on the laboratory bench",
         enquire: "Custom formulation",
         body: "Products built on our own formulations or on formulations specified by the customer.",
         more: ["Tailor-made products for corporate clients", "Spray colours matched to any RAL shade or to your powder coating"],
@@ -338,8 +338,8 @@ export const site = {
         icon: "label",
         title: "Private Label",
         short: "For brands and marketing companies worldwide.",
-        image: "/images/blog-private-label.webp",
-        imageAlt: "An industrial plant at dusk: a long factory building, pipe racks and storage tanks",
+        image: "/images/factory/aerosol-fill-43.webp",
+        imageAlt: "The aerosol filling machine with Vibrant spray cans on the table",
         enquire: "Private label",
         body: "Manufacturing for recognised brands and independent marketing companies across the globe.",
         more: ["Products for rebranding", "Automotive aftermarket, construction, MRO and general industrial"],
@@ -347,13 +347,13 @@ export const site = {
       {
         icon: "shield",
         title: "Quality Control",
-        short: "ISO certified, with after-sales support.",
-        image: "/images/blog-lubricants.webp",
-        imageAlt: "Helical gears in an open gearbox, with a stream of oil feeding the mesh",
+        short: "ISO 9001:2015 certified, with after-sales support.",
+        image: "/images/factory/lab-qc-43.webp",
+        imageAlt: "Quality checks in the laboratory: a titration flask, a sample and measuring cylinders",
         enquire: "Enquiry",
-        body: "An ISO certified company, with after-sales support on every product we supply.",
+        body: "An ISO 9001:2015 certified company, with after-sales support on every product we supply.",
         more: ["Comprehensive after-sales support"],
-        detail: placeholder("ISO standard and certificate number"),
+        detail: "Certified to ISO 9001:2015, the international standard for quality management.",
       },
     ],
     privateLabel: {
@@ -399,14 +399,14 @@ export const site = {
     { value: 70, suffix: "+", label: "Product Range" },
     { text: "All Major States in India", label: "Coverage" },
     { value: 1000, suffix: "+", label: "Happy Clients" },
-    { text: "ISO Certified Company", label: "Certification" },
+    { text: "ISO 9001:2015 Certified Company", label: "Certification" },
   ],
 
   /** What customers can count on: each point is a fact from the live site. */
   principles: [
     { title: "Own and customer formulations", body: "Standard, speciality and niche-market products, made to our formulations or to yours." },
-    { title: "R&D led by our Director", body: "Research & Development overseen personally by our Director, with a technically strong team." },
-    { title: "ISO certified", body: "An ISO certified company.", detail: placeholder("ISO standard and certificate number") },
+    { title: "R&D led by our CEO", body: "Research & Development overseen personally by our CEO, with a technically strong team." },
+    { title: "ISO 9001:2015 certified", body: "An ISO 9001:2015 certified company: quality managed to the international standard.", detail: "Certified to ISO 9001:2015, the international standard for quality management." },
     { title: "Your brand", body: "Private label manufacturing and products for rebranding, for brands across the globe." },
     { title: "After-sales support", body: "Comprehensive after-sales support for every client." },
     { title: "Across India", body: "Supplying all major states in India, with 1000+ happy clients." },
@@ -479,7 +479,7 @@ export const site = {
       seo: {
         title: "Lubricant & Construction Chemical Manufacturer, Chennai | Krini Crude",
         description:
-          "ISO certified lubricant manufacturer in Chennai: 1-COOL cutting oils, hydraulic, gear & engine oils, greases, shuttering oil, aerosol sprays and private label.",
+          "ISO 9001:2015 certified lubricant manufacturer in Chennai: 1-COOL cutting oils, hydraulic, gear & engine oils, greases, shuttering oil, aerosol sprays and private label.",
       },
       /** The live site's "Expertise" section: the welcome, then R&D and private label (the story's 2nd and 3rd paragraphs). */
       about: {
@@ -574,7 +574,7 @@ export const site = {
         items: [
           {
             q: "Is Krini Crude a manufacturer?",
-            a: "Yes. Krini Crude is an ISO certified manufacturer of lubricants, greases, construction chemicals and aerosol sprays: more than 70 products, made at our factory in Tiruverkadu, Chennai, to our own formulations or to yours.",
+            a: "Yes. Krini Crude is an ISO 9001:2015 certified manufacturer of lubricants, greases, construction chemicals and aerosol sprays: more than 70 products, made at our factory in Tiruverkadu, Chennai, to our own formulations or to yours.",
             link: { label: "About Krini Crude", href: routes.about },
           },
           {
@@ -603,6 +603,21 @@ export const site = {
             link: { label: "How private label works", href: `${routes.services}#private-label` },
           },
           {
+            q: "Which brands does Krini Crude make?",
+            a: "Three brands, all made at our factory in Chennai: 1-COOL for metalworking fluids and industrial lubricants, Lubecon for concrete release oils and shuttering greases, and Vibrant for aerosol spray paints and industrial sprays.",
+            link: { label: "View all products", href: routes.products },
+          },
+          {
+            q: "How do I get a price from Krini Crude?",
+            a: "Add the products you need to the cart on our Products page and send the list on WhatsApp, or call +91 80153 43987 or email info@krinicrude.com. We reply with the price, stock and delivery time. There is no online payment.",
+            link: { label: "Browse products", href: routes.products },
+          },
+          {
+            q: "Does Krini Crude supply across India?",
+            a: "Yes. From our ISO 9001:2015 certified factory in Tiruverkadu, Chennai, Krini Crude supplies lubricants, construction chemicals and aerosols to customers in all major states in India, with more than 1000 happy clients and after-sales support on every product.",
+            link: { label: "Contact our team", href: routes.contact },
+          },
+          {
             q: "Which industries do you supply?",
             a: "Auto assembly and auto component makers, construction, and the powder coating and paint industries, as well as industrial, automotive, marine and infrastructure customers: more than 1000 clients across India.",
           },
@@ -613,7 +628,7 @@ export const site = {
       seo: {
         title: "About Krini Crude | Industrial Lubricants Manufacturer, Chennai",
         description:
-          "One of India’s leading makers of lubricants, construction chemicals and aerosols. ISO certified, with R&D overseen by our Director, in Chennai.",
+          "One of India’s leading makers of lubricants, construction chemicals and aerosols. ISO 9001:2015 certified, with R&D overseen by our CEO, in Chennai.",
       },
       /** The live site's About page header: "About Krini Crude / Quality Industrial Solutions". */
       label: "About Us",
@@ -621,7 +636,7 @@ export const site = {
       /** Under the header: facts as published on the live site. */
       facts: [
         { value: "Chennai", label: "Office & factory" },
-        { value: "ISO", label: "Certified company" },
+        { value: "ISO", label: "9001:2015 certified" },
         { value: "70+", label: "Products" },
         { value: "1000+", label: "Happy clients" },
       ],
@@ -636,23 +651,22 @@ export const site = {
         quote: "A distinguished reputation as proud pioneers in lubricants, construction chemicals and aerosol manufacturing.",
       },
       /**
-       * Drawn from krinicrude.com's own words: "Innovation & excellence in manufacturing"
-       * (its home page) and what it says Krini Crude is committed to (its About page).
-       * Replace with Krini Crude's formal vision and mission statements, if it has them.
+       * Service first, in plain English: Krini Crude works to each customer's need (tailor-made
+       * products, private label, after-sales support), so the vision and mission say that simply.
        */
       vision: {
         label: "Vision & mission",
         visionLabel: "Our vision",
-        vision: "Innovation and excellence in manufacturing.",
+        vision: "Your need comes first: the right product, made for your work.",
         missionLabel: "Our mission",
         mission: [
-          { title: "Research & development", body: "Invest substantially in R&D, overseen by our Director." },
-          { title: "Modern technology", body: "Keep acquiring modern technologies." },
-          { title: "Reach", body: "Expand geographically: all major states in India today, brands across the globe." },
-          { title: "Support", body: "Give every client tailor-made products and comprehensive after-sales support." },
+          { title: "Listen first", body: "We learn what your site, machine or product really needs." },
+          { title: "Make it to fit", body: "We make or adjust the product to match that need." },
+          { title: "Deliver on time", body: "The right quantity and pack, when you need it." },
+          { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
         ],
       },
-      rd: { label: "Research & development", desk: "From the Director’s desk", heading: "Formulation is where the work starts." },
+      rd: { label: "Research & development", desk: "From the CEO’s desk", heading: "Formulation is where the work starts." },
       values: {
         label: "What you can count on",
         heading: "Six things every client gets.",
@@ -664,7 +678,7 @@ export const site = {
         heading: "From enquiry to after-sales.",
         steps: [
           { title: "Enquiry", body: "Tell us the application, the products and the quantities, or the product you want under your brand." },
-          { title: "Formulation", body: "Our formulation or yours, with our R&D team, overseen by our Director." },
+          { title: "Formulation", body: "Our formulation or yours, with our R&D team, overseen by our CEO." },
           { title: "Manufacturing", body: "Made at our factory in Tiruverkadu, Chennai." },
           { title: "Supply", body: "Under our brand or yours, to all major states in India." },
           { title: "After-sales", body: "Comprehensive after-sales support for every client." },
@@ -672,12 +686,12 @@ export const site = {
       },
       places: { label: "Where we are", heading: "An office in Anna Nagar, a factory in Tiruverkadu." },
       leadership: {
-        role: "Director",
+        role: "CEO",
         /** A fact from the live site; the name, message and photograph are to be supplied. */
-        note: "Our Director personally oversees Research & Development, with a well-trained, technically strong team dedicated to innovation and excellence.",
-        name: placeholder("Director’s name"),
-        message: placeholder("Director’s message, 60 to 100 words"),
-        photo: placeholder("Director’s photograph, 4:5"),
+        note: "Our CEO personally oversees Research & Development, with a well-trained, technically strong team dedicated to innovation and excellence.",
+        name: "Gokul Raj",
+        message: placeholder("CEO’s message, 60 to 100 words"),
+        photo: "/images/director.webp",
       },
       faq: [
         {
@@ -688,7 +702,7 @@ export const site = {
           q: "Where is Krini Crude based?",
           a: "Our office is at 95/20B, Gujji Main Road, Anna Nagar East, Chennai 600102, and our factory is in Chinakoladi Lakshmi Nagar, Tiruverkadu, Chennai 600077, Tamil Nadu.",
         },
-        { q: "Is Krini Crude ISO certified?", a: "Yes, Krini Crude is an ISO certified company." },
+        { q: "Is Krini Crude ISO 9001:2015 certified?", a: "Yes, Krini Crude is an ISO 9001:2015 certified company." },
         { q: "Which markets do you supply?", a: "Industrial, automotive, marine, construction, infrastructure and more specialist sectors, across all major states in India." },
         {
           q: "Can you make products to our formulation or under our brand?",
@@ -707,8 +721,8 @@ export const site = {
       facts: [
         { value: "05", label: "Services" },
         { value: "03", label: "Ways to work with us" },
-        { value: "R&D", label: "Overseen by our Director" },
-        { value: "ISO", label: "Certified company" },
+        { value: "R&D", label: "Overseen by our CEO" },
+        { value: "ISO", label: "9001:2015 certified" },
       ],
       what: { label: "What we do", heading: "Five services, one factory." },
       privateLabel: { label: "Private label & customised manufacturing", heading: ["Your brand.", "Our formulation floor."] },
@@ -728,7 +742,7 @@ export const site = {
           q: "Can you manufacture to our own formulation?",
           a: "Yes. We make products to our own formulations and to formulations specified by our customers, and our R&D team can develop tailor-made products.",
         },
-        { q: "Who oversees your R&D?", a: "Our Director personally oversees our Research & Development operations." },
+        { q: "Who oversees your R&D?", a: "Our CEO personally oversees our Research & Development operations." },
         { q: "Can you match a spray colour to our powder coating?", a: "Yes. Our colour sprays can be matched to a powder coating or to any RAL shade." },
         { q: "Do you provide after-sales support?", a: "Yes, we offer comprehensive after-sales support for every client." },
       ],

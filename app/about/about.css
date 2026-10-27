@@ -694,3 +694,521 @@ main > div.ab3 > section {
     transform: none;
   }
 }
+
+/* ---- phones, neat (the client, October 2026): text set ragged-left (justified lines open wide gaps
+   in a narrow column), the two buttons side by side, compact figures, the three ways and the four
+   commitments as tidy rows, and the Director's portrait small and centred above the words */
+@media (max-width: 639px) {
+  .ab3 :is(p, li) {
+    text-align: left;
+    text-align-last: auto;
+    -webkit-hyphens: manual;
+    hyphens: manual;
+  }
+  .ab3-top {
+    padding-bottom: 28px;
+  }
+  .ab3-hero {
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .ab3-title {
+    font-size: 1.85rem !important;
+    line-height: 1.1 !important;
+  }
+  .ab3-sub {
+    margin-top: 12px;
+    font-size: 0.98rem !important;
+  }
+  .ab3-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .ab3-actions .ab3-btn {
+    height: 44px;
+    padding: 0 10px;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.85rem !important;
+    white-space: nowrap;
+  }
+  .ab3-hero-media img {
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+  }
+  .ab3-figures {
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .ab3-figures > div {
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .ab3-figures dd {
+    font-size: 1.35rem !important;
+    text-align: center;
+  }
+  .ab3-figures dt {
+    font-size: 0.78rem !important;
+    text-align: center;
+  }
+
+  .ab3-sec {
+    padding-block: 32px;
+  }
+  .ab3-bento {
+    gap: 12px;
+  }
+  .ab3-tile {
+    padding: 20px 18px;
+    border-radius: 18px;
+  }
+  .ab3-h2 {
+    font-size: 1.35rem !important;
+  }
+  .ab3-text {
+    margin: 10px 0 14px;
+    font-size: 0.95rem !important;
+  }
+  .ab3-chips {
+    gap: 6px;
+  }
+  .ab3-chips li {
+    padding: 6px 11px;
+    font-size: 0.8rem !important;
+  }
+  .ab3-ways ol {
+    gap: 0;
+  }
+  .ab3-ways li {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 10px;
+    align-items: start;
+    padding: 12px 0;
+  }
+  .ab3-ways li + li {
+    border-top: 1px solid var(--ab-line);
+  }
+  .ab3-ways li > span {
+    grid-row: span 2;
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .ab3-ways h3 {
+    margin: 0 0 3px;
+    font-size: 1rem !important;
+  }
+  .ab3-ways p {
+    font-size: 0.88rem !important;
+  }
+
+  .ab3-lead {
+    padding-block: 36px;
+  }
+  .ab3-lead-top {
+    gap: 22px;
+    justify-items: center;
+  }
+  .ab3-portrait {
+    width: 132px;
+    max-width: 132px;
+    margin: 0 10px 10px 0;
+  }
+  .ab3-portrait::before {
+    inset: 10px -10px -10px 10px;
+    border-radius: 16px;
+  }
+  .ab3-portrait img,
+  .ab3-portrait svg {
+    border-radius: 16px;
+  }
+  .ab3-lead-copy {
+    text-align: center;
+  }
+  .ab3 .ab3-lead-copy :is(.ab3-k, .ab3-lead-name, .ab3-lead-role, .ab3-lead-text) {
+    text-align: center;
+  }
+  .ab3-lead-copy .ab3-k {
+    justify-content: center;
+  }
+  .ab3-lead-name {
+    font-size: 1.6rem !important;
+  }
+  .ab3-qmark {
+    margin: 2px auto 4px;
+    font-size: 4rem;
+  }
+  .ab3-lead-text {
+    margin-inline: auto;
+    font-size: 1rem !important;
+  }
+  .ab3-vm {
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .ab3-vision {
+    padding: 18px;
+    border-radius: 16px;
+  }
+  .ab3-vision-line {
+    font-size: 1.3rem !important;
+  }
+  .ab3-mission {
+    padding: 18px;
+    border-radius: 16px;
+  }
+  .ab3-mission ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+  .ab3-mission li {
+    gap: 8px;
+  }
+  .ab3-mission li > span {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 0.74rem;
+  }
+  .ab3-mission b {
+    font-size: 0.92rem;
+  }
+  .ab3-mission p {
+    font-size: 0.82rem !important;
+  }
+
+  .ab3-head {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .ab3-head .ab3-btn {
+    height: 42px;
+    font-size: 0.88rem !important;
+  }
+  .ab3-visit {
+    gap: 10px;
+  }
+  .ab3-place {
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .ab3-place-ic {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .ab3-place address {
+    font-size: 0.88rem !important;
+  }
+  .ab3-place > a {
+    margin-left: 50px;
+    padding: 7px 12px;
+    font-size: 0.82rem !important;
+  }
+}
+@media (max-width: 639px) {
+  /* the address takes the row beside its icon; Directions goes on the line under it */
+  .ab3-place > div {
+    flex: 1 1 calc(100% - 52px);
+  }
+  .ab3-hero {
+    margin-top: 16px;
+  }
+}
+
+/* ---- the markets with a small gold line icon each */
+.ab3-chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ab3-chip-ic {
+  flex: none;
+  color: var(--ab-gold-deep);
+}
+
+/* ---- phones, polished (the client, October 2026)
+   Who we are: the six markets as a tidy two-column grid of icon tiles.
+   Leadership: one card, the portrait at the left of the name and role, the words under them in a
+   cream quote panel. Vision: a navy card. Mission: four numbered steps joined by a gold line.
+   Where we are: the place's name at the left and Directions at the right, the address under them
+   set flush on both sides. */
+@media (max-width: 639px) {
+  .ab3-chips {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .ab3-chips li {
+    gap: 10px;
+    min-height: 52px;
+    padding: 8px 10px;
+    border: 1px solid var(--ab-line);
+    border-radius: 12px;
+    background: linear-gradient(180deg, #fff, var(--ab-soft));
+    font-size: 0.84rem !important;
+    line-height: 1.2;
+  }
+  .ab3-chip-ic {
+    width: 34px;
+    height: 34px;
+    padding: 7px;
+    border-radius: 10px;
+    background: rgb(212 175 55 / 0.14);
+  }
+
+  /* leadership card */
+  .ab3-lead-top {
+    grid-template-columns: 96px minmax(0, 1fr);
+    grid-template-areas:
+      "pic k"
+      "pic name"
+      "pic role"
+      "text text";
+    column-gap: 18px;
+    row-gap: 0;
+    align-items: center;
+    justify-items: start;
+    padding: 18px;
+    border: 1px solid var(--ab-line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff, #fdfaf1);
+    box-shadow: 0 18px 36px -28px rgb(15 23 42 / 0.45);
+  }
+  .ab3-lead-copy {
+    display: contents;
+  }
+  .ab3-portrait {
+    grid-area: pic;
+    width: 88px;
+    max-width: 88px;
+    margin: 0 8px 8px 0;
+  }
+  .ab3-portrait::before {
+    inset: 8px -8px -8px 8px;
+    border-radius: 14px;
+  }
+  .ab3-portrait img,
+  .ab3-portrait svg {
+    border-radius: 14px;
+  }
+  .ab3 .ab3-lead-top .ab3-lead-copy :is(.ab3-k, .ab3-lead-name, .ab3-lead-role, .ab3-lead-text) {
+    text-align: left;
+  }
+  .ab3-lead-top .ab3-lead-copy .ab3-k {
+    grid-area: k;
+    align-self: end;
+    justify-content: flex-start;
+    margin: 0 0 4px;
+  }
+  .ab3-lead-name {
+    grid-area: name;
+    font-size: 1.4rem !important;
+  }
+  .ab3-lead-role {
+    grid-area: role;
+    align-self: start;
+    margin-top: 4px;
+    font-size: 0.86rem !important;
+  }
+  .ab3-qmark {
+    display: none;
+  }
+  .ab3-lead-text {
+    grid-area: text;
+    position: relative;
+    width: 100%;
+    margin: 18px 0 0;
+    padding: 16px 16px 16px 18px;
+    border-left: 3px solid var(--ab-gold);
+    border-radius: 0 14px 14px 0;
+    background: #fbf6e6;
+    font-size: 0.95rem !important;
+    line-height: 1.6;
+  }
+  .ab3-lead-text::before {
+    content: "\201C";
+    display: block;
+    height: 0.5em;
+    margin-bottom: 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.6rem;
+    line-height: 0.9;
+    color: var(--ab-gold);
+  }
+
+  /* vision: navy */
+  .ab3-vision {
+    border-left: 0;
+    background:
+      radial-gradient(90% 120% at 100% 0%, rgb(212 175 55 / 0.2), transparent 60%),
+      linear-gradient(160deg, var(--ab-navy-2), var(--ab-navy));
+  }
+  .ab3-vision .ab3-k {
+    color: var(--ab-gold-hi);
+  }
+  .ab3-vision-line {
+    font-size: 1.28rem !important;
+    color: #fff;
+  }
+
+  /* mission: numbered steps joined by a line */
+  .ab3-mission ol {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 12px;
+  }
+  .ab3-mission li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 14px;
+    padding-bottom: 18px;
+  }
+  .ab3-mission li:last-child {
+    padding-bottom: 0;
+  }
+  .ab3-mission li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 36px;
+    bottom: 2px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgb(212 175 55 / 0.8), rgb(212 175 55 / 0.15));
+  }
+  .ab3-mission li > span {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 5px rgb(212 175 55 / 0.35);
+  }
+  .ab3-mission li > div {
+    padding-top: 6px;
+  }
+  .ab3-mission b {
+    font-size: 1rem;
+  }
+  .ab3-mission p {
+    margin-top: 3px;
+    font-size: 0.88rem !important;
+  }
+
+  /* where we are */
+  .ab3-place {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "ic k go"
+      "ad ad ad";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 12px;
+  }
+  .ab3-place > div {
+    display: contents;
+  }
+  .ab3-place-ic {
+    grid-area: ic;
+  }
+  .ab3-place-k {
+    grid-area: k;
+    margin: 0;
+  }
+  .ab3-place > a {
+    grid-area: go;
+    margin: 0;
+    border-color: rgb(212 175 55 / 0.5);
+    background: rgb(212 175 55 / 0.08);
+  }
+  .ab3 .ab3-place address {
+    grid-area: ad;
+    padding-top: 12px;
+    border-top: 1px solid var(--ab-line);
+    font-size: 0.9rem !important;
+    line-height: 1.6;
+    text-align: justify;
+    text-align-last: left;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+}
+
+/* ---- Inside our factory: three photographs from the plant with a short caption each; three in a
+   row on larger screens, on phones the first full width and the other two side by side. */
+.ab3-plant {
+  padding-top: 0;
+}
+.ab3-plant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.ab3-plant-fig {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--ab-line);
+  border-radius: var(--ab-r);
+  background: #fff;
+}
+.ab3-plant-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.ab3-plant-fig figcaption {
+  display: grid;
+  gap: 3px;
+  padding: 14px 16px 16px;
+}
+.ab3-plant-fig b {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ab-ink);
+}
+.ab3-plant-fig span {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ab-text);
+}
+@media (max-width: 899px) {
+  .ab3-plant-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .ab3-plant-fig:first-child {
+    grid-column: 1 / -1;
+  }
+  .ab3-plant-fig:first-child img {
+    aspect-ratio: 16 / 10;
+  }
+}
+@media (max-width: 639px) {
+  .ab3-plant-grid {
+    margin-top: 14px;
+  }
+  .ab3-plant-fig {
+    border-radius: 14px;
+  }
+  .ab3-plant-fig figcaption {
+    padding: 10px 12px 12px;
+  }
+  .ab3-plant-fig b {
+    font-size: 0.92rem;
+  }
+  .ab3-plant-fig span {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}

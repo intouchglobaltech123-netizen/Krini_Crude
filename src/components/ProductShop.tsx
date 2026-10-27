@@ -107,6 +107,11 @@ function isUpright(src?: string) {
   }
 }
 
+/** Construction chemicals whose video is shown now; the others wait for their AI videos. */
+const CONSTRUCTION_VIDEOS = new Set(["krini-shuttering-grease", "repel-shuttering-grease"]);
+/** Construction chemicals that keep their back view (the two greases); the drums show the front only. */
+const CONSTRUCTION_BACKS = new Set(["krini-shuttering-grease", "repel-shuttering-grease"]);
+
 const ON_REQUEST = "Shared with the technical data sheet: ask us on WhatsApp and we send it the same day.";
 
 function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
@@ -122,7 +127,7 @@ function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
     ...(d.coverage ? [{ k: "Coverage", v: d.coverage }] : []),
     // every construction chemical is ready to use (the client, October 2026): no dilution section
     ...(line.id === "construction" ? [{ k: "Dilution", v: "Not needed: ready to use, apply as supplied" }] : []),
-    { k: "Made at", v: "ISO certified factory, Chennai" },
+    { k: "Made at", v: "ISO 9001:2015 certified factory, Chennai" },
   ];
   const highlights = d.benefits?.length
     ? d.benefits
@@ -131,7 +136,7 @@ function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
       : [
           ...(grades.length ? [`Available in ${grades.join(", ")}`] : []),
           `Sold under our ${line.brand.name} brand`,
-          "Made at our ISO certified factory in Chennai",
+          "Made at our ISO 9001:2015 certified factory in Chennai",
           "Bulk supply, and private label under your own brand",
         ];
   const dilutionText =
@@ -151,7 +156,13 @@ function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
   ];
   if (!d.storage) packing.push({ k: "Storage", v: line.id === "aerosols" ? "Store below 50 °C, away from heat and direct sunlight. Pressurised container." : "Store indoors in the closed original container, away from heat and direct sunlight." });
     // the product in a beaker: beside the pack on the card, and a third view on its page
-    const views = [...viewsOf(slug, d.image), ...(r?.beaker ? [{ label: "Sample", src: r.beaker }] : [])];
+    // construction chemicals (the client, October 2026): the drums from the front only, no back view;
+    // the two shuttering greases keep their back view
+    const packViews =
+      line.id === "construction" && !CONSTRUCTION_BACKS.has(slug)
+        ? [{ label: "Front", src: d.image ?? viewsOf(slug)[0]?.src }]
+        : viewsOf(slug, d.image);
+    const views = [...packViews, ...(r?.beaker ? [{ label: "Sample", src: r.beaker }] : [])];
     const cardImg = d.image ?? views.find((v) => v.label === "Front" && v.src)?.src;
     return {
       key: r ? `${p.id}-${r.name}` : p.id,
@@ -177,7 +188,9 @@ function itemOf(line: Line, p: Product, r?: ProductRangeItem): ShopItem {
       sheet: line.id === "construction" ? sheetOf(slug, d) : undefined,
     report: line.id === "construction" ? d.reportUrl : undefined,
     reportLabel: d.reportLabel,
-    video: videoOf(slug, d),
+    // construction chemicals: no video yet (their AI videos come later, so the video view says "coming
+    // soon"), except the two shuttering greases, whose videos stay on (the client, October 2026)
+    video: line.id === "construction" && !CONSTRUCTION_VIDEOS.has(slug) ? undefined : videoOf(slug, d),
     about: d.description ?? (r ? `${r.text}. ${p.about}` : p.about),
     highlights,
     applications: d.purpose ?? p.uses ?? [],

@@ -5,8 +5,7 @@
  * products, an article). Built only from facts on the site; nothing here is
  * shown on the page that isn't also visible on it.
  *
- * To add once supplied: `logo` (a square PNG of the real Krini Crude logo,
- * 112 px or larger) and `sameAs` (the company's social profiles) on the
+ * To add once supplied: `sameAs` (the company's social profiles) on the
  * organisation, and `datePublished` on each article (articles.ts, `date`).
  */
 import { routes, site, isPlaceholder } from "./site";
@@ -45,6 +44,9 @@ export function organization(): Node {
     "@id": ORG,
     name: site.name,
     url: site.url,
+    // the Krini Crude logo on a white square, for search results and knowledge panels
+    logo: { "@type": "ImageObject", url: abs("/images/logo-krini-square.png"), width: 512, height: 512 },
+    image: abs("/images/logo-krini-square.png"),
     description: site.seo.description,
     slogan: site.tagline,
     email: site.contact.email,

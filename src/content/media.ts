@@ -53,21 +53,19 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "mivan3";
+const seqVersion = "pace3";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
- * oiling of the Mivan panels added in its place (Flow clips made after the client's own site video).
- * In order: the finished building; in the foundation pit, Magic Shuttering Oil rolled on to the
- * smooth face of a Mivan aluminium panel (the face that meets the concrete); the panels standing as a
- * box round the rebar, their oiled inner faces glossy as the concrete is poured in; the box stripped
- * clean; a precast mould poured and its unit lifted out clean; the building rising floor by floor; and
- * the completed building with its trees. Only gloved hands and backs are seen, never faces.
- * Cut to 14.2 s (the client: no longer than 15 s), parts sped up a little: 1920x1080 (heroSeq.video, laptops) and 1280x720 (heroSeq.videoSmall, phones).
+ * oiling added in its place (Flow clips after the client's own site video): the finished building;
+ * a landscape remake of the client's site footage: a worker beside tall Mivan aluminium panels leaning on a rebar cage rolls oil up and down them in long strokes (one wide shot, about 4 s); concrete poured into the oiled formwork box and the box
+ * stripped clean; a thin pale-yellow oil film rolled on to a precast steel mould with a big roller (5 s) before its concrete is poured, the unit
+ * lifted out clean; and the building rising to its completed finish. No faces turned to the camera.
+ * 21.3 s (the client: oiling about 4 s, pour and strip about 5 s at real speed, the precast pour and lift slowed), 1920x1080 (heroSeq.video) and 1280x720 (heroSeq.videoSmall).
  */
 export const heroSeq = {
   /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
-  frames: 72,
+  frames: 107,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
@@ -90,26 +88,26 @@ export const heroSeq = {
    */
   focus: [
     [0, 0.5],
-    [0.9, 0.5],
-    [1.3, 0.42],
-    [4.0, 0.42],
-    [4.4, 0.5],
-    [14.2, 0.5],
+    [0.8, 0.5],
+    [1.2, 0.46],
+    [4.45, 0.46],
+    [4.8, 0.5],
+    [21.33, 0.5],
   ] as [number, number][],
   /**
    * Where each step of the words starts, in seconds of the film: the name over the building, then
-   * Magic oil on the Mivan panels, the pour and the clean strip, the precast mould, and the
-   * defect-free finish (site.film.stages), the last with the buttons over the completed building.
+   * the oil on the Mivan panels, the pour and the clean strip, the precast mould (oiled, then
+   * poured), and the defect-free finish (site.film.stages), the last with the buttons.
    */
-  beats: [0, 1.0, 4.2, 8.15, 10.85],
+  beats: [0, 1.0, 4.6, 9.34, 19.07],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
-   * inside a fade: 0 the finished building (under the name), 3.9 the panel oiled glossy, 7.8 the
-   * concrete box stripped clean, 10.5 the precast unit lifted out of its mould, 14.17 the completed
+   * inside a fade: 0 the finished building (under the name), 4.35 the oiled Mivan panel, 9.25 the
+   * concrete box stripped clean, 18.8 the precast unit lifted out of its mould, 21.3 the completed
    * building with its trees.
    */
-  stops: [0, 3.9, 7.8, 10.5, 14.17],
+  stops: [0, 4.35, 9.25, 18.8, 21.3],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */

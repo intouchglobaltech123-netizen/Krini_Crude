@@ -9,7 +9,7 @@ const [productsStat, , clientsStat] = site.stats;
 const OPEN_STATS = [
   { value: `${productsStat?.value ?? 70}${productsStat?.suffix ?? "+"}`, label: "Products" },
   { value: `${clientsStat?.value ?? 1000}${clientsStat?.suffix ?? "+"}`, label: "Happy clients" },
-  { value: "ISO", label: "Certified" },
+  { value: "ISO", label: "9001:2015" },
 ];
 
 /**

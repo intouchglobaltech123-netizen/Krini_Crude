@@ -118,22 +118,32 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
   let H = 0;
   let dpr = 1;
   /**
-   * A phone held upright: one screen, the film itself playing as a video across the top of it
-   * (filmH tall, from the very top, behind the bar), fading into the dark under the words.
+   * A phone held upright: one screen, the whole film playing as a video just under the top bar,
+   * the full width of the screen and never cropped (filmH = the width at the film's 16:9), with the
+   * stage's name, the words and the buttons under it (the client, October 2026).
    */
   let band = false;
   let filmH = 0;
+  let filmTop = 0;
   const measure = () => {
     W = stage.clientWidth;
     H = stage.clientHeight;
     band = W < 640 && H > W;
     root.classList.toggle("is-band", band);
     root.classList.toggle("is-film", !band);
-    // the words (name, motto, lines, buttons, figures) sit at the foot of the screen, over the
-    // last ~90px of the film as it fades out
-    const wordsH = root.querySelector<HTMLElement>(".sh-open")?.offsetHeight || 340;
-    filmH = band ? Math.round(clamp((H - wordsH - 50 + 90) / H, 0.48, 0.72) * H) : H;
+    // on a phone: the whole film, uncropped, from just under the top bar
+    const barBottom = document.querySelector<HTMLElement>("[data-nav] .nav-main")?.getBoundingClientRect().bottom || 80;
+    filmTop = band ? Math.round(clamp(barBottom + 10, 60, 140)) : 0;
+    filmH = band ? Math.round((W * FH) / FW) : H;
+    root.style.setProperty("--sh-film-top", `${filmTop}px`);
     root.style.setProperty("--sh-film-h", `${filmH}px`);
+    root.style.setProperty("--sh-band-top", `${filmTop}px`);
+    root.style.setProperty("--sh-band-bottom", `${filmTop + filmH}px`);
+    // the words sit low on the screen, but never closer than 66px under the film (its stage's name
+    // goes in between); on a short phone they follow straight on under it
+    const wordsH = root.querySelector<HTMLElement>(".sh-open")?.offsetHeight || 300;
+    // midway between the stage's name (under the film) and "Scroll" (at the foot of the screen)
+    root.style.setProperty("--sh-open-top", `${Math.round(Math.max(filmTop + filmH + 66, (filmTop + filmH + 52 + H - 64 - wordsH) / 2))}px`);
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
@@ -356,10 +366,15 @@ export function initScrollHero(d: Disposer, scroller: Scroller) {
       if (bar && video.duration) bar.style.transform = `scaleX(${(now / video.duration).toFixed(4)})`;
       return;
     }
-    const s = Math.max(W / FW, filmH / FH);
-    const dw = FW * s;
-    const dx = clamp(W / 2 - dw * focusAt(video.currentTime || 0), W - dw, 0);
-    video.style.objectPosition = `${dx.toFixed(1)}px 50%`;
+    if (band) {
+      // the whole frame shows on a phone, so there is no crop to follow
+      video.style.objectPosition = "50% 50%";
+    } else {
+      const s = Math.max(W / FW, filmH / FH);
+      const dw = FW * s;
+      const dx = clamp(W / 2 - dw * focusAt(video.currentTime || 0), W - dw, 0);
+      video.style.objectPosition = `${dx.toFixed(1)}px 50%`;
+    }
     // which stage of the build is on screen (the name over the empty plot is stage 0)
     const now = video.currentTime || 0;
     let k = 0;

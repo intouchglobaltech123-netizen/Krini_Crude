@@ -52,10 +52,10 @@ export function Footer({ current }: { current?: PageId }) {
           <div className="ft3-brand" data-ft style={vars({ "--i": 0 })}>
             <a href={routes.home} className="ft3-logo" aria-label="Krini Crude, home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo-krini-h.webp?v=kc2" alt="" width={739} height={220} />
+              <img src="/images/logo-krini-h.webp?v=kc4" alt="" width={735} height={330} />
             </a>
             <p className="ft3-about">
-              Lubricants, greases, construction chemicals and aerosols, made at our ISO certified factory in Chennai.
+              Lubricants, greases, construction chemicals and aerosols, made at our ISO 9001:2015 certified factory in Chennai.
             </p>
             <a href={routes.contact} className="ft3-cta">
               Enquire now <Arrow />
@@ -125,7 +125,7 @@ export function Footer({ current }: { current?: PageId }) {
 
 
         <div className="ft3-bottom">
-          <p>© {year} Krini Crude · ISO certified · Chennai, India</p>
+          <p>© {year} Krini Crude · ISO 9001:2015 certified · Chennai, India</p>
           <div className="ft3-bottom-r">
             <ul className="ft3-legal">
               <li>

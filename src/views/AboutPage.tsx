@@ -22,7 +22,7 @@ import { isPlaceholder } from "../content/placeholder";
 const FIGURES = [
   { value: "70+", label: "Products" },
   { value: "1000+", label: "Happy clients" },
-  { value: "ISO", label: "Certified company" },
+  { value: "ISO", label: "9001:2015 certified" },
   { value: "Pan-India", label: "All major states" },
 ];
 
@@ -33,13 +33,43 @@ const WAYS = [
 ];
 
 const MISSION = [
-  { title: "Investment", body: "Invest substantially in research and development." },
-  { title: "Modern technology", body: "Keep acquiring modern technologies." },
-  { title: "Reach", body: "Keep expanding geographically." },
-  { title: "Support", body: "Comprehensive after-sales support for every client." },
+  { title: "Listen first", body: "We learn what your site, machine or product really needs." },
+  { title: "Make it to fit", body: "We make or adjust the product to match that need." },
+  { title: "Deliver on time", body: "The right quantity and pack, when you need it." },
+  { title: "Stay with you", body: "Help after delivery, and quick answers when anything changes." },
 ];
 
-const MARKETS = ["Industrial", "Automotive", "Marine", "Construction", "Infrastructure", "Specialist sectors"];
+/** Photographs from the factory in Tiruverkadu. */
+const PLANT = [
+  {
+    src: "/images/factory/tanks-43.webp",
+    title: "Blending and storage",
+    text: "Storage tanks, a blending vessel and drums ready for dispatch.",
+    alt: "Grey and yellow storage tanks, a blending vessel, a stacker and blue drums at the Krini Crude factory",
+  },
+  {
+    src: "/images/factory/aerosol-43.webp",
+    title: "Aerosol filling",
+    text: "Compressed air, filtering and filling for our Vibrant spray cans.",
+    alt: "The aerosol filling hall: compressor, air receiver, filters and filling machines, with Vibrant cans on the table",
+  },
+  {
+    src: "/images/factory/lab-43.webp",
+    title: "Quality laboratory",
+    text: "Every batch is checked on the bench before it leaves.",
+    alt: "The laboratory bench with burettes, flasks, measuring cylinders, a balance and oil samples",
+  },
+];
+
+/** The markets, each with a small line icon (24 x 24, drawn in the current colour). */
+const MARKETS: { name: string; icon: string }[] = [
+  { name: "Industrial", icon: "M3 20h18M4 20V10l5 3v-3l5 3V7h6v13M17 7V4h2v3M8 17h2M13 17h2" },
+  { name: "Automotive", icon: "M3 13l2-5.2A2 2 0 0 1 6.9 6.5h10.2a2 2 0 0 1 1.9 1.3L21 13v4h-2.2M5.2 17H3v-4h18M3 13h18M7 17a2 2 0 1 0 0-.01M17 17a2 2 0 1 0 0-.01" },
+  { name: "Marine", icon: "M12 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM12 8v13M8 11.5h8M4 14c0 4 3.6 7 8 7s8-3 8-7M4 14l-1.5 1.5M4 14l1.8 1.2M20 14l1.5 1.5M20 14l-1.8 1.2" },
+  { name: "Construction", icon: "M3 18h18M5 18v-3a7 7 0 0 1 14 0v3M10 8.4V6a2 2 0 0 1 4 0v2.4M9 18v-4M15 18v-4" },
+  { name: "Infrastructure", icon: "M2 18h20M4 18v-6M20 18v-6M2 12c4 0 6.5-5 10-5s6 5 10 5M8 18v-7.5M16 18v-7.5M12 18V7" },
+  { name: "Specialist sectors", icon: "M9 3h6M10 3v6.2L4.8 18.1A2 2 0 0 0 6.5 21h11a2 2 0 0 0 1.7-2.9L14 9.2V3M7.3 15h9.4" },
+];
 
 export function AboutPage() {
   const c = site.contact;
@@ -74,7 +104,7 @@ export function AboutPage() {
               </div>
               <figure className="ab3-hero-media">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/manufacturing-169.webp" alt="Stainless-steel blending tanks on the manufacturing floor" width={1600} height={900} decoding="async" fetchPriority="high" />
+                <img src="/images/factory/tanks-169.webp" alt="Storage tanks, a stacker and drums at the Krini Crude factory in Tiruverkadu, Chennai" width={1440} height={810} decoding="async" fetchPriority="high" />
               </figure>
             </div>
             <dl className="ab3-figures">
@@ -97,7 +127,12 @@ export function AboutPage() {
               <p className="ab3-text">We make standard, speciality and niche-market products.</p>
               <ul className="ab3-chips" aria-label="Markets we serve">
                 {MARKETS.map((m) => (
-                  <li key={m}>{m}</li>
+                  <li key={m.name}>
+                    <svg className="ab3-chip-ic" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={m.icon} />
+                    </svg>
+                    {m.name}
+                  </li>
                 ))}
               </ul>
             </article>
@@ -114,6 +149,28 @@ export function AboutPage() {
                 ))}
               </ol>
             </article>
+          </div>
+        </section>
+
+        {/* Inside our factory: the three rooms, photographed at the plant */}
+        <section className="ab3-sec ab3-plant" aria-labelledby="plant-title">
+          <div className="frame">
+            <p className="ab3-k">Our factory</p>
+            <h2 id="plant-title" className="ab3-h2">
+              Inside our factory in Tiruverkadu.
+            </h2>
+            <div className="ab3-plant-grid">
+              {PLANT.map((ph) => (
+                <figure key={ph.src} className="ab3-plant-fig">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ph.src} alt={ph.alt} width={1200} height={900} loading="lazy" decoding="async" />
+                  <figcaption>
+                    <b>{ph.title}</b>
+                    <span>{ph.text}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -152,7 +209,7 @@ export function AboutPage() {
             <div className="ab3-vm">
               <div className="ab3-vision">
                 <p className="ab3-k">Our vision</p>
-                <p className="ab3-vision-line">Innovation and excellence in manufacturing.</p>
+                <p className="ab3-vision-line">Your need comes first: the right product, made for your work.</p>
               </div>
               <div className="ab3-mission">
                 <p className="ab3-k">Our mission</p>
