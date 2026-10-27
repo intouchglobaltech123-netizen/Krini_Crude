@@ -53,19 +53,19 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "roof2";
+const seqVersion = "roof3";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
  * oiling added in its place (Flow clips after the client's own site video): the finished building;
- * a landscape remake of the client's site footage: a worker beside tall Mivan aluminium panels leaning on a rebar cage rolls oil up and down them in long strokes (one wide shot, about 4 s); on the same rooftop, concrete poured into the oiled aluminium column formwork, then the panels
- * stripped and the camera pushing in on the smooth fair-faced concrete; a thin pale-yellow oil film rolled on to a precast steel mould with a big roller (5 s) before its concrete is poured, the unit
+ * a landscape remake of the client's site footage: a worker beside tall Mivan aluminium panels leaning on a rebar cage rolls oil up and down them in long strokes (one wide shot, about 4 s); on the same rooftop, concrete poured into the oiled aluminium column formwork, then the last panel
+ * lifted off the clean column (no zoom; the film moves straight on); a thin pale-yellow oil film rolled on to a precast steel mould with a big roller (5 s) before its concrete is poured, the unit
  * lifted out clean; and the building rising to its completed finish. No faces turned to the camera.
- * 24.3 s (the client: oiling about 4 s, pour about 3.5 s and strip about 5 s, all on the top floor, the precast pour and lift slowed), 1920x1080 (heroSeq.video) and 1280x720 (heroSeq.videoSmall).
+ * 22.3 s (the client: oiling about 4 s, pour about 3.5 s and strip about 3 s, all on the top floor, the precast pour and lift slowed), 1920x1080 (heroSeq.video) and 1280x720 (heroSeq.videoSmall).
  */
 export const heroSeq = {
   /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
-  frames: 122,
+  frames: 112,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
@@ -102,22 +102,22 @@ export const heroSeq = {
     [1.2, 0.46],
     [4.45, 0.46],
     [4.8, 0.5],
-    [24.29, 0.5],
+    [22.29, 0.5],
   ] as [number, number][],
   /**
    * Where each step of the words starts, in seconds of the film: the name over the building, then
    * the oil on the Mivan panels, the pour and the clean strip, the precast mould (oiled, then
    * poured), and the defect-free finish (site.film.stages), the last with the buttons.
    */
-  beats: [0, 1.0, 4.6, 12.3, 22.0],
+  beats: [0, 1.0, 4.6, 10.28, 19.98],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
-   * inside a fade: 0 the finished building (under the name), 4.35 the oiled Mivan panel, 12.2 the
-   * stripped column's fair finish up close, 21.75 the precast unit lifted out of its mould, 24.25 the completed
+   * inside a fade: 0 the finished building (under the name), 4.35 the oiled Mivan panel, 10.2 the
+   * last panel carried off the clean column, 19.73 the precast unit lifted out of its mould, 22.25 the completed
    * building with its trees.
    */
-  stops: [0, 4.35, 12.2, 21.75, 24.25],
+  stops: [0, 4.35, 10.2, 19.73, 22.25],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */

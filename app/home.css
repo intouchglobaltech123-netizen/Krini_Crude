@@ -977,3 +977,118 @@ main > section.hm-make {
     backdrop-filter: blur(8px);
   }
 }
+
+/* ---- Phone hero, neat (the client, October 2026): the upright film is the hero. A clean dark glass
+   bar on top (the full-colour light logo, a slim gold-outlined Menu button), the film clear down to
+   about two thirds of the screen, and one compact block at the foot: the kicker, the name, the
+   headline, two buttons side by side and the three figures on one quiet line. The longer motto is
+   left out here (it is said again further down the page). */
+@media (max-width: 639px) {
+  html body .nav.is-over .nav-main,
+  html body .nav.is-over.is-solid .nav-main {
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgb(14 16 22 / 0.62), rgb(14 16 22 / 0.46));
+    -webkit-backdrop-filter: blur(16px) saturate(1.25);
+    backdrop-filter: blur(16px) saturate(1.25);
+    box-shadow: 0 16px 34px -20px rgb(0 0 0 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  }
+  html body .nav.is-over .nav-split .nav-logo-c {
+    padding: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+  }
+  html body .nav.is-over .nav-split .nav-logo-c .nav-logo-dark,
+  html body .nav.is-over .nav-split .nav-logo-c .nav-logo-full {
+    display: none !important;
+  }
+  html body .nav.is-over .nav-split .nav-logo-c .nav-logo-lite {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    height: 54px !important;
+    margin: -4px 0 -4px -4px;
+    filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.45));
+  }
+  html body .nav.is-over .nav-split .menu-toggle {
+    height: 40px;
+    padding: 0 14px 0 12px;
+    gap: 8px;
+    border: 1px solid rgb(212 175 55 / 0.75);
+    border-radius: 999px;
+    background: rgb(212 175 55 / 0.1);
+    color: #fff;
+    box-shadow: none;
+  }
+  html body .nav.is-over .nav-split .menu-toggle .menu-toggle-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* the film: a light fade under the bar, a deeper one only behind the words */
+  section.sh.is-band.is-tall .sh-scrim {
+    background:
+      linear-gradient(180deg, rgb(8 9 12 / 0.55) 0, rgb(8 9 12 / 0) 150px),
+      linear-gradient(0deg, rgb(8 9 12 / 0.96) 0, rgb(8 9 12 / 0.88) 24%, rgb(8 9 12 / 0.45) 40%, rgb(8 9 12 / 0) 54%);
+  }
+  section.sh.is-band.is-tall .sh-open .sh-motto {
+    display: none !important;
+  }
+  section.sh.is-band.is-tall .sh-step.sh-open {
+    padding-inline: 20px;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-title {
+    gap: 0.35rem;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-name {
+    font-size: clamp(2.1rem, 10.5vw, 2.6rem) !important;
+    line-height: 1 !important;
+  }
+  section.sh.is-band.is-tall .sh-open .sh-tagline {
+    font-size: 0.95rem !important;
+    color: rgb(255 255 255 / 0.86);
+  }
+  section.sh.is-band.is-tall .sh-open-ctas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    max-width: none;
+    margin: 18px 0 0;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn {
+    min-height: 46px;
+    padding: 0 10px;
+    border-radius: 12px;
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+  section.sh.is-band.is-tall .sh-open-ctas .btn-primary .arrow,
+  section.sh.is-band.is-tall .sh-open-ctas .btn-ghost .arrow {
+    display: none;
+  }
+  section.sh.is-band.is-tall .sh-open-stats {
+    margin-top: 16px;
+    padding: 12px 0 0;
+    border: 0;
+    border-top: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dd {
+    font-size: 1.12rem;
+  }
+  section.sh.is-band.is-tall .sh-open-stats dt {
+    font-size: 0.6rem;
+  }
+  /* the stage on screen: a small pill just above the words */
+  section.sh.is-band.is-tall .sh-chip {
+    top: calc(var(--sh-open-top, 60vh) - 42px);
+  }
+  section.sh.is-band.is-tall .sh-chip span {
+    padding: 5px 11px 5px 6px;
+    font-size: 0.74rem;
+  }
+}
