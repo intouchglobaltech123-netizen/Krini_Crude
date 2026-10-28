@@ -690,7 +690,7 @@ export const lines: Line[] = [
               image: "/images/products/magic-shuttering-oil-pack.webp",
               imageAlt: "Magic Shuttering Oil 200L drum",
               /* Magic oil rolled on to Mivan aluminium panels: made in Google Flow (October 2026) from the client's site video */
-              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=3",
+              videoUrl: "/videos/products/magic-shuttering-oil.mp4?v=4",
               pdsRevision: "Rev. 09/2026",
               description:
                 "Magic Shuttering Oil is a ready-to-use release oil developed for Mivan aluminium formwork. It forms a thin, uniform release film that supports clean demoulding, smooth concrete finishes and efficient reuse of formwork when applied correctly.",
@@ -743,7 +743,7 @@ export const lines: Line[] = [
             details: {
               image: "/images/products/repel-shuttering-oil-pack.webp",
               imageAlt: "Repel Shuttering Oil 200L drum",
-              videoUrl: "/videos/products/repel-shuttering-oil.mp4",
+              videoUrl: "/videos/products/repel-shuttering-oil.mp4?v=2",
             },
           },
           {
@@ -756,7 +756,7 @@ export const lines: Line[] = [
               pdsRevision: "Rev. 09/2026",
               image: "/images/products/silease-360-shuttering-oil-pack.webp",
               imageAlt: "Silease 360 Precast Shuttering Oil 200L drum",
-              videoUrl: "/videos/products/silease-360-shuttering-oil.mp4",
+              videoUrl: "/videos/products/silease-360-shuttering-oil.mp4?v=2",
               description:
                 "SILEASE 360 is a ready-to-use mould release oil developed for precast concrete production. It forms a uniform release film on the formwork, supports clean demoulding and helps reduce surface pinholes and honeycombing when applied correctly.",
               purpose: [
@@ -810,7 +810,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
               sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
-              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4",
+              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4?v=2",
               description: "Road Project Shuttering Oil. Cost Effective MS, Plywood & Road Projects Shuttering Oil.",
               purposeTitle: "Suitable formwork & projects",
               purpose: ["MS (mild steel) formwork", "Plywood formwork", "Road projects"],
@@ -830,7 +830,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri AL Emulsion-based Shuttering Oil 200L drum for Mivan aluminium formwork",
               sheetUrl: "/documents/nikri-al-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri AL Shuttering Oil Product Data Sheet",
-              videoUrl: "/videos/products/nikri-al-shuttering-oil.mp4",
+              videoUrl: "/videos/products/nikri-al-shuttering-oil.mp4?v=2",
               description:
                 "NIKRI AL is an emulsion-based shuttering oil that forms a uniform release film between concrete and formwork, supporting cleaner stripping and a smoother concrete finish.",
               purpose: [
@@ -886,7 +886,7 @@ export const lines: Line[] = [
               imageAlt: "Krini Shuttering Grease 1kg tub and bulk formwork release grease",
               sheetUrl: "/documents/krini-shuttering-grease-pds.pdf",
               sheetLabel: "Krini Shuttering Grease Product Data Sheet",
-              videoUrl: "/videos/products/krini-shuttering-grease.mp4",
+              videoUrl: "/videos/products/krini-shuttering-grease.mp4?v=2",
               description:
                 "KRINI SHUTTERING GREASE is a calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -937,7 +937,7 @@ export const lines: Line[] = [
               imageAlt: "Repel Shuttering Grease premium calcium-based formwork release grease tub",
               sheetUrl: "/documents/repel-shuttering-grease-pds.pdf",
               sheetLabel: "Repel Shuttering Grease Product Data Sheet",
-              videoUrl: "/videos/products/repel-shuttering-grease.mp4",
+              videoUrl: "/videos/products/repel-shuttering-grease.mp4?v=2",
               description:
                 "REPEL SHUTTERING GREASE is a high-performance calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
