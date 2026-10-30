@@ -65,7 +65,7 @@ const seqVersion = "roof14";
  */
 export const heroSeq = {
   /** The film's length at 5 frames a second (the frame sheets are only for the scroll-drawn film, which film mode does not use). */
-  frames: 112,
+  frames: 105,
   fps: 5,
   perSheet: 10,
   sheet: (k: number) => `${base}/images/hero-seq/s${String(k).padStart(2, "0")}.webp?v=${seqVersion}`,
