@@ -70,6 +70,13 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
               </ul>
             </nav>
             <div className="nav-side nav-side-r flex items-center gap-3">
+              {/* phones: mail and call as two round icons beside Menu, in place of the blue strip */}
+              <a href={`mailto:${contact.email}`} className="nav-quick nav-quick-mail" aria-label={`Email ${contact.email}`}>
+                <Glyph name="mail" size={18} />
+              </a>
+              <a href={contact.phoneHref} className="nav-quick nav-quick-call" aria-label={`Call ${contact.phone}`}>
+                <Glyph name="call" size={18} />
+              </a>
               <a href={enquireHref("Enquiry")} className="btn btn-primary nav-enquire hidden sm:inline-flex" data-magnetic data-enquire="Enquiry">
                 Enquire now <Arrow />
               </a>

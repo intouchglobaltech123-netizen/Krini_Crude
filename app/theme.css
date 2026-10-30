@@ -11221,3 +11221,47 @@ main section.cta3 {
     font-size: 14px;
   }
 }
+
+/* ---- Phones (the client, October 2026): no blue strip; the email and the phone are two round icons
+   beside Menu in the top bar, one tap away. Tablets keep the strip. */
+.nav-quick {
+  display: none;
+}
+@media (max-width: 639px) {
+  :root {
+    --nav-strip: 0px;
+  }
+  .nav-strip {
+    display: none !important;
+  }
+  .nav-side-r {
+    gap: 8px !important;
+  }
+  .nav-quick {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: none;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    transition: transform 0.15s ease;
+  }
+  .nav-quick:active {
+    transform: scale(0.94);
+  }
+  .nav-quick svg {
+    width: 18px;
+    height: 18px;
+  }
+  .nav-quick-mail {
+    color: #1a4370;
+  }
+  .nav-quick-call {
+    border-color: transparent;
+    background: linear-gradient(180deg, #ecd06e, #d4af37 55%, #c39d2c);
+    color: #14110a;
+  }
+}
