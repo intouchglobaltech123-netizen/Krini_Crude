@@ -2526,3 +2526,20 @@ section.pshop .pshop-grid .kcard-foot {
     margin-top: 0;
   }
 }
+
+/* The product page: the brand logo beside "Brand" shown bigger (the client, October 2026) */
+section.pshop .pv .pv-by .kbrand.has-logo {
+  height: 48px !important;
+  padding: 6px 14px !important;
+  border-radius: 10px;
+}
+section.pshop .pv .pv-by .kbrand.has-logo img {
+  height: 100% !important;
+  width: auto !important;
+  max-height: none !important;
+}
+@media (max-width: 639px) {
+  section.pshop .pv .pv-by .kbrand.has-logo {
+    height: 42px !important;
+  }
+}
