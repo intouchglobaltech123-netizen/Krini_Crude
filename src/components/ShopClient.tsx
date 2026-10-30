@@ -363,30 +363,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                       </button>
                     </h3>
                     {it.tagline ? <p className="kcard-tag">{it.tagline}</p> : null}
-                    <div className="kcard-specs">
-                      {it.grades.length ? (
-                        <span className="kcard-spec-item" title="Multiple grades available (choose inside product page)">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="m12 6v6l4 2" />
-                          </svg>
-                          {it.grades.length} Grades available
-                        </span>
-                      ) : (
-                        <span className="kcard-spec-item" title="Certified Manufacturer">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                          </svg>
-                          ISO 9001:2015
-                        </span>
-                      )}
-                      <span className="kcard-spec-item" title="Packaging">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                        </svg>
-                        {it.packing?.[0]?.v?.replace(/^Standard packing:\s*/i, "").replace(/^Pack sizes on request/i, "Pack on request").replace(/\s*\(.*\)\s*$/, "") || "Industrial pack"}
-                      </span>
-                    </div>
                   </div>
                   <div className="kcard-foot kcard-ask">
                     <a href={waFor(it)} className="kcard-enq" target="_blank" rel="noopener noreferrer" aria-label={`Enquire about ${it.name} on WhatsApp`}>
@@ -457,12 +433,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                   </div>
                 </div>
               ) : null}
-              {/* larger screens: the buttons here, beside the photos (phones: the bar at the foot) */}
-              <div className="pv-cta pv-cta-one">
-                <a href={waFor(pv)} className="pv-add" target="_blank" rel="noopener noreferrer">
-                  <MsgIcon /> Enquire on WhatsApp
-                </a>
-              </div>
               {/* the data sheet and the test report, where we have them (the video is in the photos) */}
               {pv.sheet || pv.report ? (
               <div className={`pv-docs${pv.sheet && pv.report ? "" : " is-solo"}`}>
@@ -730,12 +700,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
             </div>
           ) : null}
 
-          {/* phones: always at the foot, Enquire on WhatsApp */}
-          <div className="pv-buy pv-buy-one">
-            <a href={waFor(pv)} className="pv-add" target="_blank" rel="noopener noreferrer">
-              <MsgIcon /> Enquire on WhatsApp
-            </a>
-          </div>
         </div>
       ) : null}
 
