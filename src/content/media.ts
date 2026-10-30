@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "roof13";
+const seqVersion = "roof14";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
@@ -93,7 +93,7 @@ export const heroSeq = {
   tall: {
     video: `${base}/videos/krini-hero-tall.mp4?v=${seqVersion}`,
     first: `${base}/images/hero-seq/first-tall.webp?v=${seqVersion}`,
-    beats: [0, 0.8, 3.5, 8.4, 20.5] as readonly number[],
+    beats: [0, 0.8, 3.5, 8.4, 16.7] as readonly number[],
   },
   first: `${base}/images/hero-seq/first.webp?v=${seqVersion}`,
   /**
@@ -107,22 +107,22 @@ export const heroSeq = {
     [1.2, 0.46],
     [4.45, 0.46],
     [4.8, 0.5],
-    [22.29, 0.5],
+    [21.1, 0.5],
   ] as [number, number][],
   /**
    * Where each step of the words starts, in seconds of the film: the name over the building, then
    * the oil on the Mivan panels, the pour and the clean strip, the precast mould (oiled, then
    * poured), and the defect-free finish (site.film.stages), the last with the buttons.
    */
-  beats: [0, 1.0, 4.6, 10.28, 19.98],
+  beats: [0, 1.0, 4.6, 10.28, 19.92],
   /**
    * Laptops: the seconds where each part of the film ends; one scroll plays the next part, and the
    * page only moves on once the last part has played to the end. Each stop is a clean frame, never
    * inside a fade: 0 the finished building (under the name), 4.35 the oiled Mivan panel, 10.2 the
-   * last panel carried off the clean column, 19.73 the precast unit lifted out of its mould, 22.25 the completed
+   * last panel carried off the clean column, 19.73 the precast unit lifted out of its mould, 21.08 the completed
    * building with its trees.
    */
-  stops: [0, 4.35, 10.2, 19.73, 22.25],
+  stops: [0, 4.35, 10.2, 19.73, 21.08],
   /** How far into its stretch of the film a scroll step lands (0 its start, 1 the next step's start). */
   land: 0.3,
   /** The share of the scroll before the film starts (the name over its first frame), and the share at which it ends (its last frame stays for the rest). */
