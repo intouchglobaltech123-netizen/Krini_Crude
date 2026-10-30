@@ -22,7 +22,7 @@
 .lg2-top {
   position: relative;
   overflow: hidden;
-  padding: calc(var(--nav-bar, 72px) + 30px) 0 clamp(30px, 4vw, 52px);
+  padding: calc(var(--nav-h, 72px) + 30px) 0 clamp(30px, 4vw, 52px);
   background:
     radial-gradient(70% 90% at 100% 0%, rgb(212 175 55 / 0.16), transparent 60%),
     linear-gradient(160deg, var(--lg-navy-2), var(--lg-navy) 70%);

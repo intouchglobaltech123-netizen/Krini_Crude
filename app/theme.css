@@ -367,7 +367,7 @@ main section.theme-yellow {
   main > section:not(.sh):not(.theme-yellow),
   main > header,
   main > div > section:not(.theme-yellow) {
-    min-height: calc(100svh - var(--nav-bar));
+    min-height: calc(100svh - var(--nav-h));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2710,7 +2710,7 @@ main > section.legal {
   display: block !important;
 }
 .legal {
-  padding: calc(var(--nav-bar) + 36px) 0 var(--sec-pad, 80px);
+  padding: calc(var(--nav-h) + 36px) 0 var(--sec-pad, 80px);
 }
 .legal-head {
   max-width: 760px;
@@ -3339,7 +3339,7 @@ main > section.section > .frame > .mt-16 {
 
 /* Product line pages: the header within one screen */
 .lp-hero {
-  padding-top: calc(var(--nav-bar) + 28px) !important;
+  padding-top: calc(var(--nav-h) + 28px) !important;
   padding-bottom: 36px !important;
 }
 .lp-hero .lp-hero-grid {
@@ -3364,7 +3364,7 @@ main > section.section > .frame > .mt-16 {
 
 /* Blog: the heading and the topics on one row, wide photo frames on the cards */
 main > section.board {
-  padding-top: calc(var(--nav-bar) + 22px) !important;
+  padding-top: calc(var(--nav-h) + 22px) !important;
   padding-bottom: 36px !important;
 }
 @media (min-width: 1024px) {
@@ -3457,7 +3457,7 @@ main > section.board {
 }
 @media (min-width: 1024px) {
   main > section.board {
-    padding-top: calc(var(--nav-bar) + 14px) !important;
+    padding-top: calc(var(--nav-h) + 14px) !important;
   }
   .board .board-head {
     grid-template-areas:
@@ -11088,5 +11088,49 @@ main section.cta3 {
     height: 46px !important;
     width: auto !important;
     max-width: none !important;
+  }
+}
+
+/* ---- The top bar, larger screens (the client, October 2026): a blue strip with the email and the
+   phone number on the left, folding away once the page moves; under it the white bar: the logo on
+   the left, 50px between Home, About Us, Products and Blog, and 40px from them to Enquire now.
+   Phones and tablets have no strip (the menu sheet has the phone and email). */
+@media (min-width: 1024px) {
+  :root {
+    --nav-strip: 40px;
+  }
+  .nav-strip {
+    display: block;
+    background: #1a4370;
+    color: #fff;
+  }
+  .nav-strip-in {
+    justify-content: flex-start;
+  }
+  .nav-strip-reach {
+    gap: 44px;
+  }
+  .nav-strip-reach li:last-child {
+    display: list-item;
+  }
+  .nav-strip-reach a {
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .nav-strip-reach a:hover {
+    color: var(--gold-hi);
+  }
+  .nav.is-solid:not(.is-hidden) {
+    transform: translateY(calc(-1 * var(--nav-strip)));
+  }
+  /* 50px from one link's words to the next (each link has 20px of padding either side) */
+  .nav-box .nav-list {
+    gap: 10px;
+  }
+  /* 40px between the box of links and Enquire now */
+  .nav-bar.nav-split {
+    column-gap: 40px;
   }
 }

@@ -6,8 +6,8 @@ import { Arrow, Glyph } from "./ui";
 const vars = (v: Record<string, string | number>) => v as CSSProperties;
 
 /**
- * The top of every page, in two levels. A thin dark strip (ISO, the factory,
- * phone, email, WhatsApp) folds away once the page moves; under it the white
+ * The top of every page, in two levels. A thin blue strip (the email and the
+ * phone number) folds away once the page moves; under it the white
  * bar: the logo on the left; Home, About Us, Products and Blog in one box and
  * the gold Enquire now button on the right. Each is a plain link (Products
  * goes to the Products page; no panel opens under it). Below 1024px the menu
@@ -34,24 +34,15 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
       <header className="nav fixed inset-x-0 top-0 z-50" data-nav>
         <div className="nav-strip">
           <div className="frame nav-strip-in">
-            <p className="nav-strip-note">
-              <span className="nav-strip-dot" aria-hidden="true" />
-              ISO 9001:2015 certified manufacturer · Factory near Madhavaram, Chennai
-            </p>
             <ul className="nav-strip-reach">
               <li>
-                <a href={contact.phoneHref}>
-                  <Glyph name="call" size={15} /> {contact.phone}
-                </a>
-              </li>
-              <li>
                 <a href={`mailto:${contact.email}`}>
-                  <Glyph name="mail" size={15} /> {contact.email}
+                  <Glyph name="mail" size={18} /> Email: {contact.email}
                 </a>
               </li>
               <li>
-                <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer">
-                  WhatsApp
+                <a href={contact.phoneHref}>
+                  <Glyph name="call" size={18} /> Call Us: {contact.phone}
                 </a>
               </li>
             </ul>
