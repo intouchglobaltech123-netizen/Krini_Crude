@@ -754,6 +754,8 @@ function Gallery({
   const track = useRef<HTMLDivElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
   const [at, setAt] = useState(0);
+  /** True once the visitor has picked or swiped to a view (the video does not start by itself before). */
+  const [picked, setPicked] = useState(false);
 
   type GalleryItem =
     | { kind: "image"; label: string; src?: string }
@@ -763,21 +765,23 @@ function Gallery({
   const backView = views.find((v) => v.label === "Back") ?? { label: "Back" };
   const sampleView = views.find((v) => v.label === "Sample");
 
+  // the order for every product (the client, October 2026): AI Video first, then Front, then Sample
   const allViews: GalleryItem[] = [
+    { kind: "video", label: "AI Video", video },
     { kind: "image", label: "Front", src: frontView.src },
     // a back view only where the product has one (construction chemicals show the front only)
     ...(views.some((v) => v.label === "Back") ? [{ kind: "image" as const, label: "Back", src: backView.src }] : []),
-    { kind: "video", label: "AI Video", video },
     ...(sampleView ? [{ kind: "image" as const, label: "Sample", src: sampleView.src }] : []),
   ];
 
   // the video plays with sound when its view is picked; a browser that blocks sound without a tap
-  // first plays it muted instead; it pauses when another view is picked
+  // first plays it muted instead; it pauses when another view is picked. It is the first view, so
+  // it waits (paused, with its controls) until the visitor has picked a view themselves.
   const vidAt = allViews.findIndex((v) => v.kind === "video" && v.video);
   useEffect(() => {
     const v = vid.current;
     if (!v) return;
-    if (at === vidAt) {
+    if (at === vidAt && picked) {
       v.muted = false;
       v.play().catch(() => {
         v.muted = true;
@@ -786,17 +790,22 @@ function Gallery({
     } else {
       v.pause();
     }
-  }, [at, vidAt]);
+  }, [at, vidAt, picked]);
   const go = (k: number) => {
     const t = track.current;
     if (!t) return;
     const n = Math.max(0, Math.min(allViews.length - 1, k));
     t.scrollTo({ left: n * t.clientWidth, behavior: "smooth" });
+    setPicked(true);
     setAt(n);
   };
   const onScroll = () => {
     const t = track.current;
-    if (t && t.clientWidth) setAt(Math.round(t.scrollLeft / t.clientWidth));
+    if (t && t.clientWidth) {
+      const n = Math.round(t.scrollLeft / t.clientWidth);
+      if (n !== at) setPicked(true);
+      setAt(n);
+    }
   };
   return (
     <div className="pg">
