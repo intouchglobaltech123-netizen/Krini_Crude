@@ -332,7 +332,7 @@ export const lines: Line[] = [
               imageAlt: "1-COOL AL 7000 semi synthetic coolant oil 26L pail",
               sheetUrl: "/documents/1-cool-al-7000-pds.pdf",
               sheetLabel: "1-COOL AL 7000 Product Data Sheet (PDS 2026)",
-              videoUrl: "/videos/products/1-cool-al-7000.mp4",
+              videoUrl: "/videos/products/1-cool-al-7000.mp4?v=2",
               description:
                 "1-COOL AL 7000 is a high performance metal working fluid designed for machining aluminium and its alloys. It provides excellent cooling, lubrication and surface finish during high speed machining operations.",
               dilution: "3% – 10%",
@@ -810,7 +810,7 @@ export const lines: Line[] = [
               imageAlt: "Nikri 30 Shuttering Oil 200L drum for MS, plywood and road projects",
               sheetUrl: "/documents/nikri-30-shuttering-oil-pds.pdf",
               sheetLabel: "Nikri 30 Shuttering Oil Product Data Sheet",
-              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4?v=2",
+              videoUrl: "/videos/products/nikri-30-shuttering-oil.mp4?v=3",
               description: "Road Project Shuttering Oil. Cost Effective MS, Plywood & Road Projects Shuttering Oil.",
               purposeTitle: "Suitable formwork & projects",
               purpose: ["MS (mild steel) formwork", "Plywood formwork", "Road projects"],

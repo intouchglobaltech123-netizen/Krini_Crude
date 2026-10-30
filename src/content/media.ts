@@ -53,7 +53,7 @@ export type StageId = keyof typeof heroMedia.stages;
  * frames are replaced, so browsers fetch the new film rather than showing the
  * old one from their cache (the frames are served as unchanging for a year).
  */
-const seqVersion = "roof12";
+const seqVersion = "roof13";
 
 /**
  * Home's hero (ScrollHero.tsx): the client's building-first film (made with Google Flow), with the
