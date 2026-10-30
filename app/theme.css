@@ -1673,7 +1673,7 @@ main > section.cx-map {
   }
   .shop-side {
     position: sticky;
-    top: calc(var(--nav-bar) + 20px);
+    top: calc(var(--nav-h) + 20px);
   }
 }
 .shop-side {
@@ -2747,7 +2747,7 @@ main > section.legal {
   }
   .legal-toc {
     position: sticky;
-    top: calc(var(--nav-bar) + 24px);
+    top: calc(var(--nav-h) + 24px);
   }
 }
 .legal-toc {
@@ -2782,7 +2782,7 @@ main > section.legal {
   color: var(--gold-deep);
 }
 .legal-sec {
-  scroll-margin-top: calc(var(--nav-bar) + 24px);
+  scroll-margin-top: calc(var(--nav-h) + 24px);
   padding-bottom: 26px;
   margin-bottom: 26px;
   border-bottom: 1px solid var(--line);
@@ -5030,7 +5030,7 @@ main section.cta3 {
 /* the bar: categories on the left, search and cart in remaining space on the right */
 .pshop-bar {
   position: sticky;
-  top: calc(var(--nav-bar, 76px) + 12px);
+  top: calc(var(--nav-h, 76px) + 12px);
   z-index: 25;
   display: flex;
   align-items: center;
@@ -5747,7 +5747,7 @@ main section.cta3 {
 /* phones: two cards to a row, the bar under the top bar, the cart button above the quick bar */
 @media (max-width: 639px) {
   .pshop-bar {
-    top: calc(var(--nav-bar, 72px) + 6px);
+    top: calc(var(--nav-h, 72px) + 6px);
     margin-top: 20px;
     padding: 8px;
   }
@@ -6135,7 +6135,7 @@ main section.cta3 {
 @media (min-width: 1024px) {
   .bl-ask {
     position: sticky;
-    top: calc(var(--nav-bar, 76px) + 24px);
+    top: calc(var(--nav-h, 76px) + 24px);
   }
 }
 .bl-ask-k {
@@ -11092,7 +11092,7 @@ main section.cta3 {
 }
 
 /* ---- The top bar, larger screens (the client, October 2026): a blue strip with the email and the
-   phone number on the left, folding away once the page moves; under it the white bar: the logo on
+   phone number on the right, fixed at the top with the bar as the page scrolls; under it the white bar: the logo on
    the left, 50px between Home, About Us, Products and Blog, and 40px from them to Enquire now.
    Phones and tablets have no strip (the menu sheet has the phone and email). */
 @media (min-width: 1024px) {
@@ -11121,9 +11121,6 @@ main section.cta3 {
   }
   .nav-strip-reach a:hover {
     color: var(--gold-hi);
-  }
-  .nav.is-solid:not(.is-hidden) {
-    transform: translateY(calc(-1 * var(--nav-strip)));
   }
   /* 50px from one link's words to the next (each link has 20px of padding either side) */
   .nav-box .nav-list {

@@ -188,7 +188,7 @@
   }
   .lg2-toc {
     position: sticky;
-    top: calc(var(--nav-bar, 72px) + 24px);
+    top: calc(var(--nav-h, 72px) + 24px);
   }
 }
 .lg2-toc ol {
@@ -292,7 +292,7 @@
   min-width: 0;
 }
 .lg2-sec {
-  scroll-margin-top: calc(var(--nav-bar, 72px) + 20px);
+  scroll-margin-top: calc(var(--nav-h, 72px) + 20px);
   padding: clamp(18px, 2.4vw, 28px);
   border: 1px solid var(--lg-line);
   border-radius: 18px;
