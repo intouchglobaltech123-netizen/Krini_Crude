@@ -11168,3 +11168,56 @@ main section.cta3 {
   letter-spacing: 0.01em;
   line-height: 1.2;
 }
+
+/* ---- The contact strip on phones and tablets (the client, October 2026): the same blue strip with the
+   email and the phone number, fixed at the top above the floating bar. Without the "Email:" and
+   "Call Us:" words, so both fit on one line on a small phone. */
+@media (max-width: 1023px) {
+  :root {
+    --nav-strip: 34px;
+  }
+  .nav-strip {
+    display: block;
+    height: var(--nav-strip);
+    background: #1a4370;
+    color: #fff;
+  }
+  .nav-strip-in {
+    justify-content: center;
+    gap: 0;
+  }
+  .nav-strip-reach {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .nav-strip-reach li:last-child {
+    display: list-item;
+  }
+  .nav-strip-reach a {
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .nav-strip-reach a svg {
+    width: 15px;
+    height: 15px;
+  }
+  .nav-strip-label {
+    display: none;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .nav-strip-reach {
+    justify-content: flex-end;
+    gap: 32px;
+  }
+  .nav-strip-label {
+    display: inline;
+  }
+  .nav-strip-reach a {
+    font-size: 14px;
+  }
+}

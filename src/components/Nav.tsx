@@ -37,12 +37,12 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
             <ul className="nav-strip-reach">
               <li>
                 <a href={`mailto:${contact.email}`}>
-                  <Glyph name="mail" size={18} /> Email: {contact.email}
+                  <Glyph name="mail" size={18} /> <span className="nav-strip-label">Email: </span>{contact.email}
                 </a>
               </li>
               <li>
                 <a href={contact.phoneHref}>
-                  <Glyph name="call" size={18} /> Call Us: {contact.phone}
+                  <Glyph name="call" size={18} /> <span className="nav-strip-label">Call Us: </span>{contact.phone}
                 </a>
               </li>
             </ul>
