@@ -257,7 +257,7 @@ section.pshop .pshop-grid .kcard-type {
   padding: 0;
   border: 0;
   background: none;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
   font-size: 10.5px !important;
   font-weight: 700;
   letter-spacing: 0.07em;
@@ -290,7 +290,7 @@ section.pshop .pshop-grid .kcard-link {
   color: rgb(15 23 42);
 }
 section.pshop .pshop-grid .kcard-link:hover {
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 /* the specs follow the name and its line straight away, with no gap above them */
 section.pshop .pshop-grid .kcard-specs {
@@ -446,7 +446,7 @@ section.pshop .pv .pv-tagline {
   font-size: 16px !important;
   line-height: 1.4 !important;
   font-weight: 600;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 /* the heading, with the Lubecon logo beside it while Construction Chemicals is picked */
 section.pshop .pshop-head-main {
@@ -499,10 +499,14 @@ section.pshop .pshop-head-logo-lubricants {
     padding-left: 14px;
   }
 }
-/* laptops: the logos in the middle of the space between the heading and the ordering steps */
-@media (min-width: 1024px) {
+/* tablets and laptops: the brand logos at the right-hand side, level with the heading */
+@media (min-width: 640px) {
+  section.pshop .pshop-head-main {
+    width: 100%;
+  }
   section.pshop .pshop-head-logos {
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -812,7 +816,7 @@ section.pshop .pv .pv-crumbs {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 section.pshop .pv .pv-name {
   margin: 0;
@@ -1079,7 +1083,7 @@ section.pshop .pv .pv-details .pv-spec-k {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 section.pshop .pv .pv-details .pv-spec-k::before {
   content: "";
@@ -1189,7 +1193,7 @@ section.pshop .pv .pv-mini-media .kplate {
 section.pshop .pv .pv-mini-type {
   padding: 0 12px;
   font-size: 10.5px !important;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 section.pshop .pv .pv-mini-name {
   min-height: 2.5em;
@@ -1207,7 +1211,7 @@ section.pshop .pv .pv-mini-go {
   padding: 6px 12px 0;
   font-size: 12.5px !important;
   font-weight: 700;
-  color: rgb(166 124 0);
+  color: rgb(255 193 7);
 }
 section.pshop .pv .pv-mini-go::after {
   content: "→";
@@ -1872,7 +1876,7 @@ section.pshop .pv .pv-side {
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgb(166 124 0);
+    color: rgb(255 193 7);
   }
   section.pshop .pv .pv-side-list {
     display: grid;

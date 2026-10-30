@@ -23,7 +23,7 @@
   --c-mute: 75 85 99;        /* #4B5563  secondary words: cool slate */
   --c-amber: 255 193 7;     /* #ffc107  accent gold */
   --c-yellow: 255 193 7;    /* #ffc107  the gold, everywhere: buttons, rules, highlights */
-  --c-navy: 166 124 0;      /* #a67c00  links and hover states: deep metallic gold */
+  --c-navy: 255 193 7;      /* #ffc107  links and hover states: deep metallic gold */
 
   /* the space at the left and right of every page (more room on both sides: the client, October 2026) */
   --gutter: clamp(20px, 6vw, 112px);
@@ -391,9 +391,9 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.32rem 0.65rem;
-    border: 1px dashed rgba(166, 124, 0, 0.45);
+    border: 1px dashed rgba(255, 193, 7, 0.45);
     background: rgba(255, 193, 7, 0.07);
-    color: #a67c00;
+    color: #ffc107;
     font-family: var(--font-display), "Archivo", "Helvetica Neue", Arial, sans-serif;
     font-size: var(--fs-p);
     letter-spacing: 0.08em;
@@ -405,7 +405,7 @@
     content: "TBC";
     font-weight: 700;
     letter-spacing: 0.16em;
-    color: #7a5c00;
+    color: #ffc107;
   }
 
   /* Framed pictures. Each picture is cut to its frame's shape and carries Flow's
@@ -2160,7 +2160,7 @@
   .chip:hover {
     border-color: rgba(255, 193, 7, 0.8);
     background: #ffffff;
-    color: #a67c00;
+    color: #ffc107;
     box-shadow: 0 4px 14px rgba(255, 193, 7, 0.2);
   }
 
@@ -5230,7 +5230,7 @@
     place-items: center;
     aspect-ratio: 4 / 5;
     max-width: 420px;
-    border: 1px dashed rgba(166, 124, 0, 0.45);
+    border: 1px dashed rgba(255, 193, 7, 0.45);
     border-radius: 8px;
     background: #ffffff;
   }
@@ -5548,7 +5548,7 @@
     -webkit-text-stroke: 1.5px rgba(18, 17, 15, 0.16);
   }
   .process-card-place {
-    color: #a67c00;
+    color: #ffc107;
     font-weight: 600;
   }
   .process-card-title {
@@ -6554,7 +6554,7 @@ html.motion [data-shutter] {
   .grade:hover {
     border-color: rgba(255, 193, 7, 0.8);
     background: #ffffff;
-    color: #a67c00;
+    color: #ffc107;
   }
   .sh .grade {
     background: rgb(8 7 5 / 0.45);
