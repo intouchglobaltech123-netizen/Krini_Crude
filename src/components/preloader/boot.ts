@@ -71,7 +71,7 @@ export function bootPreloader(o: PreloaderOptions): void {
     `<div class="kc-pre__stage" aria-hidden="true">` +
     `<svg class="kc-pre__svg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet" focusable="false">` +
     `<defs><linearGradient id="kc-pre-oil" x1="0" y1="0" x2="1" y2="1">` +
-    `<stop offset="0" stop-color="#f6dd8a"/><stop offset=".6" stop-color="#d4af37"/><stop offset="1" stop-color="#a37f14"/>` +
+    `<stop offset="0" stop-color="#ffd54f"/><stop offset=".6" stop-color="#ffc107"/><stop offset="1" stop-color="#ffb300"/>` +
     `</linearGradient></defs>` +
     rings +
     `<path class="kc-drop-fall" d="M0 -16C5 -7 10 -1 10 5A10 10 0 0 1 -10 5C-10 -1 -5 -7 0 -16Z" fill="url(#kc-pre-oil)"/>` +

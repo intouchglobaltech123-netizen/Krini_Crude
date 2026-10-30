@@ -46,8 +46,8 @@ section.pshop .pshop-cat {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 section.pshop .pshop-cat:hover {
-  border-color: rgb(212 175 55 / 0.7);
-  background: rgb(212 175 55 / 0.08);
+  border-color: rgb(255 193 7 / 0.7);
+  background: rgb(255 193 7 / 0.08);
 }
 section.pshop .pshop-cat .pshop-cat-t {
   font-weight: 600;
@@ -76,7 +76,7 @@ section.pshop .pshop-cat[aria-pressed="true"] {
   box-shadow: 0 6px 16px -10px rgb(15 23 42 / 0.8);
 }
 section.pshop .pshop-cat[aria-pressed="true"] > span {
-  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  background: linear-gradient(180deg, #ffca28, #ffc107);
   color: rgb(15 23 42);
 }
 section.pshop .pshop-cat[aria-pressed="true"] .pshop-cat-chev {
@@ -97,9 +97,9 @@ section.pshop .pshop-search {
   transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 section.pshop .pshop-search:focus-within {
-  border-color: rgb(212 175 55 / 0.8);
+  border-color: rgb(255 193 7 / 0.8);
   background: #fff;
-  box-shadow: 0 0 0 4px rgb(212 175 55 / 0.16);
+  box-shadow: 0 0 0 4px rgb(255 193 7 / 0.16);
 }
 section.pshop .pshop-search input {
   flex: 1;
@@ -257,7 +257,7 @@ section.pshop .pshop-grid .kcard-type {
   padding: 0;
   border: 0;
   background: none;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
   font-size: 10.5px !important;
   font-weight: 700;
   letter-spacing: 0.07em;
@@ -290,7 +290,7 @@ section.pshop .pshop-grid .kcard-link {
   color: rgb(15 23 42);
 }
 section.pshop .pshop-grid .kcard-link:hover {
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 /* the specs follow the name and its line straight away, with no gap above them */
 section.pshop .pshop-grid .kcard-specs {
@@ -328,7 +328,7 @@ section.pshop .pshop-grid .kcard-add {
   border-radius: 8px;
   font-size: 13.5px !important;
   font-weight: 700;
-  box-shadow: 0 4px 10px -6px rgb(212 175 55 / 0.7);
+  box-shadow: 0 4px 10px -6px rgb(255 193 7 / 0.7);
 }
 section.pshop .pshop-grid .kcard-add svg {
   width: 16px;
@@ -446,7 +446,7 @@ section.pshop .pv .pv-tagline {
   font-size: 16px !important;
   line-height: 1.4 !important;
   font-weight: 600;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 /* the heading, with the Lubecon logo beside it while Construction Chemicals is picked */
 section.pshop .pshop-head-main {
@@ -620,7 +620,7 @@ section.pshop .pv .pv-cartbtn b {
   height: 18px;
   padding: 0 4px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  background: linear-gradient(180deg, #ffca28, #ffc107);
   font-size: 10.5px !important;
   line-height: 1;
   color: var(--pv-ink);
@@ -685,7 +685,7 @@ section.pshop .pv .pg-thumb-img img {
   object-fit: contain;
 }
 section.pshop .pv .pg-thumb[aria-pressed="true"] .pg-thumb-img {
-  border: 2px solid #d4af37;
+  border: 2px solid #ffc107;
 }
 section.pshop .pv .pg-thumb-t {
   font-size: 11.5px !important;
@@ -742,7 +742,7 @@ section.pshop .pv .pg-thumb-play-icon {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #d4af37;
+  background: #ffc107;
   color: #0f172a;
   display: flex;
   align-items: center;
@@ -812,7 +812,7 @@ section.pshop .pv .pv-crumbs {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 section.pshop .pv .pv-name {
   margin: 0;
@@ -1030,7 +1030,7 @@ section.pshop .pv .pv-details .pv-specs > div:nth-child(even) {
   background: #fbfaf6;
 }
 section.pshop .pv .pv-details .pv-specs > div:hover {
-  background: rgb(212 175 55 / 0.07);
+  background: rgb(255 193 7 / 0.07);
 }
 section.pshop .pv .pv-details .pv-specs > div:last-child {
   border-bottom: 0;
@@ -1079,14 +1079,14 @@ section.pshop .pv .pv-details .pv-spec-k {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 section.pshop .pv .pv-details .pv-spec-k::before {
   content: "";
   width: 14px;
   height: 2px;
   border-radius: 2px;
-  background: #d4af37;
+  background: #ffc107;
 }
 section.pshop .pv .pv-details .pv-small {
   margin-top: 12px;
@@ -1189,7 +1189,7 @@ section.pshop .pv .pv-mini-media .kplate {
 section.pshop .pv .pv-mini-type {
   padding: 0 12px;
   font-size: 10.5px !important;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 section.pshop .pv .pv-mini-name {
   min-height: 2.5em;
@@ -1207,7 +1207,7 @@ section.pshop .pv .pv-mini-go {
   padding: 6px 12px 0;
   font-size: 12.5px !important;
   font-weight: 700;
-  color: rgb(161 128 32);
+  color: rgb(166 124 0);
 }
 section.pshop .pv .pv-mini-go::after {
   content: "→";
@@ -1263,7 +1263,7 @@ section.pshop .rv-stars svg {
   fill: rgb(15 23 42 / 0.12);
 }
 section.pshop .rv-stars svg.is-on {
-  fill: #e0b23a;
+  fill: #ffc107;
 }
 section.pshop .rv-bars {
   display: grid;
@@ -1290,7 +1290,7 @@ section.pshop .rv-bars em {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #c9a43a, #e3c25a);
+  background: linear-gradient(90deg, #ffc107, #ffca28);
 }
 section.pshop .rv-none {
   display: flex;
@@ -1344,9 +1344,9 @@ section.pshop .rv-form {
   display: grid;
   gap: 12px;
   padding: 18px;
-  border: 1px solid rgb(212 175 55 / 0.45);
+  border: 1px solid rgb(255 193 7 / 0.45);
   border-radius: 14px;
-  background: rgb(212 175 55 / 0.05);
+  background: rgb(255 193 7 / 0.05);
 }
 section.pshop .rv-k {
   margin: 0;
@@ -1372,7 +1372,7 @@ section.pshop .rv-pick svg {
   transition: fill 0.15s ease, transform 0.15s ease;
 }
 section.pshop .rv-pick button.is-on svg {
-  fill: #e0b23a;
+  fill: #ffc107;
 }
 section.pshop .rv-pick button:hover svg {
   transform: scale(1.12);
@@ -1401,8 +1401,8 @@ section.pshop .rv-field textarea {
 section.pshop .rv-field input:focus,
 section.pshop .rv-field textarea:focus {
   outline: 0;
-  border-color: rgb(212 175 55);
-  box-shadow: 0 0 0 4px rgb(212 175 55 / 0.16);
+  border-color: rgb(255 193 7);
+  box-shadow: 0 0 0 4px rgb(255 193 7 / 0.16);
 }
 section.pshop .rv-send {
   display: flex;
@@ -1717,7 +1717,7 @@ section.pshop .rv-item p {
     gap: 4px;
     padding: 14px 14px 14px 16px;
     border: 0;
-    border-left: 3px solid #d4af37;
+    border-left: 3px solid #ffc107;
     border-radius: 0 12px 12px 0;
     background: #fbf6e6;
   }
@@ -1872,7 +1872,7 @@ section.pshop .pv .pv-side {
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgb(161 128 32);
+    color: rgb(166 124 0);
   }
   section.pshop .pv .pv-side-list {
     display: grid;
@@ -2065,7 +2065,7 @@ section.pshop .pv .pv-mini-media .kphoto {
     width: 44px;
     height: 3px;
     border-radius: 3px;
-    background: linear-gradient(90deg, #c9a43a, #e3c25a);
+    background: linear-gradient(90deg, #ffc107, #ffca28);
   }
   section.pshop .pshop-head-logos {
     display: flex;
@@ -2098,7 +2098,7 @@ section.pshop .pv .pv-mini-media .kphoto {
     border: 0;
     border-radius: 16px;
     background:
-      radial-gradient(90% 120% at 100% 0%, rgb(212 175 55 / 0.18), transparent 60%),
+      radial-gradient(90% 120% at 100% 0%, rgb(255 193 7 / 0.18), transparent 60%),
       linear-gradient(160deg, #172340, #0f172a);
     box-shadow: 0 14px 28px -20px rgb(15 23 42 / 0.7);
   }
@@ -2113,7 +2113,7 @@ section.pshop .pv .pv-mini-media .kphoto {
     letter-spacing: 0.16em;
     text-align: center;
     text-transform: uppercase;
-    color: #e3c25a;
+    color: #ffca28;
   }
   section.pshop .pshop-steps li {
     padding-top: 6px;
@@ -2123,7 +2123,7 @@ section.pshop .pv .pv-mini-media .kphoto {
   section.pshop .pshop-steps li + li::before {
     top: 20px;
     height: 2px;
-    background: linear-gradient(90deg, rgb(212 175 55 / 0.25), rgb(212 175 55 / 0.8));
+    background: linear-gradient(90deg, rgb(255 193 7 / 0.25), rgb(255 193 7 / 0.8));
     opacity: 1;
   }
   section.pshop .pshop-steps li b {
@@ -2180,7 +2180,7 @@ section.pshop .pshop-ask {
   padding: 14px 16px;
   border-radius: 16px;
   background:
-    radial-gradient(90% 140% at 100% 0%, rgb(212 175 55 / 0.16), transparent 60%),
+    radial-gradient(90% 140% at 100% 0%, rgb(255 193 7 / 0.16), transparent 60%),
     linear-gradient(160deg, #172340, #0f172a);
   box-shadow: 0 14px 28px -22px rgb(15 23 42 / 0.7);
 }
@@ -2218,7 +2218,7 @@ section.pshop .pshop-ask-wa {
   transition: filter 0.15s ease, transform 0.15s ease;
 }
 section.pshop .pshop-ask-enq {
-  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  background: linear-gradient(180deg, #ffca28, #ffc107);
   color: #0f172a;
 }
 section.pshop .pshop-ask-wa {
@@ -2275,7 +2275,7 @@ section.pshop .pshop-grid .kcard-wa {
   transition: filter 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 section.pshop .pshop-grid .kcard-enq {
-  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  background: linear-gradient(180deg, #ffca28, #ffc107);
   color: #0f172a;
 }
 section.pshop .pshop-grid .kcard-enq svg {
@@ -2333,7 +2333,7 @@ section.pshop .pshop-grid .kcard-ask .kcard-enq {
 }
 section.pshop .pshop-ask-wa {
   gap: 8px;
-  background: linear-gradient(180deg, #e3c25a, #c9a43a);
+  background: linear-gradient(180deg, #ffca28, #ffc107);
   color: #0f172a;
 }
 section.pshop .pshop-ask-wa svg {
@@ -2369,8 +2369,8 @@ section.pshop .pshop-grid .kcard-ask .kcard-enq {
   min-height: 40px;
   padding: 0 12px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #e8c860 0%, #d4af37 55%, #c39d27 100%);
-  box-shadow: 0 8px 16px -10px rgb(184 146 30 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.45);
+  background: linear-gradient(180deg, #ffca28 0%, #ffc107 55%, #ffb300 100%);
+  box-shadow: 0 8px 16px -10px rgb(230 150 0 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.45);
   font-size: 12.5px !important;
   letter-spacing: 0;
   color: #0f172a;
@@ -2380,7 +2380,7 @@ section.pshop .pshop-grid .kcard-ask .kcard-enq {
 section.pshop .pshop-grid .kcard-ask .kcard-enq:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
-  box-shadow: 0 12px 20px -10px rgb(184 146 30 / 0.9), inset 0 1px 0 rgb(255 255 255 / 0.45);
+  box-shadow: 0 12px 20px -10px rgb(230 150 0 / 0.9), inset 0 1px 0 rgb(255 255 255 / 0.45);
 }
 section.pshop .pshop-grid .kcard-ask .kcard-enq svg {
   width: 15px;

@@ -11,9 +11,9 @@ main > section.hm-make {
 
 .hm-make {
   --hm-navy: #0f172a;
-  --hm-gold: #d4af37;
-  --hm-gold-hi: #e3c25a;
-  --hm-gold-deep: #a8841c;
+  --hm-gold: #ffc107;
+  --hm-gold-hi: #ffca28;
+  --hm-gold-deep: #a67c00;
   --hm-text: #475569;
   --hm-line: rgb(15 23 42 / 0.08);
   --hm-soft: #f7f5ef;
@@ -125,12 +125,12 @@ main > section.hm-make {
   inset: 0 auto auto 0;
   width: 56px;
   height: 3px;
-  background: linear-gradient(90deg, #c9a43a, var(--hm-gold-hi));
+  background: linear-gradient(90deg, #ffc107, var(--hm-gold-hi));
   transition: width 0.35s ease;
 }
 .hm-line:hover {
   transform: translateY(-3px);
-  border-color: rgb(212 175 55 / 0.45);
+  border-color: rgb(255 193 7 / 0.45);
   box-shadow: 0 20px 40px -28px rgb(15 23 42 / 0.45);
 }
 .hm-line:hover::before {
@@ -315,7 +315,7 @@ main > section.hm-make {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .hm-q[open] {
-  border-color: rgb(212 175 55 / 0.5);
+  border-color: rgb(255 193 7 / 0.5);
   box-shadow: 0 14px 30px -24px rgb(15 23 42 / 0.4);
 }
 .hm-q summary {
@@ -440,7 +440,7 @@ main > section.hm-make {
     width: 40px;
     height: 40px;
     padding: 0;
-    border: 1px solid rgb(212 175 55 / 0.45);
+    border: 1px solid rgb(255 193 7 / 0.45);
     border-radius: 999px;
     background: rgb(10 11 14 / 0.62);
     -webkit-backdrop-filter: blur(6px);
@@ -476,7 +476,7 @@ main > section.hm-make {
     height: 52px;
     padding: 0 24px 0 18px;
     border: 0;
-    background: linear-gradient(180deg, #e3c25a, #c9a43a);
+    background: linear-gradient(180deg, #ffca28, #ffc107);
     color: #0f172a;
     font-size: 0.95rem;
     font-weight: 700;
@@ -555,7 +555,7 @@ main > section.hm-make {
     text-indent: 0;
     font-size: 0.86rem !important;
     line-height: 1.55;
-    color: rgb(227 194 90 / 0.92);
+    color: rgb(255 202 40 / 0.92);
   }
   section.sh.is-band .sh-open-ctas {
     margin-top: 18px;
@@ -757,8 +757,8 @@ main > section.hm-make {
     margin: auto auto 0;
     padding: 0;
     border-radius: 999px;
-    background: linear-gradient(180deg, var(--hm-gold-hi), #c9a43a);
-    box-shadow: 0 6px 14px -6px rgb(201 164 58 / 0.8);
+    background: linear-gradient(180deg, var(--hm-gold-hi), #ffc107);
+    box-shadow: 0 6px 14px -6px rgb(255 193 7 / 0.8);
     font-size: 0;
     color: var(--hm-navy);
   }
@@ -775,7 +775,7 @@ main > section.hm-make {
 @media (max-width: 639px) {
   section.sh.is-band .sh-scrim {
     background:
-      linear-gradient(90deg, transparent 4%, rgb(212 175 55 / 0.75) 50%, transparent 96%)
+      linear-gradient(90deg, transparent 4%, rgb(255 193 7 / 0.75) 50%, transparent 96%)
         0 calc(var(--sh-band-bottom) - 1px) / 100% 1px no-repeat,
       linear-gradient(180deg, transparent calc(var(--sh-band-bottom) - 34px), rgb(11 10 8 / 0.55) var(--sh-band-bottom), transparent var(--sh-band-bottom));
   }
@@ -808,7 +808,7 @@ main > section.hm-make {
     display: none;
   }
   section.sh.is-band .sh-open-ctas .btn-ghost {
-    border: 1px solid rgb(212 175 55 / 0.55);
+    border: 1px solid rgb(255 193 7 / 0.55);
     background: rgb(255 255 255 / 0.04);
     color: #fff;
     -webkit-backdrop-filter: blur(8px);
@@ -817,8 +817,8 @@ main > section.hm-make {
   section.sh.is-band .sh-open-stats {
     margin-top: 16px;
     padding: 12px 4px;
-    border-color: rgb(212 175 55 / 0.22);
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(212 175 55 / 0.04));
+    border-color: rgb(255 193 7 / 0.22);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 193 7 / 0.04));
   }
 }
 @media (max-width: 639px) and (min-height: 740px) {
@@ -957,7 +957,7 @@ main > section.hm-make {
   }
   section.sh.is-band.is-tall .sh-chip span {
     padding: 6px 12px;
-    border: 1px solid rgb(212 175 55 / 0.4);
+    border: 1px solid rgb(255 193 7 / 0.4);
     border-radius: 999px;
     background: rgb(10 11 14 / 0.55);
     -webkit-backdrop-filter: blur(6px);
@@ -1014,9 +1014,9 @@ main > section.hm-make {
     height: 40px;
     padding: 0 14px 0 12px;
     gap: 8px;
-    border: 1px solid rgb(212 175 55 / 0.75);
+    border: 1px solid rgb(255 193 7 / 0.75);
     border-radius: 999px;
-    background: rgb(212 175 55 / 0.1);
+    background: rgb(255 193 7 / 0.1);
     color: #fff;
     box-shadow: none;
   }
@@ -1118,7 +1118,7 @@ main > section.hm-make {
     align-items: center;
     gap: 8px;
     padding: 4px 14px 4px 4px;
-    border: 1px solid rgb(212 175 55 / 0.55);
+    border: 1px solid rgb(255 193 7 / 0.55);
     border-radius: 999px;
     background: rgb(12 13 17 / 0.84);
     color: #fff;
@@ -1133,7 +1133,7 @@ main > section.hm-make {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #d4af37;
+    background: #ffc107;
     color: #14120c;
     font-size: 0.66rem;
     font-weight: 800;
@@ -1159,10 +1159,10 @@ main > section.hm-make {
     letter-spacing: 0;
   }
   section.sh.is-band.is-tall .sh-open-ctas .btn-primary {
-    box-shadow: 0 12px 26px -14px rgb(212 175 55 / 0.75);
+    box-shadow: 0 12px 26px -14px rgb(255 193 7 / 0.75);
   }
   section.sh.is-band.is-tall .sh-open-ctas .btn-ghost {
-    border-color: rgb(212 175 55 / 0.6);
+    border-color: rgb(255 193 7 / 0.6);
     background: rgb(12 13 17 / 0.55);
     color: #fff;
   }
@@ -1324,7 +1324,7 @@ main > section.hm-make {
     gap: 5px;
     margin: 0 0 12px;
     padding: 5px 11px;
-    border: 1px solid rgba(212, 175, 55, 0.5);
+    border: 1px solid rgba(255, 193, 7, 0.5);
     border-radius: 999px;
     background: rgba(8, 7, 5, 0.42);
     -webkit-backdrop-filter: blur(6px);
@@ -1394,7 +1394,7 @@ main > section.hm-make {
     margin: 0;
     padding: 2px 0 2px 12px;
     border: 0;
-    border-left: 2px solid #d4af37;
+    border-left: 2px solid #ffc107;
     border-radius: 0;
     background: none;
     -webkit-backdrop-filter: none;
@@ -1412,7 +1412,7 @@ main > section.hm-make {
     line-height: 1.2;
   }
   section.sh.is-film .sh-step .sh-product .sh-product-v {
-    color: #e7c75e;
+    color: #ffca28;
     font-size: 16px;
     font-weight: 700;
     line-height: 1.25;
@@ -1449,9 +1449,9 @@ main > section.hm-make {
   }
   section.sh.is-film .sh-step .sh-ctas .btn-primary {
     border: 0;
-    background: linear-gradient(180deg, #ecd06e 0%, #d4af37 55%, #c39d2c 100%);
+    background: linear-gradient(180deg, #ffca28 0%, #ffc107 55%, #ffb300 100%);
     color: #14110a;
-    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    box-shadow: 0 6px 18px rgba(255, 193, 7, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   }
   section.sh.is-film .sh-step .sh-ctas .btn-ghost {
     border: 1px solid rgba(255, 255, 255, 0.55);

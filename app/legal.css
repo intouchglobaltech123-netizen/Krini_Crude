@@ -7,9 +7,9 @@
 .lg2 {
   --lg-navy: #0f172a;
   --lg-navy-2: #172340;
-  --lg-gold: #d4af37;
-  --lg-gold-hi: #e3c25a;
-  --lg-gold-deep: #a8841c;
+  --lg-gold: #ffc107;
+  --lg-gold-hi: #ffca28;
+  --lg-gold-deep: #a67c00;
   --lg-ink: #0f172a;
   --lg-text: #475569;
   --lg-line: rgb(15 23 42 / 0.08);
@@ -24,7 +24,7 @@
   overflow: hidden;
   padding: calc(var(--nav-h, 72px) + 30px) 0 clamp(30px, 4vw, 52px);
   background:
-    radial-gradient(70% 90% at 100% 0%, rgb(212 175 55 / 0.16), transparent 60%),
+    radial-gradient(70% 90% at 100% 0%, rgb(255 193 7 / 0.16), transparent 60%),
     linear-gradient(160deg, var(--lg-navy-2), var(--lg-navy) 70%);
   color: #fff;
 }
@@ -85,7 +85,7 @@
   color: rgb(255 255 255 / 0.86);
 }
 .lg2-meta span:first-child {
-  border-color: rgb(212 175 55 / 0.45);
+  border-color: rgb(255 193 7 / 0.45);
   color: var(--lg-gold-hi);
 }
 .lg2-switch {
@@ -114,7 +114,7 @@
   color: #fff;
 }
 .lg2-switch a[aria-current="page"] {
-  background: linear-gradient(180deg, var(--lg-gold-hi), #c9a43a);
+  background: linear-gradient(180deg, var(--lg-gold-hi), #ffc107);
   color: var(--lg-navy);
 }
 
@@ -127,7 +127,7 @@
   z-index: 1;
   margin-top: clamp(-28px, -2vw, -20px);
   padding: clamp(18px, 2.4vw, 26px);
-  border: 1px solid rgb(212 175 55 / 0.3);
+  border: 1px solid rgb(255 193 7 / 0.3);
   border-radius: 18px;
   background: #fff;
   box-shadow: 0 22px 44px -30px rgb(15 23 42 / 0.45);
@@ -168,7 +168,7 @@
   margin-top: 2px;
 }
 .lg2-glance svg circle {
-  fill: rgb(212 175 55 / 0.18);
+  fill: rgb(255 193 7 / 0.18);
 }
 .lg2-glance svg path {
   stroke: var(--lg-gold-deep);
@@ -366,7 +366,7 @@
   padding: clamp(20px, 2.6vw, 30px);
   border-radius: 18px;
   background:
-    radial-gradient(80% 120% at 100% 0%, rgb(212 175 55 / 0.18), transparent 60%),
+    radial-gradient(80% 120% at 100% 0%, rgb(255 193 7 / 0.18), transparent 60%),
     linear-gradient(160deg, var(--lg-navy-2), var(--lg-navy));
   color: #fff;
 }
@@ -405,7 +405,7 @@
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .lg2-ask-btns a:hover {
-  border-color: rgb(212 175 55 / 0.7);
+  border-color: rgb(255 193 7 / 0.7);
 }
 .lg2-ask-btns svg {
   fill: currentColor;
@@ -419,7 +419,7 @@
 }
 .lg2-ask-btns a.lg2-ask-gold {
   border-color: transparent;
-  background: linear-gradient(180deg, var(--lg-gold-hi), #c9a43a);
+  background: linear-gradient(180deg, var(--lg-gold-hi), #ffc107);
   color: var(--lg-navy);
 }
 

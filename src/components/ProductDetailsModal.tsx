@@ -346,7 +346,7 @@ export function ProductDetailsTrigger({
                         {d.dilutionRatios.map((item) => (
                           <tr key={item.operation}>
                             <td className="lp-props-prop">{item.operation}</td>
-                            <td className="lp-props-val" style={{ color: "var(--color-gold, #f59e0b)" }}>
+                            <td className="lp-props-val" style={{ color: "var(--color-gold, #ffc107)" }}>
                               {item.ratio}
                             </td>
                           </tr>

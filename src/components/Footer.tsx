@@ -34,11 +34,11 @@ export function Footer({ current }: { current?: PageId }) {
         <svg viewBox="0 0 2880 48" preserveAspectRatio="none">
           <defs>
             <linearGradient id="ft3-line" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stopColor="#b9911e" />
-              <stop offset="0.25" stopColor="#f0d77f" />
-              <stop offset="0.5" stopColor="#d4af37" />
-              <stop offset="0.75" stopColor="#f0d77f" />
-              <stop offset="1" stopColor="#b9911e" />
+              <stop offset="0" stopColor="#ffb300" />
+              <stop offset="0.25" stopColor="#ffd54f" />
+              <stop offset="0.5" stopColor="#ffc107" />
+              <stop offset="0.75" stopColor="#ffd54f" />
+              <stop offset="1" stopColor="#ffb300" />
             </linearGradient>
           </defs>
           <path className="ft3-line ft3-line-1" d="M0 24 C 118.8 12 241.2 12 360 24 C 478.8 36 601.2 36 720 24 C 838.8 12 961.2 12 1080 24 C 1198.8 36 1321.2 36 1440 24 C 1558.8 12 1681.2 12 1800 24 C 1918.8 36 2041.2 36 2160 24 C 2278.8 12 2401.2 12 2520 24 C 2638.8 36 2761.2 36 2880 24 C 2998.8 12 3121.2 12 3240 24 C 3358.8 36 3481.2 36 3600 24" />

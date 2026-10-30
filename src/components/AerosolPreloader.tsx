@@ -128,9 +128,9 @@ export function AerosolPreloader() {
         ctx.save();
         // High-velocity expanding mist cone
         const coneGrad = ctx.createLinearGradient(originX, originY, (p1X + p2X) / 2, (p1Y + p2Y) / 2);
-        coneGrad.addColorStop(0, "rgba(235, 185, 45, 0.75)");
-        coneGrad.addColorStop(0.18, "rgba(245, 205, 80, 0.45)");
-        coneGrad.addColorStop(0.55, "rgba(250, 225, 130, 0.16)");
+        coneGrad.addColorStop(0, "rgba(255, 193, 7, 0.75)");
+        coneGrad.addColorStop(0.18, "rgba(255, 202, 40, 0.45)");
+        coneGrad.addColorStop(0.55, "rgba(255, 213, 79, 0.16)");
         coneGrad.addColorStop(1, "rgba(255, 250, 235, 0)");
 
         ctx.fillStyle = coneGrad;
@@ -143,8 +143,8 @@ export function AerosolPreloader() {
 
         // Secondary soft atomization bloom around the nozzle exit
         const nozzleBloom = ctx.createRadialGradient(originX, originY, 0, originX, originY, 50);
-        nozzleBloom.addColorStop(0, "rgba(245, 200, 75, 0.5)");
-        nozzleBloom.addColorStop(0.5, "rgba(250, 225, 135, 0.2)");
+        nozzleBloom.addColorStop(0, "rgba(255, 202, 40, 0.5)");
+        nozzleBloom.addColorStop(0.5, "rgba(255, 213, 79, 0.2)");
         nozzleBloom.addColorStop(1, "rgba(255, 255, 255, 0)");
         ctx.fillStyle = nozzleBloom;
         ctx.beginPath();
@@ -219,14 +219,14 @@ export function AerosolPreloader() {
 
         if (p.tint === "gold") {
           // Luminous amber/yellow lubricant highlight
-          grad.addColorStop(0, `rgba(235, 185, 35, ${p.alpha * 0.65})`);
-          grad.addColorStop(0.4, `rgba(245, 205, 70, ${p.alpha * 0.38})`);
-          grad.addColorStop(0.8, `rgba(255, 230, 130, ${p.alpha * 0.12})`);
+          grad.addColorStop(0, `rgba(255, 193, 7, ${p.alpha * 0.65})`);
+          grad.addColorStop(0.4, `rgba(255, 202, 40, ${p.alpha * 0.38})`);
+          grad.addColorStop(0.8, `rgba(255, 213, 79, ${p.alpha * 0.12})`);
           grad.addColorStop(1, "rgba(255, 245, 180, 0)");
         } else if (p.tint === "bright") {
           // Warm amber glint
-          grad.addColorStop(0, `rgba(245, 195, 45, ${p.alpha * 0.6})`);
-          grad.addColorStop(0.5, `rgba(250, 220, 100, ${p.alpha * 0.28})`);
+          grad.addColorStop(0, `rgba(255, 193, 7, ${p.alpha * 0.6})`);
+          grad.addColorStop(0.5, `rgba(255, 213, 79, ${p.alpha * 0.28})`);
           grad.addColorStop(1, "rgba(255, 250, 210, 0)");
         } else {
           // Fine lubricant vapor mist with warm atmospheric refraction
@@ -339,11 +339,11 @@ export function AerosolPreloader() {
 
             {/* Gold Brand Accent Stripe */}
             <linearGradient id="goldStripe" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#9e7e22" />
-              <stop offset="35%" stopColor="#f5d77f" />
-              <stop offset="55%" stopColor="#d4af37" />
-              <stop offset="85%" stopColor="#b89329" />
-              <stop offset="100%" stopColor="#7a5f15" />
+              <stop offset="0%" stopColor="#ffb300" />
+              <stop offset="35%" stopColor="#ffd54f" />
+              <stop offset="55%" stopColor="#ffc107" />
+              <stop offset="85%" stopColor="#ffb300" />
+              <stop offset="100%" stopColor="#ffa000" />
             </linearGradient>
 
             {/* Specular Highlight Streak */}
@@ -377,8 +377,8 @@ export function AerosolPreloader() {
             />
 
             {/* Spray Nozzle Orifice facing upper right */}
-            <ellipse cx="123" cy="24" rx="3.5" ry="5.5" fill="#111215" stroke="#D4AF37" strokeWidth="1.2" />
-            <circle cx="123" cy="24" r="1.5" fill="#f5d77f" />
+            <ellipse cx="123" cy="24" rx="3.5" ry="5.5" fill="#111215" stroke="#ffc107" strokeWidth="1.2" />
+            <circle cx="123" cy="24" r="1.5" fill="#ffd54f" />
 
             {/* Active Spray Nozzle Glow when firing */}
             {phase === "spraying" && (
@@ -386,7 +386,7 @@ export function AerosolPreloader() {
                 cx="126"
                 cy="24"
                 r="7"
-                fill="rgba(212, 175, 55, 0.45)"
+                fill="rgba(255, 193, 7, 0.45)"
                 className="animate-pulse"
               />
             )}
@@ -496,7 +496,7 @@ export function AerosolPreloader() {
           phase === "spraying" ? "opacity-25" : "opacity-0"
         }`}
         style={{
-          background: "radial-gradient(ellipse at center, transparent 40%, rgba(212, 175, 55, 0.08) 100%)",
+          background: "radial-gradient(ellipse at center, transparent 40%, rgba(255, 193, 7, 0.08) 100%)",
         }}
       />
     </div>
