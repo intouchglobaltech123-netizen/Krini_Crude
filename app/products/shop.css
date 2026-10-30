@@ -2497,3 +2497,28 @@ section.pshop .pshop-grid .kcard-foot {
     padding: 8px 10px 10px;
   }
 }
+
+/* ---- Product page, larger screens: no empty space under the details (the client, October 2026).
+   The column is as tall as the photos beside it and its content (nothing new) is spread down it:
+   the free space is shared between two even gaps, one under the description and one above the
+   key features. Phones keep their own layout (the details are flattened there). */
+@media (min-width: 1024px) {
+  section.pshop .pv .pv-top {
+    align-items: stretch;
+  }
+  section.pshop .pv .pv-media {
+    align-self: start;
+  }
+  section.pshop .pv .pv-info {
+    display: flex;
+    flex-direction: column;
+    align-content: normal;
+  }
+  section.pshop .pv .pv-info > .pv-text,
+  section.pshop .pv .pv-info > .pv-assure {
+    margin-bottom: auto;
+  }
+  section.pshop .pv .pv-info > .pv-side {
+    margin-top: 0;
+  }
+}
