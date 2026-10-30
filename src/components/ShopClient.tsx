@@ -179,16 +179,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
     };
   }, [menu]);
 
-  /** What a message is about: the product, its grade when one is picked, and its kind. */
-  const about = (it: ShopItem) => {
-    const g = grades[it.key] ?? "";
-    return `${it.name}${g ? ` (${g})` : ""} · ${it.type}`;
-  };
-  /** Ask on WhatsApp: a chat with the query started. */
-  const waFor = (it: ShopItem) =>
-    `${whatsapp.split("?")[0]}?text=${encodeURIComponent(
-      ["Hi Krini Crude, I have a query about:", about(it), "My question: ", "Name / company: ", "City: "].join("\n"),
-    )}`;
   const pv = view ? items.find((i) => i.key === view) : undefined;
   // more products under it: the same kind first, then the same line, then the rest
   const similar = pv
@@ -363,11 +353,6 @@ export function ShopClient({ items, lines, whatsapp, top }: { items: ShopItem[];
                       </button>
                     </h3>
                     {it.tagline ? <p className="kcard-tag">{it.tagline}</p> : null}
-                  </div>
-                  <div className="kcard-foot kcard-ask">
-                    <a href={waFor(it)} className="kcard-enq" target="_blank" rel="noopener noreferrer" aria-label={`Enquire about ${it.name} on WhatsApp`}>
-                      <MsgIcon /> Enquire on WhatsApp
-                    </a>
                   </div>
                 </li>
               );
@@ -1095,16 +1080,6 @@ function SecIcon({ kind }: { kind: "about" | "star" | "target" | "specs" | "drop
         <path d={d[kind]} />
       </svg>
     </span>
-  );
-}
-
-/** A speech bubble: send us a message about the product. */
-function MsgIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M20 12.5a7.5 7.5 0 0 1-11 6.6L4 20l1.1-4.2A7.5 7.5 0 1 1 20 12.5Z" />
-      <path d="M8.8 10.8h6.4M8.8 14h4.2" />
-    </svg>
   );
 }
 
