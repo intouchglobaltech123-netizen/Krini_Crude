@@ -886,7 +886,7 @@ export const lines: Line[] = [
               imageAlt: "Krini Shuttering Grease 1kg tub and bulk formwork release grease",
               sheetUrl: "/documents/krini-shuttering-grease-pds.pdf",
               sheetLabel: "Krini Shuttering Grease Product Data Sheet",
-              videoUrl: "/videos/products/krini-shuttering-grease.mp4?v=3",
+              videoUrl: "/videos/products/krini-shuttering-grease.mp4?v=4",
               description:
                 "KRINI SHUTTERING GREASE is a calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
@@ -937,7 +937,7 @@ export const lines: Line[] = [
               imageAlt: "Repel Shuttering Grease premium calcium-based formwork release grease tub",
               sheetUrl: "/documents/repel-shuttering-grease-pds.pdf",
               sheetLabel: "Repel Shuttering Grease Product Data Sheet",
-              videoUrl: "/videos/products/repel-shuttering-grease.mp4?v=3",
+              videoUrl: "/videos/products/repel-shuttering-grease.mp4?v=4",
               description:
                 "REPEL SHUTTERING GREASE is a high-performance calcium and oil-based release grease formulated for easy application and smooth demoulding. Ideal for wall ties, sleeves, and critical corner structures where oil runoff occurs.",
               purpose: [
