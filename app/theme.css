@@ -11105,7 +11105,7 @@ main section.cta3 {
     color: #fff;
   }
   .nav-strip-in {
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
   .nav-strip-reach {
     gap: 44px;
