@@ -11142,3 +11142,29 @@ main section.cta3 {
 .theme-dark .text-amber {
   color: var(--gold);
 }
+
+/* ---- Home hero scroll cue (the client, October 2026): a white mouse with its wheel, and
+   "Scroll down" under it, in the middle at the foot of the first screen. */
+.sh-scroll {
+  gap: 12px;
+  color: #fff;
+}
+.sh-mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid #fff;
+  border-radius: 15px;
+}
+.sh-wheel {
+  top: 8px;
+  width: 4px;
+  height: 9px;
+  margin-left: -2px;
+  background: #fff;
+}
+.sh-scroll-text {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}

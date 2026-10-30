@@ -126,10 +126,7 @@ export function ScrollHero() {
           <span className="sh-mouse">
             <span className="sh-wheel" />
           </span>
-          <span className="sh-scroll-text">Scroll to see it in action</span>
-          <svg className="sh-chev" width="14" height="9" viewBox="0 0 14 9" fill="none">
-            <path d="M1 1.5 7 7.5l6-6" stroke="currentColor" strokeWidth="1.6" />
-          </svg>
+          <span className="sh-scroll-text">Scroll down</span>
         </div>
 
         {/* where the visitor is: one mark per step, each a way to jump there */}
