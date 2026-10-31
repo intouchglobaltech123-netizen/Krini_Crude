@@ -7,7 +7,7 @@ const vars = (v: Record<string, string | number>) => v as CSSProperties;
 
 /**
  * The top of every page, in two levels. A thin blue strip (the email and the
- * phone number) folds away once the page moves; under it the white
+ * phone number, phones and tablets only) above the white
  * bar: the logo on the left; Home, About Us, Products and Blog in one box and
  * the gold Enquire now button on the right. Each is a plain link (Products
  * goes to the Products page; no panel opens under it). Below 1024px the menu
@@ -77,6 +77,19 @@ export function Nav({ current, line: currentLine }: { current?: PageId; line?: L
               <a href={contact.phoneHref} className="nav-quick nav-quick-call" aria-label={`Call ${contact.phone}`}>
                 <Glyph name="call" size={18} />
               </a>
+              {/* larger screens: the phone number and the email stacked in two small lines, before Enquire now */}
+              <ul className="nav-reach" aria-label="Contact">
+                <li>
+                  <a href={contact.phoneHref}>
+                    <Glyph name="call" size={16} /> {contact.phone}
+                  </a>
+                </li>
+                <li>
+                  <a href={`mailto:${contact.email}`}>
+                    <Glyph name="mail" size={16} /> {contact.email}
+                  </a>
+                </li>
+              </ul>
               <a href={enquireHref("Enquiry")} className="btn btn-primary nav-enquire hidden sm:inline-flex" data-magnetic data-enquire="Enquiry">
                 Enquire now <Arrow />
               </a>
