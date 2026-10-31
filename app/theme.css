@@ -11328,3 +11328,15 @@ main section.cta3 {
     color: var(--gold-hi);
   }
 }
+
+/* ---- Larger screens (the client, October 2026): Home, About Us, Products and Blog sit on the left,
+   next to the logo; the phone, the email and Enquire now stay on the right. */
+@media (min-width: 1024px) {
+  .nav-bar.nav-split {
+    grid-template-columns: auto 1fr auto;
+    column-gap: 36px;
+  }
+  .nav-split .nav-box {
+    justify-self: start;
+  }
+}
