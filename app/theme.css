@@ -11085,7 +11085,7 @@ main section.cta3 {
     border-radius: 999px;
   }
   html body .nav:not(.is-over) .nav-split .nav-logo-c .nav-logo-dark {
-    height: 46px !important;
+    height: min(58px, 14.5vw) !important;
     width: auto !important;
     max-width: none !important;
   }
@@ -11338,5 +11338,41 @@ main section.cta3 {
   }
   .nav-split .nav-box {
     justify-self: start;
+  }
+}
+
+/* ---- Phones (the client, October 2026): the logo larger, so KRINI CRUDE is easy to read */
+@media (max-width: 639px) {
+  html body .nav .nav-split .nav-logo-c .nav-logo-dark,
+  html body .nav .nav-split .nav-logo-c .nav-logo-lite,
+  html body .nav .nav-split .nav-logo-c .nav-logo-full {
+    height: min(66px, 17vw) !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  html body .nav .nav-split .nav-logo-c {
+    margin-left: -4px;
+  }
+}
+@media (max-width: 359px) {
+  html body .nav .nav-split .nav-logo-c .nav-logo-dark,
+  html body .nav .nav-split .nav-logo-c .nav-logo-lite,
+  html body .nav .nav-split .nav-logo-c .nav-logo-full {
+    height: 12.5vw !important;
+  }
+}
+@media (max-width: 359px) {
+  .nav-quick {
+    width: 34px;
+    height: 34px;
+  }
+  .nav-side-r {
+    gap: 6px !important;
+  }
+  html body .nav .nav-split .menu-toggle {
+    padding: 0 10px 0 9px !important;
+  }
+  html body .nav .nav-split .menu-toggle .menu-toggle-label {
+    font-size: 13px;
   }
 }
